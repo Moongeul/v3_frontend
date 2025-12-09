@@ -10,6 +10,9 @@
     "svgr": "svgr --icon --typescript --no-prettier --out-dir src/assets/svgComponents public/common --ignore-existing"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@react-oauth/google": "^0.12.2",
     "framer": "^2.4.1",
     "next": "16.0.0",
     "react": "19.2.0",
