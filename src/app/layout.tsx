@@ -1,14 +1,16 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
+import { suit } from '@/styles/font'
+import EmotionRootRegistry from './registry' // Emotion 설정 파일 (필요시)
 
 const geistSans = Geist({
-  variable: '--font-geist-sans',
+  variable: '--fonts-geist-sans',
   subsets: ['latin'],
 })
 
 const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+  variable: '--fonts-geist-mono',
   subsets: ['latin'],
 })
 
@@ -23,8 +25,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ko">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+    <html lang="ko" className={suit.variable}>
+      <EmotionRootRegistry>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      </EmotionRootRegistry>
     </html>
   )
 }
