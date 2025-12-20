@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 interface LoginPageProps {
   // Page 컴포넌트는 searchParams를 props로 직접 받을 수 있습니다.
-  searchParams?: { [key: string]: string | string[] | undefined }
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 // 에러 코드에 따른 메시지 매핑
@@ -38,9 +38,9 @@ function ErrorMessage({ errorCode }: { errorCode: string }) {
   )
 }
 
-export default function LoginPage({ searchParams }: LoginPageProps) {
-  const errorCode = typeof searchParams?.error === 'string' ? searchParams.error : null
-
+export default async function LoginPage({ searchParams }: LoginPageProps) {
+  const resolvedSearchParams = await searchParams
+  const errorCode = typeof resolvedSearchParams?.error === 'string' ? resolvedSearchParams.error : null
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-y-[25px] bg-white">
       {/* errorCode가 존재할 경우에만 ErrorMessage 컴포넌트를 렌더링합니다. */}
