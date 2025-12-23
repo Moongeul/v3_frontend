@@ -1,5 +1,11 @@
-import { MoongeulIcon } from '@/assets/svgComponents'
-import { Container, EmptyIcon, IconColumn, Title } from '@/styles/common/Header.styles'
+'use client'
+
+import * as Style from '@/styles/common/Header.styles'
+
+import { useRouter } from 'next/navigation'
+import { HeaderLeftArrowIcon, MoongeulIcon } from '@/assets/svgComponents'
+import { useCallback } from 'react'
+import { HeaderLeftArrowIconPadding } from '@/styles/common/Header.styles'
 
 type HeaderType = 'default' | 'dynamic' | 'title'
 
@@ -9,35 +15,52 @@ interface HeaderProps {
   leftIcon?: React.ReactNode
   rightIcon?: React.ReactNode
   isBottomBorder?: boolean
+  path?: string //dynamic 일 때 뒤로가기 경로
 }
 
-export default function Header({ headerType, children, leftIcon, rightIcon, isBottomBorder }: HeaderProps) {
+export default function Header({ headerType, children, leftIcon, rightIcon, isBottomBorder, path }: HeaderProps) {
+  const router = useRouter()
+
+  const onBack = useCallback(() => {
+    if (path) {
+      router.push(path)
+    } else {
+      router.back()
+    }
+  }, [])
+
   const renderHeaderType = (headerType: HeaderType) => {
     switch (headerType) {
       case 'dynamic':
         return (
-          <Container $isBottomBorder={isBottomBorder}>
-            {leftIcon ? leftIcon : <EmptyIcon />}
-            <Title $headerType={headerType}>{children}</Title>
-            {rightIcon ? rightIcon : <EmptyIcon />}
-          </Container>
+          <Style.Header $isBottomBorder={isBottomBorder}>
+            {leftIcon ? (
+              <HeaderLeftArrowIconPadding>{leftIcon}</HeaderLeftArrowIconPadding>
+            ) : (
+              <HeaderLeftArrowIconPadding>
+                <HeaderLeftArrowIcon onClick={onBack} width={20} height={20} />
+              </HeaderLeftArrowIconPadding>
+            )}
+            <Style.Title $headerType={headerType}>{children}</Style.Title>
+            {rightIcon ? rightIcon : <Style.EmptyIcon />}
+          </Style.Header>
         )
       case 'default':
         return (
-          <Container $isBottomBorder={isBottomBorder}>
+          <Style.Header $isBottomBorder={isBottomBorder}>
             <MoongeulIcon width={143} height={35} />
-            <IconColumn>
-              {leftIcon ? leftIcon : <EmptyIcon />}
-              {rightIcon ? rightIcon : <EmptyIcon />}
-            </IconColumn>
-          </Container>
+            <Style.IconColumn>
+              {leftIcon ? leftIcon : <Style.EmptyIcon />}
+              {rightIcon ? rightIcon : <Style.EmptyIcon />}
+            </Style.IconColumn>
+          </Style.Header>
         )
       case 'title':
         return (
-          <Container $isBottomBorder={isBottomBorder}>
-            <Title $headerType={headerType}>{children}</Title>
-            {rightIcon ? rightIcon : <EmptyIcon />}
-          </Container>
+          <Style.Header $isBottomBorder={isBottomBorder}>
+            <Style.Title $headerType={headerType}>{children}</Style.Title>
+            {rightIcon ? rightIcon : <Style.EmptyIcon />}
+          </Style.Header>
         )
     }
   }
