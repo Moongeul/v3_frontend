@@ -4,7 +4,9 @@ import { postAuth } from '@/lib/auth'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
+  console.log('requestURL', request.url)
   const code = searchParams.get('code')
+  const platform = searchParams.get('platform')
   const errorParam = searchParams.get('error')
 
   const baseUrl = request.nextUrl.origin
@@ -15,7 +17,7 @@ export async function GET(request: NextRequest) {
 
   if (errorParam) {
     console.error('Auth error:', errorParam)
-    return redirect(`/login?error=${encodeURIComponent(errorParam)}`)
+    // return redirect(`/login?error=${encodeURIComponent(errorParam)}`)
   }
 
   if (!code) {
@@ -23,13 +25,18 @@ export async function GET(request: NextRequest) {
     return redirect('/login?error=no_code')
   }
 
+  if (!platform) {
+    console.error('플랫폼 코드가 없습니다.')
+    return redirect('/login?error=no_platform')
+  }
+
   try {
-    const result = await postAuth(code)
+    const result = await postAuth(code, platform)
     console.log('로그인 결과', result)
 
     if (!result.success) {
       console.error('Authentication failed:', result.error)
-      return redirect(`/login?error=${encodeURIComponent(result.error || 'Authentication failed')}`)
+      // return redirect(`/login?error=${encodeURIComponent(result.error || 'Authentication failed')}`)
     }
 
     const { role, accessToken, refreshToken } = result

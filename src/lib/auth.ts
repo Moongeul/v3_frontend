@@ -11,26 +11,31 @@ interface AuthCallResult {
  * 카카오 인증 - code를 받아 JWT 토큰 발급
  * PENDING 상태일 때는 accessToken만, APPROVED 상태일 때는 refreshToken도 반환
  * @param code - 카카오에서 받은 인증 코드
- * @param env - 개발 환경일경우 (localhost3000-> LOCAL, 배포 url 일 경우 'DEV')
+ * @param platform - 로그인 경로가 kakao 인 경우 kakao, google 인 경우 google
+ // * @param env - 개발 환경일경우 (localhost3000-> LOCAL, 배포 url 일 경우 'DEV')
  *
  * 주의: 이 함수는 API 응답만 처리합니다.
  * 쿠키 설정은 백엔드의 Set-Cookie 헤더로 자동 처리됩니다.
  */
-export const postAuth = async (code: string | null): Promise<AuthCallResult> => {
+export const postAuth = async (code: string | null, platform: string | null): Promise<AuthCallResult> => {
   try {
     if (!code) {
       throw new Error('Authorization code not provided')
     }
 
-    const jwtResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/v2/member/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ code: code }),
-      cache: 'no-store',
-    })
-
+    const jwtResponse = await fetch(
+      platform === 'google'
+        ? `${process.env.NEXT_PUBLIC_BASE_URL}/v2/member/google/login`
+        : `${process.env.NEXT_PUBLIC_BASE_URL}/v2/member/kakao/login`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ code: code }),
+        cache: 'no-store',
+      }
+    )
     if (!jwtResponse.ok) {
       const errorData = await jwtResponse.text()
       console.error('Auth error:', errorData)
