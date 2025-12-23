@@ -3,14 +3,6 @@
 import styled from '@emotion/styled'
 import { css, SerializedStyles, Theme } from '@emotion/react'
 
-export const FieldLabel = styled.div`
-  color: ${({ theme }) => theme.colors.headerText};
-  ${({ theme }) => theme.typography.subtitleMd}
-`
-export const RequiredMark = styled.span`
-  color: ${({ theme }) => theme.colors.baseColor.secondary500};
-  ${({ theme }) => theme.typography.subtitleMd}
-`
 export const HelperText = styled.p<{ $isError?: boolean }>`
   color: ${({ theme, $isError }) => ($isError ? theme.colors.textFieldError : theme.colors.baseColor.gray400)};
   ${({ theme }) => theme.typography.badgeSm}
@@ -21,10 +13,6 @@ export const CountTextFieldIndicator = styled.p<{ $isError: boolean | undefined 
   right: 12px;
   color: ${({ theme, $isError }) => ($isError ? theme.colors.textFieldError : theme.colors.textFieldDefaultText)};
   ${({ theme }) => theme.typography.badgeSm}
-`
-export const StyledLabelRow = styled.div`
-  display: flex;
-  row-gap: 4px;
 `
 
 interface StatusStyleProps {
@@ -38,44 +26,49 @@ function getStatusStyle({ theme, status = 'default', isFocused }: StatusStylePro
     default: css`
       border: 1px solid ${theme.colors.textFieldDefaultLine};
       color: ${theme.colors.textFieldDefaultText};
-      background-color: ${theme.colors.background};
+      background-color: ${theme.colors.textFieldFill};
     `,
     filled: css`
       border: 1px solid ${theme.colors.textFieldFilledText};
       color: ${theme.colors.textFieldFilledLine};
-      background-color: ${theme.colors.background};
+      background-color: ${theme.colors.textFieldFill};
     `,
     error: css`
       border: 1px solid ${theme.colors.textFieldError};
       color: ${theme.colors.textFieldError};
-      background-color: ${theme.colors.background};
+      background-color: ${theme.colors.textFieldFill};
     `,
   }
 
   const focusStyle = isFocused
     ? css`
-        outline: 1px solid ${theme.colors.textFieldFilledText};
-        border-color: ${theme.colors.textFieldFilledText};
+        border: 1px solid ${theme.colors.textFieldFilledText};
         color: ${theme.colors.textFieldFilledLine};
+        background-color: ${theme.colors.textFieldFill};
       `
     : ''
 
   return [styles[status] || styles.default, focusStyle]
 }
 
-export const TextFieldWrapper = styled.div`
+export const TextInputWrapper = styled.div`
   display: flex;
   column-gap: 8px;
   align-items: center;
 `
-export const TextFieldContainer = styled.div<{ $status: 'default' | 'filled' | 'error'; $isFocused?: boolean }>`
-  position: relative;
+export const TextFieldWrapper = styled.div<{
+  $status: 'default' | 'filled' | 'error'
+  $isFocused?: boolean
+  $width?: number
+  $height?: number
+}>`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  column-gap: 8px;
-  width: 100%;
-  height: 48px;
+  flex-direction: column;
+  row-gap: 4px;
+  justify-content: center;
+  position: relative;
+  width: ${({ $width }) => ($width ? `fit-content` : `100%`)};
+  height: ${({ $height }) => ($height ? `${$height}px` : `100%`)};
   border-radius: 6px;
   overflow: hidden;
 
@@ -96,17 +89,27 @@ export const TextFieldContainer = styled.div<{ $status: 'default' | 'filled' | '
     filter: url('#pencil-texture');
     pointer-events: none;
 
-    ${({ theme, $status }) =>
+    ${({ theme, $status, $isFocused }) =>
       getStatusStyle({
         theme: theme,
         status: $status,
+        isFocused: $isFocused,
       })}
   }
 `
-
-export const Input = styled.input<{ $status: 'default' | 'filled' | 'error' }>`
-  width: 100%;
+export const TextFieldContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 8px;
   padding: 8px 12px;
+`
+
+export const Input = styled.input<{
+  $status: 'default' | 'filled' | 'error'
+  $width: number | undefined
+}>`
+  width: ${({ $width }) => ($width ? `${$width}px` : `100%`)};
   background: ${({ theme }) => theme.colors.textFieldFill};
   border: ${({ theme }) => theme.colors.textFieldDefaultLine};
   outline: none;
@@ -133,6 +136,7 @@ export const TextAreaContainer = styled.div<{ $status: 'default' | 'filled' | 'e
   justify-content: space-between;
   row-gap: 8px;
   width: 100%;
+  height: 90px;
   border-radius: 6px;
   overflow: hidden;
   padding: 8px 12px;
@@ -154,10 +158,11 @@ export const TextAreaContainer = styled.div<{ $status: 'default' | 'filled' | 'e
     filter: url('#pencil-texture');
     pointer-events: none;
 
-    ${({ theme, $status }) =>
+    ${({ theme, $status, $isFocused }) =>
       getStatusStyle({
         theme: theme,
         status: $status,
+        isFocused: $isFocused,
       })}
   }
 `

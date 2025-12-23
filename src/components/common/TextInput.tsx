@@ -1,96 +1,93 @@
+'use client'
+
 import * as Style from '@/styles/common/TextInput.styles'
-import { ChangeEventHandler, JSX, ReactNode } from 'react'
+import { ChangeEventHandler, JSX, ReactNode, useState } from 'react'
 import Spacing from '@/components/common/Spacing'
 import { PencilSketchEffect } from '@/styles/common/Common.styles'
 
 interface TextFieldProps {
   textType?: 'textField' | 'textArea'
-  value: string
+  inputType?: 'number' | 'text'
+  placeholder?: string
+  value: string | number
   onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
-  status: 'default' | 'filled' | 'error'
-  label?: string
+  status?: 'default' | 'filled' | 'error'
   helperText?: string
-  isRequired?: boolean
-  isFocused?: boolean
-  maxLength?: number
-  isCountIndicator?: boolean
+  buttonElement?: ReactNode
+  leftElement?: ReactNode
   rightElement?: ReactNode
+  topElement?: ReactNode
+  width?: number
+  height?: number
 }
 export default function TextInput({
   textType = 'textField',
-  status = 'default',
-  isFocused = false,
-  label,
-  isRequired = false,
-  isCountIndicator = false,
+  inputType = 'text',
+  placeholder,
   value,
   onChange,
+  status = 'default',
   helperText,
-  maxLength,
-  rightElement, //버튼
+  buttonElement,
+  leftElement,
+  rightElement,
+  topElement,
+  width,
+  height,
 }: TextFieldProps): JSX.Element {
+  const [isFocused, setIsFocused] = useState(false)
+
+  const currentStatus = status === 'error' ? 'error' : isFocused ? 'filled' : 'default'
+
+  const handleFocus = () => setIsFocused(true)
+  const handleBlur = () => setIsFocused(false)
+
   return (
     <>
       <PencilSketchEffect />
-      {label && (
-        <>
-          <Style.StyledLabelRow>
-            <Style.FieldLabel>{label}</Style.FieldLabel>
-
-            {isRequired && <Style.RequiredMark>*</Style.RequiredMark>}
-          </Style.StyledLabelRow>
-          <Spacing height={8} />
-        </>
-      )}
-
-      <Style.TextFieldWrapper>
+      <Style.TextInputWrapper>
         {textType === 'textField' ? (
-          <Style.TextFieldContainer $isFocused={isFocused} $status={status}>
-            <Style.Input $status={status} onChange={onChange} value={value}></Style.Input>
-            {isCountIndicator && (
-              <CountIndicator isError={status === 'error'} maxLength={maxLength} valueLength={value.length} />
-            )}
-          </Style.TextFieldContainer>
+          <Style.TextFieldWrapper $height={height} $width={width} $isFocused={isFocused} $status={status}>
+            {topElement && topElement}
+            <Style.TextFieldContainer>
+              {leftElement && leftElement}
+              <Style.Input
+                $width={width}
+                type={inputType}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                placeholder={placeholder}
+                $status={currentStatus}
+                onChange={onChange}
+                value={value}
+              />
+              {rightElement && rightElement}
+            </Style.TextFieldContainer>
+          </Style.TextFieldWrapper>
         ) : (
           <Style.TextAreaContainer $isFocused={isFocused} $status={status}>
-            <Style.TextArea $status={status} onChange={onChange} value={value}></Style.TextArea>
-            {isCountIndicator && (
-              <CountIndicator isError={status === 'error'} maxLength={maxLength} valueLength={value.length} />
-            )}
+            <Style.TextArea
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              placeholder={placeholder}
+              $status={currentStatus}
+              onChange={onChange}
+              value={value}
+            />
+            {rightElement && rightElement}
           </Style.TextAreaContainer>
         )}
 
-        {rightElement && rightElement}
-      </Style.TextFieldWrapper>
+        {buttonElement && buttonElement}
+      </Style.TextInputWrapper>
 
       {helperText && (
         <>
           <Spacing height={8} />
+
           <Style.HelperText $isError={status === 'error'}>{helperText}</Style.HelperText>
         </>
       )}
     </>
-  )
-}
-
-function CountIndicator({
-  maxLength,
-  valueLength,
-  isError,
-  textType,
-}: {
-  maxLength?: number
-  valueLength?: number
-  isError?: boolean | undefined
-  textType?: 'textField' | 'textArea'
-}) {
-  return textType === 'textField' ? (
-    <Style.CountTextFieldIndicator $isError={isError}>
-      {valueLength}/{maxLength}
-    </Style.CountTextFieldIndicator>
-  ) : (
-    <Style.CountTextAreaIndicator $isError={isError}>
-      {valueLength}/{maxLength}
-    </Style.CountTextAreaIndicator>
   )
 }

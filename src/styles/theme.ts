@@ -99,7 +99,7 @@ const typography = {
     fontStyle: 'normal',
   },
 }
-const baseColor = {
+export const baseColor = {
   //light-yellow
   lightYellow50: '#FFFFFD',
   lightYellow100: '#FFFEF9',
