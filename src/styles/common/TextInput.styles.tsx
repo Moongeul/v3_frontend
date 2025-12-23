@@ -15,7 +15,7 @@ export const HelperText = styled.p<{ $isError?: boolean }>`
   color: ${({ theme, $isError }) => ($isError ? theme.colors.textFieldError : theme.colors.baseColor.gray400)};
   ${({ theme }) => theme.typography.badgeSm}
 `
-export const CountIndicator = styled.p<{ $isError?: boolean }>`
+export const CountTextFieldIndicator = styled.p<{ $isError: boolean | undefined }>`
   position: relative;
   z-index: 1; // 텍스트가 연필 효과 위로 오도록
   right: 12px;
@@ -124,4 +124,69 @@ export const Input = styled.input<{ $status: 'default' | 'filled' | 'error' }>`
   &:focus {
     outline: none;
   }
+`
+export const TextAreaContainer = styled.div<{ $status: 'default' | 'filled' | 'error'; $isFocused?: boolean }>`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  row-gap: 8px;
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 8px 12px;
+
+  /* 연필 효과를 위한 가상 요소 (Border 역할) */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+
+    border: 1px solid black;
+    border-radius: 6px;
+
+    /* 연필 효과 필터 적용 */
+    filter: url('#pencil-texture');
+    pointer-events: none;
+
+    ${({ theme, $status }) =>
+      getStatusStyle({
+        theme: theme,
+        status: $status,
+      })}
+  }
+`
+
+export const TextArea = styled.textarea<{ $status: 'default' | 'filled' | 'error' }>`
+  width: 100%;
+  height: 52px;
+  background: ${({ theme }) => theme.colors.textFieldFill};
+  border: ${({ theme }) => theme.colors.textFieldDefaultLine};
+  outline: none;
+  position: relative;
+  z-index: 1; // 텍스트가 연필 효과 위로 오도록
+  color: ${({ theme, $status }) =>
+    $status === 'error'
+      ? theme.colors.textFieldError
+      : $status === 'filled'
+        ? theme.colors.textFieldFilledLine
+        : theme.colors.textFieldDefaultText};
+
+  ${({ theme }) => theme.typography.subtitleMd}
+
+  &:focus {
+    outline: none;
+  }
+`
+export const CountTextAreaIndicator = styled.p<{ $isError: boolean | undefined }>`
+  position: relative;
+  z-index: 1; // 텍스트가 연필 효과 위로 오도록
+  align-self: flex-end;
+  color: ${({ theme, $isError }) => ($isError ? theme.colors.textFieldError : theme.colors.textFieldDefaultText)};
+  ${({ theme }) => theme.typography.badgeSm}
 `
