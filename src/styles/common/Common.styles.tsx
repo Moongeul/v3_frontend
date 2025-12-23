@@ -7,6 +7,9 @@ export const StyledSpacing = styled.div<{ $height?: number; $width?: number }>`
   height: ${({ $height }) => ($height ? `${$height}px` : `0px`)};
   width: ${({ $width }) => ($width ? `${$width}px` : `0px`)};
 `
+export const BottomBorder = styled.div`
+  border-bottom: 1px solid ${({ theme }) => theme.colors.iconStarFilled};
+`
 export const PencilSketchEffect = () => {
   return (
     <svg style={{ position: 'absolute', width: 0, height: 0 }}>
