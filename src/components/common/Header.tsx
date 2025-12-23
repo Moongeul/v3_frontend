@@ -8,14 +8,15 @@ interface HeaderProps {
   children?: React.ReactNode // 헤더 제목
   leftIcon?: React.ReactNode
   rightIcon?: React.ReactNode
+  isBottomBorder?: boolean
 }
 
-export default function Header({ headerType, children, leftIcon, rightIcon }: HeaderProps) {
+export default function Header({ headerType, children, leftIcon, rightIcon, isBottomBorder }: HeaderProps) {
   const renderHeaderType = (headerType: HeaderType) => {
     switch (headerType) {
       case 'dynamic':
         return (
-          <Container>
+          <Container $isBottomBorder={isBottomBorder}>
             {leftIcon ? leftIcon : <EmptyIcon />}
             <Title $headerType={headerType}>{children}</Title>
             {rightIcon ? rightIcon : <EmptyIcon />}
@@ -23,7 +24,7 @@ export default function Header({ headerType, children, leftIcon, rightIcon }: He
         )
       case 'default':
         return (
-          <Container>
+          <Container $isBottomBorder={isBottomBorder}>
             <MoongeulIcon width={143} height={35} />
             <IconColumn>
               {leftIcon ? leftIcon : <EmptyIcon />}
@@ -33,7 +34,7 @@ export default function Header({ headerType, children, leftIcon, rightIcon }: He
         )
       case 'title':
         return (
-          <Container>
+          <Container $isBottomBorder={isBottomBorder}>
             <Title $headerType={headerType}>{children}</Title>
             {rightIcon ? rightIcon : <EmptyIcon />}
           </Container>
