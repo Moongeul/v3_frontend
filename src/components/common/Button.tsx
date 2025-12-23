@@ -15,16 +15,16 @@ interface ButtonProps {
   rightIcon?: ReactNode
   disabled?: boolean
   buttonType?: 'button' | 'submit'
-  customClassName?: string
+  textColor?: string
 }
 
 const Button = ({
   children,
   variant = 'primary',
+  textColor,
   size = 'lg',
   category = 'text',
   isActive = true,
-  customClassName,
   onClick,
   leftIcon,
   rightIcon,
@@ -46,12 +46,12 @@ const Button = ({
         type={buttonType}
         disabled={disabled}
         onClick={handleClick}
-        className={customClassName}
         $variant={variant}
         $size={size}
         $category={category}
         $isActive={isActive}
         $width={width}
+        $textColor={textColor}
       >
         {leftIcon && <span>{leftIcon}</span>}
         {category === 'text' && children}

@@ -13,6 +13,7 @@ export const Button = styled.button<{
   $category: ButtonProps['category']
   $isActive: boolean
   $width: number | undefined
+  $textColor?: string
 }>`
   display: flex;
   align-items: center;
@@ -76,7 +77,7 @@ export const Button = styled.button<{
     `
   }}
 
-  ${({ theme, $variant, $isActive }) => {
+  ${({ theme, $variant, $isActive, $textColor }) => {
     switch ($variant) {
       case 'primary':
         const primaryBg = $isActive ? theme.colors.buttonActivePrimary : theme.colors.buttonDefaultPrimary
@@ -106,7 +107,11 @@ export const Button = styled.button<{
           }
         `
       case 'ghost':
-        const ghostColor = $isActive ? theme.colors.buttonActiveGhost : theme.colors.buttonDefaultPrimary
+        const ghostColor = !$isActive
+          ? theme.colors.buttonDefaultPrimary
+          : $textColor
+            ? $textColor
+            : theme.colors.buttonActiveGhost
         return css`
           color: ${ghostColor};
           &::before {
