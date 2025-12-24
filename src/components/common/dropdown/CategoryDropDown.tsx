@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import * as Style from '@/styles/common/DropDown.styles'
 
@@ -7,7 +9,7 @@ import Button from '@/components/common/Button'
 import DropDown from '@/components/common/DropDown'
 import useDropDown from '@/hooks/useDropDown'
 import { CategoryType } from '@/types/write'
-import { postCategory } from '@/lib/client/write'
+import { createCategory } from '@/lib/client/write'
 import { useWriteStore } from '@/store/writeStore'
 
 interface CategoryDropDownProps {
@@ -42,7 +44,7 @@ export default function CategoryDropDown({ categories }: CategoryDropDownProps) 
     if (!trimmedName) return
 
     try {
-      const result = await postCategory(trimmedName)
+      const result = await createCategory(trimmedName)
       const newCategoryData = result.data?.data
 
       if (newCategoryData) {

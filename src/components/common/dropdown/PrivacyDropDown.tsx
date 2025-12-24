@@ -1,3 +1,5 @@
+'use client'
+
 import * as Style from '@/styles/common/DropDown.styles'
 
 import DropDown from '@/components/common/DropDown'

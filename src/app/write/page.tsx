@@ -1,3 +1,4 @@
+import { getCategory } from '@/lib/server/write'
 import ReviewField from '@/components/write/ReviewField'
 import Spacing from '@/components/common/Spacing'
 import QuoteField from '@/components/write/QuoteField'
@@ -7,7 +8,8 @@ import BookInfoSummary from '@/components/common/BookInfoSummary'
 import ChangeBook from '@/components/write/ChangeBook'
 import BottomBorder from '@/components/common/BottomBorder'
 import DropDownContainer from '@/components/write/DropDownContainer'
-import { getCategory } from '@/lib/server/write'
+import PrivacyDropDown from '@/components/common/dropdown/PrivacyDropDown'
+import CategoryDropDown from '@/components/common/dropdown/CategoryDropDown'
 
 export default async function WritePage() {
   const categoryResponse = await getCategory()
@@ -15,7 +17,11 @@ export default async function WritePage() {
 
   return (
     <main>
-      <DropDownContainer categories={categories} />
+      <DropDownContainer>
+        <PrivacyDropDown />
+        <CategoryDropDown categories={categories} />
+      </DropDownContainer>
+
       <Spacing height={16} />
 
       <BookInfoSummary

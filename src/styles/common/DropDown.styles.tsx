@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 
 export const DropDownContainer = styled.div`
+  padding-top: 68px;
   display: flex;
   column-gap: 8px;
   width: 100%;
