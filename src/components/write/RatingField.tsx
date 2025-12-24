@@ -8,7 +8,7 @@ import RatingInputField from '@/components/write/RatingInputField'
 export default function RatingField() {
   return (
     <div>
-      <Label isRequired={true}>평점</Label>
+      <Label>평점</Label>
       <Spacing height={8} />
 
       <RatingInputField />
