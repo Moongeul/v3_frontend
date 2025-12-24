@@ -10,7 +10,6 @@ export interface UserType {
   accessToken: string
   refreshToken: string
 }
-//api.ts의 parseJsonResponse 타입 (프론트 BFF 구조시 불러오는 responseType)
 export interface ApiCallResult<T = never> {
   success: boolean
   data?: T

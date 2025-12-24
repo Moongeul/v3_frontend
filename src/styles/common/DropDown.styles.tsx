@@ -75,3 +75,15 @@ export const SelectOptionItem = styled.div`
   ${({ theme }) => theme.typography.buttonMd};
   color: ${({ theme }) => theme.colors.textFieldDefaultText};
 `
+export const SelectOptionInputContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  column-gap: 8px;
+`
+export const SelectOptionInput = styled.input`
+  width: 100%;
+  outline: none;
+  color: ${({ theme }) => theme.colors.textFieldDefaultText};
+  ${({ theme }) => theme.typography.buttonMd};
+`

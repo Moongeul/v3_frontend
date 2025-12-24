@@ -7,11 +7,15 @@ import BookInfoSummary from '@/components/common/BookInfoSummary'
 import ChangeBook from '@/components/write/ChangeBook'
 import BottomBorder from '@/components/common/BottomBorder'
 import DropDownContainer from '@/components/write/DropDownContainer'
+import { getCategory } from '@/lib/server/write'
 
-export default function WritePage() {
+export default async function WritePage() {
+  const categoryResponse = await getCategory()
+  const categories = categoryResponse.data?.categoryList
+
   return (
     <main>
-      <DropDownContainer />
+      <DropDownContainer categories={categories} />
       <Spacing height={16} />
 
       <BookInfoSummary
