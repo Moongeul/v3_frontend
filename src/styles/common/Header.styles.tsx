@@ -5,6 +5,8 @@ import styled from '@emotion/styled'
 type HeaderType = 'default' | 'dynamic' | 'title'
 
 export const Header = styled.header<{ $isBottomBorder?: boolean }>`
+  position: fixed;
+  z-index: 100;
   padding: 8px 20px;
   height: 60px;
   width: 100%;
@@ -12,6 +14,7 @@ export const Header = styled.header<{ $isBottomBorder?: boolean }>`
   justify-content: space-between;
   align-content: center;
   align-items: center;
+  background-color: ${({ theme }) => theme.colors.background};
   border: ${({ theme, $isBottomBorder }) => ($isBottomBorder ? `${theme.colors.baseColor.gray200}` : 'none')};
   border-bottom: ${({ $isBottomBorder, theme }) =>
     $isBottomBorder ? `1px solid ${theme.colors.baseColor.gray200}` : 'none'};
