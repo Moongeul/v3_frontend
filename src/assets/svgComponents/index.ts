@@ -1,6 +1,7 @@
 export { default as ActiveBottomButton } from './ActiveBottomButton'
 export { default as AddBlackIcon } from './AddBlackIcon'
 export { default as AddIcon } from './AddIcon'
+export { default as AddWhiteIcon } from './AddWhiteIcon'
 export { default as CalendarIcon } from './CalendarIcon'
 export { default as ChangeIcon } from './ChangeIcon'
 export { default as CloseIcon } from './CloseIcon'
