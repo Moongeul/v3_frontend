@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Header from '@/components/common/Header'
 
 export default function Home() {
   const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code`
@@ -7,9 +6,6 @@ export default function Home() {
 
   return (
     <main>
-      <Header headerType={'dynamic'} isBottomBorder={true}>
-        하이
-      </Header>
       <Link href={googleAuthUrl}>구글 로그인</Link>
       <Link href={kakaoAuthUrl}>카카오 로그인</Link>
     </main>
