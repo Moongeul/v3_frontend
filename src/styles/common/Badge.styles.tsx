@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { CSSObject } from '@emotion/react'
 
 export const Badge = styled.div<{
   $backgroundColor: string | undefined
@@ -14,7 +15,7 @@ export const Badge = styled.div<{
   background-color: transparent;
 
   color: ${({ theme, $textColor }) => ($textColor ? $textColor : theme.colors.background)};
-  ${({ theme }) => theme.typography.badgeSm};
+  ${({ theme }) => theme.typography.badgeSm as CSSObject};
 
   /* 연필 효과를 입힐 가상 요소 */
   &::before {
