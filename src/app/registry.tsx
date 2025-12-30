@@ -1,11 +1,19 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useSyncExternalStore } from 'react'
 import { useServerInsertedHTML } from 'next/navigation'
 import createCache from '@emotion/cache'
 import { CacheProvider, ThemeProvider } from '@emotion/react'
 import { useTheme } from 'next-themes'
 import { lightTheme, darkTheme } from '@/styles/theme'
+// 클라이언트 사이드인지 확인하는 헬퍼 훅 (React 19 권장 방식)
+function useIsClient() {
+  return useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  )
+}
 
 export default function EmotionRootRegistry({ children }: { children: React.ReactNode }) {
   const [{ cache, flush }] = useState(() => {
@@ -54,18 +62,9 @@ export default function EmotionRootRegistry({ children }: { children: React.Reac
 
 function ThemeWrapper({ children }: { children: React.ReactNode }) {
   const { resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const isClient = useIsClient()
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  const currentTheme = resolvedTheme === 'dark' ? darkTheme : lightTheme
-
-  // 서버 사이드 렌더링 시에는 기본 라이트 테마를 제공하여 에러 방지
-  if (!mounted) {
-    return <ThemeProvider theme={lightTheme}>{children}</ThemeProvider>
-  }
+  const currentTheme = isClient && resolvedTheme === 'dark' ? darkTheme : lightTheme
 
   return <ThemeProvider theme={currentTheme}>{children}</ThemeProvider>
 }
