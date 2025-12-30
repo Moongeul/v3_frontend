@@ -1,10 +1,14 @@
 'use client'
 
 import { ReactNode } from 'react'
-import { Spacing } from '@/components/common'
-import { BestsellerList, BookSearchResults, PopularBook } from '@/components/book/index'
+
 import { useBookStore } from '@/store/bookStore'
 import { useBookInfiniteScroll } from '@/hooks/book/useBookInfiniteScroll'
+
+import { Label, Spacing } from '@/components/common'
+import { BestsellerList, BookSearchResults, LoadMoreButton, PopularBook } from '@/components/book/index'
+
+import { typography } from '@/styles/theme'
 
 interface BookContentProps {
   children?: ReactNode
@@ -24,10 +28,18 @@ export default function BookContent({ children }: BookContentProps) {
         </>
       ) : (
         <>
-          <Spacing height={27} />
+          <Spacing height={7} />
+          <Label labelStyle={typography.subtitleLg} labelElement={<LoadMoreButton />}>
+            베스트셀러
+          </Label>
+
+          <Spacing height={4} />
           <BestsellerList />
 
           <Spacing height={36} />
+          <Label labelStyle={typography.subtitleLg}>같은 취향 사람들의 인기책</Label>
+
+          <Spacing height={8} />
           <PopularBook />
         </>
       )}

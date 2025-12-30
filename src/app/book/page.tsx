@@ -1,9 +1,5 @@
-import Spacing from '@/components/common/Spacing'
-import BookSearchField from '@/components/book/BookSearchField'
-import BestsellerList from '@/components/book/BestsellerList'
-import PopularBook from '@/components/book/PopularBook'
-import Header from '@/components/common/Header'
-import PageLayout from '@/components/common/PageLayout'
+import { Header, Spacing, PageLayout } from '@/components/common'
+import { BookSearchField, BookContent } from '@/components/book'
 
 export default function BookPage() {
   return (
@@ -13,11 +9,8 @@ export default function BookPage() {
         <Spacing height={72} />
         <BookSearchField />
 
-        <Spacing height={27} />
-        <BestsellerList />
-
-        <Spacing height={36} />
-        <PopularBook />
+        <Spacing height={20} />
+        <BookContent />
       </PageLayout>
     </main>
   )
