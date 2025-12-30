@@ -1,8 +1,8 @@
 'use client'
 
-import * as Style from '@/styles/common/Book.styles'
+import * as S from '@/styles/common/Book.styles'
 import Image from 'next/image'
-import Spacing from '@/components/common/Spacing'
+import { StarFillGrayIcon } from '@/assets/svgComponents'
 
 interface BookInfoSummaryProps {
   isbn: string
@@ -12,6 +12,7 @@ interface BookInfoSummaryProps {
   publisher?: string
   pubdate?: string
   rightElement?: React.ReactNode
+  rating?: number
 }
 export default function BookInfoSummary({
   isbn,
@@ -21,22 +22,29 @@ export default function BookInfoSummary({
   author,
   title,
   rightElement,
+  rating,
 }: BookInfoSummaryProps) {
   return (
-    <Style.BookInfoSummaryContainer>
-      <Style.Row>
-        <Style.BookImage>
-          <Image src={bookImage} width={80} height={120} alt="이미지"></Image>
-        </Style.BookImage>
-        <Style.Column>
-          <Style.Title>{title}</Style.Title>
-          <Style.Info>{author}</Style.Info>
-          <Style.Info>
+    <S.BookInfoSummaryContainer>
+      <S.Row>
+        <S.BookImage>
+          <Image src={bookImage} width={80} height={120} alt="이미지" style={{ borderRadius: 6 }}></Image>
+        </S.BookImage>
+        <S.Column>
+          <S.Title>{title}</S.Title>
+          <S.Info>{author}</S.Info>
+          <S.Info>
             {publisher} | {pubdate}
-          </Style.Info>
-        </Style.Column>
-      </Style.Row>
-      <Style.RightButton>{rightElement && rightElement}</Style.RightButton>
-    </Style.BookInfoSummaryContainer>
+          </S.Info>
+          {rating ? (
+            <S.Rating>
+              <StarFillGrayIcon width={12} height={12} />
+              {rating}
+            </S.Rating>
+          ) : null}
+        </S.Column>
+      </S.Row>
+      <S.RightButton>{rightElement && rightElement}</S.RightButton>
+    </S.BookInfoSummaryContainer>
   )
 }

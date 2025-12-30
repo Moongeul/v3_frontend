@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { suit } from '@/styles/font'
-import EmotionRootRegistry from './registry' // Emotion 설정 파일 (필요시)
+import EmotionRootRegistry from './registry'
+import { Providers } from '@/providers/Providers' // Emotion 설정 파일 (필요시)
 
 const geistSans = Geist({
   variable: '--fonts-geist-sans',
@@ -26,9 +27,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={suit.variable}>
-      <EmotionRootRegistry>
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
-      </EmotionRootRegistry>
+      <Providers>
+        <EmotionRootRegistry>
+          <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+        </EmotionRootRegistry>
+      </Providers>
     </html>
   )
 }

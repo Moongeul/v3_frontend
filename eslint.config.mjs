@@ -1,24 +1,24 @@
-import js from '@eslint/js'
-import * as tseslint from 'typescript-eslint'
+import { defineConfig, globalIgnores } from 'eslint/config'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTs from 'eslint-config-next/typescript'
+import prettierConfig from 'eslint-config-prettier'
 import prettierPlugin from 'eslint-plugin-prettier'
 
-export default [
-  js.configs.recommended,
-  ...tseslint.configs.recommended,
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
   {
-    files: ['**/*.{js,ts,jsx,tsx}'],
-    languageOptions: {
-      parser: tseslint.parser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-      },
-    },
     plugins: {
       prettier: prettierPlugin,
     },
     rules: {
-      'prettier/prettier': 'warn',
+      'prettier/prettier': 'error',
+      'no-unused-vars': 'warn',
+      'react/react-in-jsx-scope': 'off',
     },
   },
-]
+  prettierConfig,
+  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'src/assets/svgComponents/**']),
+])
+
+export default eslintConfig
