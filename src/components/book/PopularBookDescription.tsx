@@ -1,8 +1,7 @@
 'use client'
 
-import { Badge, Spacing } from '@/components/common'
+import { Badge, Spacing, StarRating } from '@/components/common'
 import { baseColor } from '@/styles/theme'
-import StarRating from '@/components/write/StarRating'
 import { StylePopularBookInfo } from '@/styles/common/Book.styles'
 
 interface PopularBookDescriptionProps {

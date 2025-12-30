@@ -3,9 +3,9 @@
 import * as Style from '@/styles/common/DropDown.styles'
 
 import DropDown from '@/components/common/DropDown'
-import useDropDown from '@/hooks/useDropDown'
 import { useWriteStore } from '@/store/writeStore'
 import { PostVisibilityEnumType } from '@/types/write'
+import { useDropDown } from '@/hooks'
 
 export default function PrivacyDropDown() {
   const privacyOptionList: { content: string; enum: PostVisibilityEnumType }[] = [

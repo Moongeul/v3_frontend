@@ -7,10 +7,10 @@ import { AddBlackIcon } from '@/assets/svgComponents'
 
 import Button from '@/components/common/Button'
 import DropDown from '@/components/common/DropDown'
-import useDropDown from '@/hooks/useDropDown'
 import { CategoryType } from '@/types/write'
 import { createCategory } from '@/lib/client/write'
 import { useWriteStore } from '@/store/writeStore'
+import { useDropDown } from '@/hooks'
 
 interface CategoryDropDownProps {
   categories: CategoryType[] | undefined

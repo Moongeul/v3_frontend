@@ -1,9 +1,8 @@
 'use client'
 
-import Label from '@/components/common/Label'
-import Spacing from '@/components/common/Spacing'
-import StarRating from '@/components/write/StarRating'
 import RatingInputField from '@/components/write/RatingInputField'
+import { useWriteStore } from '@/store/writeStore'
+import { StarRating, Label, Spacing } from '@/components/common'
 
 export default function RatingField() {
   return (
