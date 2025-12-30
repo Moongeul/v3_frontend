@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { CSSObject } from '@emotion/react'
+import BookIntroduction from '../../components/book/BookIntroduction'
 
 export const BookInfoSummaryContainer = styled.div`
   display: flex;
@@ -132,4 +133,8 @@ export const StyleBestBookTitle = styled.div`
 export const StyleBestBookAuthor = styled.div`
   ${({ theme }) => theme.typography.small as CSSObject};
   color: ${({ theme }) => theme.colors.textFieldDefaultText};
+`
+export const StyleBookIntroductionContent = styled.p`
+  ${({ theme }) => theme.typography.bodyMd as CSSObject};
+  color: ${({ theme }) => theme.colors.textFieldFilledLine};
 `
