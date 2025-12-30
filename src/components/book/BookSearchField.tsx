@@ -3,8 +3,7 @@
 import { useBookStore } from '@/store/bookStore'
 import { TextInput, Button } from '@/components/common'
 
-interface BookSearchFieldProps {}
-export default function BookSearchField({}: BookSearchFieldProps) {
+export default function BookSearchField() {
   const { searchValue, setSearchValue } = useBookStore((state) => state)
   return (
     <TextInput

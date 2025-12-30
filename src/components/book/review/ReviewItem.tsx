@@ -7,8 +7,7 @@ import InteractionButton from '@/components/book/review/InteractionButton'
 import ReviewContent from '@/components/book/review/ReviewContent'
 import ReviewHeader from '@/components/book/review/ReviewHeader'
 
-interface ReviewItemProps {}
-export default function ReviewItem({}: ReviewItemProps) {
+export default function ReviewItem() {
   return (
     <div>
       <Spacing height={20} />
