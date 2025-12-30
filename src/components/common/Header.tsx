@@ -21,13 +21,13 @@ interface HeaderProps {
 export default function Header({ headerType, children, leftIcon, rightIcon, isBottomBorder, path }: HeaderProps) {
   const router = useRouter()
 
-  const onBack = useCallback(() => {
+  const onBack = () => {
     if (path) {
       router.push(path)
     } else {
       router.back()
     }
-  }, [])
+  }
 
   const renderHeaderType = (headerType: HeaderType) => {
     switch (headerType) {

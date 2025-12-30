@@ -22,12 +22,12 @@ export default function ReviewField() {
   const MAX_LENGTH = 2000
   const isError = contentLength > MAX_LENGTH
 
-  const inputHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setState({
       ...writeData,
       writeData: { ...writeData, content: e.target.value },
     })
-  }, [])
+  }
 
   return (
     <div>

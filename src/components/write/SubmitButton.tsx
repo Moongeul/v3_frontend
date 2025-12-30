@@ -25,13 +25,13 @@ export default function SubmitButton() {
     return hasRequiredFields && isContentValid
   }, [writeData])
 
-  const handleSubmit = useCallback(async () => {
+  const handleSubmit = async () => {
     const result = await createPost(writeData)
     console.log('글쓰기 제출', result)
     if (result.success) {
       router.back()
     }
-  }, [])
+  }
 
   return (
     <Button
