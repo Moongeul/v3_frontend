@@ -5,6 +5,7 @@ import { useWriteStore } from '@/store/writeStore'
 import { StarRating, Label, Spacing } from '@/components/common'
 
 export default function RatingField() {
+  const writeData = useWriteStore((state) => state.writeData)
   return (
     <div>
       <Label>평점</Label>
@@ -13,7 +14,7 @@ export default function RatingField() {
       <RatingInputField />
       <Spacing height={8} />
 
-      <StarRating />
+      <StarRating rating={writeData.rating} />
     </div>
   )
 }
