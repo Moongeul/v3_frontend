@@ -118,7 +118,7 @@ export const baseColor = {
   lightYellow600: '#DCD9C1',
   lightYellow700: '#ACA997',
   lightYellow800: '#858375',
-  lightYellow900: '#666459',
+  lightYellow900: '#464540',
   //red
   red50: '#FFEFF0',
   red100: '#FFCED2',
