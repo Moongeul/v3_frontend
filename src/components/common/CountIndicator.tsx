@@ -1,3 +1,4 @@
+'use client'
 import * as Style from '@/styles/common/TextInput.styles'
 
 export default function CountIndicator({

@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import * as Style from '@/styles/common/Label.styles'
 

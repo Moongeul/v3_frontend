@@ -1,3 +1,5 @@
+'use client'
+
 import * as Style from '@/styles/common/Button.styles'
 
 import React from 'react'
