@@ -3,6 +3,7 @@
 import * as S from '@/styles/common/Book.styles'
 import Image from 'next/image'
 import { StarFillGrayIcon } from '@/assets/svgComponents'
+import { useRouter } from 'next/navigation'
 
 interface BookInfoSummaryProps {
   isbn: string
@@ -24,8 +25,13 @@ export default function BookInfoSummary({
   rightElement,
   rating,
 }: BookInfoSummaryProps) {
+  const router = useRouter()
   return (
-    <S.BookInfoSummaryContainer>
+    <S.BookInfoSummaryContainer
+      onClick={() => {
+        router.push(`/book/${isbn}`)
+      }}
+    >
       <S.Row>
         <S.BookImage>
           <Image src={bookImage} width={80} height={120} alt="이미지" style={{ borderRadius: 6 }}></Image>
