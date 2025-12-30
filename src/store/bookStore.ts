@@ -10,7 +10,7 @@ const initialBook = {
   searchValue: '',
 }
 
-export const useBookStore=create<BookState> ()(
+export const useBookStore = create<BookState>()(
   devtools((set) => ({
     // 초기값
     login: initialBook.searchValue,
