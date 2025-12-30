@@ -9,6 +9,7 @@ export { default as PageLayout } from './PageLayout'
 export { default as Spacing } from './Spacing'
 export { default as TextInput } from './TextInput'
 export { default as Spinner } from './Spinner'
+export { default as StarRating } from './StarRating'
 
 //dropdown
 export { default as DropDown } from './DropDown'
