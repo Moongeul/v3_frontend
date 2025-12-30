@@ -4,7 +4,7 @@ import { Button } from '@/components/common'
 import { baseColor } from '@/styles/theme'
 import { useRouter } from 'next/navigation'
 
-export default function LoadMoreButton() {
+export default function BestSellerLoadMoreButton() {
   const router = useRouter()
   return (
     <Button

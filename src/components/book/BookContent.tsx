@@ -6,7 +6,7 @@ import { useBookStore } from '@/store/bookStore'
 import { useBookInfiniteScroll } from '@/hooks/book/useBookInfiniteScroll'
 
 import { Label, Spacing } from '@/components/common'
-import { BestsellerList, BookSearchResults, LoadMoreButton, PopularBook } from '@/components/book/index'
+import { BestsellerList, BookSearchResults, BestSellerLoadMoreButton, PopularBook } from '@/components/book/index'
 
 import { typography } from '@/styles/theme'
 
@@ -29,7 +29,7 @@ export default function BookContent({ children }: BookContentProps) {
       ) : (
         <>
           <Spacing height={7} />
-          <Label labelStyle={typography.subtitleLg} labelElement={<LoadMoreButton />}>
+          <Label labelStyle={typography.subtitleLg} labelElement={<BestSellerLoadMoreButton />}>
             베스트셀러
           </Label>
 
