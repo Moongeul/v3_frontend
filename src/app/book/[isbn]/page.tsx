@@ -1,29 +1,42 @@
-import BookInfoSummary from '@/components/common/BookInfoSummary'
-import Spacing from '@/components/common/Spacing'
-import BottomBorder from '@/components/common/BottomBorder'
-import BookIntroduction from '@/components/book/BookIntroduction'
-import BookReviews from '@/components/book/BookReviews'
+import { Label, Spacing, BottomBorder, BookInfoSummary, Spinner } from '@/components/common'
+import { BookIntroduction, BookReviews, ViewAllReviewsButton } from '@/components/book'
+import { typography } from '@/styles/theme'
+import { fetchBookDetailInfo } from '@/lib/server/book'
 
-export default function BookDetailPage() {
+interface BookDetailPageProps {
+  params: Promise<{ isbn: string }>
+}
+export default async function BookDetailPage({ params }: BookDetailPageProps) {
+  const { isbn } = await params
+  const result = await fetchBookDetailInfo(isbn)
+  const book = result.data
+
+  if (!book) {
+    return <Spinner />
+  }
+
   return (
     <main>
-      <Spacing height={68}></Spacing>
+      <Spacing height={68} />
       <BookInfoSummary
-        publisher={'korfit'}
-        pubdate={'2025'}
-        isbn={'1'}
-        author={'황유림'}
-        title={'책 제목이 길어질 경우에'}
-        bookImage={'/bookimage.png'}
-        // rightElement={<ChangeBook />}
+        publisher={book.publisher}
+        pubdate={book.pubdate}
+        isbn={book.isbn}
+        author={book.author}
+        title={book.title}
+        bookImage={book.bookImage}
+        rating={book.ratingAverage}
       />
       <Spacing height={20} />
-      <BookIntroduction />
+      <BookIntroduction description={book.description} />
 
       <Spacing height={20} />
       <BottomBorder />
       <Spacing height={20} />
 
+      <Label labelStyle={typography.subtitleMd} labelElement={<ViewAllReviewsButton />}>
+        기록
+      </Label>
       <BookReviews />
     </main>
   )
