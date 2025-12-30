@@ -1,18 +1,18 @@
 'use client'
 
 import styled from '@emotion/styled'
-import { css, SerializedStyles, Theme } from '@emotion/react'
+import { css, CSSObject, SerializedStyles, Theme } from '@emotion/react'
 
 export const HelperText = styled.p<{ $isError?: boolean }>`
   color: ${({ theme, $isError }) => ($isError ? theme.colors.textFieldError : theme.colors.baseColor.gray400)};
-  ${({ theme }) => theme.typography.badgeSm}
+  ${({ theme }) => theme.typography.badgeSm as CSSObject}
 `
 export const CountTextFieldIndicator = styled.p<{ $isError: boolean | undefined }>`
   position: relative;
   z-index: 1; // 텍스트가 연필 효과 위로 오도록
   right: 12px;
   color: ${({ theme, $isError }) => ($isError ? theme.colors.textFieldError : theme.colors.textFieldDefaultText)};
-  ${({ theme }) => theme.typography.badgeSm}
+  ${({ theme }) => theme.typography.badgeSm as CSSObject}
 `
 
 interface StatusStyleProps {
@@ -122,7 +122,7 @@ export const Input = styled.input<{
         ? theme.colors.textFieldFilledLine
         : theme.colors.textFieldDefaultText};
 
-  ${({ theme }) => theme.typography.subtitleMd}
+  ${({ theme }) => theme.typography.subtitleMd as CSSObject}
 
   &:focus {
     outline: none;
@@ -182,7 +182,7 @@ export const TextArea = styled.textarea<{ $status: 'default' | 'filled' | 'error
         ? theme.colors.textFieldFilledLine
         : theme.colors.textFieldDefaultText};
 
-  ${({ theme }) => theme.typography.subtitleMd}
+  ${({ theme }) => theme.typography.subtitleMd as CSSObject}
 
   &:focus {
     outline: none;
@@ -193,5 +193,5 @@ export const CountTextAreaIndicator = styled.p<{ $isError: boolean | undefined }
   z-index: 1; // 텍스트가 연필 효과 위로 오도록
   align-self: flex-end;
   color: ${({ theme, $isError }) => ($isError ? theme.colors.textFieldError : theme.colors.textFieldDefaultText)};
-  ${({ theme }) => theme.typography.badgeSm}
+  ${({ theme }) => theme.typography.badgeSm as CSSObject}
 `

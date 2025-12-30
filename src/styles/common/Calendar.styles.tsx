@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { CSSObject } from '@emotion/react'
 
 export const DateInputBox = styled.div`
   display: flex;
@@ -7,7 +8,7 @@ export const DateInputBox = styled.div`
   align-items: center;
   cursor: pointer;
   color: ${({ theme }) => theme.colors.headerText}
-  ${({ theme }) => theme.typography.subtitleSm}
+  ${({ theme }) => theme.typography.subtitleSm as CSSObject}
   background-color: #fff;
 
   &:hover {

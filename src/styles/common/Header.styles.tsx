@@ -1,6 +1,7 @@
 'use client'
 
 import styled from '@emotion/styled'
+import { CSSObject } from '@emotion/react'
 
 type HeaderType = 'default' | 'dynamic' | 'title'
 
@@ -23,10 +24,10 @@ export const Header = styled.header<{ $isBottomBorder?: boolean }>`
 export const Title = styled.h1<{ $headerType: HeaderType }>`
   ${({ theme, $headerType }) =>
     $headerType === 'default'
-      ? theme.typography.titleLg
+      ? (theme.typography.titleLg as CSSObject)
       : $headerType === 'title'
-        ? theme.typography.titleMd
-        : theme.typography.subtitleMd}
+        ? (theme.typography.titleMd as CSSObject)
+        : (theme.typography.subtitleMd as CSSObject)}
 `
 export const IconColumn = styled.div`
   display: flex;

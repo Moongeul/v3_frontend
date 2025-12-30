@@ -1,7 +1,7 @@
 // src/styles/theme.ts
 import { Theme } from '@emotion/react'
 
-const typography = {
+export const typography = {
   titleLg: {
     fontFamily: 'SUIT',
     fontSize: '24px',
@@ -98,6 +98,14 @@ const typography = {
     letterSpacing: '-0.192px',
     fontStyle: 'normal',
   },
+  caption: {
+    fontFamily: 'SUIT',
+    fontSize: '10px',
+    fontWeight: 400,
+    lineHeight: '120%',
+    letterSpacing: '-0.192px',
+    fontStyle: 'normal',
+  },
 }
 export const baseColor = {
   //light-yellow
@@ -183,6 +191,8 @@ export const lightTheme: Theme = {
     background: '#FFFFFD',
     headerText: '#272725',
     iconStarFilled: '#EFEFEE',
+    famousSection: '#FEFCEB',
+    rating: '#929290',
     textFieldFill: '#FFFEF6',
     textFieldDefaultLine: '#B4B4B3',
     textFieldDefaultText: '#929290',
@@ -209,6 +219,8 @@ export const darkTheme: Theme = {
     background: '#272725',
     headerText: '#FFFFFD',
     iconStarFilled: '#41413F',
+    famousSection: '#464540',
+    rating: '#EFEFEE',
     textFieldFill: '#333331',
     textFieldDefaultLine: '#7D7D7A',
     textFieldDefaultText: '#B4B4B3',

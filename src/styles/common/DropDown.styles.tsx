@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { CSSObject } from '@emotion/react'
 
 export const DropDownContainer = styled.div`
   padding-top: 68px;
@@ -22,7 +23,7 @@ export const SelectBox = styled.div<{ $isFocus: boolean; $isSelectedValue: boole
     align-items: center;
     position: relative;
     border-radius: 6px;
-    ${({ theme }) => theme.typography.buttonMd}
+    ${({ theme }) => theme.typography.buttonMd as CSSObject}
     border: ${({ $isFocus, $isSelectedValue, theme }) => (!$isSelectedValue ? theme.colors.textFieldDefaultLine : $isFocus ? theme.colors.textFieldFocusLine : theme.colors.textFieldDefaultLine)};
     background-color: ${({ theme }) => theme.colors.textFieldFill};
     color: ${({ $isFocus, $isSelectedValue, theme }) => (!$isSelectedValue ? theme.colors.textFieldDefaultText : $isFocus ? theme.colors.textFieldFocusText : theme.colors.textFieldFocusText)};
@@ -73,7 +74,7 @@ export const SelectOption = styled.div`
 export const SelectOptionItem = styled.div`
   padding-top: 9px;
   padding-bottom: 9px;
-  ${({ theme }) => theme.typography.buttonMd};
+  ${({ theme }) => theme.typography.buttonMd as CSSObject};
   color: ${({ theme }) => theme.colors.textFieldDefaultText};
 `
 export const SelectOptionInputContainer = styled.div`
@@ -86,5 +87,5 @@ export const SelectOptionInput = styled.input`
   width: 100%;
   outline: none;
   color: ${({ theme }) => theme.colors.textFieldDefaultText};
-  ${({ theme }) => theme.typography.buttonMd};
+  ${({ theme }) => theme.typography.buttonMd as CSSObject};
 `

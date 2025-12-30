@@ -1,12 +1,23 @@
 // src/styles/emotion.d.ts
 import '@emotion/react'
 
+export interface TypographyType {
+  fontFamily: string
+  fontSize: string
+  fontWeight: number
+  lineHeight: string
+  letterSpacing: string
+  fontStyle: string
+}
+
 declare module '@emotion/react' {
   export interface Theme {
     colors: {
       background: string
       headerText: string
       iconStarFilled: string
+      famousSection: string
+      rating: string
       textFieldFill: string
       textFieldDefaultLine: string
       textFieldDefaultText: string
@@ -104,102 +115,18 @@ declare module '@emotion/react' {
       }
     }
     typography: {
-      titleLg: {
-        fontFamily: string
-        fontSize: string
-        fontWeight: number
-        lineHeight: string
-        letterSpacing: string
-        fontStyle: string
-      }
-      titleMd: {
-        fontFamily: string
-        fontSize: string
-        fontWeight: number
-        lineHeight: string
-        letterSpacing: string
-        fontStyle: string
-      }
-      titleSm: {
-        fontFamily: string
-        fontSize: string
-        fontWeight: number
-        lineHeight: string
-        letterSpacing: string
-        fontStyle: string
-      }
-      subtitleLg: {
-        fontFamily: string
-        fontSize: string
-        fontWeight: number
-        lineHeight: string
-        letterSpacing: string
-        fontStyle: string
-      }
-      subtitleMd: {
-        fontFamily: string
-        fontSize: string
-        fontWeight: number
-        lineHeight: string
-        letterSpacing: string
-        fontStyle: string
-      }
-      subtitleSm: {
-        fontFamily: string
-        fontSize: string
-        fontWeight: number
-        lineHeight: string
-        letterSpacing: string
-        fontStyle: string
-      }
-      bodyMd: {
-        fontFamily: string
-        fontSize: string
-        fontWeight: number
-        lineHeight: string
-        letterSpacing: string
-        fontStyle: string
-      }
-      bodySm: {
-        fontFamily: string
-        fontSize: string
-        fontWeight: number
-        lineHeight: string
-        letterSpacing: string
-        fontStyle: string
-      }
-      buttonMd: {
-        fontFamily: string
-        fontSize: string
-        fontWeight: number
-        lineHeight: string
-        letterSpacing: string
-        fontStyle: string
-      }
-      small: {
-        fontFamily: string
-        fontSize: string
-        fontWeight: number
-        lineHeight: string
-        letterSpacing: string
-        fontStyle: string
-      }
-      badgeMd: {
-        fontFamily: string
-        fontSize: string
-        fontWeight: number
-        lineHeight: string
-        letterSpacing: string
-        fontStyle: string
-      }
-      badgeSm: {
-        fontFamily: string
-        fontSize: string
-        fontWeight: number
-        lineHeight: string
-        letterSpacing: string
-        fontStyle: string
-      }
+      titleLg: TypographyType
+      titleMd: TypographyType
+      titleSm: TypographyType
+      subtitleLg: TypographyType
+      subtitleMd: TypographyType
+      subtitleSm: TypographyType
+      bodyMd: TypographyType
+      bodySm: TypographyType
+      buttonMd: TypographyType
+      small: TypographyType
+      badgeMd: TypographyType
+      badgeSm: TypographyType
     }
   }
 }

@@ -1,4 +1,6 @@
+import { CSSObject } from '@emotion/react'
 import styled from '@emotion/styled'
+import { TypographyType } from '@/styles/emotion'
 
 export const ContainerRow = styled.div`
   display: flex;
@@ -6,15 +8,15 @@ export const ContainerRow = styled.div`
   width: 100%;
   justify-content: space-between;
 `
-export const Label = styled.div`
+export const Label = styled.div<{ $labelStyle?: TypographyType }>`
   flex-shrink: 0;
   white-space: nowrap;
   color: ${({ theme }) => theme.colors.headerText};
-  ${({ theme }) => theme.typography.subtitleMd}
+  ${({ theme, $labelStyle }) => ($labelStyle ? ($labelStyle as CSSObject) : (theme.typography.subtitleMd as CSSObject))}
 `
 export const RequiredMark = styled.span`
   color: ${({ theme }) => theme.colors.baseColor.secondary500};
-  ${({ theme }) => theme.typography.subtitleMd}
+  ${({ theme }) => theme.typography.subtitleMd as CSSObject}
 `
 
 export const Row = styled.div`

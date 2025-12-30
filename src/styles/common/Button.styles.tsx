@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { css } from '@emotion/react'
+import { css, CSSObject } from '@emotion/react'
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
@@ -42,7 +42,7 @@ export const Button = styled.button<{
     box-sizing: border-box;
   }
 
-  ${({ theme }) => theme.typography.buttonMd};
+  ${({ theme }) => theme.typography.buttonMd as CSSObject};
 
   &:disabled {
     cursor: not-allowed;
@@ -152,7 +152,7 @@ export const ActionArea = styled.button`
   align-items: center;
   z-index: 2;
 
-  ${({ theme }) => theme.typography.buttonMd}
+  ${({ theme }) => theme.typography.buttonMd as CSSObject}
   color: ${({ theme }) => theme.colors.baseColor.lightYellow50};
 
   padding: 0;

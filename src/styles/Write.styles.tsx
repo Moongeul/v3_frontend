@@ -5,9 +5,12 @@ export const WritingGuide = styled.p`
   color: ${({ theme }) => theme.colors.buttonActiveGhost};
 `
 
-export const StarRatingColumn = styled.div`
+export const StarRatingColumn = styled.div<{ $textColor?: string }>`
   display: flex;
   column-gap: 2px;
+  color: ${({ $textColor }) => $textColor};
+  ${({ theme }) => theme.typography.badgeMd};
+  align-items: center;
 `
 
 export const QuoteTopElementContainer = styled.div`
