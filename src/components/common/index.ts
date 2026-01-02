@@ -11,6 +11,7 @@ export { default as TextInput } from './TextInput'
 export { default as Spinner } from './Spinner'
 export { default as Badge } from './Badge'
 export { default as StarRating } from './StarRating'
+export { default as Tab } from './Tab'
 
 //dropdown
 export { default as DropDown } from './DropDown'
