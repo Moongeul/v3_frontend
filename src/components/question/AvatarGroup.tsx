@@ -1,6 +1,6 @@
 'use client'
 
-import { StyleAvatar, StyleAvatarCount, StyleAvatarGroup } from '@/styles/home/Question.styles'
+import { StyleAvatar, StyleAvatarCount, StyleAvatarGroup } from '@/styles/question/Question.styles'
 
 export default function AvatarGroup() {
   return (

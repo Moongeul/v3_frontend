@@ -1,4 +1,5 @@
 'use client'
+
 import { Button } from '@/components/common'
 import { InteractionButtonIcon } from '@/assets/svgComponents'
 

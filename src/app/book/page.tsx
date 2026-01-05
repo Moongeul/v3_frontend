@@ -1,5 +1,5 @@
 import { Header, Spacing, PageLayout } from '@/components/common'
-import { BookSearchField, BookContent } from '@/components/book'
+import { BookContent, BookSearchField } from '@/components/book'
 
 export default function BookPage() {
   return (

@@ -11,7 +11,7 @@ import { Spacing } from '@/components/common'
 
 interface BookQuoteProps {
   quoteContent: string
-  page: string
+  page: number
 }
 
 export default function BookQuote({ quoteContent, page }: BookQuoteProps) {

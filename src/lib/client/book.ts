@@ -2,7 +2,7 @@ import { APIResponseType, Paging } from '@/types/common'
 import { BookType } from '@/types/book'
 
 /**
- * 공고 전체 보기
+ * 책 검색 결과 전체 보기
  */
 export const clientFetchBookResults = async (params: {
   page: number
@@ -20,6 +20,20 @@ export const clientFetchBookResults = async (params: {
   }
 
   const response = await fetch(`/api/book/search?${searchParams.toString()}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  return await response.json()
+}
+
+/**
+ * 책 검색 결과 전체 보기
+ */
+export const clientFetchBookDetail = async (isbn: string): Promise<APIResponseType<BookType>> => {
+  const response = await fetch(`/api/book/${isbn}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

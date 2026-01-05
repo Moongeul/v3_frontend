@@ -4,7 +4,6 @@ import * as Style from '@/styles/common/Header.styles'
 
 import { useRouter } from 'next/navigation'
 import { HeaderLeftArrowIcon, MoongeulIcon } from '@/assets/svgComponents'
-import { useCallback } from 'react'
 import { HeaderLeftArrowIconPadding } from '@/styles/common/Header.styles'
 
 type HeaderType = 'default' | 'dynamic' | 'title'

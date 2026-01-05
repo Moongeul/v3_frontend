@@ -2,10 +2,33 @@ import styled from '@emotion/styled'
 import { CSSObject } from '@emotion/react'
 import BookIntroduction from '../../components/book/BookIntroduction'
 
-export const BookInfoSummaryContainer = styled.div`
+export const BookInfoSummaryContainer = styled.div<{ $styleType: 'transparent' | 'lightYellow' }>`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding: ${({ $styleType }) => ($styleType === 'transparent' ? '0px' : '8px')};
+
+  position: relative;
+  z-index: 1;
+  transition: all 0.2s ease-in-out;
+  background-color: transparent;
+  /* 연필 효과를 입힐 가상 요소 */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    filter: url('#pencil-texture');
+    pointer-events: none;
+    box-sizing: border-box;
+    border-radius: 12px;
+
+    background-color: ${({ theme, $styleType }) =>
+      $styleType === 'transparent' ? 'transparent' : theme.colors.famousSection};
+  }
 `
 export const RightButton = styled.div`
   margin-top: auto;
@@ -21,8 +44,9 @@ export const Column = styled.div`
   flex-direction: column;
   row-gap: 8px;
 `
-export const Title = styled.p`
-  ${({ theme }) => theme.typography.titleSm as CSSObject};
+export const Title = styled.p<{ $styleType: 'transparent' | 'lightYellow' }>`
+  ${({ theme, $styleType }) =>
+    $styleType === 'transparent' ? (theme.typography.titleSm as CSSObject) : (theme.typography.badgeMd as CSSObject)};
   color: ${({ theme }) => theme.colors.headerText};
   /* 여러 줄 말줄임 핵심 속성 */
   display: -webkit-box;
@@ -34,19 +58,20 @@ export const Title = styled.p`
   /* (선택 사항) 높이가 가변적일 경우 대비 */
   word-break: break-all;
 `
-export const Info = styled.p`
-  ${({ theme }) => theme.typography.buttonMd as CSSObject};
+export const Info = styled.p<{ $styleType: 'transparent' | 'lightYellow' }>`
+  ${({ theme, $styleType }) =>
+    $styleType === 'transparent' ? (theme.typography.buttonMd as CSSObject) : (theme.typography.small as CSSObject)};
   color: ${({ theme }) => theme.colors.textFieldDefaultText};
 `
-export const Rating = styled.div`
+export const Rating = styled.div<{ $styleType: 'transparent' | 'lightYellow' }>`
   display: flex;
   column-gap: 2px;
-  align-items: center;
+  align-items: ${({ $styleType }) => ($styleType === 'lightYellow' ? 'start' : 'center')};
   ${({ theme }) => theme.typography.badgeSm as CSSObject};
-  color: ${({ theme }) => theme.colors.textFieldFilledLine};
+  color: ${({ theme, $styleType }) =>
+    $styleType === 'lightYellow' ? theme.colors.rating : theme.colors.textFieldFilledLine};
 `
 export const BookImage = styled.div`
-  border-radius: 6px;
   flex-shrink: 0;
 `
 

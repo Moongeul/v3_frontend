@@ -1,6 +1,6 @@
 import { ApiCallResult } from '@/types/common'
 import { apiCallServer } from '@/lib/api.server'
-import { CategoryResponseType, CategoryType } from '@/types/write'
+import { CategoryResponseType } from '@/types/write'
 
 /**
  * 내 카테고리 전체 조회 API

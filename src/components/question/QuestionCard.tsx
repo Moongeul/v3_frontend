@@ -1,18 +1,19 @@
 'use client'
 
-import {
-  StyleAnswerButton,
-  StyleComment,
-  StyleQuestionCard,
-  StyleQuestionCardText,
-} from '@/styles/home/Question.styles'
 import { BookInfoSummary, Spacing } from '@/components/common'
-import { ButtonTextSecondaryRightArrowIcon, CommentIcon } from '@/assets/svgComponents'
-import { AvatarGroup } from '@/components/home/index'
+import { ButtonTextSecondaryRightArrowIcon } from '@/assets/svgComponents'
+import { AvatarGroup, CommentSummary } from '@/components/question/index'
+import { useRouter } from 'next/navigation'
+import { StyleAnswerButton, StyleQuestionCard, StyleQuestionCardText } from '@/styles/question/Question.styles'
 
-export default function QuestionCard() {
+interface QuestionCardProps {
+  width?: number
+}
+
+export default function QuestionCard({ width }: QuestionCardProps) {
+  const router = useRouter()
   return (
-    <StyleQuestionCard>
+    <StyleQuestionCard onClick={() => router.push('/question/1')} $width={width}>
       <AvatarGroup />
       <Spacing height={8} />
 
@@ -31,10 +32,7 @@ export default function QuestionCard() {
       <StyleQuestionCardText>질문 입니다.</StyleQuestionCardText>
       <Spacing height={12} />
 
-      <StyleComment>
-        <CommentIcon width={20} height={20} />
-        <p>3</p>
-      </StyleComment>
+      <CommentSummary count={3} />
       <Spacing height={12} />
 
       <StyleAnswerButton>

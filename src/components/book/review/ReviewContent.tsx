@@ -1,31 +1,30 @@
 'use client'
-import BookQuote from '@/components/book/review/BookQuote'
-import { Spacing, StarRating } from '@/components/common'
-import { StyleReviewContent, StyleReviewContentMeta, StyleReviewContentMetaDate } from '@/styles/book/Review.styles'
+
+import { Spacing } from '@/components/common'
+import { ReviewContentMeta, BookQuote, ReviewContentText } from '@/components/book'
+import { QuoteType } from '@/types/record'
 
 interface ReviewContentProps {
   content: string
+  createdAt: string
+  rating: number
+  quotes: QuoteType[]
 }
 
-export default function ReviewContent({ content }: ReviewContentProps) {
+export default function ReviewContent({ content, rating, createdAt, quotes }: ReviewContentProps) {
   return (
     <>
-      <StyleReviewContentMeta>
-        <StarRating size={'sm'} type={'short'} rating={4.9} />
-        <StyleReviewContentMetaDate>
-          <p>|</p>
-          <p>2025.12.29</p>
-        </StyleReviewContentMetaDate>
-      </StyleReviewContentMeta>
+      <Spacing height={12} />
+      <ReviewContentMeta rating={rating} createdAt={createdAt} />
+      <ReviewContentText content={content} />
       <Spacing height={12} />
 
-      <StyleReviewContent>{content}</StyleReviewContent>
-      <Spacing height={12} />
-
-      <BookQuote quoteContent={'인상깊은구절이란 인상깊은구절이 아닐까 하는 생각이다.'} page={'01'} />
-      <Spacing height={8} />
-
-      <BookQuote quoteContent={'인상깊은구절이란 인상깊은구절이 아닐까 하는 생각이다.'} page={'01'} />
+      {quotes.map((quote, index) => (
+        <div key={index}>
+          <BookQuote quoteContent={quote.quoteContent} page={quote.pageNumber} />
+          <Spacing height={8} />
+        </div>
+      ))}
     </>
   )
 }

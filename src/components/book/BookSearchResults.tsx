@@ -4,14 +4,19 @@ import { BookInfoSummary, Spacing, Spinner } from '@/components/common'
 import { BookType } from '@/types/book'
 import { JSX } from 'react'
 import { APIResponseType, Paging } from '@/types/common'
+import { SelectBookButton } from '@/components/search'
 
 interface BookSearchResultsProps {
+  type?: 'default' | 'select'
+  onClick?: (isbn: string) => void
   bookResponse: APIResponseType<Paging<BookType[]>>[] | undefined
   bottomRef: (node?: Element | null) => void
   isFetchingNextPage: boolean
 }
 
 export default function BookSearchResults({
+  type = 'default',
+  onClick,
   bookResponse,
   isFetchingNextPage,
   bottomRef,
@@ -19,7 +24,7 @@ export default function BookSearchResults({
   return (
     <>
       {bookResponse?.map((page, i) =>
-        page.data?.books.map((book) => (
+        page.data?.books?.map((book) => (
           <div key={book.isbn}>
             <BookInfoSummary
               title={book.title}
@@ -29,6 +34,15 @@ export default function BookSearchResults({
               author={book.author}
               pubdate={book.pubdate}
               publisher={book.publisher}
+              rightElement={
+                onClick ? (
+                  type === 'default' ? (
+                    <button />
+                  ) : (
+                    <SelectBookButton onClick={() => onClick(book.isbn)} />
+                  )
+                ) : null
+              }
             />
             <Spacing height={20} />
           </div>

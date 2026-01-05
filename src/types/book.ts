@@ -1,11 +1,11 @@
 export interface BookType {
   isbn: string
+  bookImage: string
   title: string
   author: string
-  bookImage: string
   publisher: string
   description: string
-  pubdate: string
   ratingAverage: number
+  pubdate: string
   ratingCount: number
 }

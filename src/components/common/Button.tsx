@@ -12,7 +12,7 @@ interface ButtonProps {
   width?: number
   isActive?: boolean
   children?: ReactNode
-  onClick?: () => void
+  onClick?: (e?: MouseEvent<HTMLButtonElement, MouseEvent> | undefined) => void
   leftIcon?: ReactNode
   rightIcon?: ReactNode
   disabled?: boolean

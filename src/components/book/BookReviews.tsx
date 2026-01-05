@@ -9,12 +9,12 @@ export default function BookReviews() {
       <Spacing height={4} />
       <ReviewSummary />
 
-      <ReviewItem />
-      <ReviewItem />
-      <ReviewItem />
-      <ReviewItem />
-      <ReviewItem />
-      <ReviewItem />
+      {/*<ReviewItem />*/}
+      {/*<ReviewItem />*/}
+      {/*<ReviewItem />*/}
+      {/*<ReviewItem />*/}
+      {/*<ReviewItem />*/}
+      {/*<ReviewItem />*/}
     </>
   )
 }

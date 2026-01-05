@@ -1,14 +1,19 @@
 import styled from '@emotion/styled'
 import { CSSObject } from '@emotion/react'
 
-export const StyleRecordListWrapper = styled.div`
+export const StyleRecordListRowWrapper = styled.div`
   display: flex;
   column-gap: 12px;
   overflow-x: scroll;
 `
-export const StyleQuestionCard = styled.div`
+export const StyleRecordListColumnWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+`
+export const StyleQuestionCard = styled.div<{ $width: number | undefined }>`
   padding: 12px;
-  width: 237px;
+  width: ${({ $width }) => ($width ? `${$width}px` : `100%`)};
   height: 254px;
   flex-shrink: 0;
   display: flex;

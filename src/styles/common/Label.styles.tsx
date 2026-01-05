@@ -23,4 +23,5 @@ export const Row = styled.div`
   display: flex;
   row-gap: 4px;
   align-items: start;
+  width: 100%;
 `

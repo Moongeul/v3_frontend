@@ -70,7 +70,7 @@ export async function GET(request: NextRequest) {
 
     // 4. 사용자 상태에 따른 리다이렉트
     if (role === 'ROLE_GUEST') {
-      return redirect('/home')
+      return redirect('/home?tab=PUBLIC')
     }
 
     // 5. 예상치 못한 상태
