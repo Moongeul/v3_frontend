@@ -127,6 +127,7 @@ declare module '@emotion/react' {
       small: TypographyType
       badgeMd: TypographyType
       badgeSm: TypographyType
+      caption: TypographyType
     }
   }
 }
