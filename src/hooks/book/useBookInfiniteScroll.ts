@@ -27,7 +27,7 @@ export const useBookInfiniteScroll = (searchValue: string) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = queryResult
   const { ref, inView } = useInView()
 
-  const hasData = !!queryResult.data?.pages[0]?.data?.books?.length
+  const hasData = !!queryResult.data?.pages[0]?.data?.data?.length
 
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {

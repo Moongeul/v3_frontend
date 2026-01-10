@@ -24,7 +24,7 @@ export default function BookSearchResults({
   return (
     <>
       {bookResponse?.map((page, i) =>
-        page.data?.books?.map((book) => (
+        page.data?.data?.map((book) => (
           <div key={book.isbn}>
             <BookInfoSummary
               title={book.title}

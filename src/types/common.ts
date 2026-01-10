@@ -11,7 +11,7 @@ export interface Paging<T> {
   size: number
   totalPages: number
   isLast: boolean
-  books: T
+  data: T
 }
 
 export interface UserType {
