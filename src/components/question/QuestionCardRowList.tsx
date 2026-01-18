@@ -6,8 +6,8 @@ import { StyleRecordListRowWrapper } from '@/styles/question/Question.styles'
 export default function QuestionCardRowList() {
   return (
     <StyleRecordListRowWrapper>
-      <QuestionCard width={237} />
-      <QuestionCard width={237} />
+      <QuestionCard isAnswerButton={true} width={237} />
+      <QuestionCard isAnswerButton={true} width={237} />
       <QuestionButton width={237} />
     </StyleRecordListRowWrapper>
   )

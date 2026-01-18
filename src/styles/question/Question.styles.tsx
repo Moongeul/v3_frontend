@@ -14,7 +14,6 @@ export const StyleRecordListColumnWrapper = styled.div`
 export const StyleQuestionCard = styled.div<{ $width: number | undefined }>`
   padding: 12px;
   width: ${({ $width }) => ($width ? `${$width}px` : `100%`)};
-  height: 254px;
   flex-shrink: 0;
   display: flex;
   justify-content: center;

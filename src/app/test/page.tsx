@@ -2,14 +2,14 @@ import { SearchParams } from 'next/dist/server/request/search-params'
 import { Spacing } from '@/components/common'
 import { BottomButtons, ProgressBar, TestCard } from '@/components/test'
 
-type StepType = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12'
+export type TestStepType = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12'
 
 interface TestPageProps {
   searchParams: SearchParams
 }
 
 export default async function TestPage({ searchParams }: TestPageProps) {
-  const step = (searchParams.step as StepType) || '1'
+  const step = (searchParams.step as TestStepType) || '1'
 
   const stepData = {
     '1': {
@@ -94,10 +94,9 @@ export default async function TestPage({ searchParams }: TestPageProps) {
       <TestCard />
 
       <BottomButtons
+        step={step}
         buttonContentA={stepData[step].buttonContentA}
         buttonContentB={stepData[step].buttonContentB}
-        onClickA={stepData[step].onClickA}
-        onClickB={stepData[step].onClickB}
       />
     </main>
   )

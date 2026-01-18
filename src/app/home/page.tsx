@@ -1,9 +1,10 @@
-import { Label, Spacing, Tab } from '@/components/common'
+import { Button, Label, Spacing, Tab } from '@/components/common'
 import { Banner, RecordList, ViewAllQuestionButton } from '@/components/home'
 import { typography } from '@/styles/theme'
 import { QuestionCardRowList } from '@/components/question'
 import { SearchParams } from 'next/dist/server/request/search-params'
 import { ReviewList } from '@/components/book'
+import { WriteBannerGraphic, WhiteRightArrowIcon } from '@/assets/svgComponents'
 
 export default async function HomePage({ searchParams }: { searchParams: SearchParams }) {
   const tab = (searchParams.tab as 'PUBLIC' | 'FOLLOWERS') || 'PUBLIC'
@@ -16,7 +17,16 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
       <Tab tabList={tabList} />
       <Spacing height={20} />
 
-      <Banner />
+      <Banner
+        content={'오늘 읽은 문장, 기록해둘래요?'}
+        graphic={<WriteBannerGraphic width={132} height={66} />}
+        button={
+          <Button size={'md'} width={124} rightIcon={<WhiteRightArrowIcon width={20} height={20} />}>
+            기록 시작하기
+          </Button>
+        }
+        path={'/write'}
+      />
       <Spacing height={32} />
 
       <RecordList />

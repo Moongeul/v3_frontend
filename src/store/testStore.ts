@@ -40,10 +40,10 @@ export const useTestStore = create<TestState>()(
     setTestAnswer: (step, value) =>
       set((state) => ({
         testAnswers: {
-          ...state.testAnswers, // 1. testAnswers 객체 복사
+          ...state.testAnswers,
           answers: {
-            ...state.testAnswers.answers, // 2. answers 객체 복사
-            [step]: value, // 3. 해당 step의 값만 덮어쓰기
+            ...state.testAnswers.answers,
+            [step]: value,
           },
         },
       })),

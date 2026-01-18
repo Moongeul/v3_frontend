@@ -2,7 +2,6 @@
 
 import * as S from '@/styles/common/Badge.styles'
 import { ReactNode } from 'react'
-import { PencilSketchEffect } from '@/styles/common/Common.styles'
 
 interface BadgeProps {
   backgroundColor?: string

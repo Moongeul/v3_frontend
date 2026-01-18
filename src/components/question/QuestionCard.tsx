@@ -8,9 +8,10 @@ import { StyleAnswerButton, StyleQuestionCard, StyleQuestionCardText } from '@/s
 
 interface QuestionCardProps {
   width?: number
+  isAnswerButton?: boolean
 }
 
-export default function QuestionCard({ width }: QuestionCardProps) {
+export default function QuestionCard({ width, isAnswerButton = false }: QuestionCardProps) {
   const router = useRouter()
   return (
     <StyleQuestionCard onClick={() => router.push('/question/1')} $width={width}>
@@ -33,12 +34,16 @@ export default function QuestionCard({ width }: QuestionCardProps) {
       <Spacing height={12} />
 
       <CommentSummary count={3} />
-      <Spacing height={12} />
 
-      <StyleAnswerButton>
-        <p>이 질문에 답해볼래요</p>
-        <ButtonTextSecondaryRightArrowIcon width={20} height={20} />
-      </StyleAnswerButton>
+      {isAnswerButton ? (
+        <>
+          <Spacing height={12} />
+          <StyleAnswerButton>
+            <p>이 질문에 답해볼래요</p>
+            <ButtonTextSecondaryRightArrowIcon width={20} height={20} />
+          </StyleAnswerButton>
+        </>
+      ) : null}
     </StyleQuestionCard>
   )
 }

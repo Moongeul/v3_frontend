@@ -2,7 +2,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { keyframes } from '@emotion/react'
+import { CSSObject, keyframes } from '@emotion/react'
+import { TypographyType } from '@/styles/emotion'
 
 // 스피너
 const spin = keyframes`
@@ -41,6 +42,12 @@ export const StyledSpacing = styled.div<{ $height?: number; $width?: number }>`
 export const BottomBorder = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.iconStarFilled};
 `
+// 폰트 지정
+export const StyleContent = styled.p<{ $typography: TypographyType; $textColor?: string }>`
+  ${({ $typography }) => $typography as CSSObject}
+  color: ${({ theme, $textColor }) => ($textColor ? $textColor : theme.colors.textFieldFilledText)};
+`
+
 //연필효과
 export const PencilSketchEffect = () => {
   return (

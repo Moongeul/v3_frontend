@@ -58,7 +58,10 @@ export default function Header({ headerType, children, leftIcon, rightIcon, isBo
         return (
           <Style.Header $isBottomBorder={isBottomBorder}>
             <Style.Title $headerType={headerType}>{children}</Style.Title>
-            {rightIcon ? rightIcon : <Style.EmptyIcon />}
+            <Style.IconColumn>
+              {leftIcon ? leftIcon : <Style.EmptyIcon />}
+              {rightIcon ? rightIcon : <Style.EmptyIcon />}
+            </Style.IconColumn>
           </Style.Header>
         )
     }
