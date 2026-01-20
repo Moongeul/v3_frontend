@@ -1,4 +1,4 @@
-interface TestAnswerType {
+export interface TestAnswerType {
   answers: {
     1: 'A' | 'B'
     2: 'A' | 'B'
@@ -13,4 +13,8 @@ interface TestAnswerType {
     11: 'A' | 'B'
     12: 'A' | 'B'
   }
+}
+export interface TestResultType {
+  readingTasteType: string
+  intro: string
 }

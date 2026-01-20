@@ -6,11 +6,11 @@ export interface UserInfoType {
   readingTasteType: TagType
 }
 export type TagType =
-  | 'EMOTIONAL_REFLECTOR'
-  | 'CHATTY_READER'
-  | 'TREND_HUNTER'
-  | 'SYSTEMATIC_READER'
-  | 'IMMERSIVE_READER'
-  | 'SECRET_DIARIST'
-  | 'GENRE_SPECIALIST'
-  | 'RANDOM_PICKER'
+  | 'EMOTIONAL_REFLECTOR' // 감성 사색 정리러
+  | 'CHATTY_READER' //수다쟁이 독서가
+  | 'TREND_HUNTER' // 신상 헌터
+  | 'SYSTEMATIC_READER' //정리왕 서평러
+  | 'IMMERSIVE_READER' //  넷플릭스급 몰입러
+  | 'SECRET_DIARIST' // 비밀 일기장 주인
+  | 'GENRE_SPECIALIST' //장르 고인물
+  | 'RANDOM_PICKER' //랜덤 피커

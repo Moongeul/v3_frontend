@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
+import { TestResultType } from '@/types/test'
 
 // 타입을 명확하게 정의하여 자동 완성을 돕습니다.
 type StepType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
@@ -11,8 +12,10 @@ interface TestAnswerType {
 
 interface TestState {
   testAnswers: TestAnswerType
+  testResult: TestResultType
   // 특정 단계(step)의 답변(value)만 변경하는 함수
   setTestAnswer: (step: StepType, value: AnswerType) => void
+  setTestResult: (result: Partial<TestResultType>) => void // 2. 함수 타입 정의
   resetAnswers: () => void
 }
 
@@ -36,7 +39,7 @@ const initialAnswers: TestAnswerType = {
 export const useTestStore = create<TestState>()(
   devtools((set) => ({
     testAnswers: initialAnswers,
-
+    testResult: {} as TestResultType,
     setTestAnswer: (step, value) =>
       set((state) => ({
         testAnswers: {
@@ -45,6 +48,14 @@ export const useTestStore = create<TestState>()(
             ...state.testAnswers.answers,
             [step]: value,
           },
+        },
+      })),
+
+    setTestResult: (result) =>
+      set((state) => ({
+        testResult: {
+          ...state.testResult,
+          ...result,
         },
       })),
 
