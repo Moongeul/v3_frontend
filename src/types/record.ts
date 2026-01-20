@@ -1,5 +1,7 @@
 import { BookType } from '@/types/book'
 
+export type RecordTabType = 'BOOKSHELF' | 'CALENDAR' | 'RATING' | 'REPORT' | 'WISHLIST'
+
 export interface RecordType {
   bookInfo: BookType
   rating: number

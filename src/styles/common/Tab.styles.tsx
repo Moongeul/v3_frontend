@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { CSSObject } from '@emotion/react'
 
 export const StyleTabContainer = styled.div`
   display: flex;
@@ -13,6 +14,8 @@ export const StyleTabButton = styled.button<{ $selectedButton: boolean }>`
   z-index: 1;
   transition: all 0.2s ease-in-out;
   background-color: transparent;
+
+  ${({ theme }) => theme.typography.badgeMd as CSSObject};
 
   &::before {
     content: '';
