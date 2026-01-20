@@ -1,3 +1,5 @@
+import { TagKorType } from '@/types/user'
+
 export interface TestAnswerType {
   answers: {
     1: 'A' | 'B'
@@ -15,6 +17,6 @@ export interface TestAnswerType {
   }
 }
 export interface TestResultType {
-  readingTasteType: string
+  readingTasteType: TagKorType
   intro: string
 }

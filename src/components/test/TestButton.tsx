@@ -6,14 +6,22 @@ interface TestButtonProps {
   children: ReactNode
   buttonNumber: 'A' | 'B'
   onClick?: () => void
+  clickNumber: 'A' | 'B' | null
 }
 
-export default function TestButton({ children, buttonNumber, onClick }: TestButtonProps) {
+export default function TestButton({ children, buttonNumber, onClick, clickNumber }: TestButtonProps) {
   return (
     <>
       <PencilSketchEffect />
-      <StyleTestButton onClick={onClick}>
-        <StyleTestButtonNumber>{buttonNumber}</StyleTestButtonNumber>
+      <StyleTestButton
+        $variant={clickNumber === null ? 'default' : clickNumber === buttonNumber ? 'active' : 'disable'}
+        onClick={onClick}
+      >
+        <StyleTestButtonNumber
+          $variant={clickNumber === null ? 'default' : clickNumber === buttonNumber ? 'active' : 'disable'}
+        >
+          {buttonNumber}
+        </StyleTestButtonNumber>
         {children}
       </StyleTestButton>
     </>

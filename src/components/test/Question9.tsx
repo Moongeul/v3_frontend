@@ -13,6 +13,7 @@ export default function Question9() {
   const pathname = usePathname()
 
   const setTestAnswer = useTestStore((state) => state.setTestAnswer)
+  const testAnswers = useTestStore((state) => state.testAnswers)
 
   const handleStepClick = (step: TestStepType) => {
     router.push(`${pathname}?step=${encodeURIComponent(step)}`)
@@ -42,6 +43,7 @@ export default function Question9() {
       />
 
       <BottomButtons
+        clickNumber={testAnswers.answers['9']}
         onClickA={handleAButtonClick}
         onClickB={handleBButtonClick}
         buttonContentA={'“이거 무조건 읽어야 해!!” 강추'}

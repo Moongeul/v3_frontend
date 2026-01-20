@@ -1,18 +1,10 @@
 import { ApiCallResult } from '@/types/common'
+import { TestAnswerType, TestResultType } from '@/types/test'
 
 /**
  * 질문 생성 API
  */
-export const createTest = async (
-  testData: TestAnswerType
-): Promise<
-  ApiCallResult<
-    ApiCallResult<{
-      readingTasteType: string
-      intro: string
-    }>
-  >
-> => {
+export const createTest = async (testData: TestAnswerType): Promise<ApiCallResult<ApiCallResult<TestResultType>>> => {
   try {
     const response = await fetch(`/api/reading-taste`, {
       method: 'POST',

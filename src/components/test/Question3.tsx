@@ -13,6 +13,7 @@ export default function Question3() {
   const pathname = usePathname()
 
   const setTestAnswer = useTestStore((state) => state.setTestAnswer)
+  const testAnswers = useTestStore((state) => state.testAnswers)
 
   const handleStepClick = (step: TestStepType) => {
     router.push(`${pathname}?step=${encodeURIComponent(step)}`)
@@ -41,6 +42,7 @@ export default function Question3() {
       />
 
       <BottomButtons
+        clickNumber={testAnswers.answers['3']}
         onClickA={handleAButtonClick}
         onClickB={handleBButtonClick}
         buttonContentA={'표지가 예쁘면 무조건 "홀린 듯이" 바로 구매한다.'}

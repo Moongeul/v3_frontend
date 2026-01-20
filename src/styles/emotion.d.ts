@@ -115,6 +115,7 @@ declare module '@emotion/react' {
       }
     }
     typography: {
+      memomentTitle: TypographyType
       titleLg: TypographyType
       titleMd: TypographyType
       titleSm: TypographyType

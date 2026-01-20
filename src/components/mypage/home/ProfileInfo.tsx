@@ -12,14 +12,14 @@ import { typography } from '@/styles/theme'
 import { Badge } from '@/components/common'
 import { ProfileIcon } from '@/assets/svgComponents'
 import { useRouter } from 'next/navigation'
-import { TagType } from '@/types/user'
-import { convertTag } from '@/utils/user'
+import { TagEnumType } from '@/types/user'
+import { convertEnumToKorTag } from '@/utils/user'
 import Image from 'next/image'
 
 interface ProfileInfoProps {
   profileImage: string | undefined
   nickname: string | undefined
-  readingTasteType: TagType | undefined
+  readingTasteType: TagEnumType | undefined
 }
 
 export default function ProfileInfo({ profileImage, readingTasteType, nickname }: ProfileInfoProps) {
@@ -39,7 +39,7 @@ export default function ProfileInfo({ profileImage, readingTasteType, nickname }
         )}
 
         <StyleProfileInfo>
-          <Badge badgeLabel={convertTag(readingTasteType)} />
+          <Badge badgeLabel={convertEnumToKorTag(readingTasteType)} />
           <StyleContent $typography={typography.badgeMd}>{nickname}</StyleContent>
         </StyleProfileInfo>
       </StyleProfileInfoContainer>

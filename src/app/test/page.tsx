@@ -13,10 +13,12 @@ import {
   Question8,
   Question9,
 } from '@/components/test'
+import Onboarding from '@/components/test/Onboarding'
 
-export type TestStepType = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12'
+export type TestStepType = 'onboarding' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12'
 
 function FindTestProcessStepSwitcher({ step }: { step: TestStepType }) {
+  if (step === 'onboarding') return <Onboarding />
   if (step === '1') return <Question1 />
   if (step === '2') return <Question2 />
   if (step === '3') return <Question3 />

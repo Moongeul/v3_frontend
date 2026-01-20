@@ -6,15 +6,15 @@ import { StyleContent } from '@/styles/common/Common.styles'
 import { typography } from '@/styles/theme'
 import { Badge, Button } from '@/components/common'
 import { postFollow } from '@/lib/client/mypage'
-import { TagType } from '@/types/user'
+import { TagEnumType } from '@/types/user'
 import Image from 'next/image'
-import { convertTag } from '@/utils/user'
+import { convertEnumToKorTag } from '@/utils/user'
 import { FollowStatusType } from '@/types/mypage'
 
 interface FollowerItemProps {
   profileImage: string
   nickname: string
-  readingTasteType: TagType
+  readingTasteType: TagEnumType
   id: number
   myFollowStatus: FollowStatusType
 }
@@ -36,7 +36,7 @@ export default function FollowerItem({
 
         <StyleUserInfo>
           <StyleContent $typography={typography.badgeMd}>{nickname}</StyleContent>
-          <Badge badgeLabel={convertTag(readingTasteType)} />
+          <Badge badgeLabel={convertEnumToKorTag(readingTasteType)} />
         </StyleUserInfo>
       </StyleUserInfoContainer>
 

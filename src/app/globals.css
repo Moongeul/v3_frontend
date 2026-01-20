@@ -1,5 +1,11 @@
 @import 'tailwindcss';
-
+@font-face {
+  font-family: 'MemomentKkukkukk';
+  src: url('/fonts/MemomentKkukkukk.otf') format('otf'),
+  url('/fonts/MemomentKkukkukk.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+}
 :root {
   --background: #ffffff;
   --foreground: #171717;

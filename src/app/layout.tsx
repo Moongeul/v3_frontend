@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { suit } from '@/styles/font'
+import { memoment, suit } from '@/styles/font'
 import EmotionRootRegistry from './registry'
 import { Providers } from '@/providers/Providers' // Emotion 설정 파일 (필요시)
 
@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ko" className={suit.variable}>
+    <html lang="ko" className={`${suit.variable} ${memoment.variable}`}>
       <Providers>
         <EmotionRootRegistry>
           <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>

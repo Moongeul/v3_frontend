@@ -48,6 +48,7 @@ export default function Question1() {
       />
 
       <BottomButtons
+        clickNumber={testAnswers.answers['1']}
         onClickB={handleBButtonClick}
         onClickA={handleAButtonClick}
         buttonContentA={'마음 세탁용 힐링책'}

@@ -1,4 +1,4 @@
-import { TagType } from '@/types/user'
+import { TagEnumType } from '@/types/user'
 
 export type FollowStatusType = 'NONE' | 'PENDING' | 'ACCEPTED'
 
@@ -6,6 +6,6 @@ export interface FollowUserInfoType {
   id: number
   profileImage: string
   nickname: string
-  readingTasteType: TagType
+  readingTasteType: TagEnumType
   myFollowStatus: FollowStatusType
 }

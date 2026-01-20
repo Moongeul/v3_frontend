@@ -8,14 +8,21 @@ interface BottomButtonsProps {
   buttonContentB: string
   onClickA: () => void
   onClickB: () => void
+  clickNumber: 'A' | 'B' | null
 }
-export default function BottomButtons({ buttonContentA, buttonContentB, onClickA, onClickB }: BottomButtonsProps) {
+export default function BottomButtons({
+  buttonContentA,
+  buttonContentB,
+  onClickA,
+  onClickB,
+  clickNumber,
+}: BottomButtonsProps) {
   return (
     <StyleBottomButtons>
-      <TestButton buttonNumber={'A'} onClick={onClickA}>
+      <TestButton clickNumber={clickNumber} buttonNumber={'A'} onClick={onClickA}>
         {buttonContentA}
       </TestButton>
-      <TestButton buttonNumber={'B'} onClick={onClickB}>
+      <TestButton clickNumber={clickNumber} buttonNumber={'B'} onClick={onClickB}>
         {buttonContentB}
       </TestButton>
     </StyleBottomButtons>

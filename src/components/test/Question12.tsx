@@ -7,13 +7,15 @@ import { StyleTestWrapper } from '@/styles/test/Test.styles'
 import { useRouter } from 'next/navigation'
 import { useTestStore } from '@/store/testStore'
 import { createTest } from '@/lib/client/test'
+import { TagEnumType } from '@/types/user'
+import { convertKorToEnumTag } from '@/utils/user'
 
 export default function Question12() {
   const router = useRouter()
   const { setTestAnswer, setTestResult, testAnswers } = useTestStore((state) => state)
 
-  const onNavigate = (path: string) => {
-    router.push(`/${path}`)
+  const onNavigate = (path: string, type: TagEnumType | undefined) => {
+    router.push(`/${path}?type=${type}`)
   }
 
   /**
@@ -40,7 +42,7 @@ export default function Question12() {
           readingTasteType: result.data.data.readingTasteType,
           intro: result.data.data.intro,
         })
-        onNavigate('result')
+        onNavigate('result', convertKorToEnumTag(result.data.data.readingTasteType))
       }
     } catch (error) {
       console.error('테스트 제출 중 오류 발생:', error)
@@ -84,6 +86,7 @@ export default function Question12() {
       />
 
       <BottomButtons
+        clickNumber={testAnswers.answers['12']}
         onClickA={() => handleButtonClick('A')}
         onClickB={() => handleButtonClick('B')}
         buttonContentA={'“다음 책 뭐 읽을까?” 벌써 들떠있다'}

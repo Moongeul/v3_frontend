@@ -1,6 +1,18 @@
 import styled from '@emotion/styled'
-import { css, CSSObject } from '@emotion/react'
+import { CSSObject } from '@emotion/react'
 
+export const StyleOnboardingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* 세로 중앙 정렬 */
+
+  /* 헤더 높이(예: 60px)와 Spacing 높이 등을 제외한 최소 높이 설정 */
+  min-height: calc(100vh - 120px);
+
+  /* 만약 부모(PageLayout)가 이미 height를 가지고 있다면 100%로 충분합니다 */
+  width: 100%;
+`
 export const StyleTestWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,8 +37,6 @@ export const StyleContentContainer = styled.div`
   row-gap: 12px;
   align-items: center;
 `
-
-export const StyleGraphic = styled.div``
 
 export const StyleBottomButtons = styled.div`
   display: flex;
@@ -59,7 +69,7 @@ export const StyleProgressFill = styled.div<{ width: number }>`
   transition: width 0.3s ease-in-out;
 `
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-export const StyleTestButton = styled.div`
+export const StyleTestButton = styled.div<{ $variant: 'default' | 'active' | 'disable' }>`
   flex-shrink: 0;
   white-space: nowrap;
   column-gap: 8px;
@@ -86,18 +96,40 @@ export const StyleTestButton = styled.div`
     pointer-events: none;
     box-sizing: border-box;
     border-radius: 8px;
-    border: 1px solid ${({ theme }) => theme.colors.buttonActivePrimary};
+    border: 1px solid
+      ${({ theme, $variant }) =>
+        $variant === 'default'
+          ? theme.colors.buttonActivePrimary
+          : $variant === 'active'
+            ? theme.colors.buttonTextSecondary
+            : theme.colors.buttonDefaultPrimary};
+    background-color: ${({ theme, $variant }) =>
+      $variant === 'default'
+        ? theme.colors.background
+        : $variant === 'active'
+          ? theme.colors.buttonActiveSecondary
+          : theme.colors.background};
   }
 
-  color: ${({ theme }) => theme.colors.buttonActivePrimary};
+  color: ${({ theme, $variant }) =>
+    $variant === 'default'
+      ? theme.colors.buttonActivePrimary
+      : $variant === 'active'
+        ? theme.colors.buttonTextSecondary
+        : theme.colors.buttonDefaultPrimary};
   ${({ theme }) => theme.typography.buttonMd as CSSObject};
 `
-export const StyleTestButtonNumber = styled.div`
+export const StyleTestButtonNumber = styled.div<{ $variant: 'default' | 'active' | 'disable' }>`
   width: 32px;
   height: 32px;
   border-radius: 999px;
-  background-color: ${({ theme }) => theme.colors.buttonActivePrimary};
-  color: ${({ theme }) => theme.colors.iconStarFilled};
+  background-color: ${({ theme, $variant }) =>
+    $variant === 'default'
+      ? theme.colors.buttonActivePrimary
+      : $variant === 'active'
+        ? theme.colors.buttonTextSecondary
+        : theme.colors.buttonDefaultPrimary};
+  color: ${({ theme }) => theme.colors.baseColor.lightYellow50};
   display: flex;
   align-items: center;
   justify-content: center;

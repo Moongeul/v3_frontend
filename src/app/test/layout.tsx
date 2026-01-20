@@ -1,4 +1,5 @@
-import { Header, PageLayout, Spacing } from '@/components/common'
+import { PageLayout, Spacing } from '@/components/common'
+import { TestHeader } from '@/components/test/TestHeader'
 export default function TestLayout({
   children,
 }: Readonly<{
@@ -6,7 +7,7 @@ export default function TestLayout({
 }>) {
   return (
     <div>
-      <Header headerType={'dynamic'}>취향테스트</Header>
+      <TestHeader />
 
       <Spacing height={60} />
       <PageLayout>{children}</PageLayout>

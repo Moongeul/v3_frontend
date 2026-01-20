@@ -1,9 +1,18 @@
 // src/styles/theme.ts
 import { Theme } from '@emotion/react'
+import { memoment, suit } from '@/styles/font'
 
 export const typography = {
+  memomentTitle: {
+    fontFamily: memoment.style.fontFamily,
+    fontSize: '40px',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    lineHeight: '132%' /* 52.8px */,
+    letterSpacing: '-0.64px',
+  },
   titleLg: {
-    fontFamily: 'SUIT',
+    fontFamily: suit.style.fontFamily,
     fontSize: '24px',
     fontWeight: 600,
     lineHeight: '132%',
@@ -11,7 +20,7 @@ export const typography = {
     fontStyle: 'normal',
   },
   titleMd: {
-    fontFamily: 'SUIT',
+    fontFamily: suit.style.fontFamily,
     fontSize: '20px',
     fontWeight: 600,
     lineHeight: '132%',
@@ -19,7 +28,7 @@ export const typography = {
     fontStyle: 'normal',
   },
   titleSm: {
-    fontFamily: 'SUIT',
+    fontFamily: suit.style.fontFamily,
     fontSize: '16px',
     fontWeight: 600,
     lineHeight: '132%',
@@ -27,7 +36,7 @@ export const typography = {
     fontStyle: 'normal',
   },
   subtitleLg: {
-    fontFamily: 'SUIT',
+    fontFamily: suit.style.fontFamily,
     fontSize: '18px',
     fontWeight: 600,
     lineHeight: '132%',
@@ -35,7 +44,7 @@ export const typography = {
     fontStyle: 'normal',
   },
   subtitleMd: {
-    fontFamily: 'SUIT',
+    fontFamily: suit.style.fontFamily,
     fontSize: '16px',
     fontWeight: 500,
     lineHeight: '132%',
@@ -43,7 +52,7 @@ export const typography = {
     fontStyle: 'normal',
   },
   subtitleSm: {
-    fontFamily: 'SUIT',
+    fontFamily: suit.style.fontFamily,
     fontSize: '14px',
     fontWeight: 500,
     lineHeight: '132%',
@@ -51,7 +60,7 @@ export const typography = {
     fontStyle: 'normal',
   },
   bodyMd: {
-    fontFamily: 'SUIT',
+    fontFamily: suit.style.fontFamily,
     fontSize: '16px',
     fontWeight: 400,
     lineHeight: '132%',
@@ -59,7 +68,7 @@ export const typography = {
     fontStyle: 'normal',
   },
   bodySm: {
-    fontFamily: 'SUIT',
+    fontFamily: suit.style.fontFamily,
     fontSize: '14px',
     fontWeight: 400,
     lineHeight: '132%',
@@ -67,7 +76,7 @@ export const typography = {
     fontStyle: 'normal',
   },
   buttonMd: {
-    fontFamily: 'SUIT',
+    fontFamily: suit.style.fontFamily,
     fontSize: '14px',
     fontWeight: 500,
     lineHeight: '100%',
@@ -75,7 +84,7 @@ export const typography = {
     fontStyle: 'normal',
   },
   small: {
-    fontFamily: 'SUIT',
+    fontFamily: suit.style.fontFamily,
     fontSize: '12px',
     fontWeight: 400,
     lineHeight: '120%',
@@ -83,7 +92,7 @@ export const typography = {
     fontStyle: 'normal',
   },
   badgeMd: {
-    fontFamily: 'SUIT',
+    fontFamily: suit.style.fontFamily,
     fontSize: '14px',
     fontWeight: 600,
     lineHeight: '120%',
@@ -91,7 +100,7 @@ export const typography = {
     fontStyle: 'normal',
   },
   badgeSm: {
-    fontFamily: 'SUIT',
+    fontFamily: suit.style.fontFamily,
     fontSize: '12px',
     fontWeight: 500,
     lineHeight: '120%',
@@ -99,7 +108,7 @@ export const typography = {
     fontStyle: 'normal',
   },
   caption: {
-    fontFamily: 'SUIT',
+    fontFamily: suit.style.fontFamily,
     fontSize: '10px',
     fontWeight: 400,
     lineHeight: '120%',
