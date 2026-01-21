@@ -23,4 +23,6 @@ export interface BookShelfType {
   weight: number
   height: number
   postCount: number
+  borderColor: string
+  backgroundColor: string
 }

@@ -9,8 +9,6 @@ import { Spinner } from '@/components/common'
 export default function BookList() {
   const { books, bottomRef, isFetchingNextPage, hasData } = useAllDoneReadBookInfiniteScroll()
 
-  console.log('books', books)
-  // 데이터를 5개씩 묶는 헬퍼 함수
   const splitBooksByWeight = (books: BookShelfType[], maxWeight: number) => {
     if (!books.length) return []
 
@@ -39,7 +37,12 @@ export default function BookList() {
         rows.map((row, index) => (
           <StyleShelfRow key={`row-${index}`}>
             {row.map((book) => (
-              <Book key={book.articleId} {...book} borderColor={'#FFC35480'} backgroundColor={'#FFC35480'} />
+              <Book
+                key={book.articleId}
+                {...book}
+                borderColor={book.borderColor}
+                backgroundColor={book.backgroundColor}
+              />
             ))}
           </StyleShelfRow>
         ))}
