@@ -212,7 +212,7 @@ export const lightTheme: Theme = {
     textFieldError: '#FF626D',
     buttonDefaultPrimary: '#CCCCCC',
     buttonActivePrimary: '#1ECBCB',
-    buttonDefaultSecondary: '#CCCCCC',
+    buttonDefaultSecondary: '#EFEFEE',
     buttonActiveSecondary: '#C9F5F5',
     buttonTextSecondary: '#159090',
     buttonActiveGhost: '#545451',
