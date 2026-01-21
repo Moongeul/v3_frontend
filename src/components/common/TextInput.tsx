@@ -9,8 +9,9 @@ interface TextFieldProps {
   textType?: 'textField' | 'textArea'
   inputType?: 'number' | 'text'
   placeholder?: string
-  value: string | number
-  onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
+  value?: string | number
+  onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
+  onClick?: () => void
   status?: 'default' | 'filled' | 'error'
   helperText?: string
   buttonElement?: ReactNode
@@ -26,6 +27,7 @@ export default function TextInput({
   placeholder,
   value,
   onChange,
+  onClick,
   status = 'default',
   helperText,
   buttonElement,
@@ -56,6 +58,7 @@ export default function TextInput({
                 type={inputType}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
+                onClick={onClick}
                 placeholder={placeholder}
                 $status={currentStatus}
                 onChange={onChange}

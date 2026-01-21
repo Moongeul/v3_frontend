@@ -7,7 +7,7 @@ type HeaderType = 'default' | 'dynamic' | 'title'
 
 export const Header = styled.header<{ $isBottomBorder?: boolean }>`
   position: fixed;
-  z-index: 100;
+  z-index: 70;
   padding: 8px 20px;
   height: 60px;
   width: 100%;

@@ -42,3 +42,17 @@ export const clientFetchBookDetail = async (isbn: string): Promise<APIResponseTy
 
   return await response.json()
 }
+/**
+ * 책 검색 결과 전체 보기
+ */
+export const clientPostWishReadBookIsbn = async (isbn: string): Promise<APIResponseType<string>> => {
+  const response = await fetch(`/api/bookshelf/wish-read`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ isbn: isbn }),
+  })
+
+  return await response.json()
+}

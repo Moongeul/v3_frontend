@@ -7,7 +7,8 @@ export const StyleNavContainer = styled.div`
   column-gap: 28px;
   position: fixed;
   bottom: 0;
-  z-index: 100;
+  z-index: 50;
+  width: 100%;
 
   transition: all 0.2s ease-in-out;
   background-color: transparent;

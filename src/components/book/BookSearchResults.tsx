@@ -7,7 +7,7 @@ import { APIResponseType, Paging } from '@/types/common'
 import { SelectBookButton } from '@/components/search'
 
 interface BookSearchResultsProps {
-  type?: 'default' | 'select'
+  type?: 'default' | 'select' | 'wish' //wish
   onClick?: (isbn: string) => void
   bookResponse: APIResponseType<Paging<BookType[]>>[] | undefined
   bottomRef: (node?: Element | null) => void

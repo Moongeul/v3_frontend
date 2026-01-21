@@ -1,16 +1,18 @@
 'use client'
 
-import { useBookStore } from '@/store/bookStore'
 import { TextInput, Button } from '@/components/common'
+import { useRouter } from 'next/navigation'
 
 export default function BookSearchField() {
-  const { searchValue, setSearchValue } = useBookStore((state) => state)
+  const router = useRouter()
+  const onNavigation = () => {
+    router.push('/book/search')
+  }
   return (
     <TextInput
       height={48}
       placeholder={'책 검색'}
-      value={searchValue ?? ''}
-      onChange={(e) => setSearchValue(e.target.value)}
+      onClick={onNavigation}
       buttonElement={
         <Button width={80} size={'lg'} variant={'primary'}>
           검색
