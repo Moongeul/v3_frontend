@@ -8,6 +8,7 @@ export default function Home() {
     <main>
       <Link href={googleAuthUrl}>구글 로그인</Link>
       <Link href={kakaoAuthUrl}>카카오 로그인</Link>
+      <Link href={'/home?tab=PUBLIC'}>로그인 없이 이동(에러날 수 있음)</Link>
     </main>
   )
 }

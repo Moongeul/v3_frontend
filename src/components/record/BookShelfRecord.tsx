@@ -1,49 +1,15 @@
-import Book from '@/components/record/bookshelf/Book'
+import BookList from '@/components/record/bookshelf/BookList'
+import { Label, Spacing } from '@/components/common'
+import { typography } from '@/styles/theme'
 
 export default function BookShelfRecord() {
   return (
-    <div>
-      <Book
-        height={160}
-        postCount={3}
-        backgroundColor={'#7AA0FF80'}
-        title={'좀 된거좀'}
-        borderColor={'#7AA0FF80'}
-        articleId={1}
-        ratingAverage={4.9}
-        weight={28}
-      />
-
-      <Book
-        height={160}
-        postCount={3}
-        backgroundColor={'#7AA0FF80'}
-        title={'좀 된거좀좀 된거좀좀 된거좀'}
-        borderColor={'#7AA0FF80'}
-        articleId={1}
-        ratingAverage={4.9}
-        weight={200}
-      />
-      <Book
-        height={300}
-        postCount={3}
-        backgroundColor={'#7AA0FF80'}
-        title={'좀 된거좀좀 된거좀좀 된거좀좀 된거좀좀 된거좀좀 된거좀'}
-        borderColor={'#7AA0FF80'}
-        articleId={1}
-        ratingAverage={4.9}
-        weight={50}
-      />
-      <Book
-        height={300}
-        postCount={3}
-        backgroundColor={'#7AA0FF80'}
-        title={'좀 된거좀좀 된거좀좀 된거좀좀 된거좀좀 된거좀좀 된거좀'}
-        borderColor={'#7AA0FF80'}
-        articleId={1}
-        ratingAverage={4.9}
-        weight={50}
-      />
-    </div>
+    <main>
+      <Spacing height={12} />
+      <Label labelStyle={typography.subtitleLg}>20권</Label>
+      <Spacing height={16} />
+      <BookList />
+      <Spacing height={110} />
+    </main>
   )
 }

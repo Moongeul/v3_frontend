@@ -15,7 +15,7 @@ export const StyleBook = styled.div<{
   border-radius: 4px;
   border: 1px solid ${({ $borderColor }) => $borderColor};
   background-color: ${({ $backgroundColor }) => $backgroundColor};
-  row-gap: 8px;
+  //row-gap: 4px;
   width: ${({ $width }) => `${$width}px`};
   height: ${({ $height }) => `${$height}px`};
 `
@@ -41,7 +41,7 @@ export const StyleTitleGroup = styled.div<{ $parentHeight: number }>`
   position: absolute;
   /* 부모 높이에서 별점 영역(약 40~50px)을 제외한 나머지를 차지하게 설정 */
   /* padding 등을 고려하여 적절히 계산합니다. */
-  width: ${({ $parentHeight }) => `${$parentHeight - 60}px`};
+  width: ${({ $parentHeight }) => `${$parentHeight - 50}px`};
 
   left: 50%;
   top: 0;
@@ -66,7 +66,7 @@ export const StyleTitle = styled.p<{ $typography: TypographyType; $textColor?: s
   flex-shrink: 1; /* 공간이 부족하면 줄어들게 설정 */
   max-width: 100%; /* 그룹 면적의 80%를 넘지 않게 설정 */
   overflow: hidden;
-  text-overflow: ellipsis;
+  //text-overflow: ellipsis;
   white-space: nowrap;
 `
 
@@ -79,4 +79,31 @@ export const StylePostCountTag = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`
+////////////////////////////////////////////////////////////////////////////////
+
+export const StyleShelfRow = styled.div`
+  display: flex;
+  align-items: flex-end; /* 책들을 바닥에 밀착 */
+  gap: 4px;
+  width: 100%;
+  position: relative;
+  margin-bottom: 40px; /* 다음 선반과의 간격 */
+
+  /* 선반 바닥 디자인 */
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -16px; /* 책 바로 밑에 붙임 */
+    left: 0;
+    right: 0;
+    height: 16px;
+    background-color: ${({ theme }) => theme.colors.buttonDefaultSecondary};
+    border-radius: 4px; /* 요청하신 전체 4px 라운드 */
+  }
+`
+export const StyleBookShelfContainer = styled.div`
+  display: flex;
+  flex-direction: column; /* 줄(Row)들을 세로로 쌓음 */
+  width: 100%;
 `

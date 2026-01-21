@@ -1,4 +1,4 @@
-import { Header, PageLayout, Spacing } from '@/components/common'
+import { Header, NavBar, PageLayout, Spacing } from '@/components/common'
 import AddRecordButton from '@/components/record/AddRecordButton'
 
 export default function ReportLayout({
@@ -14,6 +14,9 @@ export default function ReportLayout({
       <Spacing height={60} />
 
       <PageLayout>{children}</PageLayout>
+
+      <Spacing height={98} />
+      <NavBar />
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { AlarmIcon, SettingIcon } from '@/assets/svgComponents'
-import { Header, PageLayout, Spacing } from '@/components/common'
+import { Header, NavBar, PageLayout, Spacing } from '@/components/common'
 import Link from 'next/link'
 export default function MypageLayout({
   children,
@@ -26,6 +26,9 @@ export default function MypageLayout({
 
       <Spacing height={60} />
       <PageLayout>{children}</PageLayout>
+
+      <Spacing height={98} />
+      <NavBar />
     </div>
   )
 }

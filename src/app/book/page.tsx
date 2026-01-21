@@ -1,4 +1,4 @@
-import { Header, Spacing, PageLayout } from '@/components/common'
+import { Header, Spacing, PageLayout, NavBar } from '@/components/common'
 import { BookContent, BookSearchField } from '@/components/book'
 
 export default function BookPage() {
@@ -12,6 +12,9 @@ export default function BookPage() {
         <Spacing height={20} />
         <BookContent />
       </PageLayout>
+
+      <Spacing height={98} />
+      <NavBar />
     </main>
   )
 }

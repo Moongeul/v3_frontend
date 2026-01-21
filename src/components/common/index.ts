@@ -12,6 +12,7 @@ export { default as Spinner } from './Spinner'
 export { default as Badge } from './Badge'
 export { default as StarRating } from './StarRating'
 export { default as Tab } from './Tab'
+export { default as NavBar } from './NavBar'
 
 //dropdown
 export { default as DropDown } from './DropDown'

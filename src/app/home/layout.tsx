@@ -1,5 +1,6 @@
 import { AlarmIcon, SearchIcon } from '@/assets/svgComponents'
-import { Header, PageLayout, Spacing } from '@/components/common'
+import { Header, NavBar, PageLayout, Spacing } from '@/components/common'
+import Link from 'next/link'
 export default function BookLayout({
   children,
 }: Readonly<{
@@ -9,12 +10,23 @@ export default function BookLayout({
     <div>
       <Header
         headerType={'default'}
-        leftIcon={<SearchIcon width={24} height={24} />}
-        rightIcon={<AlarmIcon width={24} height={24} />}
+        leftIcon={
+          <Link href={'/search'}>
+            <SearchIcon width={24} height={24} />
+          </Link>
+        }
+        rightIcon={
+          <Link href={'/alarm'}>
+            <AlarmIcon width={24} height={24} />
+          </Link>
+        }
       />
 
       <Spacing height={60} />
       <PageLayout>{children}</PageLayout>
+
+      <Spacing height={98} />
+      <NavBar />
     </div>
   )
 }
