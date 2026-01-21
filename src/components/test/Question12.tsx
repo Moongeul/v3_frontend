@@ -9,6 +9,7 @@ import { useTestStore } from '@/store/testStore'
 import { createTest } from '@/lib/client/test'
 import { TagEnumType } from '@/types/user'
 import { convertKorToEnumTag } from '@/utils/user'
+import { TestAnswerType } from '@/types/test'
 
 export default function Question12() {
   const router = useRouter()
@@ -24,7 +25,7 @@ export default function Question12() {
    */
   const handleSubmit = async (finalAnswers: typeof testAnswers) => {
     try {
-      // 1. 모든 항목에 null이 없는지 검증 (Object.values 사용)
+      // 1. 모든 항목에 null이 없는지 검증
       const allAnswered = Object.values(finalAnswers.answers).every((answer) => answer !== null)
 
       if (!allAnswered) {
@@ -32,8 +33,9 @@ export default function Question12() {
         return
       }
 
-      // 2. API 호출
-      const result = await createTest(finalAnswers)
+      // 2. API 호출 (타입 단언 추가)
+      // 검증을 통과했으므로 'as TestAnswerType'으로 강제 지정하여 에러 해결
+      const result = await createTest(finalAnswers as TestAnswerType)
 
       // 3. 결과 처리 및 페이지 이동
       if (result?.data?.data) {

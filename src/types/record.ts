@@ -13,3 +13,14 @@ export interface QuoteType {
   quoteContent: string
   pageNumber: number
 }
+
+export interface BookShelfType {
+  articleId: number
+  isbn: string
+  title: string
+  ratingAverage: number
+  ratingCount: number
+  weight: number
+  height: number
+  postCount: number
+}

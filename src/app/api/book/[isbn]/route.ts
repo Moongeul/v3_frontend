@@ -2,9 +2,9 @@ import { apiCallServer } from '@/lib/api.server'
 import { NextRequest, NextResponse } from 'next/server'
 
 // [isbn] 파라미터를 받아오기 위해 params 타입을 지정합니다.
-export async function GET(request: NextRequest, { params }: { params: { isbn: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ isbn: string }> }) {
   try {
-    const isbn = params.isbn
+    const { isbn } = await params
 
     if (!isbn) {
       return NextResponse.json({ error: 'ISBN이 필요합니다.' }, { status: 400 })

@@ -1,4 +1,5 @@
-import { SearchParams } from 'next/dist/server/request/search-params'
+export const dynamic = 'force-dynamic'
+
 import {
   Question1,
   Question10,
@@ -35,12 +36,13 @@ function FindTestProcessStepSwitcher({ step }: { step: TestStepType }) {
   return <Question1 />
 }
 
-interface TestPageProps {
-  searchParams: SearchParams
-}
-
-export default async function TestPage({ searchParams }: TestPageProps) {
-  const step = (searchParams.step as TestStepType) || '1'
+export default async function TestPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const resolvedSearchParams = await searchParams
+  const step = (resolvedSearchParams.step as TestStepType) || '1'
 
   return (
     <main>

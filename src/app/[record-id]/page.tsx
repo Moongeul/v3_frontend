@@ -31,10 +31,10 @@ export default function RecordDetailPage() {
       />
 
       <Spacing height={12} />
-      <BookQuote quoteContent={'인상깊은구절이란 인상깊은구절이 아닐까 하는 생각이다.'} page={'123'} />
+      <BookQuote quoteContent={'인상깊은구절이란 인상깊은구절이 아닐까 하는 생각이다.'} page={123} />
 
       <Spacing height={8} />
-      <BookQuote quoteContent={'인상깊은구절이란 인상깊은구절이 아닐까 하는 생각이다.'} page={'123'} />
+      <BookQuote quoteContent={'인상깊은구절이란 인상깊은구절이 아닐까 하는 생각이다.'} page={123} />
 
       <Spacing height={40} />
       <InteractionButton />

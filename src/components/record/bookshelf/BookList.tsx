@@ -2,9 +2,10 @@
 
 import { StyleBookShelfContainer, StyleShelfRow } from '@/styles/record/BookShelf.styles'
 import Book from '@/components/record/bookshelf/Book'
+import { BookShelfType } from '@/types/record'
 
 export default function BookList({}) {
-  const books = [
+  const books: BookShelfType[] = [
     {
       articleId: 1,
       isbn: '9791101',
@@ -208,9 +209,9 @@ export default function BookList({}) {
   ]
 
   // 데이터를 5개씩 묶는 헬퍼 함수
-  const splitBooksByWeight = (books, maxWeight) => {
+  const splitBooksByWeight = (books: BookShelfType[], maxWeight: number) => {
     return books.reduce(
-      (rows, book) => {
+      (rows: BookShelfType[][], book) => {
         // 마지막 줄(현재 작업 중인 줄) 가져오기
         const lastRow = rows[rows.length - 1]
 

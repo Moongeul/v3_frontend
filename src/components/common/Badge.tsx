@@ -2,20 +2,12 @@
 
 import * as S from '@/styles/common/Badge.styles'
 import { ReactNode } from 'react'
+import { TagKorType } from '@/types/user'
 
 interface BadgeProps {
   backgroundColor?: string
   textColor?: string
-  badgeLabel:
-    | '신상헌터'
-    | '장르고인물'
-    | '수다쟁이 책러'
-    | '정리왕 서평러'
-    | '비밀일기장 주인'
-    | '감성사색  정리형'
-    | '랜덤 피커'
-    | '넷플릭급 몰입러'
-    | string
+  badgeLabel: TagKorType | undefined | string
 }
 export default function Badge({ backgroundColor, badgeLabel, textColor }: BadgeProps) {
   const renderBadge = (children: ReactNode) => {

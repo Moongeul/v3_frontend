@@ -4,8 +4,14 @@ import { BottomBorder, Spacing } from '@/components/common'
 import { SearchParams } from 'next/dist/server/request/search-params'
 import { QuestionField } from '@/components/question'
 
-export default async function QuestionWritePage({ searchParams }: { searchParams: SearchParams }) {
-  const isbn = (searchParams.isbn as string) || '0'
+export default async function QuestionWritePage({
+  searchParams,
+}: {
+  // 2. 타입을 Promise로 감싸기
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const resolvedSearchParams = await searchParams
+  const isbn = resolvedSearchParams.isbn || '0'
   return (
     <main>
       <Spacing height={20} />

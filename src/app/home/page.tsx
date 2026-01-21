@@ -2,12 +2,17 @@ import { Button, Label, Spacing, Tab } from '@/components/common'
 import { Banner, RecordList, ViewAllQuestionButton } from '@/components/home'
 import { typography } from '@/styles/theme'
 import { QuestionCardRowList } from '@/components/question'
-import { SearchParams } from 'next/dist/server/request/search-params'
 import { ReviewList } from '@/components/book'
 import { WriteBannerGraphic, WhiteRightArrowIcon } from '@/assets/svgComponents'
 
-export default async function HomePage({ searchParams }: { searchParams: SearchParams }) {
-  const tab = (searchParams.tab as 'PUBLIC' | 'FOLLOWERS') || 'PUBLIC'
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const resolvedSearchParams = await searchParams
+
+  const tab = (resolvedSearchParams.tab as 'PUBLIC' | 'FOLLOWERS') || 'PUBLIC'
   const tabList: { content: string; path: string; key: string }[] = [
     { content: '전체보기', path: '/home?tab=PUBLIC', key: 'PUBLIC' },
     { content: '팔로워 보기', path: '/home?tab=FOLLOWERS', key: 'FOLLOWERS' },

@@ -4,7 +4,7 @@ import { SelectBookItem } from '@/components/question'
 import { ChangeBook } from '@/components/write'
 
 interface BookInfoProps {
-  isbn: string
+  isbn: string | string[]
 }
 
 export default async function BookInfo({ isbn }: BookInfoProps) {

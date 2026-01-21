@@ -1,10 +1,15 @@
 import { Spacing } from '@/components/common'
 import { BookContent, BookSearchField } from '@/components/book'
-import { SearchParams } from 'next/dist/server/request/search-params'
 import { SearchResultContent } from '@/components/search'
 
-export default async function SearchPage({ searchParams }: { searchParams: SearchParams }) {
-  const step = (searchParams.type as 'select' | 'default') || 'default'
+export default async function SearchPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const resolvedSearchParams = await searchParams
+
+  const step = (resolvedSearchParams.type as 'select' | 'default') || 'default'
 
   return (
     <main>

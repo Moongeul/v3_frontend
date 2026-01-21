@@ -1,5 +1,4 @@
 import { TagEnumType } from '@/types/user'
-import { SearchParams } from 'next/dist/server/request/search-params'
 import TrendHunterCard from '@/components/test/result/TrendHunterCard'
 import EmotionalReflectorCard from '@/components/test/result/EmotionalReflectorCard'
 import RandomPickerCard from '@/components/test/result/RandomPickerCard'
@@ -24,12 +23,13 @@ function FindResultSwitcher({ type }: { type: TagEnumType }) {
   return <TrendHunterCard />
 }
 
-interface TestPageProps {
-  searchParams: SearchParams
-}
-
-export default function ResultPage({ searchParams }: TestPageProps) {
-  const type = (searchParams.type as TagEnumType) || 'TREND_HUNTER'
+export default async function ResultPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const resolvedSearchParams = await searchParams
+  const type = (resolvedSearchParams.type as TagEnumType) || 'TREND_HUNTER'
 
   return (
     <main>

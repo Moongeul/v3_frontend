@@ -1,6 +1,7 @@
 'use client'
 
 import { ReactNode } from 'react'
+import { MouseEvent } from 'react'
 import { PencilSketchEffect } from '@/styles/common/Common.styles'
 
 import * as Style from '@/styles/common/Button.styles'
