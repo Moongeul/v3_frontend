@@ -13,6 +13,14 @@ export interface Paging<T> {
   isLast: boolean
   data: T
 }
+export interface TestPaging<T> {
+  total: number
+  page: number
+  size: number
+  totalPages: number
+  isLast: boolean
+  books: T
+}
 
 export interface UserType {
   role: string
