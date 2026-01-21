@@ -19,7 +19,7 @@ export default async function MypagePage() {
 
       <Spacing height={24} />
       <Banner
-        path={'/test'}
+        path={'/test?step=onboarding'}
         graphic={<TestBannerGraphic width={114} height={81} />}
         button={
           <Button size={'md'} width={139} rightIcon={<WhiteRightArrowIcon width={20} height={20} />}>
