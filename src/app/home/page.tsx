@@ -4,6 +4,7 @@ import { typography } from '@/styles/theme'
 import { QuestionCardRowList } from '@/components/question'
 import { ReviewList } from '@/components/book'
 import { WriteBannerGraphic, WhiteRightArrowIcon } from '@/assets/svgComponents'
+import { fetchQuestions } from '@/lib/server/question'
 
 export default async function HomePage({
   searchParams,
@@ -11,6 +12,9 @@ export default async function HomePage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const resolvedSearchParams = await searchParams
+
+  const questionResult = await fetchQuestions(1, 2)
+  const questionList = questionResult.data?.data
 
   const tab = (resolvedSearchParams.tab as 'PUBLIC' | 'FOLLOWERS') || 'PUBLIC'
   const tabList: { content: string; path: string; key: string }[] = [
@@ -42,7 +46,7 @@ export default async function HomePage({
       </Label>
       <Spacing height={4} />
 
-      <QuestionCardRowList />
+      <QuestionCardRowList questionList={questionList} />
       <Spacing height={32} />
 
       <Label labelStyle={typography.subtitleMd}>기록</Label>

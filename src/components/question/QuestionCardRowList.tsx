@@ -2,12 +2,17 @@
 
 import { QuestionButton, QuestionCard } from '@/components/question/index'
 import { StyleRecordListRowWrapper } from '@/styles/question/Question.styles'
+import { QuestionType } from '@/types/question'
 
-export default function QuestionCardRowList() {
+interface QuestionCardRowListProps {
+  questionList: QuestionType[] | undefined
+}
+export default function QuestionCardRowList({ questionList }: QuestionCardRowListProps) {
   return (
     <StyleRecordListRowWrapper>
-      <QuestionCard isAnswerButton={true} width={237} />
-      <QuestionCard isAnswerButton={true} width={237} />
+      {questionList?.map((question) => (
+        <QuestionCard key={question.questionId} isAnswerButton={true} width={237} {...question} />
+      ))}
       <QuestionButton width={237} />
     </StyleRecordListRowWrapper>
   )

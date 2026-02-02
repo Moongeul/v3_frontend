@@ -1,39 +1,60 @@
 'use client'
 
 import { BookInfoSummary, Spacing } from '@/components/common'
-import { ButtonTextSecondaryRightArrowIcon } from '@/assets/svgComponents'
+import { ButtonTextSecondaryRightArrowIcon, OptionIcon } from '@/assets/svgComponents'
 import { AvatarGroup, CommentSummary } from '@/components/question/index'
 import { useRouter } from 'next/navigation'
-import { StyleAnswerButton, StyleQuestionCard, StyleQuestionCardText } from '@/styles/question/Question.styles'
+import {
+  StyleAnswerButton,
+  StyleQuestionCard,
+  StyleQuestionCardHeader,
+  StyleQuestionCardText,
+} from '@/styles/question/Question.styles'
+import { QuestionType } from '@/types/question'
 
-interface QuestionCardProps {
+interface QuestionCardProps extends QuestionType {
   width?: number
   isAnswerButton?: boolean
 }
 
-export default function QuestionCard({ width, isAnswerButton = false }: QuestionCardProps) {
+export default function QuestionCard({
+  width,
+  isAnswerButton = false,
+  questionId,
+  bookInfo,
+  commentCnt,
+  createdAt,
+  participantCount,
+  participantProfileImages,
+  myArticle,
+  content,
+}: QuestionCardProps) {
   const router = useRouter()
   return (
-    <StyleQuestionCard onClick={() => router.push('/question/1')} $width={width}>
-      <AvatarGroup />
+    <StyleQuestionCard onClick={() => router.push(`/question/${questionId}`)} $width={width}>
+      <StyleQuestionCardHeader>
+        <AvatarGroup participantProfileImages={participantProfileImages} participantCount={participantCount} />
+        {myArticle && <OptionIcon width={24} height={24} />}
+      </StyleQuestionCardHeader>
       <Spacing height={8} />
 
       <BookInfoSummary
-        rating={4.9}
+        disable={true}
+        rating={bookInfo.ratingAverage}
         styleType={'lightYellow'}
-        publisher={'korfit'}
-        pubdate={'2025'}
-        isbn={'1'}
-        author={'황유림'}
-        title={'책 제목이 길어질 경우에'}
-        bookImage={'/bookimage.png'}
+        publisher={bookInfo.publisher}
+        pubdate={bookInfo.pubdate}
+        isbn={bookInfo.isbn}
+        author={bookInfo.author}
+        title={bookInfo.title}
+        bookImage={bookInfo.bookImage}
       />
       <Spacing height={8} />
 
-      <StyleQuestionCardText>질문 입니다.</StyleQuestionCardText>
+      <StyleQuestionCardText>{content}</StyleQuestionCardText>
       <Spacing height={12} />
 
-      <CommentSummary count={3} />
+      <CommentSummary count={commentCnt} />
 
       {isAnswerButton ? (
         <>

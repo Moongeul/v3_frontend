@@ -1,9 +1,9 @@
 import { apiCallServer } from '@/lib/api.server'
-import { QuestionType } from '@/types/question'
+import { CreateQuestionType } from '@/types/question'
 
 export async function POST(request: Request) {
   try {
-    const question: QuestionType = await request.json()
+    const question: CreateQuestionType = await request.json()
 
     if (!question) {
       return Response.json({ error: 'writeData 필요' }, { status: 400 })

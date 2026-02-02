@@ -1,15 +1,9 @@
 import { Header, PageLayout, Spacing } from '@/components/common'
+import { OptionIcon } from '@/assets/svgComponents'
 export default function QuestionDetailLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return (
-    <div>
-      <Header headerType={'dynamic'}>질문</Header>
-
-      <Spacing height={60} />
-      <PageLayout>{children}</PageLayout>
-    </div>
-  )
+  return <div>{children}</div>
 }

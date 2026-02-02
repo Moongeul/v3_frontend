@@ -7,14 +7,15 @@ import { useRouter } from 'next/navigation'
 
 interface BookInfoSummaryProps {
   styleType?: 'transparent' | 'lightYellow'
-  isbn: string
-  title: string
-  author: string
-  bookImage: string
+  isbn: string | undefined
+  title: string | undefined
+  author: string | undefined
+  bookImage: string | undefined
   publisher?: string
   pubdate?: string
   rightElement?: React.ReactNode
   rating?: number
+  disable?: boolean
 }
 export default function BookInfoSummary({
   styleType = 'transparent',
@@ -26,6 +27,7 @@ export default function BookInfoSummary({
   title,
   rightElement,
   rating,
+  disable = false,
 }: BookInfoSummaryProps) {
   const router = useRouter()
 
@@ -35,7 +37,7 @@ export default function BookInfoSummary({
   }
 
   return (
-    <S.BookInfoSummaryContainer $styleType={styleType} onClick={onNavigate}>
+    <S.BookInfoSummaryContainer $styleType={styleType} onClick={() => (disable ? null : onNavigate)}>
       <S.Row>
         <S.BookImage>
           <Image

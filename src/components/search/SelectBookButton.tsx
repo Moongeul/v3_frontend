@@ -6,5 +6,9 @@ interface SelectBookButtonProps {
 }
 
 export default function SelectBookButton({ onClick }: SelectBookButtonProps) {
-  return <Button onClick={onClick}>책 선택하기</Button>
+  return (
+    <Button variant={'secondary'} size={'sm'} width={80} onClick={onClick}>
+      책 선택하기
+    </Button>
+  )
 }

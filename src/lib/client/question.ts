@@ -1,11 +1,12 @@
-import { ApiCallResult } from '@/types/common'
-import { QuestionType } from '@/types/question'
+import { ApiCallResult, APIResponseType, Paging } from '@/types/common'
+import { CreateQuestionType, QuestionType } from '@/types/question'
+import { RecordType } from '@/types/record'
 
 /**
  * 질문 생성 API
  */
 export const createQuestion = async (
-  question: QuestionType
+  question: CreateQuestionType
 ): Promise<
   ApiCallResult<
     ApiCallResult<{
@@ -40,4 +41,27 @@ export const createQuestion = async (
       error: error instanceof Error ? error.message : 'Unknown error',
     }
   }
+}
+
+/**
+ * 질문 리스트 조회
+ */
+export const clientFetchQuestions = async (params: {
+  page: number
+  size: number
+}): Promise<APIResponseType<Paging<QuestionType[]>>> => {
+  const { page = 1, size = 20 } = params
+
+  const searchParams = new URLSearchParams()
+  searchParams.append('page', page.toString())
+  searchParams.append('size', size.toString())
+
+  const response = await fetch(`/api/question/list?${searchParams.toString()}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  return await response.json()
 }

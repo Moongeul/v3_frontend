@@ -1,10 +1,10 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import { QuestionType } from '@/types/question'
+import { CreateQuestionType } from '@/types/question'
 
 interface QuestionState {
-  question: QuestionType
-  setQuestion: (question: Partial<QuestionType>) => void
+  question: CreateQuestionType
+  setQuestion: (question: Partial<CreateQuestionType>) => void
 }
 
 const initialQuestion = {

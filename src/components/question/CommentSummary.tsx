@@ -4,7 +4,7 @@ import { CommentIcon } from '@/assets/svgComponents'
 import { StyleComment } from '@/styles/question/Question.styles'
 
 interface CommentSummaryProps {
-  count: number
+  count: number | undefined
 }
 
 export default function CommentSummary({ count }: CommentSummaryProps) {

@@ -39,6 +39,13 @@ export const StyleQuestionCard = styled.div<{ $width: number | undefined }>`
     border: 1px solid ${({ theme }) => theme.colors.iconStarFilled};
   }
 `
+
+export const StyleQuestionCardHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
 export const StyleQuestionCardText = styled.p`
   color: ${({ theme }) => theme.colors.headerText};
   ${({ theme }) => theme.typography.subtitleSm as CSSObject};
@@ -128,15 +135,18 @@ export const StyleAvatarGroup = styled.div`
 `
 
 export const StyleAvatar = styled.div`
+  /* 부모 컨테이너: relative와 크기 지정 */
+  position: relative;
   width: 24px;
   height: 24px;
+  border-radius: 999px;
 
-  position: relative;
+  /* 내부 Image가 fill일 때 삐져나가지 않도록 */
+  overflow: hidden;
   z-index: 1;
-
   transition: all 0.2s ease-in-out;
-  background-color: transparent;
 
+  /* 연필 질감 테두리 효과 */
   &::before {
     content: '';
     position: absolute;
@@ -144,15 +154,22 @@ export const StyleAvatar = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: -1;
+    /* 테두리가 이미지보다 위에 있어야 질감이 보입니다 */
+    z-index: 2;
     filter: url('#pencil-texture');
     pointer-events: none;
     box-sizing: border-box;
     border-radius: 999px;
-    border: 1px solid ${({ theme }) => theme.colors.headerText};
-    background-color: #ededed;
+    border: 1px solid ${({ theme }) => theme.colors.famousSection};
+    /* 이미지가 로딩되기 전이나 없을 때 보여줄 배경 */
+  }
+
+  /* Next.js Image fill 속성 대응 */
+  img {
+    object-fit: cover;
   }
 `
+
 export const StyleAvatarCount = styled.div`
   width: fit-content;
   display: flex;
