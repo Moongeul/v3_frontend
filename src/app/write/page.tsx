@@ -10,44 +10,70 @@ import BottomBorder from '@/components/common/BottomBorder'
 import DropDownContainer from '@/components/write/DropDownContainer'
 import PrivacyDropDown from '@/components/common/dropdown/PrivacyDropDown'
 import CategoryDropDown from '@/components/common/dropdown/CategoryDropDown'
+import PageField from '@/components/write/PageField'
+import { fetchBookDetailInfo } from '@/lib/server/book'
+import Header from '../../components/common/Header'
+import SubmitButton from '@/components/write/SubmitButton'
+import PageLayout from '../../components/common/PageLayout'
 
-export default async function WritePage() {
+export default async function WritePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const resolvedSearchParams = await searchParams
+  const isbn = (resolvedSearchParams.isbn as 'isbn') || 'isbn'
+
   const categoryResponse = await getCategory()
+  const bookDetailResponse = await fetchBookDetailInfo(isbn)
   const categories = categoryResponse.data?.categoryList
+  const bookInfo = bookDetailResponse.data
 
   return (
     <main>
-      <DropDownContainer>
-        <PrivacyDropDown />
-        <CategoryDropDown categories={categories} />
-      </DropDownContainer>
+      <Header headerType={'dynamic'} rightIcon={<SubmitButton />}>
+        글쓰기
+      </Header>
+      <PageLayout>
+        <div>
+          <DropDownContainer>
+            <PrivacyDropDown />
+            <CategoryDropDown categories={categories} />
+          </DropDownContainer>
 
-      <Spacing height={16} />
+          <Spacing height={16} />
 
-      <BookInfoSummary
-        publisher={'korfit'}
-        pubdate={'2025'}
-        isbn={'1'}
-        author={'황유림'}
-        title={'책 제목이 길어질 경우에'}
-        bookImage={'/bookimage.png'}
-        rightElement={<ChangeBook />}
-      />
+          {bookInfo ? (
+            <BookInfoSummary
+              publisher={bookInfo.publisher}
+              pubdate={bookInfo.pubdate}
+              isbn={bookInfo.isbn}
+              author={bookInfo.author}
+              title={bookInfo.title}
+              bookImage={bookInfo.bookImage}
+              rightElement={<ChangeBook />}
+            />
+          ) : null}
 
-      <Spacing height={20} />
-      <BottomBorder />
-      <Spacing height={20} />
+          <Spacing height={20} />
+          <BottomBorder />
+          <Spacing height={20} />
 
-      <ReadDateField />
-      <Spacing height={20} />
+          <ReadDateField />
+          <Spacing height={20} />
 
-      <RatingField />
-      <Spacing height={20} />
+          <RatingField />
+          <Spacing height={20} />
 
-      <ReviewField />
-      <Spacing height={20} />
+          <PageField />
+          <Spacing height={20} />
 
-      <QuoteField />
+          <ReviewField />
+          <Spacing height={20} />
+
+          <QuoteField />
+        </div>
+      </PageLayout>
     </main>
   )
 }

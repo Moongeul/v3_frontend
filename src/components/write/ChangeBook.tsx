@@ -10,7 +10,7 @@ export default function ChangeBook() {
   return (
     <Button
       onClick={() => {
-        router.push('/search?type=select')
+        router.push('/write/search')
       }}
       textColor={baseColor.primary600}
       leftIcon={<ChangeIcon width={20} height={20} />}

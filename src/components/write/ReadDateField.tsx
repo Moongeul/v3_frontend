@@ -19,7 +19,14 @@ export default function ReadDateField() {
 
   const handleSelect = (date: Date | undefined) => {
     if (date) {
-      setState({ ...writeData, writeData: { ...writeData, readDate: date.toDateString() } })
+      // 'yyyy-MM-dd' 포맷으로 문자열 저장
+      const formattedDate = format(date, 'yyyy-MM-dd')
+      setState({
+        writeData: {
+          ...writeData,
+          readDate: formattedDate,
+        },
+      })
       setIsOpen(false)
     }
   }

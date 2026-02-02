@@ -37,11 +37,18 @@ export default function BookInfoSummary({
   }
 
   return (
-    <S.BookInfoSummaryContainer $styleType={styleType} onClick={() => (disable ? null : onNavigate)}>
+    <S.BookInfoSummaryContainer
+      $styleType={styleType}
+      onClick={(e) => {
+        if (!disable) {
+          onNavigate(e)
+        }
+      }}
+    >
       <S.Row>
         <S.BookImage>
           <Image
-            src={bookImage}
+            src={bookImage ?? '/bookimage.png'}
             width={styleType === 'transparent' ? 80 : 50}
             height={styleType === 'transparent' ? 120 : 76}
             alt="이미지"

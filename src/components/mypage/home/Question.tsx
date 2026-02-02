@@ -19,9 +19,9 @@ export default function Question() {
       </Label>
 
       <StyleQuestionContainer>
-        <QuestionCard width={237} />
-        <QuestionCard width={237} />
-        <QuestionCard width={237} />
+        {/*<QuestionCard width={237} />*/}
+        {/*<QuestionCard width={237} />*/}
+        {/*<QuestionCard width={237} />*/}
       </StyleQuestionContainer>
     </>
   )
