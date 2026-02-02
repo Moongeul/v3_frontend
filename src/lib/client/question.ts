@@ -1,5 +1,5 @@
 import { ApiCallResult, APIResponseType, Paging } from '@/types/common'
-import { CreateQuestionType, QuestionType } from '@/types/question'
+import { AnswerType, CreateAnswerType, CreateQuestionType, QuestionType } from '@/types/question'
 import { RecordType } from '@/types/record'
 
 /**
@@ -64,4 +64,60 @@ export const clientFetchQuestions = async (params: {
   })
 
   return await response.json()
+}
+
+/**
+ * 질문 리스트 조회
+ */
+export const clientFetchAnswers = async (params: {
+  page: number
+  size: number
+  questionId: number
+}): Promise<APIResponseType<Paging<AnswerType[]>>> => {
+  const { page = 1, size = 20, questionId = 1 } = params
+
+  const searchParams = new URLSearchParams()
+  searchParams.append('page', page.toString())
+  searchParams.append('size', size.toString())
+
+  const response = await fetch(`/api/answer/list/${questionId}?${searchParams.toString()}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  return await response.json()
+}
+
+/**
+ * 전화번호 인증코드 인증
+ */
+export const postCreateAnswer = async (answer: CreateAnswerType): Promise<ApiCallResult<{ answerId: number }>> => {
+  try {
+    const response = await fetch(`/api/answer/create`, {
+      method: 'POST',
+      body: JSON.stringify(answer),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    })
+
+    if (!response.ok) {
+      const error = await response.json()
+      console.error('API 응답 에러:', error)
+      return { success: false, error: error.error || `HTTP ${response.status}` }
+    }
+
+    const data = await response.json()
+    console.log('전화번호 인증 데이터', data)
+    return data
+  } catch (error) {
+    console.error('Fetch 에러:', error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    }
+  }
 }

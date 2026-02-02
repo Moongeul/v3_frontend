@@ -25,6 +25,19 @@ export const StyleReviewItemContainer = styled.div`
   column-gap: 12px;
   width: 100%;
 `
+export const ProfileImageWrapper = styled.div`
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0; /* 컨텐츠가 많아도 크기 유지 */
+  align-self: flex-start; /* 부모 높이에 따라 늘어나지 않음 */
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative; /* Image 컴포넌트 제어용 */
+
+  img {
+    object-fit: cover; /* 이미지 비율 유지하며 채움 */
+  }
+`
 
 //header
 export const ReviewHeaderContainer = styled.div`

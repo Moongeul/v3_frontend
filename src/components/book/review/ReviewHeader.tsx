@@ -9,21 +9,29 @@ import {
 } from '@/styles/book/Review.styles'
 import { OptionIcon, ProfileIcon } from '@/assets/svgComponents'
 import { Badge } from '@/components/common'
+import { convertEnumToKorTag } from '@/utils/user'
+import Image from 'next/image'
+import { formatRelativeTime } from '@/utils/common'
+import { ProfileInfoType } from '@/types/user'
 
 interface ReviewHeaderProps {
   isProfile?: boolean
+  memberInfo: ProfileInfoType
+  created: string
 }
 
-export default function ReviewHeader({ isProfile = false }: ReviewHeaderProps) {
+export default function ReviewHeader({ isProfile = false, memberInfo, created }: ReviewHeaderProps) {
   return (
     <ReviewHeaderContainer>
       <StyleReviewHeaderMetaContainer>
-        {isProfile ? <ProfileIcon width={32} height={32} /> : null}
+        {isProfile ? (
+          <Image alt={'프로필'} src={memberInfo.profileImage} width={32} height={32} style={{ borderRadius: 999 }} />
+        ) : null}
         <StyleReviewHeaderMetaUserInfo>
-          <StyleReviewHeaderMetaNickName>닉네임</StyleReviewHeaderMetaNickName>
-          <Badge badgeLabel={'신상헌터'} />
+          <StyleReviewHeaderMetaNickName>{memberInfo.nickname}</StyleReviewHeaderMetaNickName>
+          <Badge badgeLabel={convertEnumToKorTag(memberInfo.readingTasteType)} />
         </StyleReviewHeaderMetaUserInfo>
-        <StyleReviewHeaderMetaTime>1분전</StyleReviewHeaderMetaTime>
+        <StyleReviewHeaderMetaTime>{formatRelativeTime(created)}</StyleReviewHeaderMetaTime>
       </StyleReviewHeaderMetaContainer>
       <OptionIcon width={24} height={24} />
     </ReviewHeaderContainer>

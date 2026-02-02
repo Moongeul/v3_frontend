@@ -24,3 +24,10 @@ export type TagKorType =
   | '비밀 일기장 주인'
   | '장르 고인물'
   | '랜덤 피커'
+
+export interface ProfileInfoType {
+  id: number
+  nickname: string
+  profileImage: string
+  readingTasteType: TagEnumType
+}

@@ -1,3 +1,5 @@
+import { ProfileInfoType } from '@/types/user'
+
 export interface CreateQuestionType {
   isbn: string
   content: string
@@ -22,4 +24,17 @@ export interface QuestionBookInfoType {
   publisher: string
   pubdate: string
   ratingAverage: number
+}
+
+export interface CreateAnswerType {
+  questionId: number
+  content: string
+}
+
+export interface AnswerType {
+  answerId: number
+  content: string
+  createdAt: string
+  myAnswer: boolean
+  memberInfo: ProfileInfoType
 }

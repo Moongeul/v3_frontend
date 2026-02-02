@@ -2,28 +2,44 @@
 
 import { useRouter } from 'next/navigation'
 import { BookInfoSummary, BottomBorder, Spacing } from '@/components/common'
-import { StyleReviewContentContainer, StyleReviewItemContainer } from '@/styles/book/Review.styles'
+import { ProfileImageWrapper, StyleReviewContentContainer, StyleReviewItemContainer } from '@/styles/book/Review.styles'
 import { ProfileIcon } from '@/assets/svgComponents'
 import { ReviewHeader, ReviewContent, InteractionButton } from '@/components/book'
 import { BookType } from '@/types/book'
 import { QuoteType } from '@/types/write'
+import Image from 'next/image'
+import { ProfileInfoType } from '@/types/user'
 
 interface ReviewItemProps {
   quotes: QuoteType[]
   bookInfo: BookType
   rating: number
   content: string
+  memberInfo: ProfileInfoType
+  created: string
+  readDate: string
 }
 
-export default function ReviewItem({ bookInfo, quotes, rating, content }: ReviewItemProps) {
+export default function ReviewItem({
+  bookInfo,
+  quotes,
+  rating,
+  content,
+  memberInfo,
+  created,
+  readDate,
+}: ReviewItemProps) {
   const router = useRouter()
   return (
-    <div onClick={() => router.push('/1')}>
+    <div onClick={() => router.push(`/${1}`)}>
       <Spacing height={20} />
       <StyleReviewItemContainer>
-        <ProfileIcon width={32} height={32} />
+        <ProfileImageWrapper>
+          <Image src={memberInfo.profileImage} alt={'프로필'} width={32} height={32} />
+        </ProfileImageWrapper>
+
         <StyleReviewContentContainer>
-          <ReviewHeader />
+          <ReviewHeader memberInfo={memberInfo} created={created} />
 
           {bookInfo && (
             <>
@@ -42,7 +58,7 @@ export default function ReviewItem({ bookInfo, quotes, rating, content }: Review
           )}
 
           <Spacing height={8} />
-          <ReviewContent createdAt={'2025.03.04'} rating={rating} quotes={quotes} content={content} />
+          <ReviewContent createdAt={readDate} rating={rating} quotes={quotes} content={content} />
 
           <Spacing height={12} />
           <InteractionButton />

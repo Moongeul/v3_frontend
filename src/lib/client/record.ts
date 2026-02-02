@@ -1,6 +1,5 @@
 import { APIResponseType, Paging, TestPaging } from '@/types/common'
 import { BookShelfType, RecordType } from '@/types/record'
-import { serverFetchAllDoneReadBooks } from '@/lib/server/record'
 
 /**
  * 기록 전체 보기

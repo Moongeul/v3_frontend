@@ -1,8 +1,11 @@
-import { BookInfoSummary, Header, PageLayout, Spacing } from '@/components/common'
+import { BookInfoSummary, Header, PageLayout, Spacing, Spinner } from '@/components/common'
 import { ReviewContentText } from '@/components/book'
-import { AvatarGroup, CommentSummary, Comment } from '@/components/question'
-import { fetchQuestionDetail } from '@/lib/server/question'
+import { AvatarGroup, CommentSummary, Comment, QuestionCardColumnList } from '@/components/question'
+import { fetchAnswers, fetchQuestionDetail, fetchQuestions } from '@/lib/server/question'
 import { OptionIcon } from '@/assets/svgComponents'
+import CommentInput from '@/components/question/CommentInput'
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
+import CommentList from '@/components/question/CommentList'
 
 interface QuestionDetailPageProps {
   params: Promise<{ isbn: string }>
@@ -12,6 +15,19 @@ export default async function QuestionDetailPage({ params }: QuestionDetailPageP
   const { isbn } = await params
   const result = await fetchQuestionDetail(isbn)
   const question = result.data
+
+  const queryClient = new QueryClient()
+
+  if (!question) {
+    return <Spinner />
+  }
+
+  // 서버에서 첫 번째 페이지(0) 미리 가져오기
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ['questions'],
+    queryFn: ({ pageParam }) => fetchAnswers(pageParam, 10, question?.questionId),
+    initialPageParam: 1,
+  })
 
   return (
     <main>
@@ -29,24 +45,26 @@ export default async function QuestionDetailPage({ params }: QuestionDetailPageP
           <Spacing height={12} />
 
           <BookInfoSummary
-            rating={question?.bookInfo.ratingAverage}
+            rating={question.bookInfo.ratingAverage}
             styleType={'lightYellow'}
-            publisher={question?.bookInfo.publisher}
-            pubdate={question?.bookInfo.pubdate}
-            isbn={question?.bookInfo.isbn}
-            author={question?.bookInfo.author}
-            title={question?.bookInfo.title}
-            bookImage={question?.bookInfo.bookImage}
+            publisher={question.bookInfo.publisher}
+            pubdate={question.bookInfo.pubdate}
+            isbn={question.bookInfo.isbn}
+            author={question.bookInfo.author}
+            title={question.bookInfo.title}
+            bookImage={question.bookInfo.bookImage}
           />
           <Spacing height={12} />
-          <ReviewContentText content={question?.content} />
+          <ReviewContentText content={question.content} />
 
           <Spacing height={12} />
-          <CommentSummary count={question?.commentCnt} />
+          <CommentSummary count={question.commentCnt} />
 
-          {/*<Comment />*/}
-          {/*<Comment />*/}
-          {/*<Comment />*/}
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            <CommentList questionId={question.questionId} />
+          </HydrationBoundary>
+          <Spacing height={100} />
+          <CommentInput questionId={question.questionId} />
         </div>
       </PageLayout>
     </main>

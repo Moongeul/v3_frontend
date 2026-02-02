@@ -59,11 +59,14 @@ export default function ReviewList({ tab }: ReviewListProps) {
         {data?.pages.map((page, i) =>
           page.data?.data.map((post, index) => (
             <ReviewItem
+              memberInfo={post.memberInfo}
+              created={post.created}
               key={index}
               quotes={post.quotes}
               bookInfo={post.bookInfo}
               rating={post.rating}
               content={post.content}
+              readDate={post.readDate}
             />
           ))
         )}
