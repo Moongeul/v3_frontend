@@ -1,7 +1,6 @@
 import BookInfo from '@/components/question/write/BookInfo' //서버 컴포넌트는 별도 import
 
 import { BottomBorder, Spacing } from '@/components/common'
-import { SearchParams } from 'next/dist/server/request/search-params'
 import { QuestionField } from '@/components/question'
 
 export default async function QuestionWritePage({
