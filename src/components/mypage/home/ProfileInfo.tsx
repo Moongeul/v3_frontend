@@ -20,9 +20,17 @@ interface ProfileInfoProps {
   profileImage: string | undefined
   nickname: string | undefined
   readingTasteType: TagEnumType | undefined
+  followerCount: number | undefined
+  followingCount: number | undefined
 }
 
-export default function ProfileInfo({ profileImage, readingTasteType, nickname }: ProfileInfoProps) {
+export default function ProfileInfo({
+  profileImage,
+  readingTasteType,
+  nickname,
+  followingCount,
+  followerCount,
+}: ProfileInfoProps) {
   const router = useRouter()
   const onNavigate = (path: string) => {
     router.push(path)
@@ -47,11 +55,11 @@ export default function ProfileInfo({ profileImage, readingTasteType, nickname }
       <StyleFollowContainer>
         <StyleFollowItem onClick={() => onNavigate('/follower')}>
           <StyleContent $typography={typography.small}>팔로워</StyleContent>
-          <StyleContent $typography={typography.subtitleMd}>13</StyleContent>
+          <StyleContent $typography={typography.subtitleMd}>{followerCount ? followerCount : 0}</StyleContent>
         </StyleFollowItem>
         <StyleFollowItem onClick={() => onNavigate('/following')}>
           <StyleContent $typography={typography.small}>팔로잉</StyleContent>
-          <StyleContent $typography={typography.subtitleMd}>13</StyleContent>
+          <StyleContent $typography={typography.subtitleMd}>{followingCount ? followingCount : 0}</StyleContent>
         </StyleFollowItem>
       </StyleFollowContainer>
     </StyleProfileContainer>

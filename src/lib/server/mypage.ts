@@ -1,6 +1,6 @@
 import { ApiCallResult } from '@/types/common'
 import { apiCallServer } from '@/lib/api.server'
-import { FollowUserInfoType } from '@/types/mypage'
+import { FollowUserInfoType, MyCategoryResponseType, MyCategoryType } from '@/types/mypage'
 import { UserInfoType } from '@/types/user'
 
 /**
@@ -55,6 +55,31 @@ export const fetchFollowings = async (): Promise<ApiCallResult<FollowUserInfoTyp
 export const fetchUserInfo = async (): Promise<ApiCallResult<UserInfoType>> => {
   try {
     const { data, error } = await apiCallServer(`/v2/member/user-info`, {
+      method: 'GET',
+    })
+
+    if (error) {
+      return { success: false, error }
+    }
+
+    return { success: true, data }
+  } catch (error) {
+    console.error('사용자 정보 불러오기 실패:', error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    }
+  }
+}
+
+/**
+ * 사용자 정보
+ */
+export const fetchMyCategoryList = async (
+  userId: number | undefined
+): Promise<ApiCallResult<MyCategoryResponseType>> => {
+  try {
+    const { data, error } = await apiCallServer(`/v2/member/post-stats?userId=${userId}`, {
       method: 'GET',
     })
 

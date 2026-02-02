@@ -2,6 +2,7 @@ import { Label, Spacing, BottomBorder, BookInfoSummary, Spinner } from '@/compon
 import { BookIntroduction, BookReviews, ViewAllReviewsButton } from '@/components/book'
 import { typography } from '@/styles/theme'
 import { fetchBookDetailInfo } from '@/lib/server/book'
+import WishBookButton from '@/components/common/button/WishBookButton'
 
 interface BookDetailPageProps {
   params: Promise<{ isbn: string }>
@@ -26,6 +27,7 @@ export default async function BookDetailPage({ params }: BookDetailPageProps) {
         title={book.title}
         bookImage={book.bookImage}
         rating={book.ratingAverage}
+        rightElement={<WishBookButton isbn={book.isbn} />}
       />
       <Spacing height={20} />
       <BookIntroduction description={book.description} />

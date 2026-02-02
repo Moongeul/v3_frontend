@@ -15,6 +15,7 @@ import { fetchBookDetailInfo } from '@/lib/server/book'
 import Header from '../../components/common/Header'
 import SubmitButton from '@/components/write/SubmitButton'
 import PageLayout from '../../components/common/PageLayout'
+import { SelectBookItem } from '@/components/question'
 
 export default async function WritePage({
   searchParams,
@@ -53,7 +54,9 @@ export default async function WritePage({
               bookImage={bookInfo.bookImage}
               rightElement={<ChangeBook />}
             />
-          ) : null}
+          ) : (
+            <SelectBookItem path={'/write/search'} />
+          )}
 
           <Spacing height={20} />
           <BottomBorder />

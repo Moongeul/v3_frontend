@@ -18,7 +18,7 @@ export default function WriteButton({ isbn }: WriteButtonProps) {
         router.push(`/write?isbn=${isbn}`)
         setState({ ...writeData, writeData: { ...writeData, isbn: isbn } })
       }}
-      width={81}
+      width={70}
       size={'sm'}
       variant={'primary'}
       leftIcon={<AddWhiteIcon width={15} height={15} />}

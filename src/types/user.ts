@@ -4,6 +4,8 @@ export interface UserInfoType {
   profileImage: string
   nickname: string
   readingTasteType: TagEnumType
+  followerCount: number
+  followingCount: number
 }
 export type TagEnumType =
   | 'EMOTIONAL_REFLECTOR' // 감성 사색 정리러

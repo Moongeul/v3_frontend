@@ -32,6 +32,7 @@ export default function Badge({ backgroundColor, badgeLabel, textColor }: BadgeP
         return backgroundColor
     }
   }
+
   return (
     <div>
       <S.Badge $backgroundColor={renderBadge(badgeLabel)} $textColor={textColor}>

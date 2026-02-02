@@ -13,6 +13,8 @@ export default async function Profile({ userInfo }: ProfileProps) {
         profileImage={userInfo?.profileImage}
         readingTasteType={userInfo?.readingTasteType}
         nickname={userInfo?.nickname}
+        followerCount={userInfo?.followerCount}
+        followingCount={userInfo?.followingCount}
       />
 
       <Spacing height={20} />

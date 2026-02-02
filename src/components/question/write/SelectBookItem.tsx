@@ -4,11 +4,15 @@ import { useRouter } from 'next/navigation'
 import { StyleButton, StyleSelectBookItemContainer, StyleText } from '@/styles/question/Write.styles'
 import { AddBlackIcon } from '@/assets/svgComponents'
 
-export default function SelectBookItem() {
+interface SelectBookItemProps {
+  path: string
+}
+
+export default function SelectBookItem({ path }: SelectBookItemProps) {
   const router = useRouter()
 
   const onNavigate = () => {
-    router.push('/search?type=select')
+    router.push(path)
   }
 
   return (

@@ -3,21 +3,45 @@
 import { baseColor } from '@/styles/theme'
 import { StyleGridRecordContainer } from '@/styles/mypage/MypageHome.styles'
 import { RecordCard } from '@/components/mypage'
+import { MyCategoryResponseType, MyCategoryType } from '@/types/mypage'
 
-export default function RecordCards() {
-  const recordCardContents = [
-    { title: '전체', count: '13개', backgroundColor: '#68DCDC4D', borderColor: baseColor.primary200 },
-    { title: '카테고리1', count: '13개', backgroundColor: '#7AA0FF4D', borderColor: '#BCCFFF' },
-    { title: '카테고리2', count: '13개', backgroundColor: '#68BDDC4D', borderColor: '#B3DEED' },
-    { title: '카테고리3', count: '13개', backgroundColor: '#FF96C04D', borderColor: '#FFCBDF' },
-    { title: '카테고리4', count: '13개', backgroundColor: '#FF927A4D', borderColor: '#FFC9BC' },
-    { title: '카테고리5', count: '13개', backgroundColor: '#EB7AFF4D', borderColor: '#F5BCFF' },
-  ]
+interface RecordCardsProps {
+  category: MyCategoryResponseType | undefined
+}
+
+// 🎨 반복해서 사용할 색상 팔레트 정의
+const COLOR_PALETTE = [
+  { backgroundColor: '#68DCDC4D', borderColor: baseColor.primary200 }, // 0: '전체'용
+  { backgroundColor: '#7AA0FF4D', borderColor: '#BCCFFF' }, // 1
+  { backgroundColor: '#68BDDC4D', borderColor: '#B3DEED' }, // 2
+  { backgroundColor: '#FF96C04D', borderColor: '#FFCBDF' }, // 3
+  { backgroundColor: '#FF927A4D', borderColor: '#FFC9BC' }, // 4
+  { backgroundColor: '#EB7AFF4D', borderColor: '#F5BCFF' }, // 5
+]
+
+export default function RecordCards({ category }: RecordCardsProps) {
+  // 수정된 로직
+  const baseCategory = [{ categoryId: 0, categoryTitle: '전체', postCount: category?.totalPostCount || 0 }]
+
+  // categoryList가 배열인지 확인 후 합치기
+  const categories = Array.isArray(category?.data) ? [...baseCategory, ...category?.data] : baseCategory
+
+  const recordCardContents = categories.map((category, index) => {
+    const colorTheme = COLOR_PALETTE[index % COLOR_PALETTE.length]
+    return {
+      title: category.categoryTitle,
+      count: `${category.postCount}개`,
+      categoryId: category.categoryId,
+      ...colorTheme,
+    }
+  })
+
   return (
     <StyleGridRecordContainer>
-      {recordCardContents.map((recordCardContent) => (
+      {recordCardContents.map((recordCardContent, idx) => (
         <RecordCard
-          key={recordCardContent.title}
+          id={recordCardContent.categoryId}
+          key={`${recordCardContent.title}-${idx}`}
           title={recordCardContent.title}
           count={recordCardContent.count}
           backgroundColor={recordCardContent.backgroundColor}

@@ -2,8 +2,13 @@ import { Button, Label, Spacing } from '@/components/common'
 import { baseColor, typography } from '@/styles/theme'
 import { PrimaryDropDownIcon } from '@/assets/svgComponents'
 import { RecordCards } from '@/components/mypage'
+import { MyCategoryResponseType } from '@/types/mypage'
 
-export default function Record() {
+interface RecordProps {
+  category: MyCategoryResponseType | undefined
+}
+
+export default function Record({ category }: RecordProps) {
   return (
     <>
       <Label
@@ -23,7 +28,7 @@ export default function Record() {
         기록
       </Label>
       <Spacing height={4} />
-      <RecordCards />
+      <RecordCards category={category} />
     </>
   )
 }

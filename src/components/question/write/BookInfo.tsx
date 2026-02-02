@@ -12,7 +12,7 @@ export default async function BookInfo({ isbn }: BookInfoProps) {
   const bookInfo = bookInfoResponse.data
 
   return !bookInfo ? (
-    <SelectBookItem />
+    <SelectBookItem path={'/search?type=select'} />
   ) : (
     <BookInfoSummary
       title={bookInfo.title}
