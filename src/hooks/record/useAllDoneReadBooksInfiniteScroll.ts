@@ -35,7 +35,7 @@ export const useAllDoneReadBookInfiniteScroll = () => {
   const booksWithColor =
     data?.pages.flatMap((page) => {
       // page.data.books가 배열인지 확인 (API 구조에 따라 contents일 수도 있음)
-      const bookList = page.data.books || []
+      const bookList = page.data.data || []
 
       return bookList.map((book) => {
         // 2. articleId를 색상 배열의 길이로 나눈 나머지를 인덱스로 사용

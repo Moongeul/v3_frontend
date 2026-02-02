@@ -1,5 +1,5 @@
 import { apiFetchServer } from '@/lib/api.server'
-import { APIResponseType, Paging, TestPaging } from '@/types/common'
+import { APIResponseType, Paging } from '@/types/common'
 import { BookShelfType } from '@/types/record'
 
 export const serverFetchAllPosts = async (page: number, size: number) => {
@@ -20,7 +20,7 @@ export const serverFetchAllPosts = async (page: number, size: number) => {
 export const serverFetchAllDoneReadBooks = async (
   page: number,
   size: number
-): Promise<APIResponseType<TestPaging<BookShelfType[]>>> => {
+): Promise<APIResponseType<Paging<BookShelfType[]>>> => {
   const searchParams = new URLSearchParams()
   searchParams.append('page', page.toString())
   searchParams.append('size', size.toString())

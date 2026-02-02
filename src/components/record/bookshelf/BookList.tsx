@@ -29,6 +29,7 @@ export default function BookList() {
   }
 
   const rows = splitBooksByWeight(books, 355)
+  console.log('books', books)
 
   return (
     <StyleBookShelfContainer>

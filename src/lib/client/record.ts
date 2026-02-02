@@ -31,7 +31,7 @@ export const clientFetchAllPosts = async (params: {
 export const clientFetchAllDoneReadBooks = async (params: {
   page: number
   size: number
-}): Promise<APIResponseType<TestPaging<BookShelfType[]>>> => {
+}): Promise<APIResponseType<Paging<BookShelfType[]>>> => {
   const { page = 1, size = 20 } = params
 
   const searchParams = new URLSearchParams()
