@@ -1,7 +1,7 @@
 import BookList from '@/components/record/wishlist/BookList'
 import { Spacing } from '@/components/common'
 import { getRequestClient } from '@/app/getRequestClient'
-import { serverFetchAllDoneReadBooks, serverFetchAllWishReadBooks } from '@/lib/server/record'
+import { serverFetchAllWishReadBooks } from '@/lib/server/record'
 
 const DEFAULT_SIZE = 20
 

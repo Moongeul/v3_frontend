@@ -1,9 +1,12 @@
-import { Header, PageLayout, Spacing, Spinner } from '@/components/common'
+import { Header, Label, PageLayout, Spacing, Spinner } from '@/components/common'
 import { fetchMyCategoryList, fetchUserInfo } from '@/lib/server/mypage'
 import UserProfile from '@/components/profile/UserProfile'
 import { Record } from '@/components/mypage'
 import Story from '../../../components/mypage/home/Story'
 import Question from '../../../components/mypage/home/Question'
+import { LockIcon } from '@/assets/svgComponents'
+import { typography } from '@/styles/theme'
+import PrivateNotice from '@/components/mypage/setting/PrivateNotice'
 
 export default async function UserProfilePage({ params }: { params: Promise<{ userId: string }> }) {
   const { userId } = await params
@@ -28,12 +31,18 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
           <UserProfile userInfo={userInfo} />
           <Spacing height={24} />
 
-          <Record category={category} />
-          <Spacing height={24} />
-          <Story />
+          {userInfo.privacyLevel === 'PUBLIC' ? (
+            <>
+              <Record category={category} />
+              <Spacing height={24} />
+              <Story />
 
-          <Spacing height={24} />
-          <Question />
+              <Spacing height={24} />
+              <Question />
+            </>
+          ) : (
+            <PrivateNotice />
+          )}
         </div>
       </PageLayout>
     </main>

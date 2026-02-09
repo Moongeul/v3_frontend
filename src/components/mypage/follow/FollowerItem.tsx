@@ -5,11 +5,12 @@ import { ProfileIcon } from '@/assets/svgComponents'
 import { StyleContent } from '@/styles/common/Common.styles'
 import { typography } from '@/styles/theme'
 import { Badge, Button } from '@/components/common'
-import { postFollow } from '@/lib/client/mypage'
+import { postFollow, postUnFollow } from '@/lib/client/mypage'
 import { TagEnumType } from '@/types/user'
 import Image from 'next/image'
 import { convertEnumToKorTag } from '@/utils/user'
 import { FollowStatusType } from '@/types/mypage'
+import { useRouter } from 'next/navigation'
 
 interface FollowerItemProps {
   profileImage: string
@@ -25,6 +26,8 @@ export default function FollowerItem({
   nickname,
   myFollowStatus,
 }: FollowerItemProps) {
+  const router = useRouter()
+
   return (
     <StyleFollowItemContainer>
       <StyleUserInfoContainer>
@@ -42,14 +45,21 @@ export default function FollowerItem({
 
       <Button
         onClick={async () => {
-          const result = await postFollow(id)
-          console.log('result', result)
+          if (myFollowStatus === 'ACCEPTED') {
+            const result = await postUnFollow(id)
+            console.log('언팔', result)
+            router.refresh()
+          } else {
+            const result = await postFollow(id)
+            console.log('팔로우', result)
+            router.refresh()
+          }
         }}
-        variant={'primary'}
+        variant={myFollowStatus === 'ACCEPTED' ? 'outline' : 'primary'}
         size={'sm'}
         width={80}
       >
-        맞팔로우
+        {myFollowStatus === 'ACCEPTED' ? '팔로잉' : '맞팔로우'}
       </Button>
     </StyleFollowItemContainer>
   )

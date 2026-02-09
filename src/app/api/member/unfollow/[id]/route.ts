@@ -9,7 +9,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       return NextResponse.json({ error: 'id가 필요합니다.' }, { status: 400 })
     }
 
-    const endpoint = `/v2/member/follow/${id}`
+    const endpoint = `/v2/member/unfollow/${id}`
 
     console.log('BFF Request to Backend:', endpoint)
 

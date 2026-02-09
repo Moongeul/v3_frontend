@@ -1,3 +1,6 @@
+import { PrivacyLevelType } from '@/types/setting'
+import { FollowStatusType } from '@/types/mypage'
+
 export interface UserInfoType {
   id: number
   name: string
@@ -6,6 +9,8 @@ export interface UserInfoType {
   readingTasteType: TagEnumType
   followerCount: number
   followingCount: number
+  myFollowStatus: FollowStatusType
+  privacyLevel: PrivacyLevelType
 }
 export type TagEnumType =
   | 'EMOTIONAL_REFLECTOR' // 감성 사색 정리러
