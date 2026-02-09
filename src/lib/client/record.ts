@@ -1,5 +1,6 @@
 import { APIResponseType, Paging, TestPaging } from '@/types/common'
 import { BookShelfType, RecordType } from '@/types/record'
+import { BookType } from '@/types/book'
 
 /**
  * 기록 전체 보기
@@ -39,6 +40,29 @@ export const clientFetchAllDoneReadBooks = async (params: {
   searchParams.append('size', size.toString())
 
   const response = await fetch(`/api/bookshelf/done-read?${searchParams.toString()}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  return await response.json()
+}
+
+/**
+ * 읽고 싶은 책 전체 보기
+ */
+export const clientFetchAllWishReadBooks = async (params: {
+  page: number
+  size: number
+}): Promise<APIResponseType<Paging<BookType[]>>> => {
+  const { page = 1, size = 20 } = params
+
+  const searchParams = new URLSearchParams()
+  searchParams.append('page', page.toString())
+  searchParams.append('size', size.toString())
+
+  const response = await fetch(`/api/bookshelf/wish-read?${searchParams.toString()}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

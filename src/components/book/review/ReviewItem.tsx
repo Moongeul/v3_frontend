@@ -18,10 +18,12 @@ interface ReviewItemProps {
   memberInfo: ProfileInfoType
   created: string
   readDate: string
+  postId: number
 }
 
 export default function ReviewItem({
   bookInfo,
+  postId,
   quotes,
   rating,
   content,
@@ -31,11 +33,19 @@ export default function ReviewItem({
 }: ReviewItemProps) {
   const router = useRouter()
   return (
-    <div onClick={() => router.push(`/${1}`)}>
+    <div onClick={() => router.push(`/${postId}`)}>
       <Spacing height={20} />
       <StyleReviewItemContainer>
         <ProfileImageWrapper>
-          <Image src={memberInfo.profileImage} alt={'프로필'} width={32} height={32} />
+          <Image
+            onClick={() => {
+              router.push(`/profile/${memberInfo.id}`)
+            }}
+            src={memberInfo.profileImage}
+            alt={'프로필'}
+            width={32}
+            height={32}
+          />
         </ProfileImageWrapper>
 
         <StyleReviewContentContainer>

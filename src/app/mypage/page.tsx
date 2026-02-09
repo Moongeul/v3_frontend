@@ -4,10 +4,9 @@ import { AlarmIcon, SettingIcon, TestBannerGraphic, WhiteRightArrowIcon } from '
 import { Record } from '@/components/mypage'
 import Story from '@/components/mypage/home/Story'
 import Question from '../../components/mypage/home/Question'
-import Profile from '@/components/mypage/home/Profile'
+import MyProfile from '@/components/mypage/home/MyProfile'
 import MypageItem from '@/components/mypage/home/MypageItem'
 import { fetchMyCategoryList, fetchUserInfo } from '@/lib/server/mypage'
-import { getCategory } from '@/lib/server/write'
 import Link from 'next/link'
 
 export default async function MypagePage() {
@@ -39,7 +38,7 @@ export default async function MypagePage() {
       <PageLayout>
         <div>
           <Spacing height={8} />
-          <Profile userInfo={userInfo} />
+          <MyProfile userInfo={userInfo} />
 
           <Spacing height={24} />
           <Banner

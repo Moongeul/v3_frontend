@@ -4,6 +4,7 @@ import { ProfileInfoType, TagEnumType } from '@/types/user'
 export type RecordTabType = 'BOOKSHELF' | 'CALENDAR' | 'RATING' | 'REPORT' | 'WISHLIST'
 
 export interface RecordType {
+  postId: number
   bookInfo: BookType
   created: string
   rating: number

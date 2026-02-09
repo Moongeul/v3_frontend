@@ -36,7 +36,7 @@ export default function BookList() {
       {/* 1. 데이터가 있을 때만 렌더링 */}
       {hasData &&
         rows.map((row, index) => (
-          <StyleShelfRow key={`row-${index}`}>
+          <StyleShelfRow $gap={'4px'} key={`row-${index}`}>
             {row.map((book) => (
               <Book
                 key={book.articleId}

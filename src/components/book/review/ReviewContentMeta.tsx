@@ -2,6 +2,7 @@
 
 import { StarRating } from '@/components/common'
 import { StyleReviewContentMeta, StyleReviewContentMetaDate } from '@/styles/book/Review.styles'
+import { formatDate } from '@/utils/common'
 
 interface ReviewContentMetaProps {
   rating: number
@@ -14,7 +15,7 @@ export default function ReviewContentMeta({ rating, createdAt }: ReviewContentMe
       <StarRating size={'sm'} type={'short'} rating={rating} />
       <StyleReviewContentMetaDate>
         <p>|</p>
-        <p>{createdAt}</p>
+        <p>{formatDate(createdAt)}</p>
       </StyleReviewContentMetaDate>
     </StyleReviewContentMeta>
   )

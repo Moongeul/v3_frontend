@@ -52,9 +52,9 @@ export const fetchFollowings = async (): Promise<ApiCallResult<FollowUserInfoTyp
 /**
  * 사용자 정보
  */
-export const fetchUserInfo = async (): Promise<ApiCallResult<UserInfoType>> => {
+export const fetchUserInfo = async (userId?: string): Promise<ApiCallResult<UserInfoType>> => {
   try {
-    const { data, error } = await apiCallServer(`/v2/member/user-info`, {
+    const { data, error } = await apiCallServer(`/v2/member/user-info${userId ? `?userId=${userId}` : ''}`, {
       method: 'GET',
     })
 

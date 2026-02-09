@@ -22,12 +22,12 @@ export async function GET(request: NextRequest) {
 
   if (!code) {
     console.error('No authorization code provided')
-    return redirect('/login?error=no_code')
+    // return redirect('/login?error=no_code')
   }
 
   if (!platform) {
     console.error('플랫폼 코드가 없습니다.')
-    return redirect('/login?error=no_platform')
+    // return redirect('/login?error=no_platform')
   }
 
   try {
@@ -75,11 +75,11 @@ export async function GET(request: NextRequest) {
 
     // 5. 예상치 못한 상태
     console.warn('Unexpected user status:', status)
-    return redirect('/login?error=unexpected_status')
+    // return redirect('/login?error=unexpected_status')
   } catch (error) {
     // API 호출 또는 쿠키 설정 중 발생한 예외 처리
     console.error('Redirect route handler error:', error)
     const errorMessage = error instanceof Error ? error.message : 'server_error'
-    return redirect(`/login?error=${encodeURIComponent(errorMessage)}`)
+    // return redirect(`/login?error=${encodeURIComponent(errorMessage)}`)
   }
 }

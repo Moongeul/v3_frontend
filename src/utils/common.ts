@@ -31,3 +31,12 @@ export function formatRelativeTime(dateString: string) {
 
   return `${yy}.${mm}.${dd}`
 }
+
+/**
+ * ISO 날짜 문자열을 YYYY.MM.DD 형식으로 변환합니다.
+ * @param isoString "2026-02-02T12:36:39.835675"
+ * @returns "2026.02.02"
+ */
+export const formatDate = (isoString: string): string => {
+  return isoString.slice(0, 10).replace(/-/g, '.')
+}

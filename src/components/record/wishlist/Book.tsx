@@ -2,9 +2,9 @@
 
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { BookType } from '@/types/book'
 
-interface BookProps {
-  bookImage: string
+interface BookProps extends BookType {
   isbn: string
 }
 

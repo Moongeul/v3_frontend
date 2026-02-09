@@ -82,10 +82,10 @@ export const StylePostCountTag = styled.div`
 `
 ////////////////////////////////////////////////////////////////////////////////
 
-export const StyleShelfRow = styled.div`
+export const StyleShelfRow = styled.div<{ $gap: string }>`
   display: flex;
   align-items: flex-end; /* 책들을 바닥에 밀착 */
-  gap: 4px;
+  gap: ${({ $gap }) => $gap};
   width: 100%;
   position: relative;
   margin-bottom: 40px; /* 다음 선반과의 간격 */

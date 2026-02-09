@@ -13,6 +13,7 @@ import { convertEnumToKorTag } from '@/utils/user'
 import Image from 'next/image'
 import { formatRelativeTime } from '@/utils/common'
 import { ProfileInfoType } from '@/types/user'
+import { useRouter } from 'next/navigation'
 
 interface ReviewHeaderProps {
   isProfile?: boolean
@@ -21,8 +22,14 @@ interface ReviewHeaderProps {
 }
 
 export default function ReviewHeader({ isProfile = false, memberInfo, created }: ReviewHeaderProps) {
+  const router = useRouter()
   return (
-    <ReviewHeaderContainer>
+    <ReviewHeaderContainer
+      onClick={(e) => {
+        e.stopPropagation()
+        router.push(`/profile/${memberInfo.id}`)
+      }}
+    >
       <StyleReviewHeaderMetaContainer>
         {isProfile ? (
           <Image alt={'프로필'} src={memberInfo.profileImage} width={32} height={32} style={{ borderRadius: 999 }} />

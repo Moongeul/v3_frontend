@@ -6,7 +6,7 @@ interface ProfileProps {
   userInfo: UserInfoType | undefined
 }
 
-export default async function Profile({ userInfo }: ProfileProps) {
+export default async function MyProfile({ userInfo }: ProfileProps) {
   return (
     <>
       <ProfileInfo
