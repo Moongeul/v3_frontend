@@ -4,6 +4,8 @@ import { Header, PageLayout, Spacing } from '@/components/common'
 import { AddQuestionButton, QuestionCardColumnList } from '@/components/question'
 import { fetchQuestions } from '@/lib/server/question'
 
+export const dynamic = 'force-dynamic'
+
 export default async function QuestionPage() {
   const queryClient = new QueryClient()
 

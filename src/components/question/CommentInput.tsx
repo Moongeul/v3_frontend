@@ -5,6 +5,7 @@ import { Button, TextInput } from '@/components/common'
 import { WhiteUpIcon } from '@/assets/svgComponents'
 import { useAnswerStore } from '@/store/answerStore'
 import { postCreateAnswer } from '@/lib/client/question'
+import { CreateAnswerType } from '@/types/question'
 
 interface CommentInputProps {
   questionId: number
@@ -26,7 +27,7 @@ export default function CommentInput({ questionId }: CommentInputProps) {
       <Button
         onClick={async () => {
           if (createAnswer) {
-            const result = await postCreateAnswer(createAnswer)
+            const result = await postCreateAnswer(createAnswer as CreateAnswerType)
             console.log('result', result)
           }
         }}

@@ -68,6 +68,7 @@ export default function ReviewList({ tab }: ReviewListProps) {
               rating={post.rating}
               content={post.content}
               readDate={post.readDate}
+              likesInfo={post.likesInfo}
             />
           ))
         )}

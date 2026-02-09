@@ -9,6 +9,8 @@ import MypageItem from '@/components/mypage/home/MypageItem'
 import { fetchMyCategoryList, fetchUserInfo } from '@/lib/server/mypage'
 import Link from 'next/link'
 
+export const dynamic = 'force-dynamic'
+
 export default async function MypagePage() {
   const userInfoResult = await fetchUserInfo()
   const userInfo = userInfoResult.data

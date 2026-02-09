@@ -3,12 +3,12 @@
 import { useRouter } from 'next/navigation'
 import { BookInfoSummary, BottomBorder, Spacing } from '@/components/common'
 import { ProfileImageWrapper, StyleReviewContentContainer, StyleReviewItemContainer } from '@/styles/book/Review.styles'
-import { ProfileIcon } from '@/assets/svgComponents'
 import { ReviewHeader, ReviewContent, InteractionButton } from '@/components/book'
 import { BookType } from '@/types/book'
 import { QuoteType } from '@/types/write'
 import Image from 'next/image'
 import { ProfileInfoType } from '@/types/user'
+import { LikesInfoType } from '@/types/record'
 
 interface ReviewItemProps {
   quotes: QuoteType[]
@@ -19,6 +19,7 @@ interface ReviewItemProps {
   created: string
   readDate: string
   postId: number
+  likesInfo: LikesInfoType
 }
 
 export default function ReviewItem({
@@ -30,6 +31,7 @@ export default function ReviewItem({
   memberInfo,
   created,
   readDate,
+  likesInfo,
 }: ReviewItemProps) {
   const router = useRouter()
   return (
@@ -71,7 +73,7 @@ export default function ReviewItem({
           <ReviewContent createdAt={readDate} rating={rating} quotes={quotes} content={content} />
 
           <Spacing height={12} />
-          <InteractionButton />
+          <InteractionButton likesInfo={likesInfo} />
         </StyleReviewContentContainer>
       </StyleReviewItemContainer>
       <Spacing height={20} />
