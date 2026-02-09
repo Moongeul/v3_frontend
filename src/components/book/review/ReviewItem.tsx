@@ -12,7 +12,7 @@ import { LikesInfoType } from '@/types/record'
 
 interface ReviewItemProps {
   quotes: QuoteType[]
-  bookInfo: BookType
+  bookInfo?: BookType
   rating: number
   content: string
   memberInfo: ProfileInfoType
@@ -41,7 +41,7 @@ export default function ReviewItem({
         <ProfileImageWrapper>
           <Image
             onClick={() => {
-              router.push(`/profile/${memberInfo.id}`)
+              router.push(`/profile/${memberInfo.memberId}`)
             }}
             src={memberInfo.profileImage}
             alt={'프로필'}

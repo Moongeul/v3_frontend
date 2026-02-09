@@ -52,6 +52,8 @@ export default function ReviewList({ tab }: ReviewListProps) {
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
 
+  console.log('review데이터', data)
+
   return (
     <>
       {/* 데이터 렌더링 */}

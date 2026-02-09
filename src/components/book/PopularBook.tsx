@@ -10,21 +10,27 @@ export default function PopularBook({
   postId,
   bookImage,
   profileImage,
+  bookRating,
   rating,
   content,
   readingTasteType,
-  authorName,
+  bookTitle,
+  isbn,
+  pubdate,
+  publisher,
+  author,
 }: WeeklyRecommendBookType) {
   return (
     <StylePopularBookLayout>
       <PencilSketchEffect />
       <BookInfoSummary
-        publisher={'korfit'}
-        pubdate={'2025'}
-        isbn={'1'}
-        author={authorName}
-        title={'책 제목이 길어질 경우에'}
+        publisher={publisher}
+        pubdate={pubdate}
+        isbn={isbn}
+        author={author}
+        title={bookTitle}
         bookImage={bookImage}
+        rating={bookRating}
       />
       <PopularBookDescription tag={readingTasteType} rating={rating} description={content} />
     </StylePopularBookLayout>

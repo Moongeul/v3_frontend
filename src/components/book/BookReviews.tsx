@@ -2,21 +2,37 @@
 
 import { ReviewSummary, ReviewItem } from '@/components/book/index'
 import { Spacing } from '@/components/common'
+import { BookReviewType } from '@/types/book'
 
-interface BookReviewsProps {}
+interface BookReviewsProps {
+  reviews: BookReviewType[]
+  total: number
+}
 
-export default function BookReviews() {
+export default function BookReviews({ reviews, total }: BookReviewsProps) {
   return (
     <>
       <Spacing height={4} />
-      <ReviewSummary />
+      <ReviewSummary total={total} />
 
-      {/*<ReviewItem />*/}
-      {/*<ReviewItem />*/}
-      {/*<ReviewItem />*/}
-      {/*<ReviewItem />*/}
-      {/*<ReviewItem />*/}
-      {/*<ReviewItem />*/}
+      {reviews.map((review) => (
+        <ReviewItem
+          key={review.postId}
+          readDate={review.createdAt}
+          postId={review.postId}
+          rating={review.rating}
+          likesInfo={review.likesInfo}
+          content={review.content}
+          created={review.createdAt}
+          memberInfo={{
+            id: 1,
+            readingTasteType: review.readingTasteType,
+            profileImage: review.profileImage,
+            nickname: review.nickname,
+          }}
+          quotes={review.quotes}
+        />
+      ))}
     </>
   )
 }

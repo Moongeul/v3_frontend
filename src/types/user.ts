@@ -28,7 +28,7 @@ export type TagKorType =
   | '랜덤 피커'
 
 export interface ProfileInfoType {
-  id: number
+  memberId: number
   nickname: string
   profileImage: string
   readingTasteType: TagEnumType

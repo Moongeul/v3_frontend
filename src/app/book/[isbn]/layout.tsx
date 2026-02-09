@@ -10,10 +10,5 @@ export default async function BookDetailLayout({
   params: Promise<{ isbn: string }>
 }>) {
   const { isbn } = await params
-  return (
-    <div>
-      <Header headerType={'dynamic'} rightIcon={<WriteButton isbn={isbn} />}></Header>
-      <PageLayout>{children}</PageLayout>
-    </div>
-  )
+  return <div>{children}</div>
 }

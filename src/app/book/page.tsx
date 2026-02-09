@@ -5,7 +5,6 @@ import { fetchWeeklyRecommendBook } from '@/lib/server/post'
 export default async function BookPage() {
   const weeklyRecommendBookResult = await fetchWeeklyRecommendBook()
   const weeklyRecommendBook = weeklyRecommendBookResult.data
-  console.log('weeklyRecommendBook', weeklyRecommendBook)
 
   return (
     <main>

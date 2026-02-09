@@ -1,3 +1,7 @@
+import { LikesInfoType } from '@/types/record'
+import { QuoteType } from '@/types/write'
+import { TagEnumType } from '@/types/user'
+
 export interface BookType {
   isbn: string
   bookImage: string
@@ -8,4 +12,15 @@ export interface BookType {
   ratingAverage: number
   pubdate: string
   ratingCount: number
+}
+export interface BookReviewType {
+  postId: number
+  nickname: string
+  readingTasteType: TagEnumType
+  profileImage: string
+  createdAt: string
+  rating: number
+  content: string
+  quotes: QuoteType[]
+  likesInfo: LikesInfoType
 }

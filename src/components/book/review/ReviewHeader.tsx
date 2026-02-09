@@ -7,7 +7,7 @@ import {
   StyleReviewHeaderMetaTime,
   StyleReviewHeaderMetaUserInfo,
 } from '@/styles/book/Review.styles'
-import { OptionIcon, ProfileIcon } from '@/assets/svgComponents'
+import { OptionIcon } from '@/assets/svgComponents'
 import { Badge } from '@/components/common'
 import { convertEnumToKorTag } from '@/utils/user'
 import Image from 'next/image'
@@ -27,7 +27,7 @@ export default function ReviewHeader({ isProfile = false, memberInfo, created }:
     <ReviewHeaderContainer
       onClick={(e) => {
         e.stopPropagation()
-        router.push(`/profile/${memberInfo.id}`)
+        router.push(`/profile/${memberInfo.memberId}`)
       }}
     >
       <StyleReviewHeaderMetaContainer>

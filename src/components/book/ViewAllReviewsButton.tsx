@@ -4,12 +4,16 @@ import { Button } from '@/components/common'
 import { baseColor } from '@/styles/theme'
 import { useRouter } from 'next/navigation'
 
-export default function ViewAllReviewsButton() {
+interface ViewAllReviewsButtonProps {
+  isbn: string
+}
+
+export default function ViewAllReviewsButton({ isbn }: ViewAllReviewsButtonProps) {
   const router = useRouter()
   return (
     <Button
       onClick={() => {
-        router.push('/book/review')
+        router.push(`/book/${isbn}/review`)
       }}
       variant={'ghost'}
       size={'sm'}
