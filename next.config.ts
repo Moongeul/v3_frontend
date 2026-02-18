@@ -8,6 +8,12 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'api-bucket.rhkr8521.com',
+        port: '',
+        pathname: '/moongeul/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'shopping-phinf.pstatic.net',
         pathname: '/**',
       },
