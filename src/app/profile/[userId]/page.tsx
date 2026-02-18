@@ -1,11 +1,9 @@
-import { Header, Label, PageLayout, Spacing, Spinner } from '@/components/common'
+import { Header, PageLayout, Spacing, Spinner } from '@/components/common'
 import { fetchMyCategoryList, fetchUserInfo } from '@/lib/server/mypage'
 import UserProfile from '@/components/profile/UserProfile'
 import { Record } from '@/components/mypage'
 import Story from '../../../components/mypage/home/Story'
 import Question from '../../../components/mypage/home/Question'
-import { LockIcon } from '@/assets/svgComponents'
-import { typography } from '@/styles/theme'
 import PrivateNotice from '@/components/mypage/setting/PrivateNotice'
 
 export default async function UserProfilePage({ params }: { params: Promise<{ userId: string }> }) {

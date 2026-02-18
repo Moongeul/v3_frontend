@@ -18,3 +18,4 @@ export interface MyCategoryType {
   categoryTitle: string
   postCount: number
 }
+export type CategoryRecordSortByType = 'LATEST' | 'OLDEST' | 'RATING_HIGH' | 'RATING_LOW'

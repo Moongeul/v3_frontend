@@ -1,4 +1,7 @@
-import { ApiCallResult } from '@/types/common'
+import { ApiCallResult, APIResponseType, Paging } from '@/types/common'
+import { RecordType } from '@/types/record'
+import { number } from 'framer'
+import { CategoryRecordSortByType } from '@/types/mypage'
 
 /**
  * 팔로우 API
@@ -61,4 +64,36 @@ export const postUnFollow = async (id: number): Promise<ApiCallResult<ApiCallRes
       error: error instanceof Error ? error.message : 'Unknown error',
     }
   }
+}
+/**
+ * 기록 전체 보기
+ */
+export const clientFetchAllCategoryRecords = async (params: {
+  categoryId: string
+  userId?: number
+  sortBy: CategoryRecordSortByType
+  page: number
+  size: number
+}): Promise<APIResponseType<Paging<RecordType[]>>> => {
+  const { page = 1, size = 20, sortBy, userId, categoryId } = params
+
+  // userId가 존재할 때만 '&userId=값' 문자열을 생성하고, 없으면 빈 문자열을 반환합니다.
+  const userIdQuery = userId ? `&userId=${userId}` : ''
+
+  // 요청 URL 조립
+  const url = `/api/member/post-stats/${categoryId}?sortBy=${sortBy}&page=${page}&size=${size}${userIdQuery}`
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  if (!response.ok) {
+    // 에러 핸들링을 추가하면 더 안전합니다.
+    throw new Error('Failed to fetch posts')
+  }
+
+  return await response.json()
 }

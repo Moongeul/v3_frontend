@@ -1,6 +1,6 @@
-import { Header } from '@/components/common'
+import { Header, PageLayout, Spacing } from '@/components/common'
 
-export default async function MypageRecordLayout({
+export default async function MyPageRecordLayout({
   children,
   params,
 }: Readonly<{
@@ -12,7 +12,8 @@ export default async function MypageRecordLayout({
   return (
     <div>
       <Header headerType={'dynamic'}>{id}</Header>
-      {children}
+      <Spacing height={60} />
+      <PageLayout>{children}</PageLayout>
     </div>
   )
 }

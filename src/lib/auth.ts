@@ -19,6 +19,7 @@ interface AuthCallResult {
  */
 export const postAuth = async (code: string | null, platform: string | null): Promise<AuthCallResult> => {
   try {
+    const type = process.env.NEXT_PUBLIC_URL === 'http://localhost:3000' ? 'local' : 'deploy'
     if (!code) {
       throw new Error('Authorization code not provided')
     }
@@ -32,7 +33,7 @@ export const postAuth = async (code: string | null, platform: string | null): Pr
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ code: code }),
+        body: JSON.stringify({ code: code, type: type }),
         cache: 'no-store',
       }
     )
