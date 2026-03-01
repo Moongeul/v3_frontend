@@ -44,7 +44,7 @@ export default async function RecordDetailPage({ params }: { params: Promise<{ r
       })}
 
       <Spacing height={40} />
-      <InteractionButton likesInfo={postData.likesInfo} />
+      <InteractionButton postId={postData.postId} likesCnt={postData.likesCnt} myLikesStatus={postData.myLikesStatus} />
     </main>
   )
 }

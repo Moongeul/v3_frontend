@@ -12,7 +12,8 @@ export interface RecordType {
   readDate: string
   quotesCnt: number
   quotes: QuoteType[]
-  likesInfo: LikesInfoType
+  likesCnt: LikesCntType
+  myLikesStatus: MyLikesStatusType
   memberInfo: ProfileInfoType
 }
 
@@ -34,10 +35,19 @@ export interface BookShelfType {
   backgroundColor: string
 }
 
-export interface LikesInfoType {
+export interface LikesCntType {
   relatableCount: number
   sameTasteCount: number
   impressiveExpressionCount: number
   wantToReadCount: number
   helpfulCount: number
+}
+export type LikeType = 'RELATABLE' | 'SAME_TASTE' | 'IMPRESSIVE_EXPRESSION' | 'WANT_TO_READ' | 'HELPFUL'
+
+export interface MyLikesStatusType {
+  relatableCount: boolean
+  sameTasteCount: boolean
+  impressiveExpressionCount: boolean
+  wantToReadCount: boolean
+  helpfulCount: boolean
 }

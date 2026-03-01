@@ -8,7 +8,8 @@ import { BookType } from '@/types/book'
 import { QuoteType } from '@/types/write'
 import Image from 'next/image'
 import { ProfileInfoType } from '@/types/user'
-import { LikesInfoType } from '@/types/record'
+import { LikesCntType, MyLikesStatusType } from '@/types/record'
+import InteractionButtons from '@/components/book/review/InteractionButtons'
 
 interface ReviewItemProps {
   quotes: QuoteType[]
@@ -19,7 +20,8 @@ interface ReviewItemProps {
   created: string
   readDate: string
   postId: number
-  likesInfo: LikesInfoType
+  likesInfo: LikesCntType
+  myLikesStatus: MyLikesStatusType
 }
 
 export default function ReviewItem({
@@ -32,10 +34,15 @@ export default function ReviewItem({
   created,
   readDate,
   likesInfo,
+  myLikesStatus,
 }: ReviewItemProps) {
   const router = useRouter()
   return (
-    <div onClick={() => router.push(`/${postId}`)}>
+    <div
+      onClick={(e) => {
+        router.push(`/${postId}`)
+      }}
+    >
       <Spacing height={20} />
       <StyleReviewItemContainer>
         <ProfileImageWrapper>
@@ -73,7 +80,7 @@ export default function ReviewItem({
           <ReviewContent createdAt={readDate} rating={rating} quotes={quotes} content={content} />
 
           <Spacing height={12} />
-          <InteractionButton likesInfo={likesInfo} />
+          <InteractionButtons postId={postId} likesCnt={likesInfo} myLikesStatus={myLikesStatus} />
         </StyleReviewContentContainer>
       </StyleReviewItemContainer>
       <Spacing height={20} />

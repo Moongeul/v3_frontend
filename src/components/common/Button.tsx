@@ -1,9 +1,7 @@
 'use client'
 
-import { ReactNode } from 'react'
-import { MouseEvent } from 'react'
+import React, { ReactNode } from 'react' // React 추가
 import { PencilSketchEffect } from '@/styles/common/Common.styles'
-
 import * as Style from '@/styles/common/Button.styles'
 
 interface ButtonProps {
@@ -13,7 +11,8 @@ interface ButtonProps {
   width?: number
   isActive?: boolean
   children?: ReactNode
-  onClick?: (e?: MouseEvent<HTMLButtonElement, MouseEvent> | undefined) => void
+  // 타입을 React.MouseEvent로 변경하고 선택적(?)으로 수정
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
   leftIcon?: ReactNode
   rightIcon?: ReactNode
   disabled?: boolean
@@ -35,11 +34,15 @@ const Button = ({
   buttonType = 'button',
   width,
 }: ButtonProps) => {
+  // 핸들러 내부에서도 타입을 맞춰줍니다.
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (buttonType === 'button') {
-      e.preventDefault()
+      // e.preventDefault()는 여기서 멈추면 안 될 때가 있으므로 필요에 따라 사용
     }
-    if (!disabled && onClick) onClick()
+
+    if (!disabled && onClick) {
+      onClick(e)
+    }
   }
 
   return (
@@ -48,7 +51,7 @@ const Button = ({
       <Style.Button
         type={buttonType}
         disabled={disabled}
-        onClick={handleClick}
+        onClick={handleClick} // 이제 타입 에러가 발생하지 않습니다.
         $variant={variant}
         $size={size}
         $category={category}

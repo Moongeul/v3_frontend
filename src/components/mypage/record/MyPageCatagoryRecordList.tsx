@@ -76,7 +76,8 @@ export default function MyPageCategoryRecordList({ categoryId }: MyPageCategoryR
               rating={post.rating}
               content={post.content}
               readDate={post.readDate}
-              likesInfo={post.likesInfo}
+              likesInfo={post.likesCnt}
+              myLikesStatus={post.myLikesStatus}
             />
           ))
         )}

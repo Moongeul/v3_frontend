@@ -12,6 +12,7 @@ import Button from '@/components/common/Button'
 import Spacing from '@/components/common/Spacing'
 import TextInput from '@/components/common/TextInput'
 import CountIndicator from '@/components/common/CountIndicator'
+import { clientWritingGuide } from '@/lib/client/post'
 
 export default function ReviewField() {
   const [writingGuide, setWritingGuide] = useState<string | undefined>()
@@ -36,8 +37,11 @@ export default function ReviewField() {
           <Button
             width={112}
             size={'sm'}
-            onClick={() => {
-              setWritingGuide('책에서 가장 좋았던 캐릭터와 그 이유는?')
+            onClick={async () => {
+              const result = await clientWritingGuide()
+              if (result.data) {
+                setWritingGuide(result.data)
+              }
             }}
             variant={'ghost'}
             textColor={baseColor.primary600}

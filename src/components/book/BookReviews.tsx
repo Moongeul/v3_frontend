@@ -21,7 +21,7 @@ export default function BookReviews({ reviews, total }: BookReviewsProps) {
           readDate={review.createdAt}
           postId={review.postId}
           rating={review.rating}
-          likesInfo={review.likesInfo}
+          likesInfo={review.likesCnt}
           content={review.content}
           created={review.createdAt}
           memberInfo={{
@@ -31,6 +31,13 @@ export default function BookReviews({ reviews, total }: BookReviewsProps) {
             nickname: review.nickname,
           }}
           quotes={review.quotes}
+          myLikesStatus={{
+            helpfulCount: true,
+            wantToReadCount: true,
+            relatableCount: false,
+            sameTasteCount: false,
+            impressiveExpressionCount: true,
+          }}
         />
       ))}
     </>

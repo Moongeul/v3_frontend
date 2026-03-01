@@ -36,11 +36,6 @@ export default function ReviewList({ tab }: ReviewListProps) {
 
       return undefined
     },
-
-    staleTime: 1000 * 60 * 30,
-    gcTime: 1000 * 60 * 60,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
   })
 
   // 무한 스크롤 트리거
@@ -70,7 +65,8 @@ export default function ReviewList({ tab }: ReviewListProps) {
               rating={post.rating}
               content={post.content}
               readDate={post.readDate}
-              likesInfo={post.likesInfo}
+              likesInfo={post.likesCnt}
+              myLikesStatus={post.myLikesStatus}
             />
           ))
         )}

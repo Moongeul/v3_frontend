@@ -1,4 +1,4 @@
-import { LikesInfoType } from '@/types/record'
+import { LikesCntType } from '@/types/record'
 import { QuoteType } from '@/types/write'
 import { TagEnumType } from '@/types/user'
 
@@ -22,5 +22,5 @@ export interface BookReviewType {
   rating: number
   content: string
   quotes: QuoteType[]
-  likesInfo: LikesInfoType
+  likesCnt: LikesCntType
 }
