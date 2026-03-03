@@ -1,3 +1,9 @@
+import AlarmList from '@/components/alarm/AlarmList'
+
 export default function AlarmPage() {
-  return <></>
+  return (
+    <main>
+      <AlarmList />
+    </main>
+  )
 }
