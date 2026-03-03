@@ -4,3 +4,8 @@ export interface NoticeType {
   content: string
   uploadDate: string
 }
+
+export interface WriteNoticeType {
+  title: string
+  content: string
+}

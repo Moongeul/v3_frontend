@@ -1,3 +1,9 @@
+import NoticeForm from '@/components/notice/NoticeForm'
+
 export default function WriteNoticePage() {
-  return <></>
+  return (
+    <main>
+      <NoticeForm />
+    </main>
+  )
 }
