@@ -1,7 +1,8 @@
-import { ApiCallResult } from '@/types/common'
+import { ApiCallResult, Paging } from '@/types/common'
 import { apiCallServer } from '@/lib/api.server'
 import { FollowUserInfoType, MyCategoryResponseType, MyCategoryType } from '@/types/mypage'
 import { UserInfoType } from '@/types/user'
+import { QuestionType } from '@/types/question'
 
 /**
  * 팔로워
@@ -90,6 +91,35 @@ export const fetchMyCategoryList = async (
     return { success: true, data }
   } catch (error) {
     console.error('사용자 정보 불러오기 실패:', error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    }
+  }
+}
+/**
+ * 질문 리스트 조회 API
+ */
+export const fetchMyQuestions = async (
+  pageParam: number,
+  size: number,
+  userId?: string
+): Promise<ApiCallResult<Paging<QuestionType[]>>> => {
+  try {
+    const { data, error } = await apiCallServer(
+      `/v2/member/question-list?page=${pageParam}&size=${size}${userId ? `&userId=${userId}` : ''}`,
+      {
+        method: 'GET',
+      }
+    )
+
+    if (error) {
+      return { success: false, error }
+    }
+
+    return { success: true, data }
+  } catch (error) {
+    console.error('질문 리스트 정보 불러오기 실패:', error)
     return {
       success: false,
       error: error instanceof Error ? error.message : 'Unknown error',

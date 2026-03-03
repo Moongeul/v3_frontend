@@ -6,7 +6,7 @@ import Story from '@/components/mypage/home/Story'
 import Question from '../../components/mypage/home/Question'
 import MyProfile from '@/components/mypage/home/MyProfile'
 import MypageItem from '@/components/mypage/home/MypageItem'
-import { fetchMyCategoryList, fetchUserInfo } from '@/lib/server/mypage'
+import { fetchMyCategoryList, fetchMyQuestions, fetchUserInfo } from '@/lib/server/mypage'
 import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
@@ -16,7 +16,9 @@ export default async function MypagePage() {
   const userInfo = userInfoResult.data
   const categoryResult = await fetchMyCategoryList(userInfo?.id)
   const category = categoryResult.data
-  console.log(categoryResult)
+  const myQuestionResult = await fetchMyQuestions(1, 3)
+  const myQuestions = myQuestionResult.data?.data
+  console.log(myQuestions)
 
   return (
     <main>
@@ -61,7 +63,7 @@ export default async function MypagePage() {
           <Story />
 
           <Spacing height={24} />
-          <Question />
+          <Question myQuestions={myQuestions} />
 
           <Spacing height={24} />
           <MypageItem content={'독서 취향 테스트'} path={'/test'} />

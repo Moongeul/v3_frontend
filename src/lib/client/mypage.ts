@@ -1,8 +1,36 @@
 import { ApiCallResult, APIResponseType, Paging } from '@/types/common'
 import { RecordType } from '@/types/record'
-import { number } from 'framer'
 import { CategoryRecordSortByType } from '@/types/mypage'
+import { NoticeType } from '@/types/notice'
+import { QuestionType } from '@/types/question'
 
+export const clientFetchAllMyQuestions = async (params: {
+  page: number
+  size: number
+  userId?: string // 선택사항
+}): Promise<APIResponseType<Paging<QuestionType[]>>> => {
+  const { page = 1, size = 20, userId } = params
+
+  const searchParams = new URLSearchParams()
+  searchParams.append('page', page.toString())
+  searchParams.append('size', size.toString())
+
+  // ✅ userId가 존재할 때만 추가 (null이나 undefined 체크)
+  if (userId) {
+    searchParams.append('userId', userId)
+  }
+
+  const response = await fetch(`/api/member/question-list?${searchParams.toString()}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    // BFF를 거친다면 credentials 옵션이 필요할 수도 있습니다.
+    // credentials: 'include',
+  })
+
+  return await response.json()
+}
 /**
  * 팔로우 API
  */

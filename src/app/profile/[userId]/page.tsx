@@ -1,5 +1,5 @@
 import { Header, PageLayout, Spacing, Spinner } from '@/components/common'
-import { fetchMyCategoryList, fetchUserInfo } from '@/lib/server/mypage'
+import { fetchMyCategoryList, fetchMyQuestions, fetchUserInfo } from '@/lib/server/mypage'
 import UserProfile from '@/components/profile/UserProfile'
 import { Record } from '@/components/mypage'
 import Story from '../../../components/mypage/home/Story'
@@ -13,6 +13,9 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
 
   const categoryResult = await fetchMyCategoryList(userInfo?.id)
   const category = categoryResult.data
+
+  const myQuestionResult = await fetchMyQuestions(1, 3, userId)
+  const myQuestions = myQuestionResult.data?.data
   console.log(categoryResult)
 
   if (!userInfo) {
@@ -36,7 +39,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
               <Story />
 
               <Spacing height={24} />
-              <Question />
+              <Question myQuestions={myQuestions} />
             </>
           ) : (
             <PrivateNotice />
