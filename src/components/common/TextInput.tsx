@@ -20,6 +20,7 @@ interface TextFieldProps {
   topElement?: ReactNode
   width?: number
   height?: number
+  maxLength?: number
 }
 export default function TextInput({
   textType = 'textField',
@@ -36,6 +37,7 @@ export default function TextInput({
   topElement,
   width,
   height,
+  maxLength,
 }: TextFieldProps): JSX.Element {
   const [isFocused, setIsFocused] = useState(false)
 
@@ -63,6 +65,7 @@ export default function TextInput({
                 $status={currentStatus}
                 onChange={onChange}
                 value={value}
+                maxLength={maxLength}
               />
               {rightElement && rightElement}
             </Style.TextFieldContainer>

@@ -42,9 +42,15 @@ export const apiFetchServer = async (url: string, options: FetchOptions = {}): P
     headers.set('Authorization', `Bearer ${accessToken}`)
   }
 
-  // Content-Type 기본값 설정
-  if (!headers.has('Content-Type') && fetchOptions.body) {
+  const isFormData = fetchOptions.body instanceof FormData
+
+  if (!headers.has('Content-Type') && fetchOptions.body && !isFormData) {
     headers.set('Content-Type', 'application/json')
+  }
+
+  // 만약 headers에 명시적으로 빈 값이 들어왔을 경우를 대비해 삭제 (선택 사항)
+  if (headers.get('Content-Type') === '') {
+    headers.delete('Content-Type')
   }
 
   let response = await fetch(requestUrl, {

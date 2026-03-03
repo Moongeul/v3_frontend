@@ -45,7 +45,7 @@ export const BottomBorder = styled.div`
 // 폰트 지정
 export const StyleContent = styled.p<{ $typography: TypographyType; $textColor?: string }>`
   ${({ $typography }) => $typography as CSSObject}
-  white-space: nowrap; /* 텍스트가 줄바꿈되어 찌그러지는 것 방지 */
+  white-space: pre-wrap; /* 텍스트가 줄바꿈되어 찌그러지는 것 방지 */
   flex-shrink: 0; /* 공간이 부족해도 크기가 줄어들지 않게 고정 */
   color: ${({ theme, $textColor }) => ($textColor ? $textColor : theme.colors.textFieldFilledText)};
 `

@@ -12,7 +12,8 @@ import {
 } from '@/styles/onboarding/TermsOfService.styles'
 import { CheckIcon, HeaderRightArrowIcon, UncheckIcon } from '@/assets/svgComponents'
 import { useTheme } from '@emotion/react'
-import { AgreeTermsType, useOnboardingStore } from '@/store/onboardingStore' // 경로 확인 필요
+import { useOnboardingStore } from '@/store/onboardingStore'
+import { AgreeTermsType } from '@/types/onboarding' // 경로 확인 필요
 
 // id를 AgreeTermsType의 key와 일치시킵니다.
 const TERMS_DATA: { id: keyof AgreeTermsType; label: string; required: boolean }[] = [

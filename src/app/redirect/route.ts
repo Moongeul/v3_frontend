@@ -70,9 +70,10 @@ export async function GET(request: NextRequest) {
 
     // 4. 사용자 상태에 따른 리다이렉트
     if (role === 'ROLE_GUEST') {
+      return redirect('/onboarding?tab=terms')
+    } else if (role === 'ROLE_USER') {
       return redirect('/home?tab=PUBLIC')
     }
-
     // 5. 예상치 못한 상태
     console.warn('Unexpected user status:', status)
     // return redirect('/login?error=unexpected_status')
