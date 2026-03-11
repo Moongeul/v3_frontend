@@ -15,6 +15,16 @@ export const StyleContainer = styled.div`
   flex-direction: column;
   left: 20px; /* 좌측 여백 추가 */
   right: 20px; /* 우측 여백 추가 */
+
+  /* 테마 배경색을 직접 적용합니다. */
+  background-color: ${({ theme }) => theme.colors.background};
+  /* 텍스트 색상도 테마에 맞게 설정합니다. */
+  color: ${({ theme }) => theme.colors.headerText};
+
+  /* 배경색 변경 시 부드럽게 전환 */
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 `
 
 export const StyleAllAgreementBox = styled.div`

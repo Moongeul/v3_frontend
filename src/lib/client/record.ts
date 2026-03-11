@@ -1,4 +1,4 @@
-import { APIResponseType, Paging, TestPaging } from '@/types/common'
+import { APIResponseType, Paging } from '@/types/common'
 import { BookShelfType, RecordType } from '@/types/record'
 import { BookType } from '@/types/book'
 

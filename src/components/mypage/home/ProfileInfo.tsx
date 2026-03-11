@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation'
 import { TagEnumType } from '@/types/user'
 import { convertEnumToKorTag } from '@/utils/user'
 import Image from 'next/image'
+import { useTheme } from '@emotion/react'
 
 interface ProfileInfoProps {
   profileImage: string | undefined
@@ -31,6 +32,7 @@ export default function ProfileInfo({
   followingCount,
   followerCount,
 }: ProfileInfoProps) {
+  const theme = useTheme()
   const router = useRouter()
   const onNavigate = (path: string) => {
     router.push(path)
@@ -48,7 +50,9 @@ export default function ProfileInfo({
 
         <StyleProfileInfo>
           <Badge badgeLabel={convertEnumToKorTag(readingTasteType)} />
-          <StyleContent $typography={typography.badgeMd}>{nickname}</StyleContent>
+          <StyleContent $typography={typography.badgeMd} $textColor={theme.colors.headerText}>
+            {nickname}
+          </StyleContent>
         </StyleProfileInfo>
       </StyleProfileInfoContainer>
 

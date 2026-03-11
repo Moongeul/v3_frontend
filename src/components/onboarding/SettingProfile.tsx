@@ -36,9 +36,7 @@ export default function SettingProfile() {
   return (
     <main>
       {modals.isTestModalOpen ? <TestModal /> : null}
-      <Header headerType={'title'}>프로필 설정</Header>
-      <Spacing height={80} />
-      <PageLayout>
+      <div>
         <ProfileImage />
         <Spacing height={40} />
         <NicknameField />
@@ -46,7 +44,7 @@ export default function SettingProfile() {
         <BottomButton onClick={handleSubmit} isActive={!!successMessage}>
           설정 완료
         </BottomButton>
-      </PageLayout>
+      </div>
     </main>
   )
 }

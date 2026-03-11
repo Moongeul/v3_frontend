@@ -18,7 +18,7 @@ export default async function MypagePage() {
   const category = categoryResult.data
   const myQuestionResult = await fetchMyQuestions(1, 3)
   const myQuestions = myQuestionResult.data?.data
-  console.log(myQuestions)
+  console.log(userInfo)
 
   return (
     <main>

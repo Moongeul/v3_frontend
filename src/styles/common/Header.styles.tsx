@@ -22,6 +22,7 @@ export const Header = styled.header<{ $isBottomBorder?: boolean }>`
 `
 
 export const Title = styled.h1<{ $headerType: HeaderType }>`
+  color: ${({ theme }) => theme.colors.headerText};
   ${({ theme, $headerType }) =>
     $headerType === 'default'
       ? (theme.typography.titleLg as CSSObject)

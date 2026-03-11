@@ -1,5 +1,5 @@
 import { ApiCallResult, APIResponseType, Paging } from '@/types/common'
-import { RecordType } from '@/types/record'
+import { BookShelfType, RecordType } from '@/types/record'
 import { CategoryRecordSortByType } from '@/types/mypage'
 import { QuestionType } from '@/types/question'
 
@@ -121,6 +121,60 @@ export const clientFetchAllCategoryRecords = async (params: {
     // 에러 핸들링을 추가하면 더 안전합니다.
     throw new Error('Failed to fetch posts')
   }
+
+  return await response.json()
+}
+
+/**
+ * 내가 공감한 기록
+ */
+export const clientFetchLikedPosts = async (params: {
+  page: number
+  size: number
+  userId?: string
+  sortBy: CategoryRecordSortByType
+}): Promise<APIResponseType<Paging<RecordType[]>>> => {
+  const { page = 1, size = 20, sortBy = 'LATEST', userId } = params
+
+  const searchParams = new URLSearchParams()
+  searchParams.append('sortBy', sortBy)
+  searchParams.append('page', page.toString())
+  searchParams.append('size', size.toString())
+
+  // userId가 존재할 때만 쿼리 파라미터에 추가
+  if (userId) {
+    searchParams.append('userId', userId)
+  }
+
+  const response = await fetch(`/api/member/liked-posts?${searchParams.toString()}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  return await response.json()
+}
+
+/**
+ * 기록 전체 보기
+ */
+export const clientFetchAllDoneReadBooks = async (params: {
+  page: number
+  size: number
+}): Promise<APIResponseType<Paging<BookShelfType[]>>> => {
+  const { page = 1, size = 20 } = params
+
+  const searchParams = new URLSearchParams()
+  searchParams.append('page', page.toString())
+  searchParams.append('size', size.toString())
+
+  const response = await fetch(`/api/bookshelf/done-read?${searchParams.toString()}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
 
   return await response.json()
 }

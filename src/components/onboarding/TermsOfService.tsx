@@ -15,6 +15,7 @@ export default function TermsOfService() {
   const router = useRouter()
 
   const handleSubmit = async () => {
+    console.log('agreeTerms', agreeTerms)
     const result = await postSettingAgreeTerms(agreeTerms)
     if (result.success) {
       // success('성공', '이용 약관 동의에 성공하였어요.')
@@ -26,15 +27,11 @@ export default function TermsOfService() {
 
   return (
     <main>
-      <Header headerType={'dynamic'}>이용 약관 동의</Header>
-      <Spacing height={80} />
-      <PageLayout>
-        <Content />
-        <TermsAgreement />
-        <BottomButton isActive={isRequiredAgreed} onClick={handleSubmit}>
-          동의하고 시작하기
-        </BottomButton>
-      </PageLayout>
+      <Content />
+      <TermsAgreement />
+      <BottomButton isActive={isRequiredAgreed} onClick={handleSubmit}>
+        동의하고 시작하기
+      </BottomButton>
     </main>
   )
 }

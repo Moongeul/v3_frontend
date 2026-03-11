@@ -19,7 +19,7 @@ export default function SortByDropDown({ setSortBy }: SortByDropDownProps) {
 
   const { isDropDownOpen, dropDownOpenHandler, selectedDropDownContent, selectedDropDownHandler } = useDropDown({
     initialValue: '최신순',
-    defaultValue: '전체 공개',
+    defaultValue: '최신순',
   })
 
   return (
