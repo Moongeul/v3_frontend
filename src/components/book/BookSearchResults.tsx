@@ -5,11 +5,12 @@ import { BookType } from '@/types/book'
 import { JSX } from 'react'
 import { APIResponseType, Paging } from '@/types/common'
 import { SelectBookButton } from '@/components/search'
+import { SearchType } from '@/types/search'
 
 interface BookSearchResultsProps {
   type?: 'default' | 'select' | 'wish' //wish
   onClick?: (isbn: string) => void
-  bookResponse: APIResponseType<Paging<BookType[]>>[] | undefined
+  bookResponse: APIResponseType<Paging<SearchType>>[] | undefined
   bottomRef: (node?: Element | null) => void
   isFetchingNextPage: boolean
 }
@@ -24,7 +25,7 @@ export default function BookSearchResults({
   return (
     <>
       {bookResponse?.map((page, i) =>
-        page.data?.data?.map((book) => (
+        page.data?.data?.bookData.map((book) => (
           <div key={book.isbn}>
             <BookInfoSummary
               title={book.title}

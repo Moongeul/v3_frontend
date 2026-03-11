@@ -1,5 +1,6 @@
 import { APIResponseType, Paging } from '@/types/common'
-import { BookType } from '@/types/book'
+import { BookSearchType, BookType } from '@/types/book'
+import { SearchType } from '@/types/search'
 
 /**
  * 책 검색 결과 전체 보기
@@ -8,18 +9,20 @@ export const clientFetchBookResults = async (params: {
   page: number
   size: number
   query?: string
-}): Promise<APIResponseType<Paging<BookType[]>>> => {
-  const { page = 0, size = 20, query } = params
+  type: BookSearchType
+}): Promise<APIResponseType<Paging<SearchType>>> => {
+  const { page = 0, size = 20, query, type = 'book' } = params
 
   const searchParams = new URLSearchParams()
   searchParams.append('page', page.toString())
   searchParams.append('size', size.toString())
+  searchParams.append('type', type.toString())
 
   if (query) {
     searchParams.append('query', query)
   }
 
-  const response = await fetch(`/api/book/search?${searchParams.toString()}`, {
+  const response = await fetch(`/api/book/user/search?${searchParams.toString()}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

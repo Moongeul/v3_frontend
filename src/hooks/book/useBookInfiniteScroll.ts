@@ -14,6 +14,7 @@ export const useBookInfiniteScroll = (searchValue: string) => {
       clientFetchBookResults({
         page: pageParam as number,
         size: DEFAULT_SIZE,
+        type: 'book',
         ...filterParams,
       }),
     initialPageParam: 1,
@@ -27,7 +28,7 @@ export const useBookInfiniteScroll = (searchValue: string) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = queryResult
   const { ref, inView } = useInView()
 
-  const hasData = !!queryResult.data?.pages[0]?.data?.data?.length
+  const hasData = !!queryResult.data?.pages[0]?.data?.data?.bookData.length
 
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {

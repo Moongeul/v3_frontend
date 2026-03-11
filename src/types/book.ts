@@ -2,6 +2,8 @@ import { LikesCntType } from '@/types/record'
 import { QuoteType } from '@/types/write'
 import { TagEnumType } from '@/types/user'
 
+export type BookSearchType = 'book' | 'user' | 'all'
+
 export interface BookType {
   isbn: string
   bookImage: string

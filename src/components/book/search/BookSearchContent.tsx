@@ -13,7 +13,7 @@ export default function BookSearchContent() {
   return (
     <>
       {books?.pages?.map((page, i) =>
-        page.data?.data?.map((book) => (
+        page.data?.data?.bookData.map((book) => (
           <div key={book.isbn}>
             <BookInfoSummary
               title={book.title}

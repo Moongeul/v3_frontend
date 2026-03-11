@@ -5,6 +5,8 @@ import { useBookStore } from '@/store/bookStore'
 import { useQuestionStore } from '@/store/questionStore'
 import { useBookInfiniteScroll } from '@/hooks/book/useBookInfiniteScroll'
 import { BookSearchResults } from '@/components/book'
+import { BookInfoSummary, Spacing } from '@/components/common'
+import WishBookButton from '@/components/common/button/WishBookButton'
 
 interface SearchResultContentProps {
   type: 'select' | 'default'

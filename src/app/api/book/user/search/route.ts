@@ -9,14 +9,16 @@ export async function GET(request: NextRequest) {
 
     const page = searchParams.get('page') || '0'
     const size = searchParams.get('size') || '20'
+    const type = searchParams.get('type') || 'book'
     const query = searchParams.get('query')
 
     backendParams.append('page', page)
     backendParams.append('size', size)
+    backendParams.append('type', type)
 
     if (query) backendParams.append('query', query)
 
-    const endpoint = `/v2/book/search?${backendParams.toString()}`
+    const endpoint = `/v2/book/user/search?${backendParams.toString()}`
 
     console.log('Backend Request Endpoint:', endpoint) // 디버깅용 로그
 
