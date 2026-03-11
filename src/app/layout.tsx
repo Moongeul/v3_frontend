@@ -5,7 +5,9 @@ import { memoment, suit } from '@/styles/font'
 import EmotionRootRegistry from './registry'
 import { Providers } from '@/providers/Providers'
 import { ToastProvider } from '@/components/common/toast/ToastContext'
-import ToastContainer from '@/components/common/toast/ToastContainer' // Emotion 설정 파일 (필요시)
+import ToastContainer from '@/components/common/toast/ToastContainer'
+import { MyThemeProvider } from '@/context/ThemeContext'
+import { GlobalStyle } from '@/styles/GlobalStyle' // Emotion 설정 파일 (필요시)
 
 const geistSans = Geist({
   variable: '--fonts-geist-sans',
@@ -29,14 +31,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={`${suit.variable} ${memoment.variable}`}>
-      <Providers>
-        <EmotionRootRegistry>
-          <ToastProvider>
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
-            <ToastContainer />
-          </ToastProvider>
-        </EmotionRootRegistry>
-      </Providers>
+      {/* 1. <html> 바로 아래에는 <head>와 <body>만 올 수 있습니다.
+          2. 모든 Context Provider는 <body> 안쪽에서 children을 감싸야 합니다.
+      */}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Providers>
+          <EmotionRootRegistry>
+            <MyThemeProvider>
+              <GlobalStyle />
+              <ToastProvider>
+                {children}
+                <ToastContainer />
+              </ToastProvider>
+            </MyThemeProvider>
+          </EmotionRootRegistry>
+        </Providers>
+      </body>
     </html>
   )
 }

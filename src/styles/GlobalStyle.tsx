@@ -1,21 +1,32 @@
 // src/styles/GlobalStyle.tsx
 'use client'
 
-import { Global, css } from '@emotion/react'
+import { Global, css, useTheme } from '@emotion/react'
 
-const globalStyles = css`
-  :root {
-    /* next/font에서 정의한 변수를 가져옵니다 */
-    font-family: var(--font-suit), sans-serif;
-    font-family: var(--font-memoment), sans-serif;
-  }
+export const GlobalStyle = () => {
+  const theme = useTheme()
 
-  body {
-    font-family: var(--font-suit), sans-serif;
-    font-family: var(--font-memoment), sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-`
+  return (
+    <Global
+      styles={css`
+        /* html과 body 모두에 테마 배경색을 적용해야 여백 없이 바뀝니다 */
+        html,
+        body {
+          background-color: ${theme.colors.background} !important;
+          color: ${theme.colors.headerText};
+          transition:
+            background-color 0.3s ease,
+            color 0.3s ease;
+          margin: 0;
+          padding: 0;
+        }
 
-export const GlobalStyle = () => <Global styles={globalStyles} />
+        /* Geist 폰트 변수와 Suit 폰트 변수를 안전하게 선언 */
+        :root {
+          --background: ${theme.colors.background};
+          --foreground: ${theme.colors.headerText};
+        }
+      `}
+    />
+  )
+}
