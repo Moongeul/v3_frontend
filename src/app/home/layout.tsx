@@ -25,7 +25,7 @@ export default function BookLayout({
       <Spacing height={60} />
       <PageLayout>{children}</PageLayout>
 
-      <Spacing height={98} />
+      <Spacing height={80} />
       <NavBar />
     </div>
   )

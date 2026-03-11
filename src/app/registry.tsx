@@ -1,19 +1,10 @@
+// src/app/registry.tsx
 'use client'
 
-import React, { useState, useSyncExternalStore } from 'react'
+import React, { useState } from 'react'
 import { useServerInsertedHTML } from 'next/navigation'
 import createCache from '@emotion/cache'
-import { CacheProvider, ThemeProvider } from '@emotion/react'
-import { useTheme } from 'next-themes'
-import { lightTheme, darkTheme } from '@/styles/theme'
-// 클라이언트 사이드인지 확인하는 헬퍼 훅 (React 19 권장 방식)
-function useIsClient() {
-  return useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false
-  )
-}
+import { CacheProvider } from '@emotion/react'
 
 export default function EmotionRootRegistry({ children }: { children: React.ReactNode }) {
   const [{ cache, flush }] = useState(() => {
@@ -52,19 +43,5 @@ export default function EmotionRootRegistry({ children }: { children: React.Reac
     )
   })
 
-  // ThemeWrapper를 통해 테마 상태를 감지하도록 변경
-  return (
-    <CacheProvider value={cache}>
-      <ThemeWrapper>{children}</ThemeWrapper>
-    </CacheProvider>
-  )
-}
-
-function ThemeWrapper({ children }: { children: React.ReactNode }) {
-  const { resolvedTheme } = useTheme()
-  const isClient = useIsClient()
-
-  const currentTheme = isClient && resolvedTheme === 'dark' ? darkTheme : lightTheme
-
-  return <ThemeProvider theme={currentTheme}>{children}</ThemeProvider>
+  return <CacheProvider value={cache}>{children}</CacheProvider>
 }

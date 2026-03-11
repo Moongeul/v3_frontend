@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import OnboardingContent from '@/components/onboarding/OnboardingContent'
 import OnboardingButtons from '@/components/onboarding/OnboardingButtons'
 

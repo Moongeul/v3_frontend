@@ -15,42 +15,30 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function MyThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeMode] = useState<ThemeMode>('system') // 초기값은 고정
+  const [theme, setThemeMode] = useState<ThemeMode>('light')
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    // 마운트 직후 로컬스토리지 값을 읽어 동기화
-    const savedTheme = localStorage.getItem('theme') as ThemeMode | null
-    if (savedTheme) setThemeMode(savedTheme)
-
-    const rafId = requestAnimationFrame(() => {
-      setMounted(true)
-    })
-    return () => cancelAnimationFrame(rafId)
+    const saved = localStorage.getItem('theme') as ThemeMode | null
+    if (saved) setThemeMode(saved)
+    setMounted(true)
   }, [])
 
-  const handleThemeChange = (mode: ThemeMode) => {
-    setThemeMode(mode)
-    localStorage.setItem('theme', mode)
-  }
-
-  // 테마 데이터 계산
   const activeTheme = useMemo(() => {
-    if (theme === 'system' && typeof window !== 'undefined') {
-      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-      return isDark ? darkTheme : lightTheme
-    }
+    // SSR 시점이나 하이드레이션 전에는 시스템 설정을 읽을 수 없으므로
+    // 기본 테마를 제공하되, 클라이언트에서 즉시 업데이트되도록 함
     return theme === 'dark' ? darkTheme : lightTheme
   }, [theme])
 
-  // Context value 메모이제이션
-  const value = useMemo(() => ({ theme, setTheme: handleThemeChange }), [theme])
-
+  // 팁: mounted가 false일 때 아예 안 보여주는 것이 '깜빡임' 방지에 더 확실합니다.
   return (
-    <ThemeContext.Provider value={value}>
+    <ThemeContext.Provider value={{ theme, setTheme: setThemeMode }}>
       <EmotionProvider theme={activeTheme}>
-        {/* 중요: mounted 전에는 투명하게 children을 유지하여 트리가 깨지지 않게 함 */}
-        <div style={{ opacity: mounted ? 1 : 0, transition: 'opacity 0.2s' }}>{children}</div>
+        {/* visibility 대신 렌더링 자체를 제어하거나,
+            배경색이 적용된 컨테이너를 하나 더 두는 것이 좋습니다. */}
+        <div id="theme-wrapper" style={{ opacity: mounted ? 1 : 0 }}>
+          {children}
+        </div>
       </EmotionProvider>
     </ThemeContext.Provider>
   )
@@ -58,7 +46,6 @@ export function MyThemeProvider({ children }: { children: React.ReactNode }) {
 
 export const useMyTheme = () => {
   const context = useContext(ThemeContext)
-  // 여기서 에러가 난다면 import 경로가 잘못되었거나 Provider 위치 문제입니다.
   if (!context) throw new Error('useMyTheme must be used within MyThemeProvider')
   return context
 }

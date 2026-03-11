@@ -73,7 +73,7 @@ export default async function MypagePage() {
         </div>
       </PageLayout>
 
-      <Spacing height={98} />
+      <Spacing height={80} />
       <NavBar />
     </main>
   )

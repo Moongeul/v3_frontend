@@ -35,7 +35,7 @@ export default function SettingPage() {
       <SettingItem
         content={'이용 약관'}
         rightElement={
-          <Link href={'/policy'}>
+          <Link href={'/policy?type=home'}>
             <HeaderRightArrowIcon width={20} height={20} />
           </Link>
         }
