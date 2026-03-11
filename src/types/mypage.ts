@@ -19,3 +19,8 @@ export interface MyCategoryType {
   postCount: number
 }
 export type CategoryRecordSortByType = 'LATEST' | 'OLDEST' | 'RATING_HIGH' | 'RATING_LOW'
+
+export interface WithDrawType {
+  reason: string | undefined
+  detailReason: string | undefined
+}

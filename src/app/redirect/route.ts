@@ -55,8 +55,8 @@ export async function GET(request: NextRequest) {
       ...cookieOptions,
       httpOnly: true,
     }
-    console.log('액세스토큰', accessToken)
-    console.log('리프레시토큰', refreshToken)
+    console.log('액세스 토큰', accessToken)
+    console.log('리프레시 토큰', refreshToken)
 
     if (accessToken) {
       cookieStore.set('accessToken', accessToken, secureTokenOptions)

@@ -3,9 +3,9 @@
 import { useRouter } from 'next/navigation'
 import { putPrivacyLevel } from '@/lib/client/setting'
 import { PrivacyLevelType } from '@/types/setting'
-import PrivacyItem from '@/components/mypage/privacy/PrivacyItem'
+import ToggleItem from '@/components/mypage/privacy/ToggleItem'
 
-export default function PrivacyList({ initialPrivacy }: { initialPrivacy: PrivacyLevelType }) {
+export default function PrivacyList({ initialPrivacy }: { initialPrivacy: PrivacyLevelType | undefined }) {
   const router = useRouter()
 
   const handleUpdate = async (level: PrivacyLevelType) => {
@@ -20,13 +20,13 @@ export default function PrivacyList({ initialPrivacy }: { initialPrivacy: Privac
 
   return (
     <>
-      <PrivacyItem onClick={() => handleUpdate('PUBLIC')} checked={initialPrivacy === 'PUBLIC'} content={'전체 공개'} />
-      <PrivacyItem
+      <ToggleItem onClick={() => handleUpdate('PUBLIC')} checked={initialPrivacy === 'PUBLIC'} content={'전체 공개'} />
+      <ToggleItem
         onClick={() => handleUpdate('FOLLOWER_ONLY')}
         checked={initialPrivacy === 'FOLLOWER_ONLY'}
         content={'팔로워에게만 일부 공개'}
       />
-      <PrivacyItem onClick={() => handleUpdate('PRIVATE')} checked={initialPrivacy === 'PRIVATE'} content={'비공개'} />
+      <ToggleItem onClick={() => handleUpdate('PRIVATE')} checked={initialPrivacy === 'PRIVATE'} content={'비공개'} />
     </>
   )
 }

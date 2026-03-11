@@ -1,5 +1,4 @@
 import { apiCallServer } from '@/lib/api.server'
-import { WriteDataType } from '@/types/write'
 import { PrivacyLevelType } from '@/types/setting'
 
 export async function PUT(request: Request) {
@@ -11,7 +10,7 @@ export async function PUT(request: Request) {
     }
 
     // 서버에서 백엔드 API 호출
-    const { data, error } = await apiCallServer('/v1/setting/privacy-level', {
+    const { data, error } = await apiCallServer('/v2/setting/privacy-level', {
       method: 'PUT',
       body: JSON.stringify(privacyLevel),
     })

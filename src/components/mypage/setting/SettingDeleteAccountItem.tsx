@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 export default function SettingDeleteAccountItem() {
   const router = useRouter()
   const onNavigate = () => {
-    router.push('/delete-account')
+    router.push('/mypage/withdraw')
   }
   return (
     <StyleSettingItem onClick={onNavigate}>

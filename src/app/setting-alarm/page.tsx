@@ -1,3 +1,9 @@
+import SettingAlarmList from '@/components/mypage/setting-alarm/SettingAlarmList'
+
 export default function SettingAlarmPage() {
-  return <main></main>
+  return (
+    <main>
+      <SettingAlarmList initialValue={false} />
+    </main>
+  )
 }

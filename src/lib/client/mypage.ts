@@ -1,7 +1,6 @@
 import { ApiCallResult, APIResponseType, Paging } from '@/types/common'
 import { RecordType } from '@/types/record'
 import { CategoryRecordSortByType } from '@/types/mypage'
-import { NoticeType } from '@/types/notice'
 import { QuestionType } from '@/types/question'
 
 export const clientFetchAllMyQuestions = async (params: {

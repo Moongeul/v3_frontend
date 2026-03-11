@@ -3,11 +3,11 @@ import { ApiCallResult } from '@/types/common'
 import { PrivacyLevelType } from '@/types/setting'
 
 /**
- * 책 리뷰 정보 조회 API
+ * 계정 공개 범위 조회 API
  */
 export const fetchSettingPrivacyLevel = async (): Promise<ApiCallResult<{ privacyLevel: PrivacyLevelType }>> => {
   try {
-    const { data, error } = await apiCallServer(`/v1/setting/privacy-level`, {
+    const { data, error } = await apiCallServer(`/v2/setting/privacy-level`, {
       method: 'GET',
     })
 
