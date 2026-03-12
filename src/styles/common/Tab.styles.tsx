@@ -1,8 +1,13 @@
 import styled from '@emotion/styled'
 import { CSSObject } from '@emotion/react'
 
-export const StyleTabContainer = styled.div`
+export const StyleTabContainer = styled.div<{ $width?: number }>`
   display: flex;
+  // props.$width가 있으면 그 값을 쓰고, 없으면 기본값 100% 사용
+  width: ${({ $width }) => {
+    if (!$width) return '100%'
+    return typeof $width === 'number' ? `${$width}px` : $width
+  }};
 `
 
 export const StyleTabButton = styled.button<{ $selectedButton: boolean }>`

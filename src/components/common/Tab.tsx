@@ -6,15 +6,16 @@ import { StyleTabButton, StyleTabContainer } from '@/styles/common/Tab.styles'
 
 interface TabProps {
   tabList: { content: string; path: string; key: string }[]
+  width?: number
 }
-export default function Tab({ tabList }: TabProps) {
+export default function Tab({ tabList, width }: TabProps) {
   const router = useRouter()
 
   const searchParams = useSearchParams()
   const currentTab = searchParams.get('tab') || 'home'
 
   return (
-    <StyleTabContainer>
+    <StyleTabContainer $width={width}>
       <PencilSketchEffect />
       {tabList.map((tab) => (
         <StyleTabButton

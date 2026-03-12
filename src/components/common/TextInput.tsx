@@ -1,7 +1,7 @@
 'use client'
 
 import * as Style from '@/styles/common/TextInput.styles'
-import { ChangeEventHandler, JSX, ReactNode, useState } from 'react'
+import { ChangeEventHandler, JSX, KeyboardEventHandler, ReactNode, useState } from 'react'
 import Spacing from '@/components/common/Spacing'
 import { PencilSketchEffect } from '@/styles/common/Common.styles'
 
@@ -11,6 +11,7 @@ interface TextFieldProps {
   placeholder?: string
   value?: string | number
   onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
+  onKeyDown?: KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> // 2. Props 정의 추가
   onClick?: () => void
   status?: 'default' | 'filled' | 'error'
   helperText?: string
@@ -28,6 +29,7 @@ export default function TextInput({
   placeholder,
   value,
   onChange,
+  onKeyDown,
   onClick,
   status = 'default',
   helperText,
@@ -60,6 +62,7 @@ export default function TextInput({
                 type={inputType}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
+                onKeyDown={onKeyDown}
                 onClick={onClick}
                 placeholder={placeholder}
                 $status={currentStatus}
@@ -75,6 +78,7 @@ export default function TextInput({
             <Style.TextArea
               onFocus={handleFocus}
               onBlur={handleBlur}
+              onKeyDown={onKeyDown}
               placeholder={placeholder}
               $status={currentStatus}
               onChange={onChange}
