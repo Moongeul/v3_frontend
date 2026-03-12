@@ -1,5 +1,5 @@
 import { Button, Label, Spacing, Tab } from '@/components/common'
-import { Banner, RecordList, ViewAllQuestionButton } from '@/components/home'
+import { Banner, StoryList, ViewAllQuestionButton } from '@/components/home'
 import { typography } from '@/styles/theme'
 import { QuestionCardRowList } from '@/components/question'
 import { ReviewList } from '@/components/book'
@@ -38,7 +38,7 @@ export default async function HomePage({
       />
       <Spacing height={32} />
 
-      <RecordList />
+      <StoryList tab={tab} />
       <Spacing height={32} />
 
       <Label labelElement={<ViewAllQuestionButton />} labelStyle={typography.subtitleMd}>

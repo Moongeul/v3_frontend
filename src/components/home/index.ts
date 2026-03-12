@@ -1,5 +1,5 @@
 export { default as Banner } from './Banner'
-export { default as RecordList } from './StoryList'
+export { default as StoryList } from './StoryList'
 export { default as ViewAllQuestionButton } from './ViewAllQuestionButton'
 export { default as WriteStoryButton } from './WriteRecordButton'
 export { default as StoryCard } from './RecordCard'

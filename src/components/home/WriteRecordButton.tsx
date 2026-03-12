@@ -8,7 +8,7 @@ export default function WriteRecordButton() {
     <StyleRecordButton>
       <AddWhiteIcon width={18} height={18} />
       <StyleRecordButtonText>
-        기록카드
+        스토리
         <br /> 만들기
       </StyleRecordButtonText>
     </StyleRecordButton>
