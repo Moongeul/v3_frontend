@@ -50,6 +50,7 @@ export default function StoryList({ tab }: StoryListProps) {
           page.data?.data.map((story) => (
             <StoryCard
               key={story.storyInfo.storyId}
+              storyId={story.storyInfo.storyId}
               storyImage={story.storyInfo.storyImage}
               profileImage={story.memberInfo.profileImage}
               nickname={story.memberInfo.nickname}

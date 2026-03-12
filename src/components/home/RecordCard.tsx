@@ -9,16 +9,24 @@ import {
   StyleImageOverlay, // 새로 추가한 스타일
 } from '@/styles/home/Record.styles'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 interface StoryCardProps {
   storyImage: string
   profileImage: string
   nickname: string
+  storyId: number
 }
 
-export default function RecordCard({ storyImage, profileImage, nickname }: StoryCardProps) {
+export default function RecordCard({ storyImage, profileImage, nickname, storyId }: StoryCardProps) {
+  const router = useRouter()
+
   return (
-    <StyleRecordCardContainer>
+    <StyleRecordCardContainer
+      onClick={() => {
+        router.push(`/story/detail/${storyId}`)
+      }}
+    >
       <StyleRecordCard>
         {/* 1. 어둡게 덮는 레이어 (이미지보다 위에, 프로필보다 아래에 위치) */}
         <StyleImageOverlay />
