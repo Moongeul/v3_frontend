@@ -11,7 +11,7 @@ export default function BookLayout({
       <Header
         headerType={'default'}
         leftIcon={
-          <Link href={'/search'}>
+          <Link href={'/search?tab=ALL'}>
             <SearchIcon width={24} height={24} />
           </Link>
         }
