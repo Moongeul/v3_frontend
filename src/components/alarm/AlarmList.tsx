@@ -48,15 +48,13 @@ export default function AlarmList() {
 
   return (
     <>
-      {/* 데이터 렌더링 */}
-      {/*<div className="mt-5 flex flex-col gap-y-3">*/}
-      {/*  {data?.pages.map((page) => page.data.map((alarm) => <AlarmItem key={alarm.id} {...alarm} />))}*/}
-      {/*</div>*/}
-
-      {/*/!* 스크롤 감지 영역 *!/*/}
-      {/*<div ref={ref} style={{ height: 20 }}>*/}
-      {/*  {isFetchingNextPage && <Spinner />}*/}
-      {/*</div>*/}
+      <div className="flex flex-col gap-y-3 pt-5">
+        {data?.pages.map((page) => page.data.data.map((alarm) => <AlarmItem key={alarm.id} {...alarm} />))}
+      </div>
+      {/* 스크롤 감지 영역 */}
+      <div ref={ref} style={{ height: 20 }}>
+        {isFetchingNextPage && <Spinner />}
+      </div>
     </>
   )
 }

@@ -90,8 +90,9 @@ export const Button = styled.button<{
         `
       case 'secondary':
         const secondaryBg = $isActive ? theme.colors.buttonActiveSecondary : theme.colors.buttonDefaultSecondary
+        const secondaryColor = $isActive ? theme.colors.buttonTextSecondary : theme.colors.rating
         return css`
-          color: ${theme.colors.buttonTextSecondary};
+          color: ${secondaryColor};
           &::before {
             background-color: ${secondaryBg};
             border: none;

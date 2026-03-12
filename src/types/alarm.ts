@@ -4,7 +4,7 @@ export interface AlarmType {
   notificationType: NotificationType
   profileImage: string
   content: string
-  created_at: string
+  createdAt: string
   read: boolean
 }
 export type NotificationType =
@@ -14,3 +14,8 @@ export type NotificationType =
   | 'FOLLOW_OPEN'
   | 'FOLLOW_PRIVATE'
   | 'FOLLOW_PRIVATE_ACCEPTED'
+
+export interface FollowAcceptType {
+  followerId: number
+  status: 'ACCEPT' | 'DELETE'
+}

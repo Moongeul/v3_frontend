@@ -6,7 +6,9 @@ import Image from 'next/image'
 import { StyleContent } from '@/styles/common/Common.styles'
 import { useTheme } from '@emotion/react'
 import { typography } from '@/styles/theme'
-import { formatRelativeTime } from '@/utils/common'
+import { formatDate } from '@/utils/common'
+import { Spacing } from '@/components/common'
+import AlarmButtons from '@/components/alarm/AlarmButtons'
 
 export default function AlarmItem({
   id,
@@ -15,25 +17,34 @@ export default function AlarmItem({
   read,
   relatedId,
   profileImage,
-  created_at,
+  createdAt,
 }: AlarmType) {
   const theme = useTheme()
   return (
     <StyledAlarmContainer>
-      {profileImage ? (
+      {/* 1. 프로필 이미지 영역 */}
+      {profileImage && (
         <StyledProfileImageWrapper>
-          <Image src={profileImage} alt={'프로필 이미지'} />
+          <Image src={profileImage} alt={'프로필 이미지'} width={40} height={40} style={{ borderRadius: 999 }} />
         </StyledProfileImageWrapper>
-      ) : null}
+      )}
+
+      {/* 2. 콘텐츠 영역 (여기 중복되었던 Wrapper를 하나로 합침) */}
       <StyledContentWrapper>
-        <StyledContentWrapper>
-          <StyleContent $typography={typography.subtitleSm} $textColor={theme.colors.headerText}>
-            {content}
-          </StyleContent>
-          <StyleContent $typography={typography.small} $textColor={theme.colors.textFieldDefaultText}>
-            {formatRelativeTime(created_at)}
-          </StyleContent>
-        </StyledContentWrapper>
+        <StyleContent $typography={typography.subtitleSm} $textColor={theme.colors.headerText}>
+          {content}
+        </StyleContent>
+        <StyleContent $typography={typography.small} $textColor={theme.colors.textFieldDefaultText}>
+          {formatDate(createdAt)}
+        </StyleContent>
+
+        {/* 팔로우 버튼 등 추가 요소 */}
+        {notificationType === 'FOLLOW_PRIVATE' && (
+          <>
+            <Spacing height={8} />
+            <AlarmButtons relatedId={relatedId} />
+          </>
+        )}
       </StyledContentWrapper>
     </StyledAlarmContainer>
   )

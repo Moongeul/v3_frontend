@@ -1,6 +1,6 @@
 import { ApiCallResult, Paging } from '@/types/common'
 import { apiCallServer } from '@/lib/api.server'
-import { FollowUserInfoType, MyCategoryResponseType, MyCategoryType } from '@/types/mypage'
+import { FollowUserInfoType, MyCategoryResponseType } from '@/types/mypage'
 import { UserInfoType } from '@/types/user'
 import { QuestionType } from '@/types/question'
 

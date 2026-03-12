@@ -14,10 +14,19 @@ interface HeaderProps {
   leftIcon?: React.ReactNode
   rightIcon?: React.ReactNode
   isBottomBorder?: boolean
+  onClick?: () => void
   path?: string //dynamic 일 때 뒤로가기 경로
 }
 
-export default function Header({ headerType, children, leftIcon, rightIcon, isBottomBorder, path }: HeaderProps) {
+export default function Header({
+  headerType,
+  onClick,
+  children,
+  leftIcon,
+  rightIcon,
+  isBottomBorder,
+  path,
+}: HeaderProps) {
   const router = useRouter()
 
   const onBack = () => {
@@ -37,7 +46,7 @@ export default function Header({ headerType, children, leftIcon, rightIcon, isBo
               <HeaderLeftArrowIconPadding>{leftIcon}</HeaderLeftArrowIconPadding>
             ) : (
               <HeaderLeftArrowIconPadding>
-                <HeaderLeftArrowIcon onClick={onBack} width={20} height={20} />
+                <HeaderLeftArrowIcon onClick={onClick ? onClick : onBack} width={20} height={20} />
               </HeaderLeftArrowIconPadding>
             )}
             <Style.Title $headerType={headerType}>{children}</Style.Title>

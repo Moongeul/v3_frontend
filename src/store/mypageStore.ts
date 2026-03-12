@@ -1,6 +1,7 @@
 import { create } from 'zustand/index'
 import { devtools } from 'zustand/middleware'
 import { WithDrawType } from '@/types/mypage'
+import { FollowAcceptType } from '@/types/alarm'
 
 interface MypageState {
   withdrawData: WithDrawType
@@ -10,6 +11,11 @@ interface MypageState {
 const initWithdrawData: Partial<WithDrawType> = {
   reason: '',
   detailReason: '',
+}
+
+const initFollowAcceptData: Partial<FollowAcceptType> = {
+  followerId: 0,
+  status: 'ACCEPT',
 }
 
 export const useMypageStore = create<MypageState>()(

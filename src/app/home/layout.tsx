@@ -1,11 +1,15 @@
-import { AlarmIcon, SearchIcon } from '@/assets/svgComponents'
+import { SearchIcon } from '@/assets/svgComponents'
 import { Header, NavBar, PageLayout, Spacing } from '@/components/common'
 import Link from 'next/link'
-export default function BookLayout({
+import AlarmCount from '@/components/alarm/AlarmCount'
+import { fetchUnReadNotification } from '@/lib/server/alarm'
+export default async function BookLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const result = await fetchUnReadNotification()
+  console.log('result', result)
   return (
     <div>
       <Header
@@ -17,7 +21,7 @@ export default function BookLayout({
         }
         rightIcon={
           <Link href={'/alarm'}>
-            <AlarmIcon width={24} height={24} />
+            <AlarmCount exist={result.data?.exist} />
           </Link>
         }
       />
