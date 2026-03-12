@@ -1,8 +1,24 @@
 // src/styles/theme.ts
 import { Theme } from '@emotion/react'
-import { memoment, suit } from '@/styles/font'
+import { memoment, suit, myeongjo } from '@/styles/font'
 
 export const typography = {
+  myeongjoBody: {
+    fontFamily: myeongjo.style.fontFamily,
+    fontSize: '13px',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    lineHeight: '120%',
+    letterSpacing: '-0.208px',
+  },
+  memomentBody: {
+    fontFamily: memoment.style.fontFamily,
+    fontSize: '14px',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    lineHeight: '120%',
+    letterSpacing: '-0.224px',
+  },
   memomentTitle: {
     fontFamily: memoment.style.fontFamily,
     fontSize: '40px',

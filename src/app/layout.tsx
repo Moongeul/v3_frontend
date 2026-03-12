@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { memoment, suit } from '@/styles/font'
+import { memoment, myeongjo, suit } from '@/styles/font'
 import EmotionRootRegistry from './registry'
 import { Providers } from '@/providers/Providers'
 import { ToastProvider } from '@/components/common/toast/ToastContext'
@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ko" className={`${suit.variable} ${memoment.variable}`}>
+    <html lang="ko" className={`${suit.variable} ${memoment.variable} ${myeongjo.variable}`}>
       {/* 1. <html> 바로 아래에는 <head>와 <body>만 올 수 있습니다.
           2. 모든 Context Provider는 <body> 안쪽에서 children을 감싸야 합니다.
       */}

@@ -1,5 +1,7 @@
 import styled from '@emotion/styled'
 import { CSSObject } from '@emotion/react'
+import { StoryFontType } from '@/store/storyStore'
+import { TypographyType } from '@/styles/emotion'
 
 //summary
 export const StyleReviewSummaryContainer = styled.div`
@@ -92,7 +94,7 @@ export const StyleReviewContentMetaDate = styled.div`
 `
 
 //인용구
-export const StyleBookQuoteRowContainer = styled.div`
+export const StyleBookQuoteRowContainer = styled.div<{ $isBorderLeft?: boolean }>`
   display: flex;
   column-gap: 4px;
   margin-left: 2px;
@@ -113,15 +115,15 @@ export const StyleBookQuoteRowContainer = styled.div`
     filter: url('#pencil-texture');
     pointer-events: none;
     box-sizing: border-box;
-    border-left: 1px solid ${({ theme }) => theme.colors.textFieldFilledLine};
+    border-left: 1px solid ${({ theme, $isBorderLeft }) => ($isBorderLeft ? theme.colors.textFieldFilledLine : 0)};
   }
 `
 export const StyleBookQuoteColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
 `
-export const StyleQuoteContent = styled.div`
-  ${({ theme }) => theme.typography.badgeMd as CSSObject}
+export const StyleQuoteContent = styled.div<{ $typography: TypographyType }>`
+  ${({ theme, $typography }) => ($typography ? ($typography as CSSObject) : (theme.typography.badgeMd as CSSObject))}
   color: ${({ theme }) => theme.colors.textFieldFilledLine};
 `
 export const StyleQuotePage = styled.div`

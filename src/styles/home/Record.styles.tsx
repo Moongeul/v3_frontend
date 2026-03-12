@@ -1,13 +1,13 @@
 import styled from '@emotion/styled'
 import { CSSObject } from '@emotion/react'
 
-export const StyleRecordListWrapper = styled.div`
+export const StyleStoryListWrapper = styled.div`
   display: flex;
   column-gap: 8px;
   overflow-x: scroll;
 `
 
-export const StyleRecordList = styled.div`
+export const StyleStoryList = styled.div`
   display: flex;
   column-gap: 8px;
   overflow-x: scroll;

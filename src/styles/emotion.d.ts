@@ -1,5 +1,6 @@
 // src/styles/emotion.d.ts
 import '@emotion/react'
+import { memoment } from '@/styles/font'
 
 export interface TypographyType {
   fontFamily: string
@@ -115,6 +116,8 @@ declare module '@emotion/react' {
       }
     }
     typography: {
+      myeongjoBody: TypographyType
+      memomentBody: TypographyType
       memomentTitle: TypographyType
       titleLg: TypographyType
       titleMd: TypographyType
