@@ -36,6 +36,24 @@ export const serverFetchAllDoneReadBooks = async (
   return await response.json()
 }
 
+export const serverFetchAllDoneReadRatingSummary = async (
+  userId?: string
+): Promise<APIResponseType<{ totalBooks: number; data: { range: string; count: number }[] }>> => {
+  const searchParams = new URLSearchParams()
+  if (userId) {
+    searchParams.append('userId', userId.toString())
+  }
+
+  const response = await apiFetchServer(`/v2/bookshelf/done-read/rating-summary?${searchParams.toString()}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  return await response.json()
+}
+
 export const serverFetchAllWishReadBooks = async (
   page: number,
   size: number

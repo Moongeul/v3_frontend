@@ -35,6 +35,7 @@ declare module '@emotion/react' {
       buttonActiveGhost: string
       modalBackground: string
       modalFill: string
+      read: string
       baseColor: {
         //light-yellow
         lightYellow50: string

@@ -1,4 +1,5 @@
-import { Header, PageLayout, Spacing } from '@/components/common'
+import { Header, Spacing } from '@/components/common'
+import AlarmPageLayout from '@/components/alarm/AlarmPageLayout'
 export default function AlarmLayout({
   children,
 }: Readonly<{
@@ -9,7 +10,7 @@ export default function AlarmLayout({
       <Header headerType={'dynamic'}>알림</Header>
 
       <Spacing height={60} />
-      <PageLayout>{children}</PageLayout>
+      <AlarmPageLayout>{children}</AlarmPageLayout>
     </div>
   )
 }

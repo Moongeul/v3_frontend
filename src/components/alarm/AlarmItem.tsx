@@ -21,7 +21,7 @@ export default function AlarmItem({
 }: AlarmType) {
   const theme = useTheme()
   return (
-    <StyledAlarmContainer>
+    <StyledAlarmContainer $read={read}>
       {/* 1. 프로필 이미지 영역 */}
       {profileImage && (
         <StyledProfileImageWrapper>

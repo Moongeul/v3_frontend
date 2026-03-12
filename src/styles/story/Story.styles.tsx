@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { CSSObject } from '@emotion/react'
 import { StoryFontType } from '@/components/story/OptionSelector'
-import BookQuote from '../../components/book/review/BookQuote'
 
 export const StyledTabButtonWrapper = styled.div`
   display: flex;
