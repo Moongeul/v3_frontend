@@ -29,7 +29,6 @@ export default function SubmitButton() {
 
   const handleSubmit = async () => {
     const result = await createPost(writeData)
-    console.log('글쓰기 제출', result)
     if (result.success) {
       success('게시글 생성 성공', '게시글 작성에 성공했어요.')
       router.push('/home?tab=PUBLIC')

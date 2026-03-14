@@ -8,7 +8,7 @@ import SelectBookButton from '@/components/write/SelectBookButton'
 export default function WriteBookSearchContent() {
   const { searchValue } = useBookStore((state) => state)
 
-  const { books, hasData, bottomRef, isFetchingNextPage } = useBookInfiniteScroll(searchValue)
+  const { books, bottomRef, isFetchingNextPage } = useBookInfiniteScroll(searchValue)
 
   return (
     <>

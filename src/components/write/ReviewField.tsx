@@ -67,6 +67,7 @@ export default function ReviewField() {
         rightElement={
           <CountIndicator isError={isError} textType={'textArea'} maxLength={MAX_LENGTH} valueLength={contentLength} />
         }
+        maxLength={2000}
         status={isError ? 'error' : 'default'}
         value={writeData.content ?? ''}
         onChange={inputHandler}

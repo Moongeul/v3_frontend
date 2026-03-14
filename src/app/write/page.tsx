@@ -32,7 +32,7 @@ export default async function WritePage({
 
   return (
     <main>
-      <Header headerType={'dynamic'} rightIcon={<SubmitButton />}>
+      <Header path={'/home?tab=PUBLIC'} headerType={'dynamic'} rightIcon={<SubmitButton />}>
         글쓰기
       </Header>
       <PageLayout>

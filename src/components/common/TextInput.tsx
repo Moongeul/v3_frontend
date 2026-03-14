@@ -85,6 +85,7 @@ export default function TextInput({
               $status={currentStatus}
               onChange={onChange}
               value={value}
+              maxLength={maxLength}
             />
             {rightElement && rightElement}
           </Style.TextAreaContainer>
