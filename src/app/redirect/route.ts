@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
       // return redirect(`/login?error=${encodeURIComponent(result.error || 'Authentication failed')}`)
     }
 
-    const { role, accessToken, refreshToken } = result
+    const { role, accessToken, refreshToken, isReadingTaste, memberId } = result
 
     // 3. 쿠키 설정
     const cookieStore = await cookies()
@@ -66,6 +66,13 @@ export async function GET(request: NextRequest) {
     }
     if (role) {
       cookieStore.set('role', role, cookieOptions)
+    }
+    if (isReadingTaste) {
+      cookieStore.set('isReadingTaste', String(isReadingTaste), cookieOptions)
+    }
+
+    if (memberId) {
+      cookieStore.set('memberId', String(memberId), cookieOptions)
     }
 
     // 4. 사용자 상태에 따른 리다이렉트

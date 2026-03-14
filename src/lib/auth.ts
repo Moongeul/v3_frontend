@@ -1,6 +1,8 @@
 import { APIResponseType, UserType } from '@/types/common'
 interface AuthCallResult {
   success: boolean
+  isReadingTaste?: boolean
+  memberId?: number
   accessToken?: string
   refreshToken?: string | null
   role?: string
@@ -50,7 +52,7 @@ export const postAuth = async (code: string | null, platform: string | null): Pr
       throw new Error(jwtResponseData.message || 'Authentication failed')
     }
 
-    const { role, accessToken, refreshToken } = jwtResponseData.data
+    const { role, accessToken, refreshToken, isReadingTaste, memberId } = jwtResponseData.data
 
     console.log('로그인 하고 액세스토큰', accessToken)
     console.log('로그인 하고 리스레시 토큰', refreshToken)
@@ -62,6 +64,8 @@ export const postAuth = async (code: string | null, platform: string | null): Pr
       accessToken,
       refreshToken,
       role,
+      isReadingTaste,
+      memberId,
     }
   } catch (error) {
     console.error('Authentication error:', error)

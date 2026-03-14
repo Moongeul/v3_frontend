@@ -5,6 +5,7 @@ import { QuestionCardRowList } from '@/components/question'
 import { ReviewList } from '@/components/book'
 import { WriteBannerGraphic, WhiteRightArrowIcon } from '@/assets/svgComponents'
 import { fetchQuestions } from '@/lib/server/question'
+import HomeModal from '@/components/common/modal/HomeModal'
 
 export default async function HomePage({
   searchParams,
@@ -23,6 +24,7 @@ export default async function HomePage({
   ]
   return (
     <main>
+      <HomeModal />
       <Tab tabList={tabList} />
       <Spacing height={20} />
 

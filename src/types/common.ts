@@ -23,9 +23,11 @@ export interface TestPaging<T> {
 }
 
 export interface UserType {
+  memberId: number
   role: string
   accessToken: string
   refreshToken: string
+  isReadingTaste: boolean
 }
 
 export interface ApiCallResult<T = never> {

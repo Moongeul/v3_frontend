@@ -9,7 +9,7 @@ export default async function BookLayout({
   children: React.ReactNode
 }>) {
   const result = await fetchUnReadNotification()
-  console.log('result', result)
+
   return (
     <div>
       <Header

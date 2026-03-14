@@ -13,7 +13,6 @@ import {
   StyleOverlay,
 } from '@/styles/common/Modal.styles'
 import { createPortal } from 'react-dom'
-import { ModalKey } from '@/store/modalStore'
 
 interface ModalProps {
   isOpen: boolean | undefined
