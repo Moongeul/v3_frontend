@@ -49,7 +49,7 @@ export default function ProfileInfo({
         )}
 
         <StyleProfileInfo>
-          <Badge badgeLabel={convertEnumToKorTag(readingTasteType)} />
+          {readingTasteType ? <Badge badgeLabel={convertEnumToKorTag(readingTasteType)} /> : null}
           <StyleContent $typography={typography.badgeMd} $textColor={theme.colors.headerText}>
             {nickname}
           </StyleContent>

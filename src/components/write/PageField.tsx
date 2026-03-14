@@ -19,6 +19,7 @@ export default function PageField() {
       <Label>책 페이지 수</Label>
       <Spacing height={8} />
       <TextInput
+        value={writeData.page ?? ''}
         height={48}
         status={'default'}
         onChange={inputHandler}

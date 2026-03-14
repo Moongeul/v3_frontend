@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, useCallback, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import * as Style from '@/styles/Write.styles'
 
@@ -13,8 +13,10 @@ import Spacing from '@/components/common/Spacing'
 import TextInput from '@/components/common/TextInput'
 import CountIndicator from '@/components/common/CountIndicator'
 import { clientWritingGuide } from '@/lib/client/post'
+import { Spinner } from '@/components/common'
 
 export default function ReviewField() {
+  const [isLoading, setIsLoading] = useState(false)
   const [writingGuide, setWritingGuide] = useState<string | undefined>()
   const writeData = useWriteStore((state) => state.writeData)
   const setState = useWriteStore((state) => state.setState)
@@ -35,12 +37,18 @@ export default function ReviewField() {
       <Label
         labelElement={
           <Button
-            width={112}
+            leftIcon={isLoading ? <Spinner size={'sm'} /> : null}
+            width={isLoading ? 130 : 112}
             size={'sm'}
             onClick={async () => {
+              setIsLoading(true)
               const result = await clientWritingGuide()
+
               if (result.data) {
+                setIsLoading(false)
                 setWritingGuide(result.data)
+              } else {
+                setIsLoading(false)
               }
             }}
             variant={'ghost'}

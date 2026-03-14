@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { useWriteStore } from '@/store/writeStore'
@@ -8,10 +8,12 @@ import { useWriteStore } from '@/store/writeStore'
 import { createPost } from '@/lib/client/write'
 
 import Button from '@/components/common/Button'
+import { useToast } from '@/components/common/toast/ToastContext'
 
 export default function SubmitButton() {
   const router = useRouter()
-  const writeData = useWriteStore((state) => state.writeData)
+  const { success, error } = useToast()
+  const { writeData, resetWriteData } = useWriteStore((state) => state)
 
   const isActive = useMemo(() => {
     const hasRequiredFields =
@@ -29,7 +31,11 @@ export default function SubmitButton() {
     const result = await createPost(writeData)
     console.log('글쓰기 제출', result)
     if (result.success) {
-      router.back()
+      success('게시글 생성 성공', '게시글 작성에 성공했어요.')
+      router.push('/home?tab=PUBLIC')
+      resetWriteData()
+    } else {
+      error('게시글 생성 실패', '게시글 작성에 실패했어요.')
     }
   }
 

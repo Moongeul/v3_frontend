@@ -6,7 +6,9 @@ export default function ResultLayout({
 }>) {
   return (
     <div>
-      <Header headerType={'dynamic'}>취향 테스트 결과</Header>
+      <Header headerType={'dynamic'} path={'/home?tab=PUBLIC'}>
+        취향 테스트 결과
+      </Header>
 
       <Spacing height={60} />
       <PageLayout>{children}</PageLayout>

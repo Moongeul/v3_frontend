@@ -2,34 +2,51 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { CSSObject, keyframes } from '@emotion/react'
+import { css, CSSObject, keyframes } from '@emotion/react'
 import { TypographyType } from '@/styles/emotion'
 
-// 스피너
 const spin = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 `
 
-export const Spinner = styled.div`
-  width: 2rem; /* h-8 */
-  height: 2rem; /* w-8 */
-  border-radius: 9999px; /* rounded-full */
-  border: 2px solid transparent;
-  /* border-main 역할을 할 색상을 테마나 직접 지정 */
+// 사이즈별 스타일 정의
+const sizeStyles = {
+  // 버튼 내부 텍스트 옆에 적당한 사이즈
+  sm: css`
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+  `,
+  // 기존 2rem (약 32px) - 리스트 로딩용
+  m: css`
+    width: 2rem;
+    height: 2rem;
+    border-width: 3px; /* 두께도 조금 키워야 m사이즈답게 보입니다 */
+  `,
+  // sm보다 크고 m보다 작은 사이즈 (약 24px)
+  lg: css`
+    width: 24px;
+    height: 24px;
+    border-width: 2.5px;
+  `,
+}
+
+export const Spinner = styled.div<{ size?: 'sm' | 'm' | 'lg' }>`
+  border-radius: 9999px;
+  border-style: solid;
+  border-color: transparent;
   border-bottom-color: ${({ theme }) => theme.colors.buttonActivePrimary};
+  animation: ${spin} 1s linear infinite;
 
-  animation: ${spin} 1s linear infinite; /* animate-spin */
+  /* size prop에 따른 스타일 적용 (기본값 m) */
+  ${({ size = 'm' }) => sizeStyles[size]}
 `
+
 export const SpinnerWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 2rem; /* py-8 */
-  padding-bottom: 2rem;
+  align-items: center;
 `
 
 //spacing 여백
