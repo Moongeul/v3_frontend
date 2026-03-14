@@ -11,6 +11,7 @@ import Image from 'next/image'
 import { convertEnumToKorTag } from '@/utils/user'
 import { FollowStatusType } from '@/types/mypage'
 import { useRouter } from 'next/navigation'
+import { useToast } from '@/components/common/toast/ToastContext'
 
 interface FollowerItemProps {
   profileImage: string
@@ -27,6 +28,7 @@ export default function FollowerItem({
   myFollowStatus,
 }: FollowerItemProps) {
   const router = useRouter()
+  const { success, error } = useToast()
 
   return (
     <StyleFollowItemContainer>
@@ -47,11 +49,19 @@ export default function FollowerItem({
         onClick={async () => {
           if (myFollowStatus === 'ACCEPTED') {
             const result = await postUnFollow(id)
-            console.log('언팔', result)
+            if (result.success) {
+              success('성공', '팔로우를 취소했어요.')
+            } else {
+              error('실패', '팔로우를 취소하지 못했어요.')
+            }
             router.refresh()
           } else {
             const result = await postFollow(id)
-            console.log('팔로우', result)
+            if (result.success) {
+              success('성공', '팔로우에 성공하였어요.')
+            } else {
+              error('실패', '팔로우를 하지 못했어요.')
+            }
             router.refresh()
           }
         }}

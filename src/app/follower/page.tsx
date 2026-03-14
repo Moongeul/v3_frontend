@@ -4,7 +4,7 @@ import { fetchFollowers } from '@/lib/server/mypage'
 
 export default async function FollowerPage() {
   const result = await fetchFollowers()
-  const followers = await result.data
+  const followers = result.data
 
   return (
     <>
