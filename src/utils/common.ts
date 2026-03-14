@@ -1,3 +1,6 @@
+import { format, parseISO } from 'date-fns'
+import { ko } from 'date-fns/locale' // 한국어 설정을 위해 필요
+
 export function formatRelativeTime(dateString: string) {
   const now = new Date()
   const past = new Date(dateString)
@@ -39,4 +42,14 @@ export function formatRelativeTime(dateString: string) {
  */
 export const formatDate = (isoString: string): string => {
   return isoString.slice(0, 10).replace(/-/g, '.')
+}
+
+export const formatKoreanDate = (dateString: string) => {
+  if (!dateString) return ''
+
+  // parseISO: "2026-02-02T..." 문자열을 Date 객체로 변환
+  const date = parseISO(dateString)
+
+  // format: 'M월 d일' 형태로 포맷팅 (결과: 2월 2일)
+  return format(date, 'M월 d일', { locale: ko })
 }

@@ -1,6 +1,6 @@
 import { ApiCallResult, APIResponseType, Paging } from '@/types/common'
 import { BookShelfType, RecordType } from '@/types/record'
-import { CategoryRecordSortByType } from '@/types/mypage'
+import { CategoryRecordSortByType, MyStoryType } from '@/types/mypage'
 import { QuestionType } from '@/types/question'
 import { FollowAcceptType } from '@/types/alarm'
 
@@ -207,6 +207,28 @@ export const clientFetchAllDoneReadBooks = async (params: {
   searchParams.append('size', size.toString())
 
   const response = await fetch(`/api/bookshelf/done-read?${searchParams.toString()}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  return await response.json()
+}
+/**
+ * 스토리 보관함 조회 API
+ */
+export const clientFetchMyStory = async (params: {
+  page: number
+  size: number
+}): Promise<APIResponseType<Paging<MyStoryType[]>>> => {
+  const { page = 1, size = 20 } = params
+
+  const searchParams = new URLSearchParams()
+  searchParams.append('page', page.toString())
+  searchParams.append('size', size.toString())
+
+  const response = await fetch(`/api/member/my-story?${searchParams.toString()}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

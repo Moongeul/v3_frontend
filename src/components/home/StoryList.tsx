@@ -32,6 +32,8 @@ export default function StoryList({ tab }: StoryListProps) {
     },
   })
 
+  console.log('스토르 데이터', data)
+
   const { ref, inView } = useInView()
 
   useEffect(() => {

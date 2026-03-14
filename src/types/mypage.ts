@@ -24,3 +24,9 @@ export interface WithDrawType {
   reason: string | undefined
   detailReason: string | undefined
 }
+
+export interface MyStoryType {
+  storyId: number
+  storyImage: string
+  created: string
+}

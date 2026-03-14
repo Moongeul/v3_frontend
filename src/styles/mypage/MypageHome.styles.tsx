@@ -103,7 +103,21 @@ export const StyleStoryContainer = styled.div`
 export const StyleStoryCard = styled.div`
   position: relative;
   width: 72px;
+  height: 108px;
   flex-shrink: 0;
+  padding: 4px;
+
+  /* 🌟 배경색 검정색 설정 */
+  background-color: #000000;
+  border-radius: 4px; /* 이미지와 일관성을 위해 추가 */
+
+  /* 🌟 내부 이미지 중앙 정렬 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 만약 이미지가 없을 때를 대비한 처리 */
+  overflow: hidden;
 `
 export const StyleStoryCardDateBadge = styled.div`
   position: absolute;
