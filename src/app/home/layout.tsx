@@ -1,8 +1,8 @@
-import { SearchIcon } from '@/assets/svgComponents'
 import { Header, NavBar, PageLayout, Spacing } from '@/components/common'
 import Link from 'next/link'
 import AlarmCount from '@/components/alarm/AlarmCount'
 import { fetchUnReadNotification } from '@/lib/server/alarm'
+import ThemeSearchIcon from '@/components/common/icon/ThemeSearchIcon'
 export default async function BookLayout({
   children,
 }: Readonly<{
@@ -16,7 +16,7 @@ export default async function BookLayout({
         headerType={'default'}
         leftIcon={
           <Link href={'/search?tab=ALL'}>
-            <SearchIcon width={24} height={24} />
+            <ThemeSearchIcon height={24} width={24} />
           </Link>
         }
         rightIcon={

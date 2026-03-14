@@ -6,22 +6,23 @@ export const StyleContent = styled.div`
   row-gap: 4px;
 `
 
-// --- Styles (프로젝트 컨벤션에 맞춰 조정하세요) ---
-
 export const StyleContainer = styled.div`
   display: flex;
-  position: fixed;
-  bottom: 120px;
   flex-direction: column;
-  left: 20px; /* 좌측 여백 추가 */
-  right: 20px; /* 우측 여백 추가 */
 
-  /* 테마 배경색을 직접 적용합니다. */
+  /* 🌟 absolute로 변경하여 부모(375px) 하단에 박아버립니다. */
+  position: absolute;
+  bottom: 180px; /* 바닥에서 120px 띄움 */
+  left: 0;
+
+  /* 부모 너비를 다 채우되, 내부 여백을 위해 100% 사용 */
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+
   background-color: ${({ theme }) => theme.colors.background};
-  /* 텍스트 색상도 테마에 맞게 설정합니다. */
   color: ${({ theme }) => theme.colors.headerText};
 
-  /* 배경색 변경 시 부드럽게 전환 */
   transition:
     background-color 0.2s ease,
     color 0.2s ease;

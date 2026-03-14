@@ -41,7 +41,11 @@ export const StyleOnboardingButtons = styled.div`
   flex-direction: column;
   row-gap: 12px;
   align-items: center;
-  position: fixed;
+
+  /* 🌟 해결 방법 A: 컨테이너 내부 절대 위치 */
+  position: absolute;
   bottom: 0;
   width: 100%;
+  left: 0;
+  box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
 `

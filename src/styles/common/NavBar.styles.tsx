@@ -8,11 +8,17 @@ export const StyleNavContainer = styled.div`
   position: fixed;
   bottom: 0;
   z-index: 50;
-  width: 100%;
+
+  /* 핵심 수정 사항 */
+  width: 375px; /* 부모 컨테이너와 동일한 고정 너비 부여 */
+  max-width: 100%; /* 모바일 화면이 375px보다 작을 경우 대비 */
+  left: 50%;
+  transform: translateX(-50%); /* 화면 중앙 정렬 */
 
   transition: all 0.2s ease-in-out;
   background-color: transparent;
-  /* 연필 효과를 입힐 가상 요소 */
+  box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
+
   &::before {
     content: '';
     position: absolute;

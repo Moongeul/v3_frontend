@@ -60,14 +60,6 @@ export default function Story() {
           {isFetchingNextPage && <Spinner />}
         </div>
       </StyleStoryList>
-      {/*<StyleStoryContainer>*/}
-      {/*  <StoryCard bookImage={'/bookimage.png'} />*/}
-      {/*  <StoryCard bookImage={'/bookimage.png'} />*/}
-      {/*  <StoryCard bookImage={'/bookimage.png'} />*/}
-      {/*  <StoryCard bookImage={'/bookimage.png'} />*/}
-      {/*  <StoryCard bookImage={'/bookimage.png'} />*/}
-      {/*  <StoryCard bookImage={'/bookimage.png'} />*/}
-      {/*</StyleStoryContainer>*/}
     </>
   )
 }

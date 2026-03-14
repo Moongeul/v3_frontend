@@ -14,10 +14,16 @@ import {
 } from '@/assets/svgComponents'
 import { StyleContent } from '@/styles/common/Common.styles'
 import { baseColor, typography } from '@/styles/theme'
+import NavHomeIcon from '@/components/common/icon/NavHomeIcon'
+import { useTheme } from '@emotion/react'
 
 export default function NavBar() {
   const router = useRouter()
   const path = usePathname()
+  const theme = useTheme()
+
+  // 현재 테마가 다크모드인지 확인 (테마 구조에 따라 theme.isDark 혹은 theme.mode === 'dark' 등으로 변경)
+  const isDarkMode = theme.colors.background !== '#FFFFFD'
 
   const onNavigation = (path: string) => {
     router.push(path)
@@ -26,13 +32,9 @@ export default function NavBar() {
   return (
     <StyleNavContainer>
       <StyleNavItem onClick={() => onNavigation('/home?tab=PUBLIC')}>
-        {path === '/home' ? (
-          <NavHomeSelectedIcon width={40} height={40} />
-        ) : (
-          <NavHomeUnselectedIcon width={40} height={40} />
-        )}
+        <NavHomeIcon path={'/home'} isDarkMode={isDarkMode} />
         <StyleContent
-          $textColor={path === '/home' ? baseColor.gray500 : baseColor.gray200}
+          $textColor={path === '/home' ? theme.colors.textFieldFilledLine : theme.colors.textFieldDefaultLine}
           $typography={typography.badgeSm}
         >
           홈
@@ -46,7 +48,7 @@ export default function NavBar() {
         )}
 
         <StyleContent
-          $textColor={path === '/book' ? baseColor.gray500 : baseColor.gray200}
+          $textColor={path === '/book' ? theme.colors.textFieldFilledLine : theme.colors.textFieldDefaultLine}
           $typography={typography.badgeSm}
         >
           추천
@@ -65,7 +67,7 @@ export default function NavBar() {
         )}
 
         <StyleContent
-          $textColor={path === '/record' ? baseColor.gray500 : baseColor.gray200}
+          $textColor={path === '/record' ? theme.colors.textFieldFilledLine : theme.colors.textFieldDefaultLine}
           $typography={typography.badgeSm}
         >
           책장
@@ -76,7 +78,7 @@ export default function NavBar() {
           <ProfileIcon width={28} height={28} />
         </StyleProfileItem>
         <StyleContent
-          $textColor={path === '/mypage' ? baseColor.gray500 : baseColor.gray200}
+          $textColor={path === '/mypage' ? theme.colors.textFieldFilledLine : theme.colors.textFieldDefaultLine}
           $typography={typography.badgeSm}
         >
           My
