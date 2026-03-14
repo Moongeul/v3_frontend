@@ -1,5 +1,5 @@
 import { APIResponseType, Paging } from '@/types/common'
-import { BookShelfType, RecordType } from '@/types/record'
+import { BookShelfType, CalendarType, RecordType } from '@/types/record'
 import { BookType } from '@/types/book'
 
 /**
@@ -40,6 +40,34 @@ export const clientFetchAllDoneReadBooks = async (params: {
   searchParams.append('size', size.toString())
 
   const response = await fetch(`/api/bookshelf/done-read?${searchParams.toString()}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  return await response.json()
+}
+
+/**
+ * 읽은 책 캘린더 조회 API
+ */
+export const clientFetchAllDoneReadCalendar = async (params: {
+  userId?: number
+  year: number
+  month: number
+}): Promise<APIResponseType<CalendarType>> => {
+  const { userId, year = 2026, month = 3 } = params
+
+  const searchParams = new URLSearchParams()
+  searchParams.append('year', year.toString())
+  searchParams.append('month', month.toString())
+
+  if (userId) {
+    searchParams.append('userId', userId.toString())
+  }
+
+  const response = await fetch(`/api/bookshelf/done-read/calendar?${searchParams.toString()}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

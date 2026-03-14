@@ -51,3 +51,16 @@ export interface MyLikesStatusType {
   wantToReadCount: boolean
   helpfulCount: boolean
 }
+export interface CalendarType {
+  year: number
+  month: number
+  data: CalendarDateType[]
+}
+
+export interface CalendarDateType {
+  day: number
+  postId: number
+  isbn: string
+  bookImage: string
+  count: number
+}
