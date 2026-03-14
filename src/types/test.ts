@@ -1,6 +1,7 @@
 import { TagKorType } from '@/types/user'
 
 export interface TestAnswerType {
+  guestUuid: string
   answers: {
     1: 'A' | 'B'
     2: 'A' | 'B'

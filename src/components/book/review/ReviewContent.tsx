@@ -14,8 +14,8 @@ interface ReviewContentProps {
 export default function ReviewContent({ content, rating, createdAt, quotes }: ReviewContentProps) {
   return (
     <>
-      <Spacing height={12} />
       <ReviewContentMeta rating={rating} createdAt={createdAt} />
+      <Spacing height={12} />
       <ReviewContentText content={content} />
       <Spacing height={12} />
 

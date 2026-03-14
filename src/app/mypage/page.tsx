@@ -69,7 +69,7 @@ export default async function MypagePage() {
           <MypageItem content={'독서 취향 테스트'} path={'/test'} />
           <MypageItem content={'내가 공감한 기록'} path={'/mypage/like'} />
 
-          <Spacing height={80} />
+          <Spacing height={300} />
         </div>
       </PageLayout>
 

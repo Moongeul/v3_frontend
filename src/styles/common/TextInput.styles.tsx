@@ -51,11 +51,17 @@ function getStatusStyle({ theme, status = 'default', isFocused }: StatusStylePro
   return [styles[status] || styles.default, focusStyle]
 }
 
-export const TextInputWrapper = styled.div`
+export const TextInputWrapper = styled.div<{ width?: 'fit' | 'full' | string }>`
   display: flex;
   column-gap: 8px;
   align-items: center;
-  width: 100%; /* 전체를 채우도록 설정 */
+
+  /* props에 따른 width 결정 로직 */
+  width: ${({ width }) => {
+    if (width === 'fit') return 'fit-content'
+    if (width === 'full') return '100%'
+    return width || '100%' // 기본값은 100%
+  }};
 `
 export const TextFieldWrapper = styled.div<{
   $status: 'default' | 'filled' | 'error'
@@ -110,6 +116,17 @@ export const Input = styled.input<{
   $status: 'default' | 'filled' | 'error'
   $width: number | undefined
 }>`
+  /* Chrome, Safari, Edge, Opera에서 화살표 제거 */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox에서 화살표 제거 */
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
   width: ${({ $width }) => ($width ? `${$width}px` : `100%`)};
   background: ${({ theme }) => theme.colors.textFieldFill};
   border: ${({ theme }) => theme.colors.textFieldDefaultLine};

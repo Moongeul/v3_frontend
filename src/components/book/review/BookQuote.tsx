@@ -10,6 +10,7 @@ import { DoubleQuoteLeftIcon, DoubleQuoteRightIcon } from '@/assets/svgComponent
 import { Spacing } from '@/components/common'
 import { StoryFontType } from '@/store/storyStore'
 import { typography } from '@/styles/theme'
+import QuoteIcon from '@/components/common/icon/QuoteIcon'
 
 interface BookQuoteProps {
   fontType?: StoryFontType
@@ -33,14 +34,14 @@ export default function BookQuote({ quoteContent, page, isBorderLeft = true, fon
   }
   return (
     <StyleBookQuoteRowContainer $isBorderLeft={isBorderLeft}>
-      <DoubleQuoteLeftIcon width={8} height={8} />
+      <QuoteIcon type={'left'} />
       <StyleBookQuoteColumnContainer>
         <StyleQuoteContent $typography={renderFontType(fontType)}>{quoteContent}</StyleQuoteContent>
         <Spacing height={4} />
 
         <StyleQuotePage>P.{page}</StyleQuotePage>
       </StyleBookQuoteColumnContainer>
-      <DoubleQuoteRightIcon width={8} height={8} />
+      <QuoteIcon type={'right'} />
     </StyleBookQuoteRowContainer>
   )
 }

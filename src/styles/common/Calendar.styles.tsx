@@ -7,13 +7,7 @@ export const DateInputBox = styled.div`
   width: 100%;
   align-items: center;
   cursor: pointer;
-  color: ${({ theme }) => theme.colors.headerText}
-  ${({ theme }) => theme.typography.subtitleSm as CSSObject}
-  background-color: #fff;
-
-  &:hover {
-    border-color: #00c73c; // 강조색
-  }
+  color: ${({ theme }) => theme.colors.headerText} ${({ theme }) => theme.typography.subtitleSm as CSSObject};
 `
 
 export const CalendarWrapper = styled.div`

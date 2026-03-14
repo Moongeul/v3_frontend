@@ -1,3 +1,5 @@
+import { fetchReadingTasteTotalCount } from '@/lib/server/test'
+
 export const dynamic = 'force-dynamic'
 
 import {
@@ -18,8 +20,14 @@ import Onboarding from '@/components/test/Onboarding'
 
 export type TestStepType = 'onboarding' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12'
 
-function FindTestProcessStepSwitcher({ step }: { step: TestStepType }) {
-  if (step === 'onboarding') return <Onboarding />
+function FindTestProcessStepSwitcher({
+  step,
+  totalParticipants,
+}: {
+  step: TestStepType
+  totalParticipants: number | undefined
+}) {
+  if (step === 'onboarding') return <Onboarding totalParticipants={totalParticipants} />
   if (step === '1') return <Question1 />
   if (step === '2') return <Question2 />
   if (step === '3') return <Question3 />
@@ -42,11 +50,14 @@ export default async function TestPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const resolvedSearchParams = await searchParams
-  const step = (resolvedSearchParams.step as TestStepType) || '1'
+  const step = (resolvedSearchParams.step as TestStepType) || 'onboarding'
+  const result = await fetchReadingTasteTotalCount()
+
+  const totalParticipants = result.data?.totalParticipants
 
   return (
     <main>
-      <FindTestProcessStepSwitcher step={step} />
+      <FindTestProcessStepSwitcher step={step} totalParticipants={totalParticipants} />
     </main>
   )
 }

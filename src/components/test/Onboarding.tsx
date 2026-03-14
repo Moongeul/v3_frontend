@@ -4,10 +4,14 @@ import { OnboardingGraphic } from '@/assets/svgComponents'
 import { BottomButton, Spacing } from '@/components/common'
 import { StyleContent } from '@/styles/common/Common.styles'
 import { typography } from '@/styles/theme'
-import { StyleOnboardingContainer } from '@/styles/test/Test.styles'
+import { StyledPeopleCountBadge, StyleOnboardingContainer } from '@/styles/test/Test.styles'
 import { useRouter } from 'next/navigation'
 
-export default function Onboarding() {
+interface OnboardingProps {
+  totalParticipants: number | undefined
+}
+
+export default function Onboarding({ totalParticipants }: OnboardingProps) {
   const router = useRouter()
 
   const onNavigator = () => {
@@ -17,6 +21,9 @@ export default function Onboarding() {
   return (
     <div>
       <StyleOnboardingContainer>
+        <StyledPeopleCountBadge>{totalParticipants}명이 참여했어요!</StyledPeopleCountBadge>
+        <Spacing height={12} />
+
         <StyleContent $typography={typography.memomentTitle}>독서 취향 테스트</StyleContent>
         <Spacing height={8} />
 

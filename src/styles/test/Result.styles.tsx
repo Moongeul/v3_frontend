@@ -64,12 +64,13 @@ export const StyleResultBottomButtonContainer = styled.div`
   position: fixed;
   bottom: 0;
 
-  /* 1. 화면 중앙 정렬을 위한 설정 */
+  /* 화면 중앙 정렬 */
   left: 50%;
   transform: translateX(-50%);
 
-  /* 2. 콘텐츠 너비와 동일하게 설정 (파란색 박스의 max-width와 맞추세요) */
+  /* 🌟 핵심: 부모 컨테이너인 375px을 넘지 않도록 설정 */
   width: 100%;
+  max-width: 375px;
 
   padding: 12px 20px;
   column-gap: 12px;

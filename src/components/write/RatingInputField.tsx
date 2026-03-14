@@ -51,8 +51,9 @@ export default function RatingInputField() {
   return (
     <Style.RatingInputColumn>
       <TextInput
+        wrapperWidth={'fit'}
         height={48}
-        width={12}
+        width={20}
         value={integerPart === 0 ? '' : integerPart}
         onChange={handleIntegerChange}
         inputType={'number'}
@@ -61,8 +62,9 @@ export default function RatingInputField() {
       />
       <DotIcon width={4} height={4} />
       <TextInput
+        wrapperWidth={'fit'}
         height={48}
-        width={12}
+        width={20}
         value={decimalPart === 0 ? '' : decimalPart}
         onChange={handleDecimalChange}
         inputType={'number'}

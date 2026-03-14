@@ -13,6 +13,7 @@ import { StyleContainerRow } from '@/styles/common/InteractionButtons.styles'
 import { postLikeId } from '@/lib/client/post'
 import { useRouter } from 'next/navigation'
 import { useQueryClient } from '@tanstack/react-query'
+import ThemeInteractionIcon from '@/components/common/icon/ThemeInteractionIcon'
 
 interface InteractionButtonProps {
   postId: number
@@ -37,7 +38,7 @@ export default function InteractionButtons({ postId, likesCnt, myLikesStatus }: 
   return (
     <StyleContainerRow>
       <Button
-        leftIcon={<SameTasteIcon width={20} height={20} />}
+        leftIcon={<ThemeInteractionIcon type={'SameTasteType'} />}
         width={70}
         size={'sm'}
         variant={myLikesStatus.sameTasteCount ? 'secondary' : 'outline'}
@@ -47,7 +48,7 @@ export default function InteractionButtons({ postId, likesCnt, myLikesStatus }: 
         {likesCnt.sameTasteCount}
       </Button>
       <Button
-        leftIcon={<ImpressiveExpressionIcon width={20} height={20} />}
+        leftIcon={<ThemeInteractionIcon type={'ImpressiveExpressionType'} />}
         width={70}
         size={'sm'}
         variant={myLikesStatus.impressiveExpressionCount ? 'secondary' : 'outline'}
@@ -57,7 +58,7 @@ export default function InteractionButtons({ postId, likesCnt, myLikesStatus }: 
         {likesCnt.impressiveExpressionCount}
       </Button>
       <Button
-        leftIcon={<WantToReadIcon width={20} height={20} />}
+        leftIcon={<ThemeInteractionIcon type={'WantToReadType'} />}
         width={70}
         size={'sm'}
         variant={myLikesStatus.wantToReadCount ? 'secondary' : 'outline'}
@@ -67,7 +68,7 @@ export default function InteractionButtons({ postId, likesCnt, myLikesStatus }: 
         {likesCnt.wantToReadCount}
       </Button>
       <Button
-        leftIcon={<RelatableIcon width={20} height={20} />}
+        leftIcon={<ThemeInteractionIcon type={'RelatableType'} />}
         width={70}
         size={'sm'}
         variant={myLikesStatus.relatableCount ? 'secondary' : 'outline'}
@@ -77,7 +78,7 @@ export default function InteractionButtons({ postId, likesCnt, myLikesStatus }: 
         {likesCnt.relatableCount}
       </Button>
       <Button
-        leftIcon={<HelpfulIcon width={20} height={20} />}
+        leftIcon={<ThemeInteractionIcon type={'HelpfulType'} />}
         width={70}
         size={'sm'}
         variant={myLikesStatus.helpfulCount ? 'secondary' : 'outline'}

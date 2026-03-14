@@ -36,7 +36,7 @@ export default function ReviewHeader({ isProfile = false, memberInfo, created }:
         ) : null}
         <StyleReviewHeaderMetaUserInfo>
           <StyleReviewHeaderMetaNickName>{memberInfo.nickname}</StyleReviewHeaderMetaNickName>
-          <Badge badgeLabel={convertEnumToKorTag(memberInfo.readingTasteType)} />
+          {memberInfo.readingTasteType ? <Badge badgeLabel={convertEnumToKorTag(memberInfo.readingTasteType)} /> : null}
         </StyleReviewHeaderMetaUserInfo>
         <StyleReviewHeaderMetaTime>{formatRelativeTime(created)}</StyleReviewHeaderMetaTime>
       </StyleReviewHeaderMetaContainer>

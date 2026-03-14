@@ -59,7 +59,6 @@ export default function ReviewItem({
 
         <StyleReviewContentContainer>
           <ReviewHeader memberInfo={memberInfo} created={created} />
-
           {bookInfo && (
             <>
               <Spacing height={8} />

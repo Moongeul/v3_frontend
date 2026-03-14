@@ -22,6 +22,7 @@ interface TextFieldProps {
   width?: number
   height?: number
   maxLength?: number
+  wrapperWidth?: 'fit' | 'full' | string
 }
 export default function TextInput({
   textType = 'textField',
@@ -38,6 +39,7 @@ export default function TextInput({
   rightElement,
   topElement,
   width,
+  wrapperWidth,
   height,
   maxLength,
 }: TextFieldProps): JSX.Element {
@@ -51,7 +53,7 @@ export default function TextInput({
   return (
     <>
       <PencilSketchEffect />
-      <Style.TextInputWrapper>
+      <Style.TextInputWrapper width={wrapperWidth}>
         {textType === 'textField' ? (
           <Style.TextFieldWrapper $height={height} $width={width} $isFocused={isFocused} $status={status}>
             {topElement && topElement}

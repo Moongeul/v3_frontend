@@ -75,6 +75,7 @@ export default async function WritePage({
           <Spacing height={20} />
 
           <QuoteField />
+          <Spacing height={300} />
         </div>
       </PageLayout>
     </main>

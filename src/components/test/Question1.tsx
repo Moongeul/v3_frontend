@@ -43,7 +43,7 @@ export default function Question1() {
 
       <TestCard
         graphic={<Question1Graphic width={195} height={220} />}
-        question={'오늘따라 괜히 책이 읽고 싶다! 손이 간다면?'}
+        question={`오늘따라 괜히 책이 읽고 싶다!\n손이 간다면?`}
         questionNumber={1}
       />
 

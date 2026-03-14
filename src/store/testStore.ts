@@ -7,6 +7,7 @@ type StepType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 type AnswerType = 'A' | 'B'
 
 interface TestAnswerType {
+  guestUuid: string
   answers: Record<StepType, AnswerType | null> // 초기값은 null일 수 있음
 }
 
@@ -14,12 +15,14 @@ interface TestState {
   testAnswers: TestAnswerType
   testResult: TestResultType
   // 특정 단계(step)의 답변(value)만 변경하는 함수
+  setGuestUuid: (uuid: string) => void
   setTestAnswer: (step: StepType, value: AnswerType) => void
   setTestResult: (result: Partial<TestResultType>) => void // 2. 함수 타입 정의
   resetAnswers: () => void
 }
 
 const initialAnswers: TestAnswerType = {
+  guestUuid: '',
   answers: {
     1: null,
     2: null,
@@ -50,7 +53,14 @@ export const useTestStore = create<TestState>()(
           },
         },
       })),
-
+    // guestUuid 업데이트 로직
+    setGuestUuid: (uuid) =>
+      set((state) => ({
+        testAnswers: {
+          ...state.testAnswers,
+          guestUuid: uuid,
+        },
+      })),
     setTestResult: (result) =>
       set((state) => ({
         testResult: {

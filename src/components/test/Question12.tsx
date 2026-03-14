@@ -10,10 +10,11 @@ import { createTest } from '@/lib/client/test'
 import { TagEnumType } from '@/types/user'
 import { convertKorToEnumTag } from '@/utils/user'
 import { TestAnswerType } from '@/types/test'
+import { getOrGenerateGuestUuid } from '@/utils/common'
 
 export default function Question12() {
   const router = useRouter()
-  const { setTestAnswer, setTestResult, testAnswers } = useTestStore((state) => state)
+  const { setGuestUuid, setTestAnswer, setTestResult, testAnswers } = useTestStore((state) => state)
 
   const onNavigate = (path: string, type: TagEnumType | undefined) => {
     router.push(`/${path}?type=${type}`)
@@ -58,18 +59,20 @@ export default function Question12() {
    */
   const handleButtonClick = (choice: 'A' | 'B') => {
     // 1. Zustand 스토어 업데이트 (12번 답변 저장)
+    const guestUuid = getOrGenerateGuestUuid()
+    setGuestUuid(guestUuid)
     setTestAnswer(12, choice)
 
     // 2. 검증을 위해 현재 스토어 데이터에 방금 선택한 12번 값을 합친 최신 객체 생성
     // (setTestAnswer가 비동기적으로 작동할 수 있으므로 직접 합쳐서 넘기는 것이 안전함)
     const updatedAnswers = {
       ...testAnswers,
+      guestUuid: guestUuid,
       answers: {
         ...testAnswers.answers,
         12: choice,
       },
     }
-
     // 3. 제출 및 검증 함수 실행
     handleSubmit(updatedAnswers)
   }

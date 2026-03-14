@@ -53,3 +53,17 @@ export const formatKoreanDate = (dateString: string) => {
   // format: 'M월 d일' 형태로 포맷팅 (결과: 2월 2일)
   return format(date, 'M월 d일', { locale: ko })
 }
+
+/**
+ * 생성 UUid
+ */
+export const getOrGenerateGuestUuid = () => {
+  let guestUuid = localStorage.getItem('guestUuid')
+
+  if (!guestUuid) {
+    guestUuid = self.crypto.randomUUID()
+    localStorage.setItem('guestUuid', guestUuid)
+  }
+
+  return guestUuid
+}
