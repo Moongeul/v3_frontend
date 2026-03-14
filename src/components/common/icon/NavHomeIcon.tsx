@@ -1,23 +1,23 @@
-import { DarkSelectedHomeIcon } from '@/assets/svgComponents/dark'
-import { NavHomeSelectedIcon } from '@/assets/svgComponents' // 아이콘 경로 확인
+import { DarkSelectedHomeIcon, DarkUnselectedHomeIcon } from '@/assets/svgComponents/dark'
+import { NavHomeSelectedIcon, NavHomeUnselectedIcon } from '@/assets/svgComponents'
 
 interface NavHomeIconProps {
   path: string
-  isDarkMode: boolean // 다크모드 여부를 프롭으로 받거나 context에서 가져옵니다.
+  isDarkMode: boolean
 }
 
 export default function NavHomeIcon({ path, isDarkMode }: NavHomeIconProps) {
   const isSelected = path === '/home'
 
-  return isSelected ? (
-    isDarkMode ? (
-      <DarkSelectedHomeIcon width={40} height={40} />
-    ) : (
-      <NavHomeSelectedIcon width={40} height={40} />
-    )
-  ) : isDarkMode ? (
-    <NavHomeSelectedIcon width={40} height={40} />
+  // 1. 선택 여부에 따른 아이콘 결정
+  if (isSelected) {
+    return isDarkMode ? <DarkSelectedHomeIcon width={40} height={40} /> : <NavHomeSelectedIcon width={40} height={40} />
+  }
+
+  // 2. 선택되지 않았을 때의 아이콘 결정
+  return isDarkMode ? (
+    <DarkUnselectedHomeIcon width={40} height={40} />
   ) : (
-    <NavHomeSelectedIcon width={40} height={40} />
+    <NavHomeUnselectedIcon width={40} height={40} />
   )
 }

@@ -1,5 +1,5 @@
-import { DarkSelectedHomeIcon } from '@/assets/svgComponents/dark'
-import { NavHomeSelectedIcon } from '@/assets/svgComponents' // 아이콘 경로 확인
+import { DarkSelectedBookIcon, DarkUnselectedBookIcon } from '@/assets/svgComponents/dark'
+import { NavRecommendSelectedIcon, NavRecommendUnselectedIcon } from '@/assets/svgComponents' // 아이콘 경로 확인
 
 interface NavRecommendIconProps {
   path: string
@@ -7,17 +7,20 @@ interface NavRecommendIconProps {
 }
 
 export default function NavRecommendIcon({ path, isDarkMode }: NavRecommendIconProps) {
-  const isSelected = path === '/home'
-
-  return isSelected ? (
-    isDarkMode ? (
-      <DarkSelectedHomeIcon width={40} height={40} />
+  const isSelected = path === '/book'
+  // 1. 선택 여부에 따른 아이콘 결정
+  if (isSelected) {
+    return isDarkMode ? (
+      <DarkSelectedBookIcon width={40} height={40} />
     ) : (
-      <NavHomeSelectedIcon width={40} height={40} />
+      <NavRecommendSelectedIcon width={40} height={40} />
     )
-  ) : isDarkMode ? (
-    <NavHomeSelectedIcon width={40} height={40} />
+  }
+
+  // 2. 선택되지 않았을 때의 아이콘 결정
+  return isDarkMode ? (
+    <DarkUnselectedBookIcon width={40} height={40} />
   ) : (
-    <NavHomeSelectedIcon width={40} height={40} />
+    <NavRecommendUnselectedIcon width={40} height={40} />
   )
 }

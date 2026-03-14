@@ -5,17 +5,18 @@ import { StyleNavContainer, StyleNavItem, StyleProfileItem, StyleWriteItem } fro
 import {
   NavBookshelfSelectedIcon,
   NavBookshelfUnselectedIcon,
-  NavHomeSelectedIcon,
-  NavHomeUnselectedIcon,
   NavRecommendSelectedIcon,
   NavRecommendUnselectedIcon,
   NavWriteIcon,
   ProfileIcon,
 } from '@/assets/svgComponents'
 import { StyleContent } from '@/styles/common/Common.styles'
-import { baseColor, typography } from '@/styles/theme'
+import { typography } from '@/styles/theme'
 import NavHomeIcon from '@/components/common/icon/NavHomeIcon'
 import { useTheme } from '@emotion/react'
+import NavRecommendIcon from '@/components/common/icon/NavRecommendIcon'
+import NavBookShelfIcon from '@/components/common/icon/NavBookShelfIcon'
+import NavProfileIcon from '@/components/common/icon/NavProfileIcon'
 
 export default function NavBar() {
   const router = useRouter()
@@ -32,7 +33,7 @@ export default function NavBar() {
   return (
     <StyleNavContainer>
       <StyleNavItem onClick={() => onNavigation('/home?tab=PUBLIC')}>
-        <NavHomeIcon path={'/home'} isDarkMode={isDarkMode} />
+        <NavHomeIcon path={path} isDarkMode={isDarkMode} />
         <StyleContent
           $textColor={path === '/home' ? theme.colors.textFieldFilledLine : theme.colors.textFieldDefaultLine}
           $typography={typography.badgeSm}
@@ -41,12 +42,7 @@ export default function NavBar() {
         </StyleContent>
       </StyleNavItem>
       <StyleNavItem onClick={() => onNavigation('/book')}>
-        {path === '/book' ? (
-          <NavRecommendSelectedIcon width={40} height={40} />
-        ) : (
-          <NavRecommendUnselectedIcon width={40} height={40} />
-        )}
-
+        <NavRecommendIcon path={path} isDarkMode={isDarkMode} />
         <StyleContent
           $textColor={path === '/book' ? theme.colors.textFieldFilledLine : theme.colors.textFieldDefaultLine}
           $typography={typography.badgeSm}
@@ -60,11 +56,7 @@ export default function NavBar() {
       </StyleWriteItem>
 
       <StyleNavItem onClick={() => onNavigation('/record?tab=BOOKSHELF')}>
-        {path === '/record' ? (
-          <NavBookshelfSelectedIcon width={40} height={40} />
-        ) : (
-          <NavBookshelfUnselectedIcon width={40} height={40} />
-        )}
+        <NavBookShelfIcon path={path} isDarkMode={isDarkMode} />
 
         <StyleContent
           $textColor={path === '/record' ? theme.colors.textFieldFilledLine : theme.colors.textFieldDefaultLine}
@@ -75,7 +67,7 @@ export default function NavBar() {
       </StyleNavItem>
       <StyleNavItem onClick={() => onNavigation('/mypage')}>
         <StyleProfileItem>
-          <ProfileIcon width={28} height={28} />
+          <NavProfileIcon isDarkMode={isDarkMode} />
         </StyleProfileItem>
         <StyleContent
           $textColor={path === '/mypage' ? theme.colors.textFieldFilledLine : theme.colors.textFieldDefaultLine}
