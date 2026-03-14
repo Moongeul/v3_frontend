@@ -2,7 +2,6 @@
 
 import { ReviewItem } from '@/components/book'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { clientFetchAllPosts } from '@/lib/client/record'
 import { useInView } from 'react-intersection-observer'
 import { useEffect, useState } from 'react'
 import { clientFetchAllCategoryRecords } from '@/lib/client/mypage'
@@ -57,7 +56,7 @@ export default function MyPageCategoryRecordList({ categoryId }: MyPageCategoryR
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
 
-  console.log('review데이터', data)
+  console.log('카테고리 기록 데이터', data)
 
   return (
     <div>

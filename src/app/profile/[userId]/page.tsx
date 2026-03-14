@@ -16,7 +16,6 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
 
   const myQuestionResult = await fetchMyQuestions(1, 3, userId)
   const myQuestions = myQuestionResult.data?.data
-  console.log(categoryResult)
 
   if (!userInfo) {
     return <Spinner />

@@ -2,10 +2,17 @@
 
 import { StyleRecordButton, StyleRecordButtonText } from '@/styles/home/Record.styles'
 import { AddWhiteIcon } from '@/assets/svgComponents'
+import { useRouter } from 'next/navigation'
 
 export default function WriteRecordButton() {
+  const router = useRouter()
+
   return (
-    <StyleRecordButton>
+    <StyleRecordButton
+      onClick={() => {
+        router.push('/mypage/record')
+      }}
+    >
       <AddWhiteIcon width={18} height={18} />
       <StyleRecordButtonText>
         스토리

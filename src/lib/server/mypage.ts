@@ -126,3 +126,33 @@ export const fetchMyQuestions = async (
     }
   }
 }
+
+/**
+ * 카테고리명 조회 API
+ */
+export const fetchCategoryName = async (
+  id: string
+): Promise<
+  ApiCallResult<{
+    categoryId: number
+    title: string
+  }>
+> => {
+  try {
+    const { data, error } = await apiCallServer(`/v2/category/${id}?id=${id}`, {
+      method: 'GET',
+    })
+
+    if (error) {
+      return { success: false, error }
+    }
+
+    return { success: true, data }
+  } catch (error) {
+    console.error('카테고리명 조회 실패:', error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    }
+  }
+}

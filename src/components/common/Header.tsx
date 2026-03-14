@@ -35,8 +35,6 @@ export default function Header({
   // 현재 테마가 다크모드인지 확인 (테마 구조에 따라 theme.isDark 혹은 theme.mode === 'dark' 등으로 변경)
   const isDarkMode = theme.colors.background !== '#FFFFFD'
 
-  console.log('theme', theme)
-
   const onBack = () => {
     if (path) {
       router.push(path)

@@ -4,12 +4,16 @@ import { Button } from '@/components/common'
 import { AddWhiteIcon } from '@/assets/svgComponents'
 import { useRouter } from 'next/navigation'
 
-export default function StoryWriteButton() {
+interface StoryWriteButtonProps {
+  recordId: string
+}
+
+export default function StoryWriteButton({ recordId }: StoryWriteButtonProps) {
   const router = useRouter()
   return (
     <Button
       onClick={() => {
-        router.push('/write')
+        router.push(`/story/${recordId}/write`)
       }}
       width={110}
       size={'sm'}

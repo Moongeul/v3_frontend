@@ -7,13 +7,13 @@ import {
   StyleReviewHeaderMetaTime,
   StyleReviewHeaderMetaUserInfo,
 } from '@/styles/book/Review.styles'
-import { OptionIcon } from '@/assets/svgComponents'
 import { Badge } from '@/components/common'
 import { convertEnumToKorTag } from '@/utils/user'
 import Image from 'next/image'
 import { formatRelativeTime } from '@/utils/common'
 import { ProfileInfoType } from '@/types/user'
 import { useRouter } from 'next/navigation'
+import ThemeOptionIcon from '@/components/common/icon/ThemeOptionIcon'
 
 interface ReviewHeaderProps {
   isProfile?: boolean
@@ -40,7 +40,7 @@ export default function ReviewHeader({ isProfile = false, memberInfo, created }:
         </StyleReviewHeaderMetaUserInfo>
         <StyleReviewHeaderMetaTime>{formatRelativeTime(created)}</StyleReviewHeaderMetaTime>
       </StyleReviewHeaderMetaContainer>
-      <OptionIcon width={24} height={24} />
+      <ThemeOptionIcon />
     </ReviewHeaderContainer>
   )
 }
