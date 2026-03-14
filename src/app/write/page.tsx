@@ -12,10 +12,9 @@ import PrivacyDropDown from '@/components/common/dropdown/PrivacyDropDown'
 import CategoryDropDown from '@/components/common/dropdown/CategoryDropDown'
 import PageField from '@/components/write/PageField'
 import { fetchBookDetailInfo } from '@/lib/server/book'
-import Header from '../../components/common/Header'
-import SubmitButton from '@/components/write/SubmitButton'
 import PageLayout from '../../components/common/PageLayout'
 import { SelectBookItem } from '@/components/question'
+import WriteHeader from '@/components/write/WriteHeader'
 
 export default async function WritePage({
   searchParams,
@@ -32,9 +31,7 @@ export default async function WritePage({
 
   return (
     <main>
-      <Header path={'/home?tab=PUBLIC'} headerType={'dynamic'} rightIcon={<SubmitButton />}>
-        글쓰기
-      </Header>
+      <WriteHeader />
       <PageLayout>
         <div>
           <DropDownContainer>
