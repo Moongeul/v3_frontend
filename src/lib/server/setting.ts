@@ -24,3 +24,26 @@ export const fetchSettingPrivacyLevel = async (): Promise<ApiCallResult<{ privac
     }
   }
 }
+
+/**
+ * 계정 공개 범위 조회 API
+ */
+export const fetchSettingPushAlarm = async (): Promise<ApiCallResult<{ pushEnabled: boolean }>> => {
+  try {
+    const { data, error } = await apiCallServer(`/v2/setting/push`, {
+      method: 'GET',
+    })
+
+    if (error) {
+      return { success: false, error }
+    }
+
+    return { success: true, data }
+  } catch (error) {
+    console.error('푸시 알림 동의 여부 조회:', error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    }
+  }
+}

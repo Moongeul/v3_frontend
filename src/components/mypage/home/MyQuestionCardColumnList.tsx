@@ -16,7 +16,7 @@ export default function MyQuestionCardColumnList({ userId }: MyQuestionCardColum
   const { ref, inView } = useInView()
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['myQuestions'],
+    queryKey: ['myQuestions', userId],
     queryFn: ({ pageParam }) => clientFetchAllMyQuestions({ page: pageParam, size: 20, userId: userId }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {

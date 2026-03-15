@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { useToast } from '@/components/common/toast/ToastContext'
 
 interface SettingAlarmListProps {
-  initialValue: boolean
+  initialValue: boolean | undefined
 }
 
 export default function SettingAlarmList({ initialValue }: SettingAlarmListProps) {
@@ -15,7 +15,7 @@ export default function SettingAlarmList({ initialValue }: SettingAlarmListProps
   const { success, error } = useToast()
   const [isPushEnabled, setIsPushEnabled] = useState(initialValue)
 
-  const handleUpdate = async (isPushEnabled: boolean) => {
+  const handleUpdate = async (isPushEnabled: boolean | undefined) => {
     try {
       const result = await patchSettingPush(!isPushEnabled)
       if (result.success) {
@@ -28,9 +28,10 @@ export default function SettingAlarmList({ initialValue }: SettingAlarmListProps
       error('푸시 알림 설정 실패', '푸시 알림 설정에 실패하였습니다. ')
     }
   }
-  return (
-    <>
-      <ToggleItem onClick={() => handleUpdate(isPushEnabled)} checked={isPushEnabled} content={'푸시 알림 허용'} />
-    </>
-  )
+  if (isPushEnabled !== undefined)
+    return (
+      <>
+        <ToggleItem onClick={() => handleUpdate(isPushEnabled)} checked={isPushEnabled} content={'푸시 알림 허용'} />
+      </>
+    )
 }
