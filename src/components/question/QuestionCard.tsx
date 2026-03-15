@@ -30,6 +30,7 @@ export default function QuestionCard({
   content,
 }: QuestionCardProps) {
   const router = useRouter()
+
   return (
     <StyleQuestionCard onClick={() => router.push(`/question/${questionId}`)} $width={width}>
       <StyleQuestionCardHeader>

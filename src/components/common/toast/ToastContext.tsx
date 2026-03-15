@@ -2,7 +2,7 @@
 
 import { createContext, ReactNode, useCallback, useContext, useState } from 'react'
 
-export type ToastType = 'success' | 'error'
+export type ToastType = 'success' | 'error' | 'interaction'
 
 export interface Toast {
   id: string
@@ -15,7 +15,13 @@ export interface Toast {
 
 interface ToastContextType {
   toasts: Toast[]
-  addToast: (title: string, type: ToastType, description?: string, duration?: number) => void
+  addToast: (
+    title: string,
+    type: ToastType,
+    description?: string,
+    icon?: ReactNode, // 4번째
+    duration?: number // 5번째
+  ) => void
   removeToast: (id: string) => void
 }
 
@@ -29,7 +35,13 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const addToast = useCallback(
-    (title: string, type: ToastType, description?: string, icon?: ReactNode, duration = 3000) => {
+    (
+      title: string,
+      type: ToastType,
+      description?: string,
+      icon?: ReactNode, // icon을 4번째로
+      duration: number = 3000 // duration을 마지막으로
+    ) => {
       const id = Date.now().toString()
       const toast: Toast = { id, title, description, type, icon, duration }
 
@@ -41,7 +53,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
         }, duration)
       }
     },
-    []
+    [removeToast]
   )
 
   return <ToastContext.Provider value={{ toasts, addToast, removeToast }}>{children}</ToastContext.Provider>
@@ -56,5 +68,7 @@ export function useToast() {
   return {
     success: (title: string, description?: string) => context.addToast(title, 'success', description),
     error: (title: string, description?: string) => context.addToast(title, 'error', description),
+    interaction: (title: string, icon: ReactNode, description?: string) =>
+      context.addToast(title, 'interaction', description, icon),
   }
 }

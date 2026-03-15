@@ -1,7 +1,7 @@
 import { BookInfoSummary, Header, PageLayout, Spacing, Spinner } from '@/components/common'
 import { ReviewContentText } from '@/components/book'
-import { AvatarGroup, CommentSummary, Comment, QuestionCardColumnList } from '@/components/question'
-import { fetchAnswers, fetchQuestionDetail, fetchQuestions } from '@/lib/server/question'
+import { AvatarGroup, CommentSummary } from '@/components/question'
+import { fetchAnswers, fetchQuestionDetail } from '@/lib/server/question'
 import { OptionIcon } from '@/assets/svgComponents'
 import CommentInput from '@/components/question/CommentInput'
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
@@ -31,7 +31,11 @@ export default async function QuestionDetailPage({ params }: QuestionDetailPageP
 
   return (
     <main>
-      <Header headerType={'dynamic'} rightIcon={question?.myArticle ? <OptionIcon width={24} height={24} /> : null}>
+      <Header
+        path={'/question'}
+        headerType={'dynamic'}
+        rightIcon={question?.myArticle ? <OptionIcon width={24} height={24} /> : null}
+      >
         질문
       </Header>
 

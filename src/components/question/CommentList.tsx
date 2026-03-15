@@ -34,8 +34,6 @@ export default function CommentList({ questionId }: CommentListProps) {
   // 2차원 배열로 오는 data.pages를 평탄화하여 리스트에 전달
   const allAnswers = data?.pages.flatMap((page) => page.data.data) ?? []
 
-  console.log('allQuestions', allAnswers)
-
   return (
     <div>
       {allAnswers.map((answer) => (

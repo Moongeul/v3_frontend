@@ -15,37 +15,49 @@ import {
   SameTasteIcon,
   WantToReadIcon,
 } from '@/assets/svgComponents'
-
-type ThemeInteractionIconType =
-  | 'SameTasteType'
-  | 'ImpressiveExpressionType'
-  | 'WantToReadType'
-  | 'RelatableType'
-  | 'HelpfulType'
+import { LikeType } from '@/types/record'
 
 interface ThemeInteractionIconProps {
-  type: 'SameTasteType' | 'ImpressiveExpressionType' | 'WantToReadType' | 'RelatableType' | 'HelpfulType'
+  type: LikeType
+  width?: number
+  height?: number
 }
-export default function ThemeInteractionIcon({ type }: ThemeInteractionIconProps) {
+export default function ThemeInteractionIcon({ type, width = 20, height = 20 }: ThemeInteractionIconProps) {
   const theme = useTheme()
   const isDarkMode = theme.colors.background !== '#FFFFFD'
 
-  const renderThemeIcon = (type: ThemeInteractionIconType) => {
+  const renderThemeIcon = (type: LikeType) => {
     switch (type) {
-      case 'SameTasteType':
-        return isDarkMode ? <DarkSameTasteIcon width={20} height={20} /> : <SameTasteIcon width={20} height={20} />
-      case 'ImpressiveExpressionType':
+      case 'SAME_TASTE':
         return isDarkMode ? (
-          <DarkImpressiveExpressionIcon width={20} height={20} />
+          <DarkSameTasteIcon width={width} height={height} />
         ) : (
-          <ImpressiveExpressionIcon width={20} height={20} />
+          <SameTasteIcon width={height} height={height} />
         )
-      case 'WantToReadType':
-        return isDarkMode ? <DarkWantToReadIcon width={20} height={20} /> : <WantToReadIcon width={20} height={20} />
-      case 'HelpfulType':
-        return isDarkMode ? <DarkHelpfulIcon width={20} height={20} /> : <HelpfulIcon width={20} height={20} />
-      case 'RelatableType':
-        return isDarkMode ? <DarkRelatableIcon width={20} height={20} /> : <RelatableIcon width={20} height={20} />
+      case 'IMPRESSIVE_EXPRESSION':
+        return isDarkMode ? (
+          <DarkImpressiveExpressionIcon width={width} height={height} />
+        ) : (
+          <ImpressiveExpressionIcon width={width} height={height} />
+        )
+      case 'WANT_TO_READ':
+        return isDarkMode ? (
+          <DarkWantToReadIcon width={width} height={height} />
+        ) : (
+          <WantToReadIcon width={height} height={height} />
+        )
+      case 'HELPFUL':
+        return isDarkMode ? (
+          <DarkHelpfulIcon width={width} height={height} />
+        ) : (
+          <HelpfulIcon width={height} height={height} />
+        )
+      case 'RELATABLE':
+        return isDarkMode ? (
+          <DarkRelatableIcon width={width} height={height} />
+        ) : (
+          <RelatableIcon width={height} height={height} />
+        )
     }
   }
   return renderThemeIcon(type)

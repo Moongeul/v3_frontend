@@ -1,7 +1,7 @@
 'use client'
 
 import { QuestionCard } from '@/components/question/index'
-import { Spacing } from '@/components/common'
+import { Spacing, Spinner } from '@/components/common'
 import { StyleRecordListColumnWrapper } from '@/styles/question/Question.styles'
 import { useInView } from 'react-intersection-observer'
 import { useInfiniteQuery } from '@tanstack/react-query'
@@ -33,6 +33,8 @@ export default function QuestionCardColumnList() {
   const allQuestions = data?.pages.flatMap((page) => page.data.data) ?? []
 
   console.log('allQuestions', allQuestions)
+
+  if (!allQuestions) return <Spinner size={'lg'} />
 
   return (
     <StyleRecordListColumnWrapper>

@@ -15,7 +15,7 @@ export default async function MyQuestionPage() {
   })
   return (
     <main>
-      <Header headerType={'dynamic'} rightIcon={<AddQuestionButton />}>
+      <Header path={'/mypage'} headerType={'dynamic'} rightIcon={<AddQuestionButton />}>
         질문
       </Header>
       <Spacing height={60} />

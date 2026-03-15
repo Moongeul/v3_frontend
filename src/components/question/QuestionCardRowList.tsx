@@ -3,11 +3,14 @@
 import { QuestionButton, QuestionCard } from '@/components/question/index'
 import { StyleRecordListRowWrapper } from '@/styles/question/Question.styles'
 import { QuestionType } from '@/types/question'
+import { Spinner } from '@/components/common'
 
 interface QuestionCardRowListProps {
   questionList: QuestionType[] | undefined
 }
 export default function QuestionCardRowList({ questionList }: QuestionCardRowListProps) {
+  if (!questionList) return <Spinner size={'lg'} />
+
   return (
     <StyleRecordListRowWrapper>
       {questionList?.map((question) => (

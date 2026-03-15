@@ -16,6 +16,7 @@ export default function QuestionField() {
       <Spacing height={8} />
 
       <TextInput
+        maxLength={2000}
         textType={'textArea'}
         height={90}
         onChange={(e) => {

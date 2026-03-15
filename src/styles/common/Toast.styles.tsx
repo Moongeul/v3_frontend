@@ -35,13 +35,25 @@ export const StyledToastItem = styled(motion.div)<{ type: Toast['type'] }>`
         return theme.colors.baseColor.primary500
       case 'error':
         return theme.colors.textFieldError
+      case 'interaction':
+        return theme.colors.modalFill
     }
   }};
 `
 
-export const StyledToastItemContentWrapper = styled.div`
+export const StyledToastItemContentWrapper = styled.div<{ type: Toast['type'] }>`
   display: flex;
   column-gap: 8px;
+  align-items: ${({ type }) => {
+    switch (type) {
+      case 'success':
+        return 'start'
+      case 'error':
+        return 'start'
+      case 'interaction':
+        return 'center'
+    }
+  }};
 `
 
 export const StyledToastItemIconBox = styled.span`

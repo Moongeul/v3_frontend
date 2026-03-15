@@ -1,10 +1,9 @@
 'use client'
 
 import { useEffect } from 'react'
-import { motion } from 'framer-motion'
 
 import { Toast } from '@/components/common/toast/ToastContext'
-import { AlertErrorIcon, AlertSuccessIcon, WhiteXIcon } from '@/assets/svgComponents'
+import { AlertErrorIcon, AlertSuccessIcon } from '@/assets/svgComponents'
 import { useTheme } from '@emotion/react'
 import {
   StyledToastItem,
@@ -29,10 +28,16 @@ export default function ToastItem({ toast, onClose }: ToastItemProps) {
     return () => clearTimeout(timer)
   }, [toast.duration, onClose])
 
-  const icon = {
-    success: <AlertSuccessIcon width={24} height={24} />,
-    error: <AlertErrorIcon width={24} height={24} />,
-  }[toast.type]
+  const getIcon = () => {
+    if (toast.type === 'interaction') {
+      return toast.icon // interaction 타입은 주입받은 icon 사용
+    }
+
+    return {
+      success: <AlertSuccessIcon width={24} height={24} />,
+      error: <AlertErrorIcon width={24} height={24} />,
+    }[toast.type]
+  }
 
   return (
     <StyledToastItem
@@ -43,25 +48,29 @@ export default function ToastItem({ toast, onClose }: ToastItemProps) {
       transition={{ type: 'tween', duration: 0.3, ease: 'easeOut' }}
       role="alert"
     >
-      <StyledToastItemContentWrapper>
-        <StyledToastItemIconBox>{icon}</StyledToastItemIconBox>
+      <StyledToastItemContentWrapper type={toast.type}>
+        <StyledToastItemIconBox>{getIcon()}</StyledToastItemIconBox>
 
         <StyledToastItemTextBox>
-          <Label labelStyle={typography.titleSm} labelColor={theme.colors.baseColor.lightYellow50}>
+          <Label
+            labelStyle={typography.titleSm}
+            labelColor={toast.type === 'interaction' ? theme.colors.headerText : theme.colors.baseColor.lightYellow50}
+          >
             {toast.title}
           </Label>
 
           {toast.description && (
-            <Label labelStyle={typography.bodySm} labelColor={theme.colors.baseColor.lightYellow300}>
+            <Label
+              labelStyle={typography.bodySm}
+              labelColor={
+                toast.type === 'interaction' ? theme.colors.textFieldFilledLine : theme.colors.baseColor.lightYellow300
+              }
+            >
               {toast.description}
             </Label>
           )}
         </StyledToastItemTextBox>
       </StyledToastItemContentWrapper>
-
-      <button onClick={onClose} className="transition-opacity hover:opacity-75">
-        <WhiteXIcon width={24} height={24} />
-      </button>
     </StyledToastItem>
   )
 }

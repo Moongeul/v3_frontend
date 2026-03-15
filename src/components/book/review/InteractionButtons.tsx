@@ -1,36 +1,79 @@
 'use client'
 
 import { Button } from '@/components/common'
-import {
-  HelpfulIcon,
-  ImpressiveExpressionIcon,
-  RelatableIcon,
-  SameTasteIcon,
-  WantToReadIcon,
-} from '@/assets/svgComponents'
 import { LikesCntType, LikeType, MyLikesStatusType } from '@/types/record'
 import { StyleContainerRow } from '@/styles/common/InteractionButtons.styles'
 import { postLikeId } from '@/lib/client/post'
 import { useRouter } from 'next/navigation'
 import { useQueryClient } from '@tanstack/react-query'
 import ThemeInteractionIcon from '@/components/common/icon/ThemeInteractionIcon'
+import { useToast } from '@/components/common/toast/ToastContext'
 
 interface InteractionButtonProps {
   postId: number
   likesCnt: LikesCntType
   myLikesStatus: MyLikesStatusType
+  content: string
 }
 
-export default function InteractionButtons({ postId, likesCnt, myLikesStatus }: InteractionButtonProps) {
+export default function InteractionButtons({ postId, likesCnt, myLikesStatus, content }: InteractionButtonProps) {
   const router = useRouter()
+  const { interaction } = useToast()
   const queryClient = useQueryClient()
 
+  const renderTitle = (likeType: LikeType) => {
+    switch (likeType) {
+      case 'RELATABLE':
+        return '공감되었어요'
+      case 'HELPFUL':
+        return '도움이 되었어요'
+      case 'SAME_TASTE':
+        return '취향이 통했어요!'
+      case 'IMPRESSIVE_EXPRESSION':
+        return '인상 깊었어요'
+      case 'WANT_TO_READ':
+        return '읽고 싶어요'
+    }
+  }
+
+  const truncateContent = (text: string) => {
+    return text.length > 10 ? `${text.slice(0, 10)}...` : text
+  }
+
+  const renderDescription = (likeType: LikeType) => {
+    const truncated = truncateContent(content)
+    switch (likeType) {
+      case 'RELATABLE':
+        return `${truncated}에 마음을 남겼어요.`
+      case 'HELPFUL':
+        return `${truncated}이 와닿았어요.`
+      case 'SAME_TASTE':
+        return `${truncated}에 공감했어요.`
+      case 'IMPRESSIVE_EXPRESSION':
+        return `${truncated}에 마음을 남겼어요.`
+      case 'WANT_TO_READ':
+        return `${truncated}를 보고 읽고 싶어졌어요.`
+    }
+  }
+
   const handleSubmit = async (e: React.MouseEvent, likeType: LikeType) => {
-    e.stopPropagation() // 함수 시작하자마자 전파 중단
+    e.stopPropagation()
 
     const result = await postLikeId(postId, likeType)
+
     if (result.success) {
+      // 1. 쿼리 무효화를 실행하고 '완료'될 때까지 기다립니다.
+      // invalidateQueries는 Promise를 반환하므로 await가 가능합니다.
       await queryClient.invalidateQueries({ queryKey: ['post'] })
+
+      // 2. 토스트를 띄웁니다.
+      interaction(
+        renderTitle(likeType),
+        <ThemeInteractionIcon width={40} height={40} type={likeType} />,
+        renderDescription(likeType)
+      )
+
+      // 3. 서버 데이터를 다시 불러옵니다.
       router.refresh()
     }
   }
@@ -38,7 +81,7 @@ export default function InteractionButtons({ postId, likesCnt, myLikesStatus }: 
   return (
     <StyleContainerRow>
       <Button
-        leftIcon={<ThemeInteractionIcon type={'SameTasteType'} />}
+        leftIcon={<ThemeInteractionIcon type={'SAME_TASTE'} />}
         width={70}
         size={'sm'}
         variant={myLikesStatus.sameTasteCount ? 'secondary' : 'outline'}
@@ -48,7 +91,7 @@ export default function InteractionButtons({ postId, likesCnt, myLikesStatus }: 
         {likesCnt.sameTasteCount}
       </Button>
       <Button
-        leftIcon={<ThemeInteractionIcon type={'ImpressiveExpressionType'} />}
+        leftIcon={<ThemeInteractionIcon type={'IMPRESSIVE_EXPRESSION'} />}
         width={70}
         size={'sm'}
         variant={myLikesStatus.impressiveExpressionCount ? 'secondary' : 'outline'}
@@ -58,7 +101,7 @@ export default function InteractionButtons({ postId, likesCnt, myLikesStatus }: 
         {likesCnt.impressiveExpressionCount}
       </Button>
       <Button
-        leftIcon={<ThemeInteractionIcon type={'WantToReadType'} />}
+        leftIcon={<ThemeInteractionIcon type={'WANT_TO_READ'} />}
         width={70}
         size={'sm'}
         variant={myLikesStatus.wantToReadCount ? 'secondary' : 'outline'}
@@ -68,7 +111,7 @@ export default function InteractionButtons({ postId, likesCnt, myLikesStatus }: 
         {likesCnt.wantToReadCount}
       </Button>
       <Button
-        leftIcon={<ThemeInteractionIcon type={'RelatableType'} />}
+        leftIcon={<ThemeInteractionIcon type={'RELATABLE'} />}
         width={70}
         size={'sm'}
         variant={myLikesStatus.relatableCount ? 'secondary' : 'outline'}
@@ -78,7 +121,7 @@ export default function InteractionButtons({ postId, likesCnt, myLikesStatus }: 
         {likesCnt.relatableCount}
       </Button>
       <Button
-        leftIcon={<ThemeInteractionIcon type={'HelpfulType'} />}
+        leftIcon={<ThemeInteractionIcon type={'HELPFUL'} />}
         width={70}
         size={'sm'}
         variant={myLikesStatus.helpfulCount ? 'secondary' : 'outline'}
