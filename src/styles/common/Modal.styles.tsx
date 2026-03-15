@@ -21,7 +21,7 @@ export const StyleOverlay = styled(motion.div)`
 export const StyleAnimatedModal = styled(motion.div)`
   position: relative;
   z-index: 110;
-  width: 100%;
+  width: 335px;
   margin: 0 20px;
   background-color: transparent;
   padding: 24px 16px 16px 16px;
