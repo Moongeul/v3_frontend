@@ -88,11 +88,23 @@ export const StyledOptionSelectorContainer = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 12px;
+
+  /* 1. 기준을 화면 하단에 고정 */
   position: fixed;
   bottom: 0;
-  padding: 20px;
+
+  /* 2. 너비를 부모와 동일한 375px로 제한 */
   width: 100%;
-  left: 0;
+  max-width: 375px;
+
+  /* 3. 중앙 정렬 (부모가 중앙에 있으므로 동일하게 맞춰줌) */
+  left: 50%;
+  transform: translateX(-50%);
+
+  padding: 20px;
+  background-color: #ffffff; /* 배경색이 있어야 뒤의 콘텐츠와 겹치지 않음 */
+  box-sizing: border-box; /* 패딩이 너비에 영향을 주지 않도록 설정 */
+  z-index: 100; /* 다른 요소보다 위에 오도록 설정 */
 `
 export const StyledFontList = styled.div`
   display: flex;
