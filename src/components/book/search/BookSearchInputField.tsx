@@ -9,7 +9,7 @@ export default function BookSearchInputField() {
   return (
     <TextInput
       height={48}
-      placeholder={'책 검색'}
+      placeholder={'찾고 싶은 책을 검색해보세요.'}
       value={searchValue ?? ''}
       onChange={(e) => setSearchValue(e.target.value)}
       buttonElement={

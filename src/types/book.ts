@@ -26,3 +26,9 @@ export interface BookReviewType {
   quotes: QuoteType[]
   likesCnt: LikesCntType
 }
+export interface BestSellerType {
+  isbn: string
+  bookImage: string
+  title: string
+  author: string
+}

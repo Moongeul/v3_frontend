@@ -2,20 +2,24 @@
 
 import BestSellerItem from '@/components/book/BestSellerItem'
 import { StyleBestSellerBookRowContainer } from '@/styles/common/Book.styles'
+import { BestSellerType } from '@/types/book'
 
-export default function BestsellerList() {
+interface BestSellerListProps {
+  bestSellers: BestSellerType[] | undefined
+}
+
+export default function BestsellerList({ bestSellers }: BestSellerListProps) {
   return (
     <StyleBestSellerBookRowContainer>
-      <BestSellerItem
-        isbn={'1'}
-        title={'책제목책제목책제목책제목책제목책제목'}
-        author={'작가'}
-        bookImage={'/bookimage.png'}
-      />
-      <BestSellerItem isbn={'1'} title={'책제목'} author={'작가'} bookImage={'/bookimage.png'} />
-      <BestSellerItem isbn={'1'} title={'책제목'} author={'작가'} bookImage={'/bookimage.png'} />
-      <BestSellerItem isbn={'1'} title={'책제목'} author={'작가'} bookImage={'/bookimage.png'} />
-      <BestSellerItem isbn={'1'} title={'책제목'} author={'작가'} bookImage={'/bookimage.png'} />
+      {bestSellers?.map((bestSeller) => (
+        <BestSellerItem
+          key={bestSeller.isbn}
+          isbn={bestSeller.isbn}
+          title={bestSeller.title}
+          author={bestSeller.author}
+          bookImage={bestSeller.bookImage}
+        />
+      ))}
     </StyleBestSellerBookRowContainer>
   )
 }

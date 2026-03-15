@@ -1,27 +1,26 @@
 'use client'
 
-import { Button, Label, Spacing } from '@/components/common'
-import { BestsellerList, BestSellerLoadMoreButton, PopularBook } from '@/components/book/index'
+import { Label, Spacing } from '@/components/common'
+import { BestsellerList, PopularBook } from '@/components/book/index'
 
 import { typography } from '@/styles/theme'
-import { TestBannerGraphic, WhiteRightArrowIcon } from '@/assets/svgComponents'
-import { Banner } from '@/components/home'
 import { WeeklyRecommendBookType } from '@/types/post'
+import { BestSellerType } from '@/types/book'
+import TestBanner from '@/components/book/TestBanner'
 
 interface BookContentProps {
   weeklyRecommendBook: WeeklyRecommendBookType | undefined
+  bestSellers: BestSellerType[] | undefined
 }
 
-export default function BookContent({ weeklyRecommendBook }: BookContentProps) {
+export default function BookContent({ weeklyRecommendBook, bestSellers }: BookContentProps) {
   return (
     <>
       <Spacing height={7} />
-      <Label labelStyle={typography.subtitleLg} labelElement={<BestSellerLoadMoreButton />}>
-        지금 많이 읽는 책
-      </Label>
+      <Label labelStyle={typography.subtitleLg}>지금 많이 읽는 책</Label>
 
       <Spacing height={4} />
-      <BestsellerList />
+      <BestsellerList bestSellers={bestSellers} />
 
       {weeklyRecommendBook ? (
         <>
@@ -34,16 +33,7 @@ export default function BookContent({ weeklyRecommendBook }: BookContentProps) {
       ) : null}
 
       <Spacing height={8} />
-      <Banner
-        path={'/test?step=onboarding'}
-        graphic={<TestBannerGraphic width={114} height={81} />}
-        button={
-          <Button size={'md'} width={139} rightIcon={<WhiteRightArrowIcon width={20} height={20} />}>
-            독서 취향 테스트
-          </Button>
-        }
-        content={'나의 독서 취향이 궁금하다면?'}
-      />
+      <TestBanner />
     </>
   )
 }

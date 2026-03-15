@@ -4,17 +4,19 @@ import { useBookStore } from '@/store/bookStore'
 import { useWriteStore } from '@/store/writeStore'
 import SubmitButton from '@/components/write/SubmitButton'
 import Header from '../common/Header'
+import { useRouter } from 'next/navigation'
 
 export default function WriteHeader() {
+  const router = useRouter()
   const { setSearchValue } = useBookStore((state) => state)
   const { resetWriteData } = useWriteStore((state) => state)
   return (
     <Header
       onClick={() => {
+        router.push('/home?tab=PUBLIC')
         setSearchValue('')
         resetWriteData()
       }}
-      path={'/home?tab=PUBLIC'}
       headerType={'dynamic'}
       rightIcon={<SubmitButton />}
     >

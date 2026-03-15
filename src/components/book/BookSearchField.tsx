@@ -11,7 +11,7 @@ export default function BookSearchField() {
   return (
     <TextInput
       height={48}
-      placeholder={'책 검색'}
+      placeholder={'찾고 싶은 책을 검색해보세요.'}
       onClick={onNavigation}
       buttonElement={
         <Button width={80} size={'lg'} variant={'primary'}>

@@ -1,5 +1,4 @@
 import { ApiCallResult } from '@/types/common'
-import { BookType } from '@/types/book'
 import { apiCallServer } from '@/lib/api.server'
 import { WeeklyRecommendBookType } from '@/types/post'
 
