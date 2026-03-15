@@ -6,6 +6,7 @@ import { ReviewList } from '@/components/book'
 import { WriteBannerGraphic, WhiteRightArrowIcon } from '@/assets/svgComponents'
 import { fetchQuestions } from '@/lib/server/question'
 import HomeModal from '@/components/common/modal/HomeModal'
+import HomeBanner from '@/components/home/HomeBanner'
 
 export default async function HomePage({
   searchParams,
@@ -28,16 +29,7 @@ export default async function HomePage({
       <Tab tabList={tabList} />
       <Spacing height={20} />
 
-      <Banner
-        content={'오늘 읽은 문장, 기록해둘래요?'}
-        graphic={<WriteBannerGraphic width={132} height={66} />}
-        button={
-          <Button size={'md'} width={124} rightIcon={<WhiteRightArrowIcon width={20} height={20} />}>
-            기록 시작하기
-          </Button>
-        }
-        path={'/write'}
-      />
+      <HomeBanner />
       <Spacing height={32} />
 
       <StoryList tab={tab} />
