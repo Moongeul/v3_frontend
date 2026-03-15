@@ -1,10 +1,11 @@
-import { Tab } from '@/components/common'
+import { Header, NavBar, PageLayout, Spacing, Tab } from '@/components/common'
 import { RecordTabType } from '@/types/record'
 import BookShelfRecord from '@/components/record/BookShelfRecord'
 import CalendarRecord from '@/components/record/CalendarRecord'
 import RatingRecord from '@/components/record/RatingRecord'
 import ReportRecord from '@/components/record/ReportRecord'
 import WishListRecord from '@/components/record/WishListRecord'
+import AddRecordButton from '@/components/record/AddRecordButton'
 
 function FindResultSwitcher(tab: RecordTabType) {
   if (tab === 'BOOKSHELF') return <BookShelfRecord />
@@ -33,8 +34,18 @@ export default async function RecordPage({
   ]
   return (
     <main>
-      <Tab tabList={tabList} />
-      {FindResultSwitcher(tab)}
+      <Header headerType={'title'} rightIcon={<AddRecordButton />}>
+        책장 및 리포트
+      </Header>
+      <Spacing height={60} />
+
+      <PageLayout>
+        <Tab tabList={tabList} />
+        {FindResultSwitcher(tab)}
+      </PageLayout>
+
+      <Spacing height={98} />
+      <NavBar />
     </main>
   )
 }

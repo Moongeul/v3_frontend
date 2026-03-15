@@ -10,6 +10,7 @@ import { useStoryStore } from '@/store/storyStore'
 import { BookType } from '@/types/book'
 import { BookQuote } from '@/components/book'
 import { useToast } from '@/components/common/toast/ToastContext'
+import { useRouter } from 'next/navigation'
 
 interface StoryContentProps {
   postId: number
@@ -20,6 +21,8 @@ interface StoryContentProps {
 }
 
 export default function StoryContent({ bookInfo, content, rating, created, postId }: StoryContentProps) {
+  const router = useRouter()
+
   const { bgColor, menu, selectedQuotes, fontType } = useStoryStore((state) => state)
   const { success, error } = useToast()
   const contentRef = useRef<HTMLDivElement>(null)
@@ -45,13 +48,14 @@ export default function StoryContent({ bookInfo, content, rating, created, postI
       })
 
       if (response.ok) {
-        success('이미지 전송 성공', '스토리 이미지 전송에 성공했어요.')
+        success('스토리 생성 성공', '스토리를 생성했어요.')
+        router.push('/home?tab=PUBLIC')
       } else {
-        error('이미지 전송 실패', '스토리 이미지 전송에 실패했어요.')
+        error('스토리 생성 실패', '스토리를 생성하지 못했어요.')
       }
     } catch (e) {
       console.error('Capture Error:', e)
-      error('이미지 전송 실패', '이미지 캡쳐 중 오류가 발생했습니다.')
+      error('스토리 생성 실패', '스토리를 생성하지 못했어요.')
     }
   }, [postId, success, error]) // 의존성 추가
 

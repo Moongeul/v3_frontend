@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { BookInfoSummary, BottomBorder, Spacing } from '@/components/common'
 import { ProfileImageWrapper, StyleReviewContentContainer, StyleReviewItemContainer } from '@/styles/book/Review.styles'
-import { ReviewHeader, ReviewContent, InteractionButton } from '@/components/book'
+import { ReviewHeader, ReviewContent } from '@/components/book'
 import { BookType } from '@/types/book'
 import { QuoteType } from '@/types/write'
 import Image from 'next/image'

@@ -11,6 +11,7 @@ import {
 import { StyleContent } from '@/styles/common/Common.styles'
 import { baseColor, typography } from '@/styles/theme'
 import { WhiteStarIcon } from '@/assets/svgComponents'
+import { useRouter } from 'next/navigation'
 
 interface BookProps {
   backgroundColor: string
@@ -32,8 +33,18 @@ export default function Book({
   backgroundColor,
   borderColor,
 }: BookProps) {
+  const router = useRouter()
+
   return (
-    <StyleBook $width={weight} $backgroundColor={backgroundColor} $height={height} $borderColor={borderColor}>
+    <StyleBook
+      onClick={() => {
+        router.push(`/${articleId}`)
+      }}
+      $width={weight}
+      $backgroundColor={backgroundColor}
+      $height={height}
+      $borderColor={borderColor}
+    >
       <StyleBookContent>
         {/* 그룹으로 묶어서 가로 배치 후 회전 */}
         <StyleTitleGroup $parentHeight={height}>

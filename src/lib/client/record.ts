@@ -1,6 +1,7 @@
 import { APIResponseType, Paging } from '@/types/common'
 import { BookShelfType, CalendarType, RecordType } from '@/types/record'
 import { BookType } from '@/types/book'
+import { CategoryRecordSortByType } from '@/types/mypage'
 
 /**
  * 기록 전체 보기
@@ -96,6 +97,45 @@ export const clientFetchAllWishReadBooks = async (params: {
       'Content-Type': 'application/json',
     },
   })
+
+  return await response.json()
+}
+
+/**
+ * 읽은 책 별점 구간 상세 조회 API
+ */
+export const clientFetchAllRatingRangeRecords = async (params: {
+  range: string
+  userId?: number
+  sortBy: CategoryRecordSortByType
+  page: number
+  size: number
+}): Promise<APIResponseType<Paging<RecordType[]>>> => {
+  const { page = 1, size = 20, sortBy, userId, range } = params
+  const searchParams = new URLSearchParams()
+  searchParams.append('page', page.toString())
+  searchParams.append('size', size.toString())
+  searchParams.append('sortBy', sortBy.toString())
+  searchParams.append('range', range.toString())
+
+  if (userId) {
+    searchParams.append('userId', userId.toString())
+  }
+
+  // 요청 URL 조립
+  const url = `/api/bookshelf/done-read/rating-summary/details?${searchParams.toString()}`
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  if (!response.ok) {
+    // 에러 핸들링을 추가하면 더 안전합니다.
+    throw new Error('Failed to fetch posts')
+  }
 
   return await response.json()
 }

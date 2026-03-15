@@ -1,12 +1,17 @@
+'use client'
+
 import { Button, Spacing } from '@/components/common'
 import ProfileInfo from '@/components/mypage/home/ProfileInfo'
 import { UserInfoType } from '@/types/user'
+import { useRouter } from 'next/navigation'
 
 interface ProfileProps {
   userInfo: UserInfoType | undefined
 }
 
-export default async function MyProfile({ userInfo }: ProfileProps) {
+export default function MyProfile({ userInfo }: ProfileProps) {
+  const router = useRouter()
+
   return (
     <>
       <ProfileInfo
@@ -19,7 +24,13 @@ export default async function MyProfile({ userInfo }: ProfileProps) {
 
       <Spacing height={20} />
 
-      <Button variant={'outline'} size={'md'}>
+      <Button
+        onClick={() => {
+          router.push(`/profile/edit`)
+        }}
+        variant={'outline'}
+        size={'md'}
+      >
         프로필 편집
       </Button>
     </>

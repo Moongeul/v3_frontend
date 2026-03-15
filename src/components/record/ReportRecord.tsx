@@ -1,3 +1,9 @@
+import PrepareService from '@/components/record/report/PrepareService'
+
 export default function ReportRecord() {
-  return <></>
+  return (
+    <main>
+      <PrepareService />
+    </main>
+  )
 }

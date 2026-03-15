@@ -1,6 +1,7 @@
 'use client'
 import { StylePostCountTag } from '@/styles/record/BookShelf.styles'
 import { StyledRatingItem } from '@/styles/record/Rating.styles'
+import { useRouter } from 'next/navigation'
 
 interface RatingItemProps {
   label: string // 예: "4.5 ~ 5.0"
@@ -10,11 +11,19 @@ interface RatingItemProps {
 }
 
 export default function RatingItem({ label, count, color, width }: RatingItemProps) {
+  const router = useRouter()
+
   // 너비가 68px(가장 작은 단계)이거나 count가 없을 때 태그를 숨깁니다.
   const isSmallest = width === 68 || width === '68px'
 
   return (
-    <StyledRatingItem $color={color} $width={width}>
+    <StyledRatingItem
+      onClick={() => {
+        router.push(`/record/rating/${label}`)
+      }}
+      $color={color}
+      $width={width}
+    >
       {label}
       {/* 가장 작은 너비가 아닐 때만 개수 태그 표시 */}
       {!isSmallest && count > 0 && <StylePostCountTag>+{count}</StylePostCountTag>}
