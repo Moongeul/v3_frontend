@@ -1,14 +1,9 @@
 'use client'
 
-import { KeyboardEvent } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { Button, TextInput } from '@/components/common'
+import { TextInput } from '@/components/common'
 import { useSearchStore } from '@/store/searchStore'
 
 export default function SearchField() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-
   // Zustand 스토어에서 상태와 액션 가져오기
   const { searchValue, setSearchValue } = useSearchStore()
 

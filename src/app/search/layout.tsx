@@ -1,4 +1,5 @@
 import { Header, PageLayout, Spacing } from '@/components/common'
+import SearchHeader from '@/components/search/SearchHeader'
 export default function BookLayout({
   children,
 }: Readonly<{
@@ -6,7 +7,7 @@ export default function BookLayout({
 }>) {
   return (
     <div>
-      <Header headerType={'dynamic'}>검색</Header>
+      <SearchHeader />
 
       <Spacing height={60} />
       <PageLayout>{children}</PageLayout>

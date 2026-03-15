@@ -2,7 +2,7 @@
 
 import { StylePrivateNoticeContainer } from '@/styles/mypage/Privacy.styles'
 import { LockIcon } from '@/assets/svgComponents'
-import { Label, Spacing } from '@/components/common'
+import { Spacing } from '@/components/common'
 import { typography } from '@/styles/theme'
 import { StyleContent } from '@/styles/common/Common.styles'
 
