@@ -10,13 +10,13 @@ export default async function MyQuestionPage({ params }: { params: Promise<{ use
 
   // 서버에서 첫 번째 페이지(0) 미리 가져오기
   await queryClient.prefetchInfiniteQuery({
-    queryKey: ['questions'],
+    queryKey: ['questions', userId],
     queryFn: ({ pageParam }) => fetchMyQuestions(pageParam, 10, userId),
     initialPageParam: 1,
   })
   return (
     <main>
-      <Header path={'/mypage'} headerType={'dynamic'} rightIcon={<AddQuestionButton />}>
+      <Header headerType={'dynamic'} rightIcon={<AddQuestionButton />}>
         질문
       </Header>
       <Spacing height={60} />
