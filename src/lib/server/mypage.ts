@@ -107,7 +107,7 @@ export const fetchMyQuestions = async (
 ): Promise<ApiCallResult<Paging<QuestionType[]>>> => {
   try {
     const { data, error } = await apiCallServer(
-      `/v2/member/question-list?page=${pageParam}&size=${size}${userId ? `&userId=${userId}` : ''}`,
+      `/v2/member/question-list?${userId ? `userId=${userId}&` : ''}page=${pageParam}&size=${size}`,
       {
         method: 'GET',
       }

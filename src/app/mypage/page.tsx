@@ -56,17 +56,17 @@ export default async function MypagePage() {
           />
 
           <Spacing height={24} />
-          <Record category={category} />
+          <Record category={category} userId={userInfo?.id} />
 
           <Spacing height={24} />
-          <Story />
+          <Story userId={userInfo?.id} />
 
           <Spacing height={24} />
-          <Question myQuestions={myQuestions} />
+          <Question userId={userInfo?.id} nickname={userInfo?.nickname} myQuestions={myQuestions} />
 
           <Spacing height={24} />
           <MypageItem content={'독서 취향 테스트'} path={'/test'} />
-          <MypageItem content={'내가 공감한 기록'} path={'/mypage/like'} />
+          <MypageItem content={'내가 공감한 기록'} path={`/mypage/${userInfo?.id}/like`} />
 
           <Spacing height={300} />
         </div>

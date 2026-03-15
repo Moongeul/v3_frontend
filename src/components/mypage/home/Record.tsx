@@ -8,9 +8,10 @@ import { useRouter } from 'next/navigation'
 
 interface RecordProps {
   category: MyCategoryResponseType | undefined
+  userId: number | undefined
 }
 
-export default function Record({ category }: RecordProps) {
+export default function Record({ category, userId }: RecordProps) {
   const router = useRouter()
 
   return (
@@ -20,7 +21,7 @@ export default function Record({ category }: RecordProps) {
         labelElement={
           <Button
             onClick={() => {
-              router.push('/mypage/record')
+              router.push(`/mypage/${userId}/record`)
             }}
             variant={'ghost'}
             size={'sm'}

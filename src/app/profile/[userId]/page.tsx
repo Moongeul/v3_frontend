@@ -33,12 +33,12 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
 
           {userInfo.privacyLevel === 'PUBLIC' ? (
             <>
-              <Record category={category} />
+              <Record userId={userInfo.id} category={category} />
               <Spacing height={24} />
-              <Story />
+              {/*<Story />*/}
 
               <Spacing height={24} />
-              <Question myQuestions={myQuestions} />
+              <Question userId={userInfo.id} nickname={userInfo.nickname} myQuestions={myQuestions} />
             </>
           ) : (
             <PrivateNotice />

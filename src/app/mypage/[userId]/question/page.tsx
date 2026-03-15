@@ -4,13 +4,14 @@ import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query
 import { fetchMyQuestions } from '@/lib/server/mypage'
 import MyQuestionCardColumnList from '@/components/mypage/home/MyQuestionCardColumnList'
 
-export default async function MyQuestionPage() {
+export default async function MyQuestionPage({ params }: { params: Promise<{ userId: string }> }) {
+  const { userId } = await params
   const queryClient = new QueryClient()
 
   // 서버에서 첫 번째 페이지(0) 미리 가져오기
   await queryClient.prefetchInfiniteQuery({
     queryKey: ['questions'],
-    queryFn: ({ pageParam }) => fetchMyQuestions(pageParam, 10),
+    queryFn: ({ pageParam }) => fetchMyQuestions(pageParam, 10, userId),
     initialPageParam: 1,
   })
   return (
@@ -23,7 +24,7 @@ export default async function MyQuestionPage() {
       <PageLayout>
         {/* 서버에서 만든 상태를 클라이언트로 전달 */}
         <HydrationBoundary state={dehydrate(queryClient)}>
-          <MyQuestionCardColumnList />
+          <MyQuestionCardColumnList userId={userId} />
         </HydrationBoundary>
       </PageLayout>
     </main>

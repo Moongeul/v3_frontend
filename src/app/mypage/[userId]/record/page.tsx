@@ -2,8 +2,9 @@ import { Header, NavBar, PageLayout, Spacing } from '@/components/common'
 import { RecordCards } from '@/components/mypage'
 import { fetchMyCategoryList, fetchUserInfo } from '@/lib/server/mypage'
 
-export default async function MypageRecordPage() {
-  const userInfoResult = await fetchUserInfo()
+export default async function MypageRecordPage({ params }: { params: Promise<{ userId: string }> }) {
+  const { userId } = await params
+  const userInfoResult = await fetchUserInfo(userId)
   const userInfo = userInfoResult.data
 
   const categoryResult = await fetchMyCategoryList(userInfo?.id)

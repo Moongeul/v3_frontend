@@ -20,11 +20,16 @@ export const serverFetchAllPosts = async (page: number, size: number) => {
 
 export const serverFetchAllDoneReadBooks = async (
   page: number,
-  size: number
+  size: number,
+  userId?: string
 ): Promise<APIResponseType<Paging<BookShelfType[]>>> => {
   const searchParams = new URLSearchParams()
   searchParams.append('page', page.toString())
   searchParams.append('size', size.toString())
+
+  if (userId) {
+    searchParams.append('userId', userId.toString())
+  }
 
   const response = await apiFetchServer(`/v2/bookshelf/done-read?${searchParams.toString()}`, {
     method: 'GET',

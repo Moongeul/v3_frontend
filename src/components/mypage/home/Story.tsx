@@ -12,7 +12,11 @@ import { StyleStoryList } from '@/styles/home/Record.styles'
 
 const DEFAULT_SIZE = 20
 
-export default function Story() {
+interface StoryProps {
+  userId: number | undefined
+}
+
+export default function Story({ userId }: StoryProps) {
   // 1. queryKey를 tab에 따라 분리하여 캐시 충돌 방지
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ['stories'],
@@ -20,6 +24,7 @@ export default function Story() {
       clientFetchMyStory({
         page: pageParam as number,
         size: DEFAULT_SIZE,
+        userId,
       }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {

@@ -221,6 +221,7 @@ export const clientFetchAllDoneReadBooks = async (params: {
 export const clientFetchMyStory = async (params: {
   page: number
   size: number
+  userId?: number
 }): Promise<APIResponseType<Paging<MyStoryType[]>>> => {
   const { page = 1, size = 20 } = params
 

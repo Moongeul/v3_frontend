@@ -8,12 +8,16 @@ import { QuestionCard } from '@/components/question'
 import { Spacing } from '@/components/common'
 import { clientFetchAllMyQuestions } from '@/lib/client/mypage'
 
-export default function MyQuestionCardColumnList() {
+interface MyQuestionCardColumnListProps {
+  userId: string
+}
+
+export default function MyQuestionCardColumnList({ userId }: MyQuestionCardColumnListProps) {
   const { ref, inView } = useInView()
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ['myQuestions'],
-    queryFn: ({ pageParam }) => clientFetchAllMyQuestions({ page: pageParam, size: 20 }),
+    queryFn: ({ pageParam }) => clientFetchAllMyQuestions({ page: pageParam, size: 20, userId: userId }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       // 서버 응답(Paging 구조)에 따라 다음 페이지 번호 계산

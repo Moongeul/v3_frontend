@@ -6,6 +6,7 @@ import { UserInfoType } from '@/types/user'
 import { StyleUserProfileButtons } from '@/styles/profile/Profile.styles'
 import { postFollow, postUnFollow } from '@/lib/client/mypage'
 import { useRouter } from 'next/navigation'
+import { useToast } from '@/components/common/toast/ToastContext'
 
 interface UserProfileProps {
   userInfo: UserInfoType
@@ -13,6 +14,7 @@ interface UserProfileProps {
 
 export default function UserProfile({ userInfo }: UserProfileProps) {
   const router = useRouter()
+  const { success, error } = useToast()
   return (
     <>
       <ProfileInfo
@@ -30,11 +32,19 @@ export default function UserProfile({ userInfo }: UserProfileProps) {
           onClick={async () => {
             if (userInfo.myFollowStatus === 'ACCEPTED') {
               const result = await postUnFollow(userInfo.id)
-              console.log('언팔', result)
+              if (result.success) {
+                success('팔로우 취소 성공', '팔로우를 취소했어요')
+              } else {
+                error('팔로우 취소 실패', '팔로우를 취소하지 못헀어요.')
+              }
               router.refresh()
             } else {
               const result = await postFollow(userInfo.id)
-              console.log('팔로우', result)
+              if (result.success) {
+                success('팔로우 성공', '팔로우를 했어요')
+              } else {
+                error('팔로우 실패', '팔로우를 하지 못헀어요.')
+              }
               router.refresh()
             }
           }}
@@ -44,7 +54,13 @@ export default function UserProfile({ userInfo }: UserProfileProps) {
           {userInfo.myFollowStatus === 'ACCEPTED' ? '팔로잉' : '팔로우'}
         </Button>
         {userInfo.privacyLevel === 'PUBLIC' && (
-          <Button variant={'outline'} size={'md'}>
+          <Button
+            onClick={() => {
+              router.push(`/profile/${userInfo.id}/record`)
+            }}
+            variant={'outline'}
+            size={'md'}
+          >
             책장 둘러보기
           </Button>
         )}

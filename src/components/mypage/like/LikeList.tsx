@@ -11,7 +11,11 @@ import SortByDropDown from '@/components/mypage/record/SortByDropDown'
 
 const DEFAULT_SIZE = 20
 
-export default function LikeList() {
+interface LikeListProps {
+  userId: string
+}
+
+export default function LikeList({ userId }: LikeListProps) {
   const [sortBy, setSortBy] = useState<CategoryRecordSortByType>('LATEST')
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({

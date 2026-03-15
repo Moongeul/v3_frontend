@@ -9,9 +9,14 @@ export async function GET(request: NextRequest) {
 
     const page = searchParams.get('page') || '0'
     const size = searchParams.get('size') || '20'
+    const userId = searchParams.get('userId')
 
     backendParams.append('page', page)
     backendParams.append('size', size)
+
+    if (userId) {
+      searchParams.append('userId', userId.toString())
+    }
 
     const endpoint = `/v2/bookshelf/done-read?${backendParams.toString()}`
 

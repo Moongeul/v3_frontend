@@ -7,9 +7,11 @@ import { QuestionCard } from '@/components/question'
 import { QuestionType } from '@/types/question'
 import { useRouter } from 'next/navigation'
 interface MyQuestionType {
+  userId: number | undefined
+  nickname: string | undefined
   myQuestions: QuestionType[] | undefined
 }
-export default function Question({ myQuestions }: MyQuestionType) {
+export default function Question({ userId, nickname, myQuestions }: MyQuestionType) {
   const router = useRouter()
   return (
     <>
@@ -17,7 +19,7 @@ export default function Question({ myQuestions }: MyQuestionType) {
         labelElement={
           <Button
             onClick={() => {
-              router.push('/mypage/question')
+              router.push(`/mypage/${userId}/question`)
             }}
             variant={'ghost'}
             size={'sm'}
@@ -28,7 +30,7 @@ export default function Question({ myQuestions }: MyQuestionType) {
           </Button>
         }
       >
-        내가 올린 질문카드
+        {nickname}님이 올린 질문카드
       </Label>
       <Spacing height={4} />
 
