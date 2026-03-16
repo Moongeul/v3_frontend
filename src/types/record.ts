@@ -1,5 +1,5 @@
 import { BookType } from '@/types/book'
-import { ProfileInfoType, TagEnumType } from '@/types/user'
+import { ProfileInfoType } from '@/types/user'
 
 export type RecordTabType = 'BOOKSHELF' | 'CALENDAR' | 'RATING' | 'REPORT' | 'WISHLIST'
 

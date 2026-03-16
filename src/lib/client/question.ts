@@ -1,6 +1,5 @@
 import { ApiCallResult, APIResponseType, Paging } from '@/types/common'
 import { AnswerType, CreateAnswerType, CreateQuestionType, QuestionType } from '@/types/question'
-import { RecordType } from '@/types/record'
 
 /**
  * 질문 생성 API
