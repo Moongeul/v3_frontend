@@ -1,7 +1,6 @@
 'use client'
 
 import { Label, Spacing, StarRating } from '@/components/common'
-import RatingInputField from '@/components/write/RatingInputField'
 import { useEditStore } from '@/store/editStore'
 import EditRatingInputField from '@/components/edit/EditRatingInputField'
 

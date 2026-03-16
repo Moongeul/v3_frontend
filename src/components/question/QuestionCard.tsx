@@ -1,7 +1,7 @@
 'use client'
 
 import { BookInfoSummary, Spacing } from '@/components/common'
-import { ButtonTextSecondaryRightArrowIcon, OptionIcon } from '@/assets/svgComponents'
+import { ButtonTextSecondaryRightArrowIcon } from '@/assets/svgComponents'
 import { AvatarGroup, CommentSummary } from '@/components/question/index'
 import { useRouter } from 'next/navigation'
 import {
@@ -11,6 +11,12 @@ import {
   StyleQuestionCardText,
 } from '@/styles/question/Question.styles'
 import { QuestionType } from '@/types/question'
+import ThemeOptionIcon from '@/components/common/icon/ThemeOptionIcon'
+import { useState } from 'react'
+import { useEditStore } from '@/store/editStore'
+import DeleteQuestionModal from '@/components/common/modal/DeleteQuestionModal'
+import { useModalStore } from '@/store/modalStore'
+import QuestionOptionsMenu from '@/components/common/option/QuestionOptionMenu'
 
 interface QuestionCardProps extends QuestionType {
   width?: number
@@ -30,12 +36,43 @@ export default function QuestionCard({
   content,
 }: QuestionCardProps) {
   const router = useRouter()
+  const [isMenuOpen, setIsMenuOpen] = useState(false) // 메뉴 열림 상태
+  const { setQuestionField } = useEditStore((state) => state)
+
+  const handleMenuClick = (e: React.MouseEvent) => {
+    e.stopPropagation() // 카드 클릭 이벤트(상세 이동)가 발생하지 않도록 방지
+    setIsMenuOpen(!isMenuOpen)
+  }
+
+  const onDeleteClick = () => {
+    setIsMenuOpen(false)
+  }
+
+  const onEditClick = () => {
+    setQuestionField('content', content)
+    setQuestionField('isbn', bookInfo.isbn)
+    setIsMenuOpen(false)
+    router.push(`/question/${questionId}/edit?isbn=${bookInfo.isbn}`)
+  }
 
   return (
-    <StyleQuestionCard onClick={() => router.push(`/question/${questionId}`)} $width={width}>
+    <StyleQuestionCard
+      onClick={(e) => {
+        e.stopPropagation()
+        router.push(`/question/${questionId}`)
+      }}
+      $width={width}
+    >
+      <DeleteQuestionModal questionId={questionId} />
+
       <StyleQuestionCardHeader>
         <AvatarGroup participantProfileImages={participantProfileImages} participantCount={participantCount} />
-        {myArticle && <OptionIcon width={24} height={24} />}
+        {myArticle && (
+          <div style={{ position: 'relative' }}>
+            <ThemeOptionIcon onClick={handleMenuClick} />
+            {isMenuOpen && <QuestionOptionsMenu onDeleteClick={onDeleteClick} onEditClick={onEditClick} />}
+          </div>
+        )}
       </StyleQuestionCardHeader>
       <Spacing height={8} />
 

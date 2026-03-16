@@ -1,7 +1,7 @@
 import { apiCallServer } from '@/lib/api.server'
 import { NextRequest, NextResponse } from 'next/server'
 
-// [isbn] 파라미터를 받아오기 위해 params 타입을 지정합니다.
+// [questionId] 파라미터를 받아오기 위해 params 타입을 지정합니다.
 export async function GET(request: NextRequest, { params }: { params: Promise<{ questionId: string }> }) {
   try {
     const { questionId } = await params

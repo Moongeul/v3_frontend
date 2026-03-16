@@ -10,12 +10,15 @@ import Image from 'next/image'
 import { Badge } from '@/components/common'
 import { convertEnumToKorTag } from '@/utils/user'
 import { formatRelativeTime } from '@/utils/common'
-import { GrayXIcon } from '@/assets/svgComponents'
+import { GrayOptionIcon, GrayXIcon } from '@/assets/svgComponents'
 import { useRouter } from 'next/navigation'
 import { ProfileInfoType } from '@/types/user'
 import { StyleContent } from '@/styles/common/Common.styles'
 import { useTheme } from '@emotion/react'
 import { typography } from '@/styles/theme'
+import { useState } from 'react'
+import ThemeOptionIcon from '@/components/common/icon/ThemeOptionIcon'
+import StoryOptionsMenu from '@/components/common/option/StoryOptionMenu'
 
 interface DetailHeaderProps {
   memberInfo: ProfileInfoType
@@ -25,6 +28,12 @@ interface DetailHeaderProps {
 export default function DetailHeader({ memberInfo, created }: DetailHeaderProps) {
   const router = useRouter()
   const theme = useTheme()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const handleMenuClick = (e: React.MouseEvent) => {
+    e.stopPropagation() // 카드 클릭 이벤트(상세 이동)가 발생하지 않도록 방지
+    setIsMenuOpen(!isMenuOpen)
+  }
 
   return (
     <StyledDetailHeader>
@@ -45,7 +54,11 @@ export default function DetailHeader({ memberInfo, created }: DetailHeaderProps)
           <StyleReviewHeaderMetaTime>{formatRelativeTime(created)}</StyleReviewHeaderMetaTime>
         </StyleReviewHeaderMetaContainer>
       </ReviewHeaderContainer>
-      {/*<GrayOptionIcon width={36} height={36} />*/}
+      <div style={{ position: 'relative' }}>
+        <GrayOptionIcon onClick={handleMenuClick} width={36} height={36} />
+        {isMenuOpen && <StoryOptionsMenu />}
+      </div>
+
       <GrayXIcon
         onClick={() => {
           router.back()

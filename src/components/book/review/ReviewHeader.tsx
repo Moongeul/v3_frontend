@@ -40,7 +40,7 @@ export default function ReviewHeader({ isProfile = false, memberInfo, created }:
         </StyleReviewHeaderMetaUserInfo>
         <StyleReviewHeaderMetaTime>{formatRelativeTime(created)}</StyleReviewHeaderMetaTime>
       </StyleReviewHeaderMetaContainer>
-      <ThemeOptionIcon />
+      <ThemeOptionIcon onClick={() => {}} />
     </ReviewHeaderContainer>
   )
 }

@@ -2,18 +2,16 @@ import { BookInfoSummary, Header, PageLayout, Spacing, Spinner } from '@/compone
 import { ReviewContentText } from '@/components/book'
 import { AvatarGroup, CommentSummary } from '@/components/question'
 import { fetchAnswers, fetchQuestionDetail } from '@/lib/server/question'
-import { OptionIcon } from '@/assets/svgComponents'
 import CommentInput from '@/components/question/CommentInput'
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import CommentList from '@/components/question/CommentList'
+import QuestionOptionIcon from '@/components/question/QuestionOptionIcon'
+import DeleteQuestionModal from '@/components/common/modal/DeleteQuestionModal'
 
-interface QuestionDetailPageProps {
-  params: Promise<{ isbn: string }>
-}
-
-export default async function QuestionDetailPage({ params }: QuestionDetailPageProps) {
-  const { isbn } = await params
-  const result = await fetchQuestionDetail(isbn)
+export default async function QuestionDetailPage({ params }: { params: Promise<{ questionId: string }> }) {
+  const { questionId } = await params
+  console.log('questionId', questionId)
+  const result = await fetchQuestionDetail(questionId)
   const question = result.data
 
   const queryClient = new QueryClient()
@@ -31,10 +29,15 @@ export default async function QuestionDetailPage({ params }: QuestionDetailPageP
 
   return (
     <main>
+      <DeleteQuestionModal questionId={questionId} />
       <Header
         path={'/question'}
         headerType={'dynamic'}
-        rightIcon={question?.myArticle ? <OptionIcon width={24} height={24} /> : null}
+        rightIcon={
+          question?.myArticle ? (
+            <QuestionOptionIcon questionId={questionId} isbn={question.bookInfo.isbn} content={question.content} />
+          ) : null
+        }
       >
         질문
       </Header>
