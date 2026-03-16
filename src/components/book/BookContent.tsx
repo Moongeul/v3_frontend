@@ -16,11 +16,8 @@ interface BookContentProps {
 }
 
 export default function BookContent({ weeklyRecommendBook, bestSellers, mostRecordedBook }: BookContentProps) {
+  // 쿠키 값은 문자열로 반환됩니다 ('true' or 'false')
   const isReadingTaste = Cookies.get('isReadingTaste')
-
-  // 디버깅용 로그
-  console.log('isReadingTaste', isReadingTaste)
-  console.log('data', { weeklyRecommendBook, bestSellers, mostRecordedBook })
 
   return (
     <>
@@ -30,8 +27,9 @@ export default function BookContent({ weeklyRecommendBook, bestSellers, mostReco
       <Spacing height={4} />
       <BestsellerList bestSellers={bestSellers} />
 
-      {/* 1. 취향이 닮은 사람들의 인기책 (mostRecordedBook이 있을 때) */}
-      {mostRecordedBook && (
+      {/* 1. 취향이 닮은 사람들의 인기책:
+          isReadingTaste가 'false' 문자열이고 데이터가 있을 때만 렌더링 */}
+      {isReadingTaste === 'false' && mostRecordedBook && (
         <>
           <Spacing height={36} />
           <Label labelStyle={typography.subtitleLg}>취향이 닮은 사람들의 인기책</Label>
@@ -51,7 +49,8 @@ export default function BookContent({ weeklyRecommendBook, bestSellers, mostReco
         </>
       )}
 
-      {/* 2. Moongeul 에서 많이 기록한 책 (weeklyRecommendBook이 있을 때) */}
+      {/* 2. Moongeul 에서 많이 기록한 책:
+          데이터가 있을 때 항상 렌더링 (isReadingTaste 값과 무관하게 노출됨) */}
       {weeklyRecommendBook && (
         <>
           <Spacing height={36} />
