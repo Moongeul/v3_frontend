@@ -4,12 +4,25 @@ import { StylePopularBookLayout } from '@/styles/common/Book.styles'
 import { PopularBookDescription } from '@/components/book/index'
 import { BookInfoSummary } from '@/components/common'
 import { PencilSketchEffect } from '@/styles/common/Common.styles'
-import { WeeklyRecommendBookType } from '@/types/post'
+import { TagEnumType } from '@/types/user'
+
+interface PopularBookProps {
+  postId: number
+  bookImage: string
+  bookTitle: string
+  isbn: string
+  author: string
+  publisher: string
+  pubdate: string
+  bookRating: number
+  rating: number
+  content: string
+  readingTasteType?: TagEnumType
+}
 
 export default function PopularBook({
   postId,
   bookImage,
-  profileImage,
   bookRating,
   rating,
   content,
@@ -19,7 +32,7 @@ export default function PopularBook({
   pubdate,
   publisher,
   author,
-}: WeeklyRecommendBookType) {
+}: PopularBookProps) {
   return (
     <StylePopularBookLayout>
       <PencilSketchEffect />

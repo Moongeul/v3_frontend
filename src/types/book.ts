@@ -1,6 +1,7 @@
 import { LikesCntType } from '@/types/record'
 import { QuoteType } from '@/types/write'
 import { TagEnumType } from '@/types/user'
+import { fetchMostRecordedBook } from '@/lib/server/book'
 
 export type BookSearchType = 'book' | 'user' | 'all'
 
@@ -31,4 +32,16 @@ export interface BestSellerType {
   bookImage: string
   title: string
   author: string
+}
+export interface MostRecordedBookType {
+  postId: number
+  bookImage: string
+  bookTitle: string
+  isbn: string
+  author: string
+  publisher: string
+  pubdate: string
+  bookRating: number
+  rating: number
+  content: string
 }

@@ -1,7 +1,7 @@
 import { Header, Spacing, PageLayout, NavBar } from '@/components/common'
 import { BookContent, BookSearchField } from '@/components/book'
 import { fetchWeeklyRecommendBook } from '@/lib/server/post'
-import { fetchBookBestSeller } from '@/lib/server/book'
+import { fetchBookBestSeller, fetchMostRecordedBook } from '@/lib/server/book'
 
 export default async function BookPage() {
   const weeklyRecommendBookResult = await fetchWeeklyRecommendBook()
@@ -9,6 +9,9 @@ export default async function BookPage() {
 
   const bestSellerResult = await fetchBookBestSeller()
   const bestSeller = bestSellerResult.data?.data
+
+  const mostRecordedBookResult = await fetchMostRecordedBook()
+  const mostRecordedBook = mostRecordedBookResult.data
 
   return (
     <main>
@@ -18,7 +21,11 @@ export default async function BookPage() {
         <BookSearchField />
 
         <Spacing height={20} />
-        <BookContent bestSellers={bestSeller} weeklyRecommendBook={weeklyRecommendBook} />
+        <BookContent
+          mostRecordedBook={mostRecordedBook}
+          bestSellers={bestSeller}
+          weeklyRecommendBook={weeklyRecommendBook}
+        />
       </PageLayout>
 
       <Spacing height={98} />

@@ -1,7 +1,6 @@
 'use client'
 
 import { Badge, Spacing, StarRating } from '@/components/common'
-import { baseColor } from '@/styles/theme'
 import { StylePopularBookInfo } from '@/styles/common/Book.styles'
 import { TagEnumType } from '@/types/user'
 import { convertEnumToKorTag } from '@/utils/user'
@@ -9,7 +8,7 @@ import { ReactNode } from 'react'
 
 interface PopularBookDescriptionProps {
   description: string
-  tag: TagEnumType
+  tag?: TagEnumType
   rating: number
 }
 
@@ -39,10 +38,12 @@ export default function PopularBookDescription({ description, tag, rating }: Pop
 
   return (
     <div>
-      <Badge
-        backgroundColor={renderColor(convertEnumToKorTag(tag))}
-        badgeLabel={`${convertEnumToKorTag(tag)} 유형의 인기책`}
-      />
+      {tag ? (
+        <Badge
+          backgroundColor={renderColor(convertEnumToKorTag(tag))}
+          badgeLabel={`${convertEnumToKorTag(tag)} 유형의 인기책`}
+        />
+      ) : null}
       <Spacing height={8} />
       <StarRating type={'short'} rating={rating} />
       <Spacing height={8} />
