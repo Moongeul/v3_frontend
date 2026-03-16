@@ -1,10 +1,10 @@
 'use client'
 
 import ThemeOptionIcon from '@/components/common/icon/ThemeOptionIcon'
-import OptionsMenu from '@/components/common/OptionMenu'
 import { useEditStore } from '@/store/editStore'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import QuestionOptionsMenu from '@/components/common/option/QuestionOptionMenu'
 
 interface QuestionOptionIconProps {
   content: string
@@ -36,7 +36,7 @@ export default function QuestionOptionIcon({ content, isbn, questionId }: Questi
   return (
     <div style={{ position: 'relative' }}>
       <ThemeOptionIcon onClick={handleMenuClick} />
-      {isMenuOpen && <OptionsMenu onDeleteClick={onDeleteClick} onEditClick={onEditClick} />}
+      {isMenuOpen && <QuestionOptionsMenu onDeleteClick={onDeleteClick} onEditClick={onEditClick} />}
     </div>
   )
 }
