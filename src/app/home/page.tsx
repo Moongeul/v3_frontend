@@ -1,12 +1,12 @@
-import { Button, Label, Spacing, Tab } from '@/components/common'
-import { Banner, StoryList, ViewAllQuestionButton } from '@/components/home'
+import { Label, Spacing, Tab } from '@/components/common'
+import { StoryList, ViewAllQuestionButton } from '@/components/home'
 import { typography } from '@/styles/theme'
 import { QuestionCardRowList } from '@/components/question'
 import { ReviewList } from '@/components/book'
-import { WriteBannerGraphic, WhiteRightArrowIcon } from '@/assets/svgComponents'
 import { fetchQuestions } from '@/lib/server/question'
 import HomeModal from '@/components/common/modal/HomeModal'
 import HomeBanner from '@/components/home/HomeBanner'
+import AuthWatcher from '@/components/common/AuthWatcher'
 
 export default async function HomePage({
   searchParams,
@@ -16,6 +16,10 @@ export default async function HomePage({
   const resolvedSearchParams = await searchParams
 
   const questionResult = await fetchQuestions(1, 2)
+  const initialError = questionResult?.success ? undefined : questionResult?.error
+
+  console.log('initialError', initialError)
+
   const questionList = questionResult.data?.data
 
   const tab = (resolvedSearchParams.tab as 'PUBLIC' | 'FOLLOWERS') || 'PUBLIC'
@@ -25,6 +29,7 @@ export default async function HomePage({
   ]
   return (
     <main>
+      <AuthWatcher error={initialError} results={questionResult} />
       <HomeModal />
       <Tab tabList={tabList} />
       <Spacing height={20} />

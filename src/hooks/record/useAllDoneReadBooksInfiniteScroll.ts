@@ -60,6 +60,7 @@ export const useAllDoneReadBookInfiniteScroll = () => {
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
 
   return {
+    data: data,
     books: booksWithColor,
     hasData,
     bottomRef: ref,

@@ -24,7 +24,7 @@ export default async function RecordDetailPage({ params }: { params: Promise<{ p
       <PageLayout>
         <Spacing height={12} />
 
-        <ReviewHeader created={postData.created} memberInfo={postData.memberInfo} isProfile={true} />
+        {/*<ReviewHeader isMenuOpen={} handleMenuClick={} menu={} created={postData.created} memberInfo={postData.memberInfo} isProfile={true} />*/}
         <Spacing height={12} />
 
         <BookInfoSummary

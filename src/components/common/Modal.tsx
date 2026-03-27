@@ -16,7 +16,7 @@ import { createPortal } from 'react-dom'
 
 interface ModalProps {
   isOpen: boolean | undefined
-  onClose: () => void
+  onClose?: () => void
   title: string
   content?: string
   graphic?: ReactNode

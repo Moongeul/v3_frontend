@@ -5,6 +5,11 @@ export interface CreateQuestionType {
   content: string
 }
 
+export interface EditAnswerType {
+  answerId: string
+  content: string
+}
+
 export interface QuestionType {
   questionId: number
   content: string

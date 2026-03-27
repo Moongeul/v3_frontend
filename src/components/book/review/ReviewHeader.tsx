@@ -14,15 +14,27 @@ import { formatRelativeTime } from '@/utils/common'
 import { ProfileInfoType } from '@/types/user'
 import { useRouter } from 'next/navigation'
 import ThemeOptionIcon from '@/components/common/icon/ThemeOptionIcon'
+import { ReactNode, useState } from 'react'
 
 interface ReviewHeaderProps {
   isProfile?: boolean
   memberInfo: ProfileInfoType
   created: string
+  menu: ReactNode
+  handleMenuClick: (e: React.MouseEvent) => void
+  isMenuOpen: boolean
 }
 
-export default function ReviewHeader({ isProfile = false, memberInfo, created }: ReviewHeaderProps) {
+export default function ReviewHeader({
+  isProfile = false,
+  memberInfo,
+  created,
+  menu,
+  handleMenuClick,
+  isMenuOpen,
+}: ReviewHeaderProps) {
   const router = useRouter()
+
   return (
     <ReviewHeaderContainer
       onClick={(e) => {
@@ -40,7 +52,10 @@ export default function ReviewHeader({ isProfile = false, memberInfo, created }:
         </StyleReviewHeaderMetaUserInfo>
         <StyleReviewHeaderMetaTime>{formatRelativeTime(created)}</StyleReviewHeaderMetaTime>
       </StyleReviewHeaderMetaContainer>
-      <ThemeOptionIcon onClick={() => {}} />
+      <div style={{ position: 'relative' }}>
+        <ThemeOptionIcon onClick={handleMenuClick} />
+        {isMenuOpen && menu}
+      </div>
     </ReviewHeaderContainer>
   )
 }

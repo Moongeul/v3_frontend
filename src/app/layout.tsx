@@ -8,7 +8,8 @@ import { ToastProvider } from '@/components/common/toast/ToastContext'
 import ToastContainer from '@/components/common/toast/ToastContainer'
 import { MyThemeProvider } from '@/context/ThemeContext'
 import { GlobalStyle } from '@/styles/GlobalStyle'
-import MobileLayout from '@/components/common/MobileLayout' // Emotion 설정 파일 (필요시)
+import MobileLayout from '@/components/common/MobileLayout'
+import GlobalModals from '@/components/common/GlobalModals' // Emotion 설정 파일 (필요시)
 
 const geistSans = Geist({
   variable: '--fonts-geist-sans',
@@ -42,6 +43,7 @@ export default function RootLayout({
               <GlobalStyle />
               <MobileLayout>
                 <ToastProvider>
+                  <GlobalModals />
                   {children}
                   <ToastContainer />
                 </ToastProvider>

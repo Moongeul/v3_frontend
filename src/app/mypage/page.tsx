@@ -8,11 +8,14 @@ import MyProfile from '@/components/mypage/home/MyProfile'
 import MypageItem from '@/components/mypage/home/MypageItem'
 import { fetchMyCategoryList, fetchMyQuestions, fetchUserInfo } from '@/lib/server/mypage'
 import Link from 'next/link'
+import AuthWatcher from '@/components/common/AuthWatcher'
 
 export const dynamic = 'force-dynamic'
 
 export default async function MypagePage() {
   const userInfoResult = await fetchUserInfo()
+  const initialError = userInfoResult?.success ? undefined : userInfoResult?.error
+
   const userInfo = userInfoResult.data
   const categoryResult = await fetchMyCategoryList(userInfo?.id)
   const category = categoryResult.data
@@ -21,6 +24,7 @@ export default async function MypagePage() {
 
   return (
     <main>
+      <AuthWatcher error={initialError} results={userInfoResult} />
       <Header
         headerType={'title'}
         leftIcon={

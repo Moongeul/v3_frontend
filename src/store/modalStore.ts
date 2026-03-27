@@ -5,7 +5,13 @@ import { devtools } from 'zustand/middleware'
  * 1. 모든 모달의 키값을 유니온 타입으로 정의합니다.
  * 여기에 새로운 모달 이름을 추가하기만 하면 자동 완성이 지원됩니다.
  */
-export type ModalKey = 'isTestModalOpen' | 'isDeleteQuestionModalOpen' | 'isDeleteStoryModalOpen'
+export type ModalKey =
+  | 'isTestModalOpen'
+  | 'isDeleteQuestionModalOpen'
+  | 'isDeleteStoryModalOpen'
+  | 'isDeleteAnswerModalOpen'
+  | 'isDeletePostModalOpen'
+  | 'isRequiredLoginModalOpen'
 
 interface ModalState {
   // 각 모달의 열림 상태를 저장하는 객체

@@ -1,4 +1,4 @@
-import { apiFetchServer } from '@/lib/api.server'
+import { apiCallServer, apiFetchServer } from '@/lib/api.server'
 import { APIResponseType, Paging } from '@/types/common'
 import { BookShelfType, RecordType } from '@/types/record'
 import { BookType } from '@/types/book'
@@ -18,27 +18,16 @@ export const serverFetchAllPosts = async (page: number, size: number) => {
   return await response.json()
 }
 
-export const serverFetchAllDoneReadBooks = async (
-  page: number,
-  size: number,
-  userId?: string
-): Promise<APIResponseType<Paging<BookShelfType[]>>> => {
+export const serverFetchAllDoneReadBooks = async (page: number, size: number, userId?: string) => {
   const searchParams = new URLSearchParams()
   searchParams.append('page', page.toString())
   searchParams.append('size', size.toString())
+  if (userId) searchParams.append('userId', userId)
 
-  if (userId) {
-    searchParams.append('userId', userId.toString())
-  }
-
-  const response = await apiFetchServer(`/v2/bookshelf/done-read?${searchParams.toString()}`, {
+  // apiCallServer를 사용하면 { success, data, error } 형태로 반환됩니다.
+  return await apiCallServer<Paging<BookShelfType[]>>(`/v2/bookshelf/done-read?${searchParams.toString()}`, {
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
   })
-
-  return await response.json()
 }
 
 export const serverFetchAllDoneReadRatingSummary = async (

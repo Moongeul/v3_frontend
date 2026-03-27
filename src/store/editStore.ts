@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { PostVisibilityEnumType, QuoteType } from '@/types/write'
-import { CreateQuestionType } from '@/types/question'
+import { CreateQuestionType, EditAnswerType } from '@/types/question'
 
 // 기존에 정의하신 타입들을 import 하세요.
 // import { PostVisibilityEnumType, QuoteType } from '@/types/...';
@@ -19,6 +19,7 @@ export interface WriteDataType {
 interface EditState {
   editData: WriteDataType
   questionEditData: CreateQuestionType
+  answerEditData: EditAnswerType
 
   setQuestionField: <K extends keyof CreateQuestionType>(field: K, value: CreateQuestionType[K]) => void
   // 개별 필드 수정 함수
@@ -26,6 +27,7 @@ interface EditState {
   // 여러 필드 동시 수정 함수
   setEditData: (data: Partial<WriteDataType>) => void
   // 초기화 함수
+  setAnswerEditField: <K extends keyof EditAnswerType>(field: K, value: EditAnswerType[K]) => void
   resetEditData: () => void
 }
 
@@ -45,9 +47,15 @@ const initialQuestion = {
   content: '',
 }
 
+const initialAnswer = {
+  answerId: '',
+  content: '',
+}
+
 export const useEditStore = create<EditState>((set) => ({
   editData: initialWriteData,
   questionEditData: initialQuestion,
+  answerEditData: initialAnswer,
 
   // 특정 필드 하나만 바꿀 때: setField('rating', 5)
   setField: (field, value) =>
@@ -72,6 +80,14 @@ export const useEditStore = create<EditState>((set) => ({
     set((state) => ({
       questionEditData: {
         ...state.questionEditData,
+        [field]: value,
+      },
+    })),
+  // 특정 필드 하나만 바꿀 때: setField('rating', 5)
+  setAnswerEditField: (field, value) =>
+    set((state) => ({
+      answerEditData: {
+        ...state.answerEditData,
         [field]: value,
       },
     })),
