@@ -7,7 +7,7 @@ import { convertEnumToKorTag } from '@/utils/user'
 import { StyleReviewHeaderMetaUserInfo } from '@/styles/book/Review.styles'
 import { useTheme } from '@emotion/react'
 import { TagEnumType } from '@/types/user'
-import { StyledUserItem } from '@/styles/search/Search.styles'
+import { StyledUserItemWrapper } from '@/styles/search/Search.styles'
 import Image from 'next/image'
 
 interface UserItemProps {
@@ -21,7 +21,7 @@ export default function UserItem({ readingTasteType, nickname, profileImage }: U
   const theme = useTheme()
 
   return (
-    <StyledUserItem>
+    <StyledUserItemWrapper>
       <Image alt={'프로필'} src={profileImage} width={48} height={48} style={{ borderRadius: 999 }} />
       <StyleReviewHeaderMetaUserInfo>
         <StyleContent $typography={typography.badgeMd} $textColor={theme.colors.headerText}>
@@ -29,6 +29,6 @@ export default function UserItem({ readingTasteType, nickname, profileImage }: U
         </StyleContent>
         <Badge badgeLabel={convertEnumToKorTag(readingTasteType)} />
       </StyleReviewHeaderMetaUserInfo>
-    </StyledUserItem>
+    </StyledUserItemWrapper>
   )
 }

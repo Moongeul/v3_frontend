@@ -5,7 +5,7 @@ import { createContext, useContext, useEffect, useState, useMemo } from 'react'
 import { ThemeProvider as EmotionProvider } from '@emotion/react'
 import { lightTheme, darkTheme } from '@/styles/theme'
 
-type ThemeMode = 'light' | 'dark' | 'system'
+export type ThemeMode = 'light' | 'dark' | 'system'
 
 interface ThemeContextType {
   theme: ThemeMode

@@ -2,6 +2,7 @@
 import { WhiteRightArrowIcon } from '@/assets/svgComponents'
 import { StyleQuestionButton, StyleQuestionCard } from '@/styles/question/Question.styles'
 import { useRouter } from 'next/navigation'
+import Cookies from 'js-cookie'
 
 interface QuestionButtonProps {
   width?: number
@@ -9,6 +10,7 @@ interface QuestionButtonProps {
 
 export default function QuestionButton({ width }: QuestionButtonProps) {
   const router = useRouter()
+  const loginMemberId = Cookies.get('memberId')
 
   return (
     <StyleQuestionCard $width={width}>

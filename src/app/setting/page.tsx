@@ -1,9 +1,9 @@
 import SettingItem from '@/components/mypage/setting/SettingItem'
 import SettingLogoutItem from '@/components/mypage/setting/SettingLogoutItem'
 import SettingDeleteAccountItem from '@/components/mypage/setting/SettingDeleteAccountItem'
-import { HeaderRightArrowIcon } from '@/assets/svgComponents'
 import Version from '@/components/mypage/setting/Version'
 import Link from 'next/link'
+import ThemeHeaderRightArrowIcon from '@/components/common/icon/ThemeHeaderRightArrowIcon'
 
 export default function SettingPage() {
   return (
@@ -12,7 +12,7 @@ export default function SettingPage() {
         content={'계정 공개 범위 설정'}
         rightElement={
           <Link href={'/privacy'}>
-            <HeaderRightArrowIcon width={20} height={20} />
+            <ThemeHeaderRightArrowIcon />
           </Link>
         }
       />
@@ -20,7 +20,7 @@ export default function SettingPage() {
         content={'알림'}
         rightElement={
           <Link href={'/setting-alarm'}>
-            <HeaderRightArrowIcon width={20} height={20} />
+            <ThemeHeaderRightArrowIcon />
           </Link>
         }
       />
@@ -28,7 +28,7 @@ export default function SettingPage() {
         content={'테마'}
         rightElement={
           <Link href={'/theme'}>
-            <HeaderRightArrowIcon width={20} height={20} />
+            <ThemeHeaderRightArrowIcon />
           </Link>
         }
       />
@@ -36,7 +36,7 @@ export default function SettingPage() {
         content={'이용 약관'}
         rightElement={
           <Link href={'/policy?type=home'}>
-            <HeaderRightArrowIcon width={20} height={20} />
+            <ThemeHeaderRightArrowIcon />
           </Link>
         }
       />

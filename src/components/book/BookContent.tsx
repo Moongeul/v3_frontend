@@ -1,7 +1,7 @@
 'use client'
 
 import { Label, Spacing } from '@/components/common'
-import { BestsellerList, PopularBook } from '@/components/book/index'
+import { BestsellerList, BestSellerLoadMoreButton, PopularBook } from '@/components/book/index'
 
 import { typography } from '@/styles/theme'
 import { WeeklyRecommendBookType } from '@/types/post'

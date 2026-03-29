@@ -3,14 +3,16 @@
 import { StyleRecordButton, StyleRecordButtonText } from '@/styles/home/Record.styles'
 import { AddWhiteIcon } from '@/assets/svgComponents'
 import { useRouter } from 'next/navigation'
+import Cookies from 'js-cookie'
 
 export default function WriteRecordButton() {
   const router = useRouter()
+  const loginMemberId = Cookies.get('memberId')
 
-  return (
+  return loginMemberId ? (
     <StyleRecordButton
       onClick={() => {
-        router.push('/mypage/record')
+        router.push(`/mypage/${loginMemberId}/record`)
       }}
     >
       <AddWhiteIcon width={18} height={18} />
@@ -19,5 +21,5 @@ export default function WriteRecordButton() {
         <br /> 만들기
       </StyleRecordButtonText>
     </StyleRecordButton>
-  )
+  ) : null
 }

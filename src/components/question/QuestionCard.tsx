@@ -17,6 +17,7 @@ import { useEditStore } from '@/store/editStore'
 import DeleteQuestionModal from '@/components/common/modal/DeleteQuestionModal'
 import QuestionOptionsMenu from '@/components/common/option/QuestionOptionMenu'
 import UserOptionMenu from '@/components/common/option/UserOptionMenu'
+import Cookies from 'js-cookie'
 
 interface QuestionCardProps extends QuestionType {
   width?: number
@@ -38,6 +39,7 @@ export default function QuestionCard({
   const router = useRouter()
   const [isMenuOpen, setIsMenuOpen] = useState(false) // 메뉴 열림 상태
   const { setQuestionField } = useEditStore((state) => state)
+  const loginMemberId = Cookies.get('memberId')
 
   const handleMenuClick = (e: React.MouseEvent) => {
     e.stopPropagation() // 카드 클릭 이벤트(상세 이동)가 발생하지 않도록 방지
@@ -58,8 +60,10 @@ export default function QuestionCard({
   return (
     <StyleQuestionCard
       onClick={(e) => {
-        e.stopPropagation()
-        router.push(`/question/${questionId}`)
+        if (loginMemberId) {
+          e.stopPropagation()
+          router.push(`/question/${questionId}`)
+        }
       }}
       $width={width}
     >
@@ -101,7 +105,7 @@ export default function QuestionCard({
 
       <CommentSummary count={commentCnt} />
 
-      {isAnswerButton ? (
+      {loginMemberId && isAnswerButton ? (
         <>
           <Spacing height={12} />
           <StyleAnswerButton>

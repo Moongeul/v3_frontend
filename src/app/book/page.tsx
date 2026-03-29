@@ -17,7 +17,6 @@ export default async function BookPage() {
     <main>
       <Header headerType={'title'}>책 둘러보기</Header>
       <PageLayout>
-        <Spacing height={72} />
         <BookSearchField />
 
         <Spacing height={20} />

@@ -11,36 +11,46 @@ import { clientFetchQuestions } from '@/lib/client/question'
 export default function QuestionCardColumnList() {
   const { ref, inView } = useInView()
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
     queryKey: ['questions'],
-    queryFn: ({ pageParam }) => clientFetchQuestions({ page: pageParam, size: 20 }),
+    queryFn: ({ pageParam = 1 }) => clientFetchQuestions({ page: pageParam, size: 20 }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      // 서버 응답(Paging 구조)에 따라 다음 페이지 번호 계산
-      // 예: 현재 페이지가 마지막이 아니면 page + 1 반환
-      return lastPage.data.isLast ? undefined : lastPage.data.page + 1
+      // API 응답 구조에 맞게 수정 (lastPage?.data 존재 여부 확인)
+      return lastPage?.data?.isLast ? undefined : (lastPage?.data?.page ?? 0) + 1
     },
   })
 
-  // 스크롤이 하단에 닿으면 다음 페이지 호출
   useEffect(() => {
-    if (inView && hasNextPage) {
+    if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage()
     }
-  }, [inView, hasNextPage, fetchNextPage])
+  }, [inView, hasNextPage, fetchNextPage, isFetchingNextPage])
 
-  // 2차원 배열로 오는 data.pages를 평탄화하여 리스트에 전달
-  const allQuestions = data?.pages.flatMap((page) => page.data.data) ?? []
+  // 데이터 평탄화 시 안전하게 접근
+  const allQuestions = data?.pages.flatMap((page) => page?.data?.data ?? []) ?? []
 
-  console.log('allQuestions', allQuestions)
-
-  if (!allQuestions) return <Spinner size={'lg'} />
+  // 로딩 중이면서 데이터가 아직 없을 때 스피너 표시
+  if (isLoading && allQuestions.length === 0) return <Spinner size={'lg'} />
 
   return (
     <StyleRecordListColumnWrapper>
-      {allQuestions.map((question) => (
-        <QuestionCard key={question.questionId} {...question} />
-      ))}
+      {allQuestions.map((question, index) => {
+        // 데이터가 유효하지 않거나 ID가 없는 경우를 대비
+        if (!question || !question.questionId) return null
+
+        return (
+          <QuestionCard
+            key={`${question.questionId}-${index}`} // ID 중복 방지를 위해 index 조합 (권장되진 않으나 에러 회피용)
+            {...question}
+          />
+        )
+      })}
+
+      {/* 스크롤 감지 포인트 */}
+      <div ref={ref} style={{ height: '10px' }} />
+
+      {isFetchingNextPage && <Spinner size={'sm'} />}
       <Spacing height={30} />
     </StyleRecordListColumnWrapper>
   )

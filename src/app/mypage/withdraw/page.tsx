@@ -7,7 +7,7 @@ export default function WithDrawPage() {
   return (
     <main>
       <Header headerType={'dynamic'}>회원 탈퇴</Header>
-      <Spacing height={80} />
+      <Spacing height={60} />
 
       <PageLayout>
         <div>

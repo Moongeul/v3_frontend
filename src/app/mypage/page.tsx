@@ -1,6 +1,5 @@
-import { Button, Header, NavBar, PageLayout, Spacing } from '@/components/common'
-import { Banner } from '@/components/home'
-import { AlarmIcon, SettingIcon, TestBannerGraphic, WhiteRightArrowIcon } from '@/assets/svgComponents'
+import { Header, NavBar, PageLayout, Spacing } from '@/components/common'
+import { AlarmIcon, SettingIcon } from '@/assets/svgComponents'
 import { Record } from '@/components/mypage'
 import Story from '@/components/mypage/home/Story'
 import Question from '../../components/mypage/home/Question'
@@ -9,8 +8,9 @@ import MypageItem from '@/components/mypage/home/MypageItem'
 import { fetchMyCategoryList, fetchMyQuestions, fetchUserInfo } from '@/lib/server/mypage'
 import Link from 'next/link'
 import AuthWatcher from '@/components/common/AuthWatcher'
-import HomeBanner from '@/components/home/HomeBanner'
 import MypageBanner from '@/components/mypage/home/MypageBanner'
+import ThemeAlarmIcon from '@/components/common/icon/ThemeAlarmIcon'
+import ThemeSettingIcon from '@/components/common/icon/ThemeSettingIcon'
 
 export const dynamic = 'force-dynamic'
 
@@ -31,12 +31,12 @@ export default async function MypagePage() {
         headerType={'title'}
         leftIcon={
           <Link href={'/alarm'}>
-            <AlarmIcon width={24} height={24} />
+            <ThemeAlarmIcon />
           </Link>
         }
         rightIcon={
           <Link href={'/setting'}>
-            <SettingIcon width={36} height={36} />
+            <ThemeSettingIcon />
           </Link>
         }
       >
