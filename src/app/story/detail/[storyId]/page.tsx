@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { Spinner } from '@/components/common'
 import DetailHeader from '@/components/story/detail/DetailHeader'
 import DeleteStoryModal from '@/components/common/modal/DeleteStoryModal'
+import ReportModal from '@/components/common/modal/ReportModal'
+import BlockModal from '@/components/common/modal/BlockModal'
 
 interface StoryDetailProps {
   params: Promise<{ storyId: string }>
@@ -21,6 +23,8 @@ export default async function StoryDetailPage({ params }: StoryDetailProps) {
   return (
     <DetailLayout>
       <DeleteStoryModal storyId={storyId} />
+      <ReportModal />
+      <BlockModal />
       <DetailHeader memberInfo={story.memberInfo} created={story.storyInfo.created} />
       <Image src={story.storyInfo.storyImage} alt={'이미지'} width={335} height={296} />
     </DetailLayout>

@@ -5,8 +5,12 @@ export type RecordTabType = 'BOOKSHELF' | 'CALENDAR' | 'RATING' | 'REPORT' | 'WI
 
 export interface RecordType {
   postId: number
-  bookInfo: BookType
+  memberInfo: ProfileInfoType
   created: string
+  bookInfo: BookType
+  postVisibility: 'PUBLIC' | 'FOLLOWERS' | 'PRIVATE'
+  categoryId: number
+  page: number
   rating: number
   content: string
   readDate: string
@@ -14,7 +18,6 @@ export interface RecordType {
   quotes: QuoteType[]
   likesCnt: LikesCntType
   myLikesStatus: MyLikesStatusType
-  memberInfo: ProfileInfoType
 }
 
 export interface QuoteType {

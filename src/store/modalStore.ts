@@ -12,6 +12,8 @@ export type ModalKey =
   | 'isDeleteAnswerModalOpen'
   | 'isDeletePostModalOpen'
   | 'isRequiredLoginModalOpen'
+  | 'isBlockModalOpen'
+  | 'isReportModalOpen'
 
 interface ModalState {
   // 각 모달의 열림 상태를 저장하는 객체

@@ -7,6 +7,9 @@ import { fetchQuestions } from '@/lib/server/question'
 import HomeModal from '@/components/common/modal/HomeModal'
 import HomeBanner from '@/components/home/HomeBanner'
 import AuthWatcher from '@/components/common/AuthWatcher'
+import DeletePostModal from '@/components/common/modal/DeletePostModal'
+import ReportModal from '@/components/common/modal/ReportModal'
+import BlockModal from '@/components/common/modal/BlockModal'
 
 export default async function HomePage({
   searchParams,
@@ -29,6 +32,9 @@ export default async function HomePage({
   ]
   return (
     <main>
+      <DeletePostModal />
+      <ReportModal />
+      <BlockModal />
       <AuthWatcher error={initialError} results={questionResult} />
       <HomeModal />
       <Tab tabList={tabList} />

@@ -1,8 +1,12 @@
-import { BookQuote, InteractionButton, ReviewContentMeta, ReviewContentText, ReviewHeader } from '@/components/book'
+import { BookQuote, InteractionButton, ReviewContentMeta, ReviewContentText } from '@/components/book'
 import { BookInfoSummary, Header, PageLayout, Spacing } from '@/components/common'
 import { serverFetchPostDetail } from '@/lib/server/record'
 import { StoryWriteButton } from '@/components/story'
 import { cookies } from 'next/headers'
+import ReviewDetailHeader from '@/components/post/ReviewDetailHeader'
+import DeletePostModal from '@/components/common/modal/DeletePostModal'
+import ReportModal from '@/components/common/modal/ReportModal'
+import BlockModal from '@/components/common/modal/BlockModal'
 
 export default async function RecordDetailPage({ params }: { params: Promise<{ postId: string }> }) {
   const { postId } = await params
@@ -22,9 +26,17 @@ export default async function RecordDetailPage({ params }: { params: Promise<{ p
       />
       <Spacing height={60} />
       <PageLayout>
+        <DeletePostModal />
+        <ReportModal />
+        <BlockModal />
         <Spacing height={12} />
 
-        {/*<ReviewHeader isMenuOpen={} handleMenuClick={} menu={} created={postData.created} memberInfo={postData.memberInfo} isProfile={true} />*/}
+        <ReviewDetailHeader
+          isbn={postData.bookInfo.isbn}
+          postId={postId}
+          created={postData.created}
+          memberInfo={postData.memberInfo}
+        />
         <Spacing height={12} />
 
         <BookInfoSummary

@@ -9,6 +9,8 @@ import MypageItem from '@/components/mypage/home/MypageItem'
 import { fetchMyCategoryList, fetchMyQuestions, fetchUserInfo } from '@/lib/server/mypage'
 import Link from 'next/link'
 import AuthWatcher from '@/components/common/AuthWatcher'
+import HomeBanner from '@/components/home/HomeBanner'
+import MypageBanner from '@/components/mypage/home/MypageBanner'
 
 export const dynamic = 'force-dynamic'
 
@@ -48,16 +50,7 @@ export default async function MypagePage() {
           <MyProfile userInfo={userInfo} />
 
           <Spacing height={24} />
-          <Banner
-            path={'/test?step=onboarding'}
-            graphic={<TestBannerGraphic width={114} height={81} />}
-            button={
-              <Button size={'md'} width={139} rightIcon={<WhiteRightArrowIcon width={20} height={20} />}>
-                독서 취향 테스트
-              </Button>
-            }
-            content={'나의 독서 취향이 궁금하다면?'}
-          />
+          <MypageBanner />
 
           <Spacing height={24} />
           <Record category={category} userId={userInfo?.id} />

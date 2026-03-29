@@ -7,6 +7,8 @@ import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query
 import CommentList from '@/components/question/CommentList'
 import QuestionOptionIcon from '@/components/question/QuestionOptionIcon'
 import DeleteQuestionModal from '@/components/common/modal/DeleteQuestionModal'
+import UserOptionMenu from '@/components/common/option/UserOptionMenu'
+import QuestionDetailHeader from '@/components/question/QuestionDetailHeader'
 
 export default async function QuestionDetailPage({ params }: { params: Promise<{ questionId: string }> }) {
   const { questionId } = await params
@@ -30,17 +32,7 @@ export default async function QuestionDetailPage({ params }: { params: Promise<{
   return (
     <main>
       <DeleteQuestionModal questionId={questionId} />
-      <Header
-        path={'/question'}
-        headerType={'dynamic'}
-        rightIcon={
-          question?.myArticle ? (
-            <QuestionOptionIcon questionId={questionId} isbn={question.bookInfo.isbn} content={question.content} />
-          ) : null
-        }
-      >
-        질문
-      </Header>
+      <QuestionDetailHeader question={question} />
 
       <Spacing height={60} />
       <PageLayout>

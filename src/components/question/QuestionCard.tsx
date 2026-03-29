@@ -15,8 +15,8 @@ import ThemeOptionIcon from '@/components/common/icon/ThemeOptionIcon'
 import { useState } from 'react'
 import { useEditStore } from '@/store/editStore'
 import DeleteQuestionModal from '@/components/common/modal/DeleteQuestionModal'
-import { useModalStore } from '@/store/modalStore'
 import QuestionOptionsMenu from '@/components/common/option/QuestionOptionMenu'
+import UserOptionMenu from '@/components/common/option/UserOptionMenu'
 
 interface QuestionCardProps extends QuestionType {
   width?: number
@@ -67,11 +67,18 @@ export default function QuestionCard({
 
       <StyleQuestionCardHeader>
         <AvatarGroup participantProfileImages={participantProfileImages} participantCount={participantCount} />
-        {myArticle && (
+        {myArticle ? (
           <div style={{ position: 'relative' }}>
             <ThemeOptionIcon onClick={handleMenuClick} />
             {isMenuOpen && <QuestionOptionsMenu onDeleteClick={onDeleteClick} onEditClick={onEditClick} />}
           </div>
+        ) : (
+          <>
+            <div style={{ position: 'relative' }}>
+              <ThemeOptionIcon onClick={handleMenuClick} />
+              {isMenuOpen && <UserOptionMenu handleMenuClick={handleMenuClick} />}
+            </div>
+          </>
         )}
       </StyleQuestionCardHeader>
       <Spacing height={8} />

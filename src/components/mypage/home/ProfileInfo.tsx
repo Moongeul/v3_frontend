@@ -18,6 +18,7 @@ import Image from 'next/image'
 import { useTheme } from '@emotion/react'
 
 interface ProfileInfoProps {
+  userId: number | undefined
   profileImage: string | undefined
   nickname: string | undefined
   readingTasteType: TagEnumType | undefined
@@ -26,6 +27,7 @@ interface ProfileInfoProps {
 }
 
 export default function ProfileInfo({
+  userId,
   profileImage,
   readingTasteType,
   nickname,
@@ -35,7 +37,11 @@ export default function ProfileInfo({
   const theme = useTheme()
   const router = useRouter()
   const onNavigate = (path: string) => {
-    router.push(path)
+    if (userId) {
+      router.push(`/profile/${userId}${path}`)
+    } else {
+      router.push(path)
+    }
   }
   return (
     <StyleProfileContainer>

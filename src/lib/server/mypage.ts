@@ -7,9 +7,9 @@ import { QuestionType } from '@/types/question'
 /**
  * 팔로워
  */
-export const fetchFollowers = async (): Promise<ApiCallResult<FollowUserInfoType[]>> => {
+export const fetchFollowers = async (userId?: string): Promise<ApiCallResult<FollowUserInfoType[]>> => {
   try {
-    const { data, error } = await apiCallServer(`/v2/member/follower`, {
+    const { data, error } = await apiCallServer(`/v2/member/follower${userId ? `?userId=${userId}` : ''}`, {
       method: 'GET',
     })
 
@@ -30,9 +30,9 @@ export const fetchFollowers = async (): Promise<ApiCallResult<FollowUserInfoType
 /**
  * 팔로잉
  */
-export const fetchFollowings = async (): Promise<ApiCallResult<FollowUserInfoType[]>> => {
+export const fetchFollowings = async (userId?: string): Promise<ApiCallResult<FollowUserInfoType[]>> => {
   try {
-    const { data, error } = await apiCallServer(`/v2/member/following`, {
+    const { data, error } = await apiCallServer(`/v2/member/following${userId ? `?userId=${userId}` : ''}`, {
       method: 'GET',
     })
 

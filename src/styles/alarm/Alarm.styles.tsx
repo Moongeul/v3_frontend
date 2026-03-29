@@ -17,7 +17,7 @@ export const StyledAlarmContainer = styled.div<{ $read: boolean }>`
   display: flex;
   column-gap: 12px;
   align-items: center;
-  background-color: ${({ theme, $read }) => ($read ? theme.colors.read : theme.colors.background)};
+  background-color: ${({ theme, $read }) => ($read ? theme.colors.background : theme.colors.read)};
   border-bottom: 1px solid ${({ theme }) => theme.colors.iconStarFilled};
 `
 export const StyledProfileImageWrapper = styled.div`

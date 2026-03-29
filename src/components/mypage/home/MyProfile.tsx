@@ -15,6 +15,7 @@ export default function MyProfile({ userInfo }: ProfileProps) {
   return (
     <>
       <ProfileInfo
+        userId={userInfo?.id}
         profileImage={userInfo?.profileImage}
         readingTasteType={userInfo?.readingTasteType}
         nickname={userInfo?.nickname}

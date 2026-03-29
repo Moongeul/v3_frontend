@@ -10,6 +10,10 @@ import Image from 'next/image'
 import { ProfileInfoType } from '@/types/user'
 import { LikesCntType, MyLikesStatusType } from '@/types/record'
 import InteractionButtons from '@/components/book/review/InteractionButtons'
+import { useState } from 'react'
+import Cookies from 'js-cookie'
+import PostOptionMenu from '@/components/common/option/PostOptionMenu'
+import UserOptionMenu from '@/components/common/option/UserOptionMenu'
 
 interface ReviewItemProps {
   quotes: QuoteType[]
@@ -37,6 +41,14 @@ export default function ReviewItem({
   myLikesStatus,
 }: ReviewItemProps) {
   const router = useRouter()
+  const loginMemberId = Cookies.get('memberId')
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const handleMenuClick = (e: React.MouseEvent) => {
+    e.stopPropagation() // 카드 클릭 이벤트(상세 이동)가 발생하지 않도록 방지
+    setIsMenuOpen(!isMenuOpen)
+  }
+
   return (
     <div
       onClick={(e) => {
@@ -58,7 +70,19 @@ export default function ReviewItem({
         </ProfileImageWrapper>
 
         <StyleReviewContentContainer>
-          {/*<ReviewHeader memberInfo={memberInfo} created={created} />*/}
+          <ReviewHeader
+            menu={
+              String(memberInfo.memberId) === loginMemberId ? (
+                <PostOptionMenu postId={postId} isbn={bookInfo?.isbn} handleMenuClick={handleMenuClick} />
+              ) : (
+                <UserOptionMenu handleMenuClick={handleMenuClick} />
+              )
+            }
+            handleMenuClick={handleMenuClick}
+            isMenuOpen={isMenuOpen}
+            memberInfo={memberInfo}
+            created={created}
+          />
           {bookInfo && (
             <>
               <Spacing height={8} />

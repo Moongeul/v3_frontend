@@ -19,6 +19,8 @@ import { typography } from '@/styles/theme'
 import { useState } from 'react'
 import ThemeOptionIcon from '@/components/common/icon/ThemeOptionIcon'
 import StoryOptionsMenu from '@/components/common/option/StoryOptionMenu'
+import Cookies from 'js-cookie'
+import UserOptionMenu from '@/components/common/option/UserOptionMenu'
 
 interface DetailHeaderProps {
   memberInfo: ProfileInfoType
@@ -29,6 +31,7 @@ export default function DetailHeader({ memberInfo, created }: DetailHeaderProps)
   const router = useRouter()
   const theme = useTheme()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const loginMemberId = Cookies.get('memberId')
 
   const handleMenuClick = (e: React.MouseEvent) => {
     e.stopPropagation() // 카드 클릭 이벤트(상세 이동)가 발생하지 않도록 방지
@@ -54,10 +57,17 @@ export default function DetailHeader({ memberInfo, created }: DetailHeaderProps)
           <StyleReviewHeaderMetaTime>{formatRelativeTime(created)}</StyleReviewHeaderMetaTime>
         </StyleReviewHeaderMetaContainer>
       </ReviewHeaderContainer>
-      <div style={{ position: 'relative' }}>
-        <GrayOptionIcon onClick={handleMenuClick} width={36} height={36} />
-        {isMenuOpen && <StoryOptionsMenu />}
-      </div>
+      {Number(loginMemberId) === memberInfo.memberId ? (
+        <div style={{ position: 'relative' }}>
+          <GrayOptionIcon onClick={handleMenuClick} width={36} height={36} />
+          {isMenuOpen && <StoryOptionsMenu />}
+        </div>
+      ) : (
+        <div style={{ position: 'relative' }}>
+          <GrayOptionIcon onClick={handleMenuClick} width={36} height={36} />
+          {isMenuOpen && <UserOptionMenu handleMenuClick={handleMenuClick} />}
+        </div>
+      )}
 
       <GrayXIcon
         onClick={() => {

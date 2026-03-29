@@ -4,18 +4,14 @@ import { StyledOptionMenu, StyledOptionMenuItem } from '@/styles/common/OptionMe
 import { useTheme } from '@emotion/react'
 import { useModalStore } from '@/store/modalStore'
 import { useRouter } from 'next/navigation'
-import { useEditStore } from '@/store/editStore'
 
-interface PostOptionMenuProps {
+interface UserOptionMenuProps {
   handleMenuClick: (e: React.MouseEvent) => void
-  postId: string | number
-  isbn: string | undefined
 }
 
-export default function PostOptionMenu({ handleMenuClick, postId, isbn }: PostOptionMenuProps) {
+export default function UserOptionMenu({ handleMenuClick }: UserOptionMenuProps) {
   const theme = useTheme()
   const { toggleModal } = useModalStore((state) => state)
-  const { setDeletePostId } = useEditStore((state) => state)
   const router = useRouter()
 
   return (
@@ -24,22 +20,21 @@ export default function PostOptionMenu({ handleMenuClick, postId, isbn }: PostOp
         onClick={(e) => {
           e.stopPropagation() // 부모 카드 클릭 이벤트 방지
           handleMenuClick(e)
-          router.push(`/${postId}/edit?isbn=${isbn}`)
+          toggleModal('isReportModalOpen')
         }}
         $color={theme.colors.textFieldDefaultText}
       >
-        수정
+        신고하기
       </StyledOptionMenuItem>
       <StyledOptionMenuItem
         onClick={(e) => {
           handleMenuClick(e)
           e.stopPropagation()
-          setDeletePostId(postId as string)
-          toggleModal('isDeletePostModalOpen')
+          toggleModal('isBlockModalOpen')
         }}
-        $color={theme.colors.textFieldError}
+        $color={theme.colors.textFieldDefaultText}
       >
-        삭제
+        차단하기
       </StyledOptionMenuItem>
     </StyledOptionMenu>
   )

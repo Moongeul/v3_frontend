@@ -1,4 +1,3 @@
-import WriteHeader from '@/components/write/WriteHeader'
 import DropDownContainer from '@/components/write/DropDownContainer'
 import EditPrivacyDropDown from '@/components/edit/EditPrivacyDropDown'
 import EditCategoryDropDown from '@/components/edit/EditCategoryDropDown'
@@ -13,6 +12,7 @@ import { getCategory } from '@/lib/server/write'
 import { fetchBookDetailInfo } from '@/lib/server/book'
 import { BookInfoSummary, BottomBorder, PageLayout, Spacing } from '@/components/common'
 import EditChangeBook from '@/components/edit/EditChangeBook'
+import EditHeader from '@/components/edit/EditHeader'
 
 export default async function EditPage({
   params,
@@ -35,16 +35,14 @@ export default async function EditPage({
   const bookDetailResponse = await fetchBookDetailInfo(isbn)
   const bookInfo = bookDetailResponse.data
 
-  console.log('postData', postData)
-
   return (
     <main>
-      <WriteHeader />
+      <EditHeader postId={Number(postId)} />
       <PageLayout>
         <div>
           <DropDownContainer>
-            <EditPrivacyDropDown />
-            <EditCategoryDropDown categories={categories} />
+            <EditPrivacyDropDown selectedPrivacyDropDown={postData.postVisibility} isbn={isbn} />
+            <EditCategoryDropDown categories={categories} selectedCategoryId={postData.categoryId} />
           </DropDownContainer>
 
           <Spacing height={16} />
@@ -73,13 +71,13 @@ export default async function EditPage({
           <EditRatingField selectedRating={postData.rating} />
           <Spacing height={20} />
 
-          <EditPageField />
+          <EditPageField selectedPage={postData.page} />
           <Spacing height={20} />
 
-          <EditReviewField />
+          <EditReviewField selectedReview={postData.content} />
           <Spacing height={20} />
 
-          <EditQuoteField />
+          <EditQuoteField selectedQuotes={postData.quotes} />
           <Spacing height={300} />
         </div>
       </PageLayout>

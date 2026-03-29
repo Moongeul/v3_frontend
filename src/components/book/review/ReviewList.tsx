@@ -6,6 +6,7 @@ import { clientFetchAllPosts } from '@/lib/client/record'
 import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
 import { Spinner } from '@/components/common'
+import DeletePostModal from '@/components/common/modal/DeletePostModal'
 
 const DEFAULT_SIZE = 20
 

@@ -6,6 +6,8 @@ import WishBookButton from '@/components/common/button/WishBookButton'
 import Header from '../../../components/common/Header'
 import WriteButton from '../../../components/book/WriteButton'
 import PageLayout from '../../../components/common/PageLayout'
+import ReportModal from '@/components/common/modal/ReportModal'
+import BlockModal from '@/components/common/modal/BlockModal'
 
 interface BookDetailPageProps {
   params: Promise<{ isbn: string }>
@@ -24,9 +26,11 @@ export default async function BookDetailPage({ params }: BookDetailPageProps) {
 
   return (
     <main>
-      <Header headerType={'dynamic'} rightIcon={<WriteButton isbn={isbn} />}></Header>
+      <Header headerType={'dynamic'} rightIcon={<WriteButton isbn={isbn} />} />
       <PageLayout>
         <div>
+          <ReportModal />
+          <BlockModal />
           <Spacing height={68} />
           <BookInfoSummary
             publisher={book.publisher}

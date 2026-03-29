@@ -17,9 +17,12 @@ export interface WriteDataType {
 }
 
 interface EditState {
+  nickname: string // 차단할 유저
+  content: string // 신고할 게시글
   editData: WriteDataType
   questionEditData: CreateQuestionType
   answerEditData: EditAnswerType
+  deletePostId: string
 
   setQuestionField: <K extends keyof CreateQuestionType>(field: K, value: CreateQuestionType[K]) => void
   // 개별 필드 수정 함수
@@ -27,6 +30,10 @@ interface EditState {
   // 여러 필드 동시 수정 함수
   setEditData: (data: Partial<WriteDataType>) => void
   // 초기화 함수
+  setDeletePostId: (deletePostId: string) => void
+  setNickname: (deletePostId: string) => void
+  setContent: (content: string) => void
+
   setAnswerEditField: <K extends keyof EditAnswerType>(field: K, value: EditAnswerType[K]) => void
   resetEditData: () => void
 }
@@ -56,6 +63,9 @@ export const useEditStore = create<EditState>((set) => ({
   editData: initialWriteData,
   questionEditData: initialQuestion,
   answerEditData: initialAnswer,
+  deletePostId: '',
+  nickname: '',
+  content: '',
 
   // 특정 필드 하나만 바꿀 때: setField('rating', 5)
   setField: (field, value) =>
@@ -74,6 +84,12 @@ export const useEditStore = create<EditState>((set) => ({
         ...data,
       },
     })),
+
+  setDeletePostId: (deletePostId) => set({ deletePostId: deletePostId }),
+
+  setNickname: (nickname) => set({ nickname: nickname }),
+
+  setContent: (content) => set({ content: content }),
 
   // 특정 필드 하나만 바꿀 때: setField('rating', 5)
   setQuestionField: (field, value) =>

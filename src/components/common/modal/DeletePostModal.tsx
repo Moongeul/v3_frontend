@@ -6,19 +6,17 @@ import { Button } from '@/components/common'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/common/toast/ToastContext'
 import { deletePost } from '@/lib/client/post'
+import { useEditStore } from '@/store/editStore'
 
-interface DeletePostModalProps {
-  postId: number | string
-}
-
-export default function DeletePostModal({ postId }: DeletePostModalProps) {
+export default function DeletePostModal() {
   const { toggleModal, modals } = useModalStore()
+  const { deletePostId } = useEditStore((state) => state)
   return modals.isDeletePostModalOpen ? (
     <Modal
       isOpen={modals.isDeletePostModalOpen}
       onClose={() => toggleModal('isDeletePostModalOpen')}
       title={'게시글을 삭제할까요?'}
-      footerButtons={<FooterButtons postId={postId} toggleModal={toggleModal} />}
+      footerButtons={<FooterButtons postId={deletePostId} toggleModal={toggleModal} />}
     />
   ) : null
 }
@@ -41,7 +39,6 @@ function FooterButtons({ toggleModal, postId }: { postId: number | string; toggl
           const result = await deletePost(postId)
           if (result.success) {
             success('게시글 삭제 성공', '게시글을 삭제했어요.')
-            router.push('/question')
             router.refresh()
             toggleModal('isDeletePostModalOpen')
           } else {
