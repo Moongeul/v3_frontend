@@ -32,6 +32,7 @@ export default async function RecordPage({
     { content: '리포트', path: '/record?tab=REPORT', key: 'REPORT' },
     { content: '읽을책', path: '/record?tab=WISHLIST', key: 'WISHLIST' },
   ]
+
   return (
     <main>
       <Header headerType={'title'} rightIcon={<AddRecordButton />}>

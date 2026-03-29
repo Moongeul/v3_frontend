@@ -2,6 +2,7 @@ export interface APIResponseType<T> {
   status: number
   success: boolean
   message: string
+  error?: string
   data: T
 }
 

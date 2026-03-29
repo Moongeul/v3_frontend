@@ -2,6 +2,7 @@ import RatingItem from '@/components/record/rating/RatingItem'
 import { Label, Spacing } from '@/components/common'
 import { serverFetchAllDoneReadRatingSummary } from '@/lib/server/record'
 import { typography } from '@/styles/theme'
+import AuthWatcher from '@/components/common/AuthWatcher'
 
 // 색상만 정의한 설정 (너비는 동적으로 계산하므로 제거)
 const RANGE_COLORS: Record<string, string> = {
@@ -39,6 +40,8 @@ const getTieredWidth = (count: number, min: number, max: number) => {
 
 export default async function RatingRecord() {
   const result = await serverFetchAllDoneReadRatingSummary()
+  const initialError = result?.success ? undefined : result?.message
+
   const rawData = result?.data?.data || []
 
   // 1. 정렬: 점수 범위 내림차순 (5.0 -> 0.0)
@@ -51,6 +54,8 @@ export default async function RatingRecord() {
 
   return (
     <div>
+      <AuthWatcher error={initialError} results={result} />
+
       <Spacing height={12} />
       <Label labelStyle={typography.subtitleLg}>{result?.data?.totalBooks || 0}권</Label>
       <Spacing height={16} />

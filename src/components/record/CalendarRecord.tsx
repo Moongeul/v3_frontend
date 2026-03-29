@@ -25,6 +25,7 @@ import { clientFetchAllDoneReadCalendar } from '@/lib/client/record'
 import { CalendarDateType } from '@/types/record'
 import { GrayLeftArrowIcon, GrayRightArrowIcon } from '@/assets/svgComponents'
 import { Spacing } from '@/components/common'
+import AuthWatcher from '@/components/common/AuthWatcher'
 
 export default function CalendarRecord() {
   const [currentDate, setCurrentDate] = useState(new Date())
@@ -32,27 +33,35 @@ export default function CalendarRecord() {
   const [recordMap, setRecordMap] = useState<Record<number, CalendarDateType>>({})
   const [isLoading, setIsLoading] = useState(false)
 
-  // 1. API 호출 로직
+  // AuthWatcher에 넘겨줄 에러 상태 추가
+  const [apiError, setApiError] = useState<string | undefined>(undefined)
+
   useEffect(() => {
     const fetchCalendarData = async () => {
       setIsLoading(true)
+      setApiError(undefined) // 호출 시 에러 초기화
+
       try {
         const year = getYear(currentDate)
-        const month = getMonth(currentDate) + 1 // JS Month(0-11) -> API Month(1-12)
+        const month = getMonth(currentDate) + 1
 
         const response = await clientFetchAllDoneReadCalendar({ year, month })
-        console.log('response', response)
+        console.log('📅 Calendar API Response:', response)
 
         if (response.success && response.data) {
-          // 배열을 { day: data } 형태의 객체로 변환하여 접근 최적화
           const newMap: Record<number, CalendarDateType> = {}
+          // response.data.data 구조에 맞춰 순회
           response.data.data.forEach((item: CalendarDateType) => {
             newMap[item.day] = item
           })
           setRecordMap(newMap)
+        } else {
+          // 실패 시 에러 메시지 저장 (AuthWatcher가 감지하도록)
+          setApiError(response.error)
         }
       } catch (error) {
         console.error('달력 데이터를 불러오는데 실패했습니다:', error)
+        // setApiError(error.message || '네트워크 에러가 발생했습니다.')
       } finally {
         setIsLoading(false)
       }
@@ -75,6 +84,8 @@ export default function CalendarRecord() {
   return (
     <>
       <Spacing height={12} />
+      <AuthWatcher error={apiError} />
+
       <StyledCalendarContainer style={{ opacity: isLoading ? 0.6 : 1 }}>
         <StyledCalendarHeader>
           <GrayLeftArrowIcon onClick={handlePrevMonth} width={36} height={36} />
