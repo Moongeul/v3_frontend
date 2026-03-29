@@ -7,7 +7,7 @@ import { MyCategoryResponseType, MyCategoryType } from '@/types/mypage'
 
 interface RecordCardsProps {
   category: MyCategoryResponseType | undefined
-  userId: number | undefined
+  userId: number | undefined | string
 }
 
 // 🎨 반복해서 사용할 색상 팔레트 정의

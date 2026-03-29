@@ -11,7 +11,7 @@ interface RecordCardProps {
   borderColor: string
   count: string
   title: string
-  userId: number | undefined
+  userId: number | undefined | string
 }
 
 export default function RecordCard({ id, backgroundColor, borderColor, count, title, userId }: RecordCardProps) {

@@ -18,7 +18,7 @@ export default async function MypageRecordPage({ params }: { params: Promise<{ u
       <PageLayout>
         <div>
           <Spacing height={20} />
-          <RecordCards category={category} />
+          <RecordCards userId={userId} category={category} />
         </div>
       </PageLayout>
 
