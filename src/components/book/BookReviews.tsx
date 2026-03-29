@@ -25,7 +25,7 @@ export default function BookReviews({ reviews, total }: BookReviewsProps) {
           content={review.content}
           created={review.createdAt}
           memberInfo={{
-            memberId: 1,
+            memberId: review.memberId,
             readingTasteType: review.readingTasteType,
             profileImage: review.profileImage,
             nickname: review.nickname,

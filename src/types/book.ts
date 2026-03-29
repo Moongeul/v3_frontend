@@ -19,6 +19,7 @@ export interface BookType {
 export interface BookReviewType {
   postId: number
   nickname: string
+  memberId: number
   readingTasteType: TagEnumType
   profileImage: string
   createdAt: string
