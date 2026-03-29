@@ -1,13 +1,11 @@
-import { BookInfoSummary, Header, PageLayout, Spacing, Spinner } from '@/components/common'
+import { BookInfoSummary, PageLayout, Spacing, Spinner } from '@/components/common'
 import { ReviewContentText } from '@/components/book'
 import { AvatarGroup, CommentSummary } from '@/components/question'
 import { fetchAnswers, fetchQuestionDetail } from '@/lib/server/question'
 import CommentInput from '@/components/question/CommentInput'
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import CommentList from '@/components/question/CommentList'
-import QuestionOptionIcon from '@/components/question/QuestionOptionIcon'
 import DeleteQuestionModal from '@/components/common/modal/DeleteQuestionModal'
-import UserOptionMenu from '@/components/common/option/UserOptionMenu'
 import QuestionDetailHeader from '@/components/question/QuestionDetailHeader'
 
 export default async function QuestionDetailPage({ params }: { params: Promise<{ questionId: string }> }) {

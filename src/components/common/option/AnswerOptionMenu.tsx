@@ -9,9 +9,10 @@ import { useEditStore } from '@/store/editStore'
 interface AnswerOptionMenuProps {
   handleMenuClick: (e: React.MouseEvent) => void
   content: string
+  answerId: number
 }
 
-export default function AnswerOptionMenu({ handleMenuClick, content }: AnswerOptionMenuProps) {
+export default function AnswerOptionMenu({ handleMenuClick, content, answerId }: AnswerOptionMenuProps) {
   const theme = useTheme()
   const router = useRouter()
   const { toggleModal } = useModalStore((state) => state)
@@ -23,6 +24,7 @@ export default function AnswerOptionMenu({ handleMenuClick, content }: AnswerOpt
         onClick={(e) => {
           handleMenuClick(e)
           setAnswerEditField('content', content)
+          setAnswerEditField('answerId', String(answerId))
         }}
         $color={theme.colors.textFieldDefaultText}
       >

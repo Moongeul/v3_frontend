@@ -4,7 +4,7 @@ import { StyleCommentInputWrapper } from '@/styles/question/QuestionComment.styl
 import { Button, TextInput } from '@/components/common'
 import { WhiteUpIcon } from '@/assets/svgComponents'
 import { useAnswerStore } from '@/store/answerStore'
-import { postCreateAnswer, putAnswer } from '@/lib/client/question' // 수정 API 추가 가정
+import { postCreateAnswer, putAnswer } from '@/lib/client/question'
 import { CreateAnswerType } from '@/types/question'
 import { useToast } from '@/components/common/toast/ToastContext'
 import { useRouter } from 'next/navigation'
@@ -17,39 +17,50 @@ interface CommentInputProps {
 export default function CommentInput({ questionId }: CommentInputProps) {
   const router = useRouter()
   const { success, error } = useToast()
+
+  // 스토어 상태
   const { updateAnswer, createAnswer } = useAnswerStore((state) => state)
-  const { setAnswerEditField, answerEditData } = useEditStore((state) => state)
+  const { setAnswerEditField, answerEditData, resetEditData } = useEditStore((state) => state)
 
-  // 1. 현재 모드 확인 (수정할 데이터가 있으면 수정 모드)
-  const isEditMode = !!answerEditData && answerEditData.answerId !== ''
+  // 1. 수정 모드 판별 (ID가 존재하거나, 특정 플래그를 통해 확인)
+  // 만약 answerId가 처음에 ''(빈문자열)로 들어온다면, '내용이 있는지' 혹은 'ID가 존재하는지'를 엄격히 체크해야 합니다.
+  const isEditMode = Boolean(answerEditData?.content)
 
-  // 2. 통합 제출 핸들러
   const handleSubmit = async () => {
-    // 내용이 비어있는지 체크
-    const currentContent = (isEditMode ? answerEditData.content : createAnswer.content) || ''
-    if (!currentContent.trim()) return error('알림', '내용을 입력해주세요.')
+    const currentContent = isEditMode ? answerEditData.content : createAnswer.content
+
+    if (!currentContent?.trim()) {
+      return error('알림', '내용을 입력해주세요.')
+    }
 
     try {
       let result
 
       if (isEditMode) {
         // [수정 로직]
-        // patchUpdateAnswer API가 있다고 가정합니다.
         result = await putAnswer(answerEditData.content, answerEditData.answerId)
+        router.refresh()
       } else {
         // [생성 로직]
         result = await postCreateAnswer({
           ...createAnswer,
           questionId: questionId,
         } as CreateAnswerType)
+        router.refresh()
       }
 
       if (result.success) {
         success(isEditMode ? '수정 완료' : '답변 성공', '성공적으로 반영되었습니다.')
 
-        // 초기화
-        updateAnswer('content', '')
-        setAnswerEditField('content', '') // 수정 데이터 비우기
+        // 3. 초기화 로직 (중요)
+        if (isEditMode) {
+          resetEditData?.() // EditStore에 초기화 함수가 있다면 호출
+          // 만약 reset함수가 없다면 직접 초기화:
+          setAnswerEditField('answerId', '')
+          setAnswerEditField('content', '')
+        } else {
+          updateAnswer('content', '')
+        }
 
         router.refresh()
       } else {
@@ -63,15 +74,16 @@ export default function CommentInput({ questionId }: CommentInputProps) {
   return (
     <StyleCommentInputWrapper>
       <TextInput
-        // 수정 모드일 때는 answerEditData를, 아닐 때는 createAnswer.content를 보여줌
+        // value 결정: 수정 모드일 때와 아닐 때를 명확히 구분
         value={isEditMode ? answerEditData.content : createAnswer.content}
         height={48}
         placeholder={'답변을 남겨보아요.'}
         onChange={(e) => {
+          const val = e.target.value
           if (isEditMode) {
-            setAnswerEditField('content', e.target.value)
+            setAnswerEditField('content', val)
           } else {
-            updateAnswer('content', e.target.value)
+            updateAnswer('content', val)
             updateAnswer('questionId', questionId)
           }
         }}

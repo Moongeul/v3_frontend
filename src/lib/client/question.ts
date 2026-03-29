@@ -241,7 +241,7 @@ export const putAnswer = async (
   >
 > => {
   try {
-    const response = await fetch(`/api/question/${answerId}`, {
+    const response = await fetch(`/api/answer/${answerId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

@@ -36,7 +36,7 @@ export default function Comment({ memberInfo, createdAt, myAnswer, answerId, con
             isMenuOpen={isMenuOpen}
             menu={
               myAnswer ? (
-                <AnswerOptionMenu content={content} handleMenuClick={handleMenuClick} />
+                <AnswerOptionMenu content={content} answerId={answerId} handleMenuClick={handleMenuClick} />
               ) : (
                 <UserOptionMenu handleMenuClick={handleMenuClick} />
               )
