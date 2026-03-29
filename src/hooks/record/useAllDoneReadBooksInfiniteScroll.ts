@@ -34,13 +34,14 @@ export const useAllDoneReadBookInfiniteScroll = () => {
   // 1. 모든 페이지 데이터를 합치고 가공
   const booksWithColor =
     data?.pages.flatMap((page) => {
-      // page.data.books가 배열인지 확인 (API 구조에 따라 contents일 수도 있음)
+      // page.data.data가 실제 배열인지 확인
       const bookList = page.data.data || []
 
       return bookList.map((book) => {
-        // 2. articleId를 색상 배열의 길이로 나눈 나머지를 인덱스로 사용
-        // articleId가 고유하므로 해당 책은 언제나 같은 색상을 가짐
-        const colorIndex = Math.abs(book.articleId) % SHELF_COLORS.length
+        // ✅ articleId 대신 postId를 사용하세요!
+        // 만약 postId도 없을 경우를 대비해 기본값 0을 처리해주는 것이 안전합니다.
+        const id = book.postId || 0
+        const colorIndex = Math.abs(id) % SHELF_COLORS.length
         const assignedColor = SHELF_COLORS[colorIndex]
 
         return {

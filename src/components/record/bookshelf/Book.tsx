@@ -16,15 +16,18 @@ import { useRouter } from 'next/navigation'
 interface BookProps {
   backgroundColor: string
   borderColor: string
-  articleId: number
+  postId: number
   title: string
   ratingAverage: number
   weight: number
   height: number
   postCount: number
+  isbn: string
+  userId: string | undefined
 }
 export default function Book({
-  articleId,
+  postId,
+  userId,
   postCount,
   weight,
   ratingAverage,
@@ -32,13 +35,18 @@ export default function Book({
   height,
   backgroundColor,
   borderColor,
+  isbn,
 }: BookProps) {
   const router = useRouter()
 
   return (
     <StyleBook
       onClick={() => {
-        router.push(`/${articleId}`)
+        if (userId) {
+          router.push(`/profile/${userId}/record/${isbn}`)
+        } else {
+          router.push(`/record/${isbn}`)
+        }
       }}
       $width={weight}
       $backgroundColor={backgroundColor}

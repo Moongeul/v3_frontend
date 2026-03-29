@@ -42,7 +42,7 @@ export default async function UserBookShelfRecord({ userId }: UserBookShelfRecor
       <Spacing height={12} />
       <Label labelStyle={typography.subtitleLg}>{totalCount}권</Label>
       <Spacing height={16} />
-      <BookList />
+      <BookList userId={userId} />
       <Spacing height={110} />
     </HydrationBoundary>
   )

@@ -23,7 +23,7 @@ export interface QuoteType {
 }
 
 export interface BookShelfType {
-  articleId: number
+  postId: number
   isbn: string
   title: string
   ratingAverage: number

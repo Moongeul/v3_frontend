@@ -6,7 +6,11 @@ import { BookShelfType } from '@/types/record'
 import { useAllDoneReadBookInfiniteScroll } from '@/hooks/record/useAllDoneReadBooksInfiniteScroll'
 import { Spinner } from '@/components/common'
 
-export default function BookList() {
+interface BookListProps {
+  userId?: string
+}
+
+export default function BookList({ userId }: BookListProps) {
   const { books, bottomRef, isFetchingNextPage, hasData } = useAllDoneReadBookInfiniteScroll()
 
   const splitBooksByWeight = (books: BookShelfType[], maxWeight: number) => {
@@ -40,7 +44,8 @@ export default function BookList() {
           <StyleShelfRow $gap={'4px'} key={`row-${index}`}>
             {row.map((book) => (
               <Book
-                key={book.articleId}
+                key={book.postId}
+                userId={userId}
                 {...book}
                 borderColor={book.borderColor}
                 backgroundColor={book.backgroundColor}

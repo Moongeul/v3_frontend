@@ -9,6 +9,7 @@ export const StyleBook = styled.div<{
   $width: number
 }>`
   display: flex;
+  cursor: pointer;
   flex-direction: column;
   justify-content: space-between;
   padding: 8px;

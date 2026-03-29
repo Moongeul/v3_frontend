@@ -11,14 +11,15 @@ interface RecordCardProps {
   borderColor: string
   count: string
   title: string
+  userId: number | undefined
 }
 
-export default function RecordCard({ id, backgroundColor, borderColor, count, title }: RecordCardProps) {
+export default function RecordCard({ id, backgroundColor, borderColor, count, title, userId }: RecordCardProps) {
   const router = useRouter()
   return (
     <StyleRecordCard
       onClick={() => {
-        router.push(`/mypage/record/${id}`)
+        router.push(`/mypage/${userId}/record/${id}`)
       }}
       $backgroundColor={backgroundColor}
       $borderColor={borderColor}

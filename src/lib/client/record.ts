@@ -1,4 +1,4 @@
-import { APIResponseType, Paging } from '@/types/common'
+import { APIResponseType, BookShelfPaging, Paging } from '@/types/common'
 import { BookShelfType, CalendarType, RecordType } from '@/types/record'
 import { BookType } from '@/types/book'
 import { CategoryRecordSortByType } from '@/types/mypage'
@@ -136,6 +136,35 @@ export const clientFetchAllRatingRangeRecords = async (params: {
     // 에러 핸들링을 추가하면 더 안전합니다.
     throw new Error('Failed to fetch posts')
   }
+
+  return await response.json()
+}
+
+/**
+ * 읽은 책별 기록 리스트 조회 API
+ */
+export const clientBookShelfDoneReadPosts = async (params: {
+  page: number
+  size: number
+  userId?: string
+  isbn: string
+}): Promise<APIResponseType<BookShelfPaging<RecordType[]>>> => {
+  const { page = 1, size = 20, userId, isbn } = params
+
+  const searchParams = new URLSearchParams()
+  searchParams.append('page', page.toString())
+  searchParams.append('size', size.toString())
+
+  if (userId) {
+    searchParams.append('userId', userId.toString())
+  }
+
+  const response = await fetch(`/api/bookshelf/done-read/${isbn}/posts?${searchParams.toString()}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
 
   return await response.json()
 }

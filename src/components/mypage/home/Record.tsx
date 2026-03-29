@@ -35,7 +35,7 @@ export default function Record({ category, userId }: RecordProps) {
         기록
       </Label>
       <Spacing height={4} />
-      <RecordCards category={category} />
+      <RecordCards category={category} userId={userId} />
     </>
   )
 }

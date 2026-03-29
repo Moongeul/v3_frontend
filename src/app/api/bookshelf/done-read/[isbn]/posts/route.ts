@@ -1,24 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { apiCallServer } from '@/lib/api.server'
 
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ isbn: string }> }) {
   try {
+    const { isbn } = await params
+
     const { searchParams } = new URL(request.url)
 
     const backendParams = new URLSearchParams()
 
-    const year = searchParams.get('year') || '0'
-    const month = searchParams.get('month') || '20'
+    const page = searchParams.get('page') || '0'
+    const size = searchParams.get('size') || '20'
     const userId = searchParams.get('userId')
 
     if (userId) {
       backendParams.append('userId', userId)
     }
 
-    backendParams.append('year', year)
-    backendParams.append('month', month)
+    backendParams.append('page', page)
+    backendParams.append('size', size)
 
-    const endpoint = `/v2/bookshelf/done-read/calendar?${backendParams.toString()}`
+    const endpoint = `/v2/bookshelf/done-read/${isbn}/posts?${backendParams.toString()}`
 
     console.log('Backend Request Endpoint:', endpoint) // 디버깅용 로그
 

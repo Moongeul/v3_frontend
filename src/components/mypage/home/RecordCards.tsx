@@ -7,6 +7,7 @@ import { MyCategoryResponseType, MyCategoryType } from '@/types/mypage'
 
 interface RecordCardsProps {
   category: MyCategoryResponseType | undefined
+  userId: number | undefined
 }
 
 // 🎨 반복해서 사용할 색상 팔레트 정의
@@ -19,7 +20,7 @@ const COLOR_PALETTE = [
   { backgroundColor: '#EB7AFF4D', borderColor: '#F5BCFF' }, // 5
 ]
 
-export default function RecordCards({ category }: RecordCardsProps) {
+export default function RecordCards({ category, userId }: RecordCardsProps) {
   // 수정된 로직
   const baseCategory = [{ categoryId: 0, categoryTitle: '전체', postCount: category?.totalPostCount || 0 }]
 
@@ -40,8 +41,9 @@ export default function RecordCards({ category }: RecordCardsProps) {
     <StyleGridRecordContainer>
       {recordCardContents.map((recordCardContent, idx) => (
         <RecordCard
-          id={recordCardContent.categoryId}
           key={`${recordCardContent.title}-${idx}`}
+          userId={userId}
+          id={recordCardContent.categoryId}
           title={recordCardContent.title}
           count={recordCardContent.count}
           backgroundColor={recordCardContent.backgroundColor}
