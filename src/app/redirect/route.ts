@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
       return redirect('/onboarding?tab=terms')
     } else if (role === 'ROLE_USER') {
       return redirect('/home?tab=PUBLIC')
-    } else if (role === 'ADMIN') {
+    } else if (role === 'ROLE_ADMIN') {
       return redirect('/home?tab=PUBLIC')
     }
     // 5. 예상치 못한 상태
