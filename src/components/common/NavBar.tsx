@@ -17,11 +17,17 @@ import { useTheme } from '@emotion/react'
 import NavRecommendIcon from '@/components/common/icon/NavRecommendIcon'
 import NavBookShelfIcon from '@/components/common/icon/NavBookShelfIcon'
 import NavProfileIcon from '@/components/common/icon/NavProfileIcon'
+import Cookies from 'js-cookie'
+import { useModalStore } from '@/store/modalStore'
+import { useBackPathStore } from '@/store/backPathStore'
 
 export default function NavBar() {
   const router = useRouter()
   const path = usePathname()
   const theme = useTheme()
+  const loginMemberId = Cookies.get('memberId')
+  const { setModal } = useModalStore()
+  const setBackPath = useBackPathStore((state) => state.setBackPath)
 
   // 현재 테마가 다크모드인지 확인 (테마 구조에 따라 theme.isDark 혹은 theme.mode === 'dark' 등으로 변경)
   const isDarkMode = theme.colors.background !== '#FFFFFD'
@@ -51,7 +57,16 @@ export default function NavBar() {
         </StyleContent>
       </StyleNavItem>
 
-      <StyleWriteItem onClick={() => onNavigation('/write')}>
+      <StyleWriteItem
+        onClick={() => {
+          if (loginMemberId) {
+            onNavigation('/write')
+          } else {
+            setModal('isRequiredLoginModalOpen', true)
+            setBackPath(path === '/home' ? '/home?tab=PUBLIC' : '/book')
+          }
+        }}
+      >
         <NavWriteIcon width={21} height={24} />
       </StyleWriteItem>
 
