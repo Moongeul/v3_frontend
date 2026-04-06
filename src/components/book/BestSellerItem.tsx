@@ -24,7 +24,7 @@ export default function BestSellerItem({ isbn, bookImage, title, author }: Bests
       }}
     >
       <StyleBestSellerBookImage>
-        <Image src={bookImage} alt={'이미지'} width={92} height={138} style={{ borderRadius: 6 }}></Image>
+        <Image src={bookImage} alt={'이미지'} width={92} height={138} />
       </StyleBestSellerBookImage>
 
       <StyleBestBookTitle>{title}</StyleBestBookTitle>

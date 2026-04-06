@@ -117,8 +117,17 @@ export const StyleBestSellerItemContainer = styled.div`
 `
 
 export const StyleBestSellerBookImage = styled.div`
-  border-radius: 6px;
+  width: 92px; /* 부모 크기 고정 */
+  height: 138px;
   flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden; /* 이미지가 밖으로 나가지 않게 */
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 비율을 유지하며 영역을 꽉 채움 */
+  }
 `
 export const StyleBestSellerBookRowContainer = styled.div`
   display: flex;
@@ -142,6 +151,27 @@ export const StyleBestSellerBookRowContainer = styled.div`
     flex-shrink: 0;
   }
 `
+
+export const StyleBestSellerBookColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+
+  -webkit-overflow-scrolling: touch;
+
+  /* 3. 스크롤바 숨기기 (디자인 깔끔하게) */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  /* 5. 내부 아이템들 설정 (가장 중요) */
+  & > * {
+    flex-shrink: 0;
+  }
+`
+
 export const StyleBestBookTitle = styled.div`
   ${({ theme }) => theme.typography.subtitleSm as CSSObject};
   color: ${({ theme }) => theme.colors.headerText};

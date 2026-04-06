@@ -71,6 +71,29 @@ export const fetchBookBestSeller = async (): Promise<ApiCallResult<{ data: BestS
 }
 
 /**
+ * 베스트 셀러 상세 조회
+ */
+export const fetchBookBestSellerDetail = async (): Promise<ApiCallResult<{ data: BookType[] }>> => {
+  try {
+    const { data, error } = await apiCallServer(`/v2/book/bestseller/detail`, {
+      method: 'GET',
+    })
+
+    if (error) {
+      return { success: false, error }
+    }
+
+    return { success: true, data }
+  } catch (error) {
+    console.error('베스트셀러 도서 상세 API:', error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    }
+  }
+}
+
+/**
  * 가장 많이 기록된 책 API
  */
 export const fetchMostRecordedBook = async (): Promise<ApiCallResult<MostRecordedBookType>> => {

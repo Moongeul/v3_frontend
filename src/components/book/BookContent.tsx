@@ -9,6 +9,7 @@ import { BestSellerType, MostRecordedBookType } from '@/types/book'
 import TestBanner from '@/components/book/TestBanner'
 import Cookies from 'js-cookie'
 import NoWeeklyRecommendBookResult from '@/components/book/NoWeeklyRecommendBookResult'
+import BookHomeBestsellerList from '@/components/book/BookHomeBestsellerList'
 
 interface BookContentProps {
   weeklyRecommendBook: WeeklyRecommendBookType | undefined
@@ -30,7 +31,7 @@ export default function BookContent({ weeklyRecommendBook, bestSellers, mostReco
         지금 많이 읽는 책
       </Label>
       <Spacing height={4} />
-      <BestsellerList bestSellers={bestSellers} />
+      <BookHomeBestsellerList bestSellers={bestSellers} />
       {/* 1. 취향이 닮은 사람들의 인기책:
           isReadingTaste가 'false' 문자열이고 데이터가 있을 때만 렌더링 */}
       {isReadingTaste === 'false' && mostRecordedBook && (
