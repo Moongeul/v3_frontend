@@ -56,7 +56,7 @@ export default function WishBookButton({ isbn, isWishRead }: WishBookButtonProps
             </Button>
           </>
         }
-        title={'읽고 싶은 책에 등록할까요?'}
+        title={isWishRead ? '읽고 싶은 책에서 삭제할까요?' : '읽고 싶은 책에 등록할까요?'}
         isOpen={isOpen}
         onClose={toggleModalState}
       />
