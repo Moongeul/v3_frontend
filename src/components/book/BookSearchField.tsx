@@ -10,7 +10,7 @@ export default function BookSearchField() {
   const onNavigation = () => {
     router.push('/book/search')
   }
-  return loginMemberId ? (
+  return (
     <>
       <Spacing height={72} />
       <TextInput
@@ -24,7 +24,5 @@ export default function BookSearchField() {
         }
       />
     </>
-  ) : (
-    <Spacing height={50} />
   )
 }
