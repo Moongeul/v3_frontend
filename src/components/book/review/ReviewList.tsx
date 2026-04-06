@@ -37,6 +37,10 @@ export default function ReviewList({ tab }: ReviewListProps) {
 
       return undefined
     },
+    // 탭 변경 시 즉시 'stale' 상태로 간주하여 백그라운드 리페치 유도
+    staleTime: 0,
+    // 컴포넌트가 마운트될 때(탭 전환 시) 항상 새로고침
+    refetchOnMount: true,
   })
 
   // 무한 스크롤 트리거
@@ -47,8 +51,6 @@ export default function ReviewList({ tab }: ReviewListProps) {
       fetchNextPage()
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
-
-  console.log('review데이터', data)
 
   return (
     <>

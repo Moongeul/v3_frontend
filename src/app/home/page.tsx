@@ -43,7 +43,7 @@ export default async function HomePage({
       <HomeBanner />
       <Spacing height={32} />
 
-      <StoryList tab={tab} />
+      <StoryList key={`story-section-${tab}`} tab={tab} />
       <Spacing height={32} />
 
       <Label labelElement={<ViewAllQuestionButton />} labelStyle={typography.subtitleMd}>
@@ -55,7 +55,7 @@ export default async function HomePage({
       <Spacing height={32} />
 
       <Label labelStyle={typography.subtitleMd}>기록</Label>
-      <ReviewList tab={tab} />
+      <ReviewList key={`review-section-${tab}`} tab={tab} />
     </main>
   )
 }

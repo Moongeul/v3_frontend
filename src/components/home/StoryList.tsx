@@ -30,6 +30,10 @@ export default function StoryList({ tab }: StoryListProps) {
       const { page, totalPages } = lastPage.data
       return page < totalPages ? page + 1 : undefined
     },
+    // 탭 변경 시 즉시 'stale' 상태로 간주하여 백그라운드 리페치 유도
+    staleTime: 0,
+    // 컴포넌트가 마운트될 때(탭 전환 시) 항상 새로고침
+    refetchOnMount: true,
   })
 
   console.log('스토르 데이터', data)
