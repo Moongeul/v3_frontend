@@ -4,15 +4,24 @@ import { StyleRecordButton, StyleRecordButtonText } from '@/styles/home/Record.s
 import { AddWhiteIcon } from '@/assets/svgComponents'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
+import { useModalStore } from '@/store/modalStore'
+import { useBackPathStore } from '@/store/backPathStore'
 
 export default function WriteRecordButton() {
   const router = useRouter()
   const loginMemberId = Cookies.get('memberId')
+  const { setModal } = useModalStore()
+  const { setBackPath } = useBackPathStore()
 
-  return loginMemberId ? (
+  return (
     <StyleRecordButton
       onClick={() => {
-        router.push(`/mypage/${loginMemberId}/record`)
+        if (loginMemberId) {
+          router.push(`/mypage/${loginMemberId}/record`)
+        } else {
+          setModal('isRequiredLoginModalOpen', true)
+          setBackPath('/home?tab=PUBLIC')
+        }
       }}
     >
       <AddWhiteIcon width={18} height={18} />
@@ -21,5 +30,5 @@ export default function WriteRecordButton() {
         <br /> 만들기
       </StyleRecordButtonText>
     </StyleRecordButton>
-  ) : null
+  )
 }

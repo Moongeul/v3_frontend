@@ -4,6 +4,7 @@ import Modal from '@/components/common/Modal'
 import { ModalKey, useModalStore } from '@/store/modalStore'
 import { Button } from '@/components/common'
 import { useRouter } from 'next/navigation'
+import { useBackPathStore } from '@/store/backPathStore'
 
 export default function RequiredLoginModal() {
   const { toggleModal, modals } = useModalStore()
@@ -18,6 +19,7 @@ export default function RequiredLoginModal() {
 }
 function FooterButtons({ toggleModal }: { toggleModal: (key: ModalKey) => void }) {
   const router = useRouter()
+  const { backPath, setBackPath } = useBackPathStore()
 
   return (
     <>
@@ -25,7 +27,12 @@ function FooterButtons({ toggleModal }: { toggleModal: (key: ModalKey) => void }
         variant={'secondary'}
         onClick={() => {
           toggleModal('isRequiredLoginModalOpen')
-          router.back()
+          if (backPath) {
+            router.push(backPath)
+            setBackPath(undefined)
+          } else {
+            router.back()
+          }
         }}
       >
         다음에

@@ -18,6 +18,8 @@ import DeleteQuestionModal from '@/components/common/modal/DeleteQuestionModal'
 import QuestionOptionsMenu from '@/components/common/option/QuestionOptionMenu'
 import UserOptionMenu from '@/components/common/option/UserOptionMenu'
 import Cookies from 'js-cookie'
+import { useModalStore } from '@/store/modalStore'
+import { useBackPathStore } from '@/store/backPathStore'
 
 interface QuestionCardProps extends QuestionType {
   width?: number
@@ -38,7 +40,9 @@ export default function QuestionCard({
 }: QuestionCardProps) {
   const router = useRouter()
   const [isMenuOpen, setIsMenuOpen] = useState(false) // 메뉴 열림 상태
+  const { setModal } = useModalStore()
   const { setQuestionField } = useEditStore((state) => state)
+  const { setBackPath } = useBackPathStore()
   const loginMemberId = Cookies.get('memberId')
 
   const handleMenuClick = (e: React.MouseEvent) => {
@@ -105,10 +109,19 @@ export default function QuestionCard({
 
       <CommentSummary count={commentCnt} />
 
-      {loginMemberId && isAnswerButton ? (
+      {isAnswerButton ? (
         <>
           <Spacing height={12} />
-          <StyleAnswerButton>
+          <StyleAnswerButton
+            onClick={() => {
+              if (loginMemberId) {
+                router.push(`/question/${questionId}`)
+              } else {
+                setModal('isRequiredLoginModalOpen', true)
+                setBackPath('/home?tab=PUBLIC')
+              }
+            }}
+          >
             <p>이 질문에 답해볼래요</p>
             <ButtonTextSecondaryRightArrowIcon width={20} height={20} />
           </StyleAnswerButton>

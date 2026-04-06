@@ -18,7 +18,7 @@ export default function QuestionCardRowList({ questionList }: QuestionCardRowLis
       {questionList?.map((question) => (
         <QuestionCard key={question.questionId} isAnswerButton={true} width={237} {...question} />
       ))}
-      {loginMemberId ? <QuestionButton width={237} /> : null}
+      <QuestionButton width={237} />
     </StyleRecordListRowWrapper>
   )
 }
