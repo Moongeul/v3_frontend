@@ -56,6 +56,7 @@ export async function DELETE() {
     cookieStore.delete('refreshToken')
     cookieStore.delete('status')
     cookieStore.delete('role')
+    cookieStore.delete('memberId')
 
     return NextResponse.json({ success: true })
   } catch (error) {
