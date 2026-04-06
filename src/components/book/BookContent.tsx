@@ -22,6 +22,7 @@ export default function BookContent({ weeklyRecommendBook, bestSellers, mostReco
   const isReadingTaste = Cookies.get('isReadingTaste')
 
   console.log('isReadingTaste', isReadingTaste)
+  console.log('mostRecordedBook', weeklyRecommendBook)
   console.log('weeklyRecommendBook', weeklyRecommendBook)
 
   return (
@@ -34,7 +35,7 @@ export default function BookContent({ weeklyRecommendBook, bestSellers, mostReco
       <BookHomeBestsellerList bestSellers={bestSellers} />
       {/* 1. 취향이 닮은 사람들의 인기책:
           isReadingTaste가 'false' 문자열이고 데이터가 있을 때만 렌더링 */}
-      {isReadingTaste === 'false' && mostRecordedBook && (
+      {isReadingTaste === 'true' && mostRecordedBook && (
         <>
           <Spacing height={36} />
           <Label labelStyle={typography.subtitleLg}>취향이 닮은 사람들의 인기책</Label>
@@ -53,6 +54,7 @@ export default function BookContent({ weeklyRecommendBook, bestSellers, mostReco
           />
         </>
       )}
+
       {/* 2. Moongeul 에서 많이 기록한 책:
           데이터가 있을 때 항상 렌더링 (isReadingTaste 값과 무관하게 노출됨) */}
       <Spacing height={36} />
