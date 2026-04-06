@@ -6,6 +6,7 @@ import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
 import { clientFetchAllAlarms } from '@/lib/client/alarm'
 import { Spinner } from '@/components/common'
+import { useRouter } from 'next/navigation'
 
 const DEFAULT_SIZE = 20
 
@@ -43,6 +44,15 @@ export default function AlarmList() {
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
 
   console.log('알람 데이터', data)
+
+  const router = useRouter()
+
+  useEffect(() => {
+    // 사용자가 알림 페이지를 나갈 때 서버 컴포넌트 데이터를 최신화하도록 요청
+    return () => {
+      router.refresh()
+    }
+  }, [router])
 
   if (!data) return <Spinner />
 

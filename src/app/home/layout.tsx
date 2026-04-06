@@ -3,6 +3,7 @@ import Link from 'next/link'
 import AlarmCount from '@/components/alarm/AlarmCount'
 import { fetchUnReadNotification } from '@/lib/server/alarm'
 import ThemeSearchIcon from '@/components/common/icon/ThemeSearchIcon'
+import { cookies } from 'next/headers'
 export default async function BookLayout({
   children,
 }: Readonly<{
@@ -10,19 +11,31 @@ export default async function BookLayout({
 }>) {
   const result = await fetchUnReadNotification()
 
+  // 2. 쿠키 인스턴스 가져오기 (비동기 처리 필요 - Next.js 15 기준)
+  const cookieStore = await cookies()
+  const memberId = cookieStore.get('memberId')?.value
+
   return (
     <div>
       <Header
         headerType={'default'}
         leftIcon={
-          <Link href={'/search?tab=ALL'}>
-            <ThemeSearchIcon height={24} width={24} />
-          </Link>
+          memberId ? (
+            <Link href={'/search?tab=ALL'}>
+              <ThemeSearchIcon height={24} width={24} />
+            </Link>
+          ) : null
         }
         rightIcon={
-          <Link href={'/alarm'}>
-            <AlarmCount exist={result.data?.exist} />
-          </Link>
+          memberId ? (
+            <Link href={'/alarm'}>
+              <AlarmCount exist={result.data?.exist} />
+            </Link>
+          ) : (
+            <Link href={'/search?tab=ALL'}>
+              <ThemeSearchIcon height={24} width={24} />
+            </Link>
+          )
         }
       />
 

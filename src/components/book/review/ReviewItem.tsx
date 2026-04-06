@@ -102,8 +102,17 @@ export default function ReviewItem({
           <Spacing height={8} />
           <ReviewContent createdAt={readDate} rating={rating} quotes={quotes} content={content} />
 
-          <Spacing height={12} />
-          <InteractionButtons content={content} postId={postId} likesCnt={likesInfo} myLikesStatus={myLikesStatus} />
+          {loginMemberId ? (
+            <>
+              <Spacing height={12} />
+              <InteractionButtons
+                content={content}
+                postId={postId}
+                likesCnt={likesInfo}
+                myLikesStatus={myLikesStatus}
+              />
+            </>
+          ) : null}
         </StyleReviewContentContainer>
       </StyleReviewItemContainer>
       <Spacing height={20} />
