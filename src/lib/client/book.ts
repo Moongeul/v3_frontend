@@ -45,12 +45,28 @@ export const clientFetchBookDetail = async (isbn: string): Promise<APIResponseTy
 
   return await response.json()
 }
+
 /**
- * 책 검색 결과 전체 보기
+ * 읽고 싶은 책 등록
  */
 export const clientPostWishReadBookIsbn = async (isbn: string): Promise<APIResponseType<string>> => {
   const response = await fetch(`/api/bookshelf/wish-read`, {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ isbn: isbn }),
+  })
+
+  return await response.json()
+}
+
+/**
+ * 읽고 싶은 책 삭제
+ */
+export const clientDeleteWishReadBookIsbn = async (isbn: string): Promise<APIResponseType<string>> => {
+  const response = await fetch(`/api/bookshelf/wish-read`, {
+    method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },

@@ -15,6 +15,7 @@ export interface BookType {
   ratingAverage: number
   pubdate: string
   ratingCount: number
+  isWishRead: boolean
 }
 export interface BookReviewType {
   postId: number

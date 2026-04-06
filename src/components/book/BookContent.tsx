@@ -26,7 +26,9 @@ export default function BookContent({ weeklyRecommendBook, bestSellers, mostReco
   return (
     <>
       <Spacing height={7} />
-      <Label labelStyle={typography.subtitleLg}>지금 많이 읽는 책</Label>
+      <Label labelStyle={typography.subtitleLg} labelElement={<BestSellerLoadMoreButton />}>
+        지금 많이 읽는 책
+      </Label>
       <Spacing height={4} />
       <BestsellerList bestSellers={bestSellers} />
       {/* 1. 취향이 닮은 사람들의 인기책:

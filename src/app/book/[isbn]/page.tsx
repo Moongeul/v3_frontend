@@ -40,7 +40,7 @@ export default async function BookDetailPage({ params }: BookDetailPageProps) {
             title={book.title}
             bookImage={book.bookImage}
             rating={book.ratingAverage}
-            rightElement={<WishBookButton isbn={book.isbn} />}
+            rightElement={<WishBookButton isWishRead={book.isWishRead} isbn={book.isbn} />}
           />
           <Spacing height={20} />
           <BookIntroduction description={book.description} />

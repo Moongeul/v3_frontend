@@ -1,24 +1,45 @@
 'use client'
 
 import { Button } from '@/components/common'
-import { GrayWishIcon } from '@/assets/svgComponents'
+import { GrayWishIcon, SecondWishIcon } from '@/assets/svgComponents'
 import { baseColor } from '@/styles/theme'
 import { useModal } from '@/hooks/common/useModal'
 import Modal from '@/components/common/Modal'
-import { clientPostWishReadBookIsbn } from '@/lib/client/book'
+import { clientDeleteWishReadBookIsbn, clientPostWishReadBookIsbn } from '@/lib/client/book'
+import { useToast } from '@/components/common/toast/ToastContext'
+import { useRouter } from 'next/navigation'
 
 interface WishBookButtonProps {
   isbn: string
+  isWishRead: boolean
 }
 
-export default function WishBookButton({ isbn }: WishBookButtonProps) {
+export default function WishBookButton({ isbn, isWishRead }: WishBookButtonProps) {
   const { isOpen, toggleModalState } = useModal()
+  const { success, error } = useToast()
+  const router = useRouter()
 
-  const handleSubmit = async (isbn: string) => {
-    const result = await clientPostWishReadBookIsbn(isbn)
-    console.log('책 담기 성공', result)
-    if (result.success) {
-      toggleModalState()
+  const handleSubmit = async (isbn: string, isWishRead: boolean) => {
+    if (isWishRead) {
+      const result = await clientDeleteWishReadBookIsbn(isbn)
+      if (result.success) {
+        success('책 담기 취소 성공', '읽고 싶은 책장에서 책을 지웠어요.')
+        router.refresh()
+        toggleModalState()
+      } else {
+        error('책 담기 취소 실패', '읽고 싶은 책장에서 책을 지우지 못했어요.')
+        router.refresh()
+      }
+    } else {
+      const result = await clientPostWishReadBookIsbn(isbn)
+      if (result.success) {
+        success('책 담기 성공', '읽고 싶은 책장에 저장했어요.')
+        router.refresh()
+        toggleModalState()
+      } else {
+        error('책 담기 실패', '읽고 싶은 책장에 저장하지 못했어요.')
+        router.refresh()
+      }
     }
   }
 
@@ -30,7 +51,7 @@ export default function WishBookButton({ isbn }: WishBookButtonProps) {
             <Button onClick={toggleModalState} size={'lg'} variant={'secondary'}>
               다음에
             </Button>
-            <Button onClick={() => handleSubmit(isbn)} size={'lg'} variant={'primary'}>
+            <Button onClick={() => handleSubmit(isbn, isWishRead)} size={'lg'} variant={'primary'}>
               네, 할래요
             </Button>
           </>
@@ -41,15 +62,15 @@ export default function WishBookButton({ isbn }: WishBookButtonProps) {
       />
       <Button
         variant={'secondary'}
-        isActive={false}
+        isActive={!isWishRead}
         size={'sm'}
         width={65}
         buttonType={'button'}
         onClick={toggleModalState}
         textColor={baseColor.gray300}
-        leftIcon={<GrayWishIcon width={20} height={20} />}
+        leftIcon={isWishRead ? <GrayWishIcon width={20} height={20} /> : <SecondWishIcon width={20} height={20} />}
       >
-        담기
+        {isWishRead ? '취소' : '담기'}
       </Button>
     </>
   )
