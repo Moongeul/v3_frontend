@@ -119,25 +119,25 @@ export async function POST(request: NextRequest) {
   const code = formData.get('code') as string | null
   const errorParam = formData.get('error') as string | null
 
-  if (errorParam) {
-    console.error('Apple auth error:', errorParam)
-    return redirect(`/login?error=${encodeURIComponent(errorParam)}`)
-  }
-  if (!code) {
-    console.error('Apple: No authorization code')
-    return redirect('/login?error=no_code')
-  }
-  if (!platform) {
-    console.error('Apple: No platform param')
-    return redirect('/login?error=no_platform')
-  }
+  // if (errorParam) {
+  //   console.error('Apple auth error:', errorParam)
+  //   return redirect(`/login?error=${encodeURIComponent(errorParam)}`)
+  // }
+  // if (!code) {
+  //   console.error('Apple: No authorization code')
+  //   return redirect('/login?error=no_code')
+  // }
+  // if (!platform) {
+  //   console.error('Apple: No platform param')
+  //   return redirect('/login?error=no_platform')
+  // }
 
   try {
     const result = await postAuth(code, platform)
 
     if (!result.success) {
       console.error('Apple authentication failed:', result.error)
-      return redirect(`/login?error=${encodeURIComponent(result.error ?? 'auth_failed')}`)
+      // return redirect(`/login?error=${encodeURIComponent(result.error ?? 'auth_failed')}`)
     }
 
     await setAuthCookies(result)
@@ -146,6 +146,6 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('POST(Apple) callback route handler error:', error)
     const message = error instanceof Error ? error.message : 'server_error'
-    return redirect(`/login?error=${encodeURIComponent(message)}`)
+    // return redirect(`/login?error=${encodeURIComponent(message)}`)
   }
 }

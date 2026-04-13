@@ -1,4 +1,5 @@
 import { APIResponseType, UserType } from '@/types/common'
+
 interface AuthCallResult {
   success: boolean
   isReadingTaste?: boolean
@@ -9,55 +10,46 @@ interface AuthCallResult {
   error?: string
 }
 
-/**
- * 카카오 인증 - code를 받아 JWT 토큰 발급
- * PENDING 상태일 때는 accessToken만, APPROVED 상태일 때는 refreshToken도 반환
- * @param code - 카카오에서 받은 인증 코드
- * @param platform - 로그인 경로가 kakao 인 경우 kakao, google 인 경우 google
- // * @param env - 개발 환경일경우 (localhost3000-> LOCAL, 배포 url 일 경우 'DEV')
- *
- * 주의: 이 함수는 API 응답만 처리합니다.
- * 쿠키 설정은 백엔드의 Set-Cookie 헤더로 자동 처리됩니다.
- */
+// ✅ platform → 엔드포인트 매핑을 상수로 분리
+//    새 플랫폼 추가 시 여기만 수정하면 됨
+const AUTH_ENDPOINTS: Record<string, string> = {
+  kakao: '/v2/member/kakao/login',
+  google: '/v2/member/google/login',
+  apple: '/v2/member/apple/login',
+}
+
+// ✅ type 결정 로직도 상수로 분리
+const getEnvType = () => (process.env.NEXT_PUBLIC_URL === 'http://localhost:3000' ? 'local' : 'deploy')
+
 export const postAuth = async (code: string | null, platform: string | null): Promise<AuthCallResult> => {
   try {
-    const type = process.env.NEXT_PUBLIC_URL === 'http://localhost:3000' ? 'local' : 'deploy'
-    if (!code) {
-      throw new Error('Authorization code not provided')
-    }
+    if (!code) throw new Error('Authorization code not provided')
+    if (!platform) throw new Error('Platform not provided')
 
-    const jwtResponse = await fetch(
-      platform === 'google'
-        ? `${process.env.NEXT_PUBLIC_BASE_URL}/v2/member/google/login`
-        : `${process.env.NEXT_PUBLIC_BASE_URL}/v2/member/kakao/login`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ code: code, type: type }),
-        cache: 'no-store',
-      }
-    )
+    // ✅ 지원하지 않는 플랫폼 early return — 기존엔 잘못된 URL로 요청 나가던 버그 수정
+    const endpoint = AUTH_ENDPOINTS[platform]
+    if (!endpoint) throw new Error(`Unsupported platform: ${platform}`)
+
+    const jwtResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}${endpoint}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code, type: getEnvType() }),
+      cache: 'no-store',
+    })
+
     if (!jwtResponse.ok) {
       const errorData = await jwtResponse.text()
-      console.error('Auth error:', errorData)
+      console.error('Auth API error:', errorData)
       throw new Error(`Failed to authenticate: ${jwtResponse.status}`)
     }
 
     const jwtResponseData: APIResponseType<UserType> = await jwtResponse.json()
-    console.log('jwtResponseData', jwtResponseData)
-    // isSuccess 확인
+
     if (!jwtResponseData.success) {
       throw new Error(jwtResponseData.message || 'Authentication failed')
     }
 
     const { role, accessToken, refreshToken, isReadingTaste, memberId } = jwtResponseData.data
-
-    console.log('로그인 하고 액세스토큰', accessToken)
-    console.log('로그인 하고 리스레시 토큰', refreshToken)
-
-    console.log('✅ authentication successful')
 
     return {
       success: true,
