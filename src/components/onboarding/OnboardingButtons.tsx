@@ -16,7 +16,7 @@ const AUTH_URLS = {
     `https://appleid.apple.com/auth/authorize` +
     `?response_type=code` +
     `&response_mode=form_post` +
-    `&client_id=com.moongeul.appidentifer` +
+    `&client_id=com.moongeul.app` +
     `&redirect_uri=${encodeURIComponent('https://moongeul.vercel.app/redirect?platform=apple')}` +
     `&scope=name%20email`,
 } as const
