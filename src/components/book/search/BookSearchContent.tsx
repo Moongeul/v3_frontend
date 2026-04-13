@@ -35,7 +35,7 @@ export default function BookSearchContent() {
               author={book.author}
               pubdate={book.pubdate}
               publisher={book.publisher}
-              rightElement={<WishBookButton isWishRead={false} isbn={book.isbn} />}
+              rightElement={<WishBookButton isWishRead={book.isWishRead} isbn={book.isbn} />}
             />
             <Spacing height={20} />
           </div>

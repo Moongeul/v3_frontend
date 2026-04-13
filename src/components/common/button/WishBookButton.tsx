@@ -8,6 +8,7 @@ import Modal from '@/components/common/Modal'
 import { clientDeleteWishReadBookIsbn, clientPostWishReadBookIsbn } from '@/lib/client/book'
 import { useToast } from '@/components/common/toast/ToastContext'
 import { useRouter } from 'next/navigation'
+import Cookies from 'js-cookie'
 
 interface WishBookButtonProps {
   isbn: string
@@ -18,6 +19,7 @@ export default function WishBookButton({ isbn, isWishRead }: WishBookButtonProps
   const { isOpen, toggleModalState } = useModal()
   const { success, error } = useToast()
   const router = useRouter()
+  const memberId = Cookies.get('memberId')
 
   const handleSubmit = async (isbn: string, isWishRead: boolean) => {
     if (isWishRead) {
@@ -43,7 +45,7 @@ export default function WishBookButton({ isbn, isWishRead }: WishBookButtonProps
     }
   }
 
-  return (
+  return memberId ? (
     <>
       <Modal
         footerButtons={
@@ -60,6 +62,7 @@ export default function WishBookButton({ isbn, isWishRead }: WishBookButtonProps
         isOpen={isOpen}
         onClose={toggleModalState}
       />
+
       <Button
         variant={'secondary'}
         isActive={!isWishRead}
@@ -73,5 +76,5 @@ export default function WishBookButton({ isbn, isWishRead }: WishBookButtonProps
         {isWishRead ? '취소' : '담기'}
       </Button>
     </>
-  )
+  ) : null
 }

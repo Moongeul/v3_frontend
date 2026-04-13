@@ -1,7 +1,3 @@
-import PageLayout from '@/components/common/PageLayout'
-import Header from '@/components/common/Header'
-import WriteButton from '@/components/book/WriteButton'
-
 export default async function BookDetailLayout({
   children,
   params,

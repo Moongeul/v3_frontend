@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import Button from '@/components/common/Button'
 import { AddWhiteIcon } from '@/assets/svgComponents'
 import { useWriteStore } from '@/store/writeStore'
+import Cookies from 'js-cookie'
 
 interface WriteButtonProps {
   isbn: string
@@ -12,7 +13,9 @@ interface WriteButtonProps {
 export default function WriteButton({ isbn }: WriteButtonProps) {
   const router = useRouter()
   const { setState, writeData } = useWriteStore((state) => state)
-  return (
+  const memberId = Cookies.get('memberId')
+
+  return memberId ? (
     <Button
       onClick={() => {
         router.push(`/write?isbn=${isbn}`)
@@ -25,5 +28,5 @@ export default function WriteButton({ isbn }: WriteButtonProps) {
     >
       기록
     </Button>
-  )
+  ) : null
 }
