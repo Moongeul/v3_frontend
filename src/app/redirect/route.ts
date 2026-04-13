@@ -106,6 +106,16 @@ export async function POST(request: NextRequest) {
 
   // ✅ 애플은 form_post → FormData로 파싱
   const formData = await request.formData()
+
+  // ✅ 이거 먼저 찍어보세요
+  console.log('=== APPLE CALLBACK DEBUG ===')
+  console.log('platform:', platform)
+  console.log('code:', formData.get('code'))
+  console.log('id_token:', formData.get('id_token')) // 애플은 id_token도 같이 옴
+  console.log('user:', formData.get('user')) // 최초 로그인 시 user 정보도 옴
+  console.log('error:', formData.get('error'))
+  console.log('============================')
+
   const code = formData.get('code') as string | null
   const errorParam = formData.get('error') as string | null
 
