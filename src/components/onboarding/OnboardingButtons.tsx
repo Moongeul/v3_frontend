@@ -12,13 +12,7 @@ const AUTH_URLS = {
   kakao: `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code`,
   google: `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI}&response_type=code&scope=email%20profile`,
   // ✅ 애플: response_mode=form_post 필수, scope에 name email
-  apple:
-    `https://appleid.apple.com/auth/authorize` +
-    `?response_type=code` +
-    `&response_mode=form_post` +
-    `&client_id=com.moongeul.app` +
-    `&redirect_uri=${encodeURIComponent('https://moongeul.vercel.app/redirect?platform=apple')}` +
-    `&scope=name%20email`,
+  apple: `https://appleid.apple.com/auth/authorize?response_type=code&response_mode=form_post&client_id=${process.env.NEXT_PUBLIC_APPLE_CLIENT_ID}&redirect_uri=${encodeURIComponent(process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI ?? '')}&scope=name%20email`,
 } as const
 
 export default function OnboardingButtons() {
