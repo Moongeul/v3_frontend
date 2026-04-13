@@ -45,6 +45,8 @@ export const postAuth = async (code: string | null, platform: string | null): Pr
 
     const jwtResponseData: APIResponseType<UserType> = await jwtResponse.json()
 
+    console.log('jwtResponseData', jwtResponseData)
+
     if (!jwtResponseData.success) {
       throw new Error(jwtResponseData.message || 'Authentication failed')
     }
