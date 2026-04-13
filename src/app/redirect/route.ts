@@ -82,13 +82,16 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// 애플 — form_post 방식이라 POST로 code 수신
 export async function POST(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const platform = searchParams.get('platform')
   const baseUrl = request.nextUrl.origin
 
+  // ✅ 에러 redirect는 302 유지 (GET 페이지로 가도 무방)
   const redirect = (pathname: string) => NextResponse.redirect(new URL(pathname, baseUrl))
+
+  // ✅ 성공 redirect만 303 — POST → GET 전환 강제
+  const redirectWithGet = (pathname: string) => NextResponse.redirect(new URL(pathname, baseUrl), 303)
 
   const formData = await request.formData()
   const code = formData.get('code') as string | null
@@ -105,7 +108,8 @@ export async function POST(request: NextRequest) {
       return redirect(`/login?error=${encodeURIComponent(result.error ?? 'auth_failed')}`)
     }
 
-    const response = redirect(getRedirectPathByRole(result.role))
+    // ✅ 303으로 response 생성 후 쿠키 담아서 반환
+    const response = redirectWithGet(getRedirectPathByRole(result.role))
     setAuthCookiesToResponse(response, result)
     return response
   } catch (error) {
