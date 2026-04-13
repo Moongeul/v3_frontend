@@ -103,6 +103,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const result = await postAuth(code, platform)
+    console.log('애플로그인 API는 보냄', result)
 
     if (!result.success) {
       return redirect(`/login?error=${encodeURIComponent(result.error ?? 'auth_failed')}`)
