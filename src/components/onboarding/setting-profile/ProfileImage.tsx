@@ -70,6 +70,11 @@ export default function ProfileImage() {
     const file = e.target.files?.[0]
     if (!file) return
 
+    // 이거 추가해서 콘솔 확인
+    console.log('file.name:', file.name)
+    console.log('file.type:', file.type)
+    console.log('file.size:', file.size)
+
     const isHeicName = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')
     const isHeicType = file.type === 'image/heic' || file.type === 'image/heif'
 
