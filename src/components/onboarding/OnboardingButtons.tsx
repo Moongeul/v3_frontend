@@ -3,7 +3,7 @@
 
 import { StyleOnboardingButtons } from '@/styles/onboarding/Onboarding.styles'
 import { Button } from '@/components/common'
-import { GoogleIcon, KakaoIcon } from '@/assets/svgComponents'
+import { AppleIcon, GoogleIcon, KakaoIcon } from '@/assets/svgComponents'
 import { useRouter } from 'next/navigation'
 
 // ✅ 환경변수 + URL 조립 로직을 컴포넌트 외부 상수로 분리
@@ -31,14 +31,14 @@ export default function OnboardingButtons() {
       <Button onClick={handleGuestStart} size={'sm'} variant={'ghost'}>
         비회원으로 시작
       </Button>
-      <Button
-        leftIcon={<GoogleIcon width={20} height={20} />}
-        variant={'outline'}
-        size={'lg'}
-        onClick={() => router.push(AUTH_URLS.google)}
-      >
-        구글로 시작하기
-      </Button>
+      {/*<Button*/}
+      {/*  leftIcon={<GoogleIcon width={20} height={20} />}*/}
+      {/*  variant={'outline'}*/}
+      {/*  size={'lg'}*/}
+      {/*  onClick={() => router.push(AUTH_URLS.google)}*/}
+      {/*>*/}
+      {/*  구글로 시작하기*/}
+      {/*</Button>*/}
       <Button
         leftIcon={<KakaoIcon width={20} height={20} />}
         variant={'outline'}
@@ -48,7 +48,12 @@ export default function OnboardingButtons() {
         카카오로 시작하기
       </Button>
       {/* ✅ 애플 버튼 — 아이콘, URL 모두 교체 */}
-      <Button variant={'outline'} size={'lg'} onClick={() => router.push(AUTH_URLS.apple)}>
+      <Button
+        leftIcon={<AppleIcon width={20} height={20} />}
+        variant={'outline'}
+        size={'lg'}
+        onClick={() => router.push(AUTH_URLS.apple)}
+      >
         애플로 시작하기
       </Button>
     </StyleOnboardingButtons>

@@ -1,0 +1,4 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+const SvgAppleIcon = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 20" {...props}><g clipPath="url(#apple_icon_svg__a)"><path fill="#272725" d="M15.446 10.625c.028 3.027 2.649 4.034 2.678 4.047-.023.071-.42 1.435-1.381 2.845-.832 1.218-1.695 2.432-3.055 2.457-1.336.025-1.766-.794-3.293-.794s-2.004.769-3.269.819c-1.313.05-2.312-1.318-3.15-2.532C2.261 14.984.951 10.451 2.71 7.391c.873-1.52 2.434-2.482 4.129-2.507 1.288-.025 2.505.869 3.293.869.787 0 2.265-1.075 3.82-.917.65.027 2.476.263 3.649 1.984-.095.059-2.18 1.275-2.157 3.805m-2.511-7.432C13.63 2.348 14.1 1.171 13.972 0c-1.004.04-2.218.67-2.939 1.516-.646.748-1.211 1.946-1.058 3.093 1.12.087 2.263-.57 2.96-1.416" /></g><defs><clipPath id="apple_icon_svg__a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath></defs></svg>;
+export default SvgAppleIcon;
