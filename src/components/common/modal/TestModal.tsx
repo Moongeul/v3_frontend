@@ -21,13 +21,14 @@ export default function TestModal() {
 }
 function FooterButtons({ toggleModal }: { toggleModal: (key: ModalKey) => void }) {
   const router = useRouter()
+  const { setModal } = useModalStore((state) => state)
 
   return (
     <>
       <Button
         variant={'secondary'}
         onClick={() => {
-          toggleModal('isTestModalOpen')
+          setModal('isTestModalOpen', false)
           router.push('/home?tab=PUBLIC')
         }}
       >
@@ -35,7 +36,7 @@ function FooterButtons({ toggleModal }: { toggleModal: (key: ModalKey) => void }
       </Button>
       <Button
         onClick={() => {
-          toggleModal('isTestModalOpen')
+          setModal('isTestModalOpen', false)
           router.push('/test?step=onboarding')
         }}
       >
