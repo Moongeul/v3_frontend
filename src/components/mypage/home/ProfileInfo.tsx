@@ -16,6 +16,7 @@ import { TagEnumType } from '@/types/user'
 import { convertEnumToKorTag } from '@/utils/user'
 import Image from 'next/image'
 import { useTheme } from '@emotion/react'
+import { useState } from 'react'
 
 interface ProfileInfoProps {
   userId: number | undefined
@@ -36,6 +37,7 @@ export default function ProfileInfo({
 }: ProfileInfoProps) {
   const theme = useTheme()
   const router = useRouter()
+  const [imgError, setImgError] = useState(false) // 추가
   const onNavigate = (path: string) => {
     if (userId) {
       router.push(`/profile/${userId}${path}`)
@@ -46,9 +48,16 @@ export default function ProfileInfo({
   return (
     <StyleProfileContainer>
       <StyleProfileInfoContainer>
-        {profileImage ? (
+        {profileImage && !imgError ? ( // 수정
           <div style={{ width: 48, height: 48, overflow: 'hidden', borderRadius: 999, flexShrink: 0 }}>
-            <Image src={profileImage} width={48} height={48} alt="프로필 사진" style={{ objectFit: 'cover' }} />
+            <Image
+              src={profileImage}
+              width={48}
+              height={48}
+              alt="프로필 사진"
+              style={{ objectFit: 'cover' }}
+              onError={() => setImgError(true)} // 추가
+            />
           </div>
         ) : (
           <ProfileIcon width={48} height={48} />

@@ -46,17 +46,16 @@ export default function ReviewHeader({
     >
       <StyleReviewHeaderMetaContainer>
         {isProfile ? (
-          imgError ? (
-            // 이미지 로드 실패 시 기본 프로필 아이콘
+          imgError || !memberInfo.profileImage ? (
             <ProfileIcon width={32} height={32} />
           ) : (
             <Image
-              alt={'프로필'}
+              alt="프로필"
               src={memberInfo.profileImage}
               width={32}
               height={32}
               style={{ borderRadius: 999 }}
-              onError={() => setImgError(true)} // HEIC 등 로드 실패 시
+              onError={() => setImgError(true)}
             />
           )
         ) : null}
