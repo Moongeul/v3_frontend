@@ -11,7 +11,6 @@ import TestModal from '@/components/common/modal/TestModal'
 import { useModalStore } from '@/store/modalStore'
 import { useEffect } from 'react'
 import Cookies from 'js-cookie'
-import { postReadingTestLink } from '@/lib/client/test'
 import { getOrGenerateGuestUuid } from '@/utils/common'
 
 export default function SettingProfile() {

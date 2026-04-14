@@ -7,7 +7,7 @@ import { Button } from '@/components/common'
 import { useRouter } from 'next/navigation'
 
 export default function TestModal() {
-  const { modals, setModal } = useModalStore()
+  const { modals, setModal } = useModalStore((state) => state)
   return (
     <Modal
       isOpen={modals.isTestModalOpen}
