@@ -8,6 +8,9 @@ import EditBottomButton from '@/components/mypage/profile/EditBottomButton'
 export default async function EditProfilePage() {
   const userInfoResult = await fetchUserInfo()
   const userInfo = userInfoResult.data
+
+  console.log('userInfo', userInfo)
+
   return (
     <main>
       <EditProfileImage initialImageUrl={userInfo?.profileImage} />

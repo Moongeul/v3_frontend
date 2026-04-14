@@ -14,6 +14,7 @@ import { useState } from 'react'
 import Cookies from 'js-cookie'
 import PostOptionMenu from '@/components/common/option/PostOptionMenu'
 import UserOptionMenu from '@/components/common/option/UserOptionMenu'
+import { ProfileIcon } from '@/assets/svgComponents'
 
 interface ReviewItemProps {
   quotes: QuoteType[]
@@ -43,6 +44,7 @@ export default function ReviewItem({
   const router = useRouter()
   const loginMemberId = Cookies.get('memberId')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [imgError, setImgError] = useState(false)
 
   const handleMenuClick = (e: React.MouseEvent) => {
     e.stopPropagation() // 카드 클릭 이벤트(상세 이동)가 발생하지 않도록 방지
@@ -58,15 +60,22 @@ export default function ReviewItem({
       <Spacing height={20} />
       <StyleReviewItemContainer>
         <ProfileImageWrapper>
-          <Image
-            onClick={() => {
-              router.push(`/profile/${memberInfo.memberId}`)
-            }}
-            src={memberInfo.profileImage}
-            alt={'프로필'}
-            width={32}
-            height={32}
-          />
+          {imgError || !memberInfo.profileImage ? (
+            <ProfileIcon width={32} height={32} />
+          ) : (
+            <Image
+              onClick={(e) => {
+                e.stopPropagation()
+                router.push(`/profile/${memberInfo.memberId}`)
+              }}
+              src={memberInfo.profileImage}
+              alt="프로필"
+              width={32}
+              height={32}
+              style={{ borderRadius: 999, objectFit: 'cover' }}
+              onError={() => setImgError(true)}
+            />
+          )}
         </ProfileImageWrapper>
 
         <StyleReviewContentContainer>

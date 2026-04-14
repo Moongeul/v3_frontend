@@ -7,32 +7,105 @@ import {
   StyledSettingProfileImageWrapper,
 } from '@/styles/onboarding/SettingProfile.styles'
 import { AddWhiteIcon, ProfileIcon } from '@/assets/svgComponents'
-import { ChangeEvent, useEffect } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useMypageStore } from '@/store/mypageStore'
+import heic2any from 'heic2any'
 
 interface EditProfileImageProps {
-  initialImageUrl?: string | null // 부모로부터 받을 초기 이미지 URL
+  initialImageUrl?: string | null
 }
 
 export default function EditProfileImage({ initialImageUrl }: EditProfileImageProps) {
   const { profilePreview, setProfileImage } = useMypageStore()
+  const [imgError, setImgError] = useState(false)
 
-  // 1. 컴포넌트 마운트 시 초기값 세팅
   useEffect(() => {
     if (initialImageUrl && !profilePreview) {
-      // 이미 파일 선택으로 생성된 preview가 없을 때만 초기값 설정
       setProfileImage(null, initialImageUrl)
+      // setImgError(false) 제거
     }
   }, [initialImageUrl, setProfileImage, profilePreview])
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
+  const compressImage = (blob: Blob, maxSize = 500, quality = 0.7): Promise<File> => {
+    return new Promise((resolve, reject) => {
+      const img = new window.Image()
+      const url = URL.createObjectURL(blob)
 
-    if (file) {
-      const previewUrl = URL.createObjectURL(file)
-      setProfileImage(file, previewUrl)
+      img.onload = () => {
+        URL.revokeObjectURL(url)
+        let { width, height } = img
+        if (width > height) {
+          if (width > maxSize) {
+            height = Math.round((height * maxSize) / width)
+            width = maxSize
+          }
+        } else {
+          if (height > maxSize) {
+            width = Math.round((width * maxSize) / height)
+            height = maxSize
+          }
+        }
+        const canvas = document.createElement('canvas')
+        canvas.width = width
+        canvas.height = height
+        const ctx = canvas.getContext('2d')
+        if (!ctx) return reject(new Error('Canvas context 실패'))
+        ctx.drawImage(img, 0, 0, width, height)
+        canvas.toBlob(
+          (compressed) => {
+            if (!compressed) return reject(new Error('압축 실패'))
+            resolve(new File([compressed], 'profile.jpg', { type: 'image/jpeg' }))
+          },
+          'image/jpeg',
+          quality
+        )
+      }
+      img.onerror = () => {
+        URL.revokeObjectURL(url)
+        reject(new Error('이미지 로드 실패'))
+      }
+      img.src = url
+    })
+  }
+
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    const fileName = file.name.toLowerCase()
+    const needsConversion =
+      file.type === 'image/heic' ||
+      file.type === 'image/heif' ||
+      fileName.endsWith('.heic') ||
+      fileName.endsWith('.heif')
+
+    try {
+      let blobToCompress: Blob = file
+
+      if (needsConversion) {
+        try {
+          const converted = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.8 })
+          blobToCompress = Array.isArray(converted) ? converted[0] : converted
+        } catch {
+          alert('이 HEIC 파일은 변환할 수 없어요. 다른 사진을 선택해주세요.')
+          return
+        }
+      }
+
+      const compressedFile = await compressImage(blobToCompress, 500, 0.7)
+      const previewUrl = URL.createObjectURL(compressedFile)
+      setProfileImage(compressedFile, previewUrl)
+      setImgError(false)
+    } catch {
+      // HEIC 아닌 일반 이미지 실패 시 원본 폴백
+      if (!needsConversion) {
+        const previewUrl = URL.createObjectURL(file)
+        setProfileImage(file, previewUrl)
+      }
     }
   }
+
+  const showPreview = profilePreview && !imgError
 
   return (
     <StyledSettingProfileImageContainer>
@@ -45,13 +118,12 @@ export default function EditProfileImage({ initialImageUrl }: EditProfileImagePr
           id="profile-upload"
           type="file"
           onChange={handleFileChange}
-          accept="image/*"
+          accept="image/*,.heic,.heif"
           style={{ display: 'none' }}
         />
 
-        {/* 2. profilePreview가 있으면 보여주고, 없으면 기본 아이콘 */}
-        {profilePreview ? (
-          <PreviewImage src={profilePreview} alt="프로필 미리보기" />
+        {showPreview ? (
+          <PreviewImage src={profilePreview} alt="프로필 미리보기" onError={() => setImgError(true)} />
         ) : (
           <ProfileIcon width={100} height={100} />
         )}

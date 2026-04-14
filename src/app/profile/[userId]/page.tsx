@@ -2,7 +2,6 @@ import { Header, PageLayout, Spacing, Spinner } from '@/components/common'
 import { fetchMyCategoryList, fetchMyQuestions, fetchUserInfo } from '@/lib/server/mypage'
 import UserProfile from '@/components/profile/UserProfile'
 import { Record } from '@/components/mypage'
-import Story from '../../../components/mypage/home/Story'
 import Question from '../../../components/mypage/home/Question'
 import PrivateNotice from '@/components/mypage/setting/PrivateNotice'
 
