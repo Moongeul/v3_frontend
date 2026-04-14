@@ -54,7 +54,7 @@ export default function SettingProfile() {
 
   return (
     <main>
-      {modals.isTestModalOpen ? <TestModal /> : null}
+      <TestModal />
       <div>
         <ProfileImage />
         <Spacing height={40} />
