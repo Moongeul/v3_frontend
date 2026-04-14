@@ -5,6 +5,8 @@ import EditRandomNicknameButton from '@/components/mypage/profile/EditRandomNick
 import { fetchUserInfo } from '@/lib/server/mypage'
 import EditBottomButton from '@/components/mypage/profile/EditBottomButton'
 
+export const dynamic = 'force-dynamic'
+
 export default async function EditProfilePage() {
   const userInfoResult = await fetchUserInfo()
   const userInfo = userInfoResult.data
