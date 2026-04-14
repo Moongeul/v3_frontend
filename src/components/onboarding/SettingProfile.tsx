@@ -12,11 +12,13 @@ import { useModalStore } from '@/store/modalStore'
 import { useEffect } from 'react'
 import Cookies from 'js-cookie'
 import { getOrGenerateGuestUuid } from '@/utils/common'
+import { useRouter } from 'next/navigation'
 
 export default function SettingProfile() {
   const { nickname, successMessage, profileFile } = useOnboardingStore()
   const { modals, toggleModal, setModal } = useModalStore()
   const { success, error } = useToast()
+  const router = useRouter()
 
   useEffect(() => {
     // 1. 쿠키에서 isReadingTaste 가져오기 (문자열 'true'로 저장됨)
@@ -45,7 +47,7 @@ export default function SettingProfile() {
     const nicknameResult = await patchMemberNickname(nickname)
     if (nicknameResult.success && nicknameResult.data) {
       success('닉네임 수정 성공', '닉네임을 수정했어요.')
-      toggleModal('isTestModalOpen')
+      router.push('/home?tab=PUBLIC')
     } else {
       error('닉네임 수정 실패', '닉네임을 수정하지 못했어요.')
     }
