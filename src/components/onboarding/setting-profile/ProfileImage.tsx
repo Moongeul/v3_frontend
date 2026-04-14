@@ -70,28 +70,33 @@ export default function ProfileImage() {
     const file = e.target.files?.[0]
     if (!file) return
 
-    // 이거 추가해서 콘솔 확인
-    console.log('file.name:', file.name)
-    console.log('file.type:', file.type)
-    console.log('file.size:', file.size)
-
-    const isHeicName = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')
+    const fileName = file.name.toLowerCase()
+    const isHeicName = fileName.endsWith('.heic') || fileName.endsWith('.heif')
     const isHeicType = file.type === 'image/heic' || file.type === 'image/heif'
+
+    // HEIC/HEIF 판단: 타입 또는 확장자 둘 중 하나만 맞아도 변환 시도
+    const needsConversion = isHeicType || isHeicName
 
     try {
       let blobToCompress: Blob = file
 
-      // HEIC → JPEG 변환
-      if (isHeicType) {
-        const converted = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.8 })
-        blobToCompress = Array.isArray(converted) ? converted[0] : converted
-      } else if (isHeicName && !isHeicType) {
-        // iOS가 이미 변환한 경우 → 그대로 사용
-        blobToCompress = file
+      if (needsConversion) {
+        try {
+          // heic2any 변환 시도
+          const converted = await heic2any({
+            blob: file,
+            toType: 'image/jpeg',
+            quality: 0.8,
+          })
+          blobToCompress = Array.isArray(converted) ? converted[0] : converted
+        } catch (heicError) {
+          console.warn('heic2any 변환 실패, 원본으로 압축 시도:', heicError)
+          // 변환 실패해도 Canvas 압축은 시도
+          blobToCompress = file
+        }
       }
 
-      // Canvas로 리사이징 + 압축
-      // maxSize: 500px, quality: 0.7 → 프로필 이미지 기준 보통 50~150KB
+      // 무조건 Canvas 압축 통과 (HEIC든 일반이든)
       const compressedFile = await compressImage(blobToCompress, 500, 0.7)
 
       console.log(`압축 전: ${(file.size / 1024).toFixed(1)}KB → 압축 후: ${(compressedFile.size / 1024).toFixed(1)}KB`)
@@ -100,7 +105,6 @@ export default function ProfileImage() {
       setProfileImage(compressedFile, previewUrl)
     } catch (error) {
       console.error('이미지 처리 실패:', error)
-      // fallback: 원본 그대로 사용
       try {
         const previewUrl = URL.createObjectURL(file)
         setProfileImage(file, previewUrl)
