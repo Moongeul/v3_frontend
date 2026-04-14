@@ -15,6 +15,7 @@ import { ProfileInfoType } from '@/types/user'
 import { useRouter } from 'next/navigation'
 import ThemeOptionIcon from '@/components/common/icon/ThemeOptionIcon'
 import { ReactNode, useState } from 'react'
+import { ProfileIcon } from '@/assets/svgComponents'
 
 interface ReviewHeaderProps {
   isProfile?: boolean
@@ -34,6 +35,7 @@ export default function ReviewHeader({
   isMenuOpen,
 }: ReviewHeaderProps) {
   const router = useRouter()
+  const [imgError, setImgError] = useState(false)
 
   return (
     <ReviewHeaderContainer
@@ -44,7 +46,19 @@ export default function ReviewHeader({
     >
       <StyleReviewHeaderMetaContainer>
         {isProfile ? (
-          <Image alt={'프로필'} src={memberInfo.profileImage} width={32} height={32} style={{ borderRadius: 999 }} />
+          imgError ? (
+            // 이미지 로드 실패 시 기본 프로필 아이콘
+            <ProfileIcon width={32} height={32} />
+          ) : (
+            <Image
+              alt={'프로필'}
+              src={memberInfo.profileImage}
+              width={32}
+              height={32}
+              style={{ borderRadius: 999 }}
+              onError={() => setImgError(true)} // HEIC 등 로드 실패 시
+            />
+          )
         ) : null}
         <StyleReviewHeaderMetaUserInfo>
           <StyleReviewHeaderMetaNickName>{memberInfo.nickname}</StyleReviewHeaderMetaNickName>
