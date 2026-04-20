@@ -1,7 +1,7 @@
 'use client'
 
 import { Label, Spacing } from '@/components/common'
-import { BestsellerList, BestSellerLoadMoreButton, PopularBook } from '@/components/book/index'
+import { BestSellerLoadMoreButton, PopularBook } from '@/components/book/index'
 
 import { typography } from '@/styles/theme'
 import { WeeklyRecommendBookType } from '@/types/post'
@@ -40,18 +40,7 @@ export default function BookContent({ weeklyRecommendBook, bestSellers, mostReco
           <Spacing height={36} />
           <Label labelStyle={typography.subtitleLg}>취향이 닮은 사람들의 인기책</Label>
           <Spacing height={8} />
-          <PopularBook
-            content={mostRecordedBook.content}
-            bookImage={mostRecordedBook.bookImage}
-            rating={mostRecordedBook.rating}
-            isbn={mostRecordedBook.isbn}
-            bookRating={mostRecordedBook.bookRating}
-            bookTitle={mostRecordedBook.bookTitle}
-            pubdate={mostRecordedBook.pubdate}
-            author={mostRecordedBook.author}
-            postId={mostRecordedBook.postId}
-            publisher={mostRecordedBook.publisher}
-          />
+          <PopularBook {...mostRecordedBook} />
         </>
       )}
 
@@ -62,7 +51,18 @@ export default function BookContent({ weeklyRecommendBook, bestSellers, mostReco
       {weeklyRecommendBook ? (
         <>
           <Spacing height={8} />
-          <PopularBook {...weeklyRecommendBook} />
+          <PopularBook
+            content={weeklyRecommendBook.content}
+            bookImage={weeklyRecommendBook.bookImage}
+            rating={weeklyRecommendBook.rating}
+            isbn={weeklyRecommendBook.isbn}
+            bookRating={weeklyRecommendBook.bookRating}
+            bookTitle={weeklyRecommendBook.bookTitle}
+            pubdate={weeklyRecommendBook.pubdate}
+            author={weeklyRecommendBook.author}
+            postId={weeklyRecommendBook.postId}
+            publisher={weeklyRecommendBook.publisher}
+          />
         </>
       ) : (
         <NoWeeklyRecommendBookResult />
