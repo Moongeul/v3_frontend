@@ -62,19 +62,17 @@ export default function InteractionButtons({ postId, likesCnt, myLikesStatus, co
     const result = await postLikeId(postId, likeType)
 
     if (result.success) {
-      // 1. 쿼리 무효화를 실행하고 '완료'될 때까지 기다립니다.
-      // invalidateQueries는 Promise를 반환하므로 await가 가능합니다.
-      await queryClient.invalidateQueries({ queryKey: ['post'] })
+      // invalidateQueries만으로 충분해요. refetchType: 'active'로 현재 마운트된 쿼리만 리페치
+      await queryClient.invalidateQueries({
+        queryKey: ['post'],
+        refetchType: 'active',
+      })
 
-      // 2. 토스트를 띄웁니다.
       interaction(
         renderTitle(likeType),
         <ThemeInteractionIcon width={40} height={40} type={likeType} />,
         renderDescription(likeType)
       )
-
-      // 3. 서버 데이터를 다시 불러옵니다.
-      router.refresh()
     }
   }
 
