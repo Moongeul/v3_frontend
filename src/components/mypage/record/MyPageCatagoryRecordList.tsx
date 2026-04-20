@@ -18,7 +18,7 @@ interface MyPageCategoryRecordListProps {
 export default function MyPageCategoryRecordList({ categoryId }: MyPageCategoryRecordListProps) {
   const [sortBy, setSortBy] = useState<CategoryRecordSortByType>('LATEST')
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['categoryRecords'],
+    queryKey: ['categoryRecords', categoryId, sortBy],
     queryFn: ({ pageParam }) =>
       clientFetchAllCategoryRecords({
         sortBy: sortBy,

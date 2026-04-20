@@ -18,7 +18,7 @@ interface RatingRangeRecordListProps {
 export default function RatingRangeRecordList({ range }: RatingRangeRecordListProps) {
   const [sortBy, setSortBy] = useState<CategoryRecordSortByType>('LATEST')
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['ratingRecords'],
+    queryKey: ['ratingRecords', range, sortBy],
     queryFn: ({ pageParam }) =>
       clientFetchAllRatingRangeRecords({
         sortBy: sortBy,

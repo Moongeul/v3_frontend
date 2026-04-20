@@ -1,5 +1,4 @@
 import { Header, NavBar, PageLayout, Spacing } from '@/components/common'
-import { AlarmIcon, SettingIcon } from '@/assets/svgComponents'
 import { Record } from '@/components/mypage'
 import Story from '@/components/mypage/home/Story'
 import Question from '../../components/mypage/home/Question'

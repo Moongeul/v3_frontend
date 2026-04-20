@@ -16,7 +16,7 @@ interface BookShelfListProps {
 
 export default function BookShelfList({ isbn, userId }: BookShelfListProps) {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['bookshelf'],
+    queryKey: ['bookshelf', isbn, userId],
     queryFn: ({ pageParam }) =>
       clientBookShelfDoneReadPosts({
         page: pageParam as number,

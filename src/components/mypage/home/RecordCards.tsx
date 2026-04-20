@@ -3,7 +3,7 @@
 import { baseColor } from '@/styles/theme'
 import { StyleGridRecordContainer } from '@/styles/mypage/MypageHome.styles'
 import { RecordCard } from '@/components/mypage'
-import { MyCategoryResponseType, MyCategoryType } from '@/types/mypage'
+import { MyCategoryResponseType } from '@/types/mypage'
 
 interface RecordCardsProps {
   category: MyCategoryResponseType | undefined
