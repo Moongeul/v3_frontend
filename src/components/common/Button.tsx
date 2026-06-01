@@ -1,6 +1,7 @@
+// components/common/Button.tsx
 'use client'
 
-import React, { ReactNode } from 'react' // React 추가
+import React, { ReactNode } from 'react'
 import { PencilSketchEffect } from '@/styles/common/Common.styles'
 import * as Style from '@/styles/common/Button.styles'
 
@@ -11,13 +12,14 @@ interface ButtonProps {
   width?: number
   isActive?: boolean
   children?: ReactNode
-  // 타입을 React.MouseEvent로 변경하고 선택적(?)으로 수정
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
   leftIcon?: ReactNode
   rightIcon?: ReactNode
   disabled?: boolean
   buttonType?: 'button' | 'submit'
   textColor?: string
+  isLoading?: boolean // ✅ 추가
+  loadingText?: string // ✅ 선택적: 로딩 중 텍스트 (없으면 스피너만)
 }
 
 const Button = ({
@@ -33,14 +35,12 @@ const Button = ({
   disabled,
   buttonType = 'button',
   width,
+  isLoading = false,
+  loadingText,
 }: ButtonProps) => {
-  // 핸들러 내부에서도 타입을 맞춰줍니다.
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (buttonType === 'button') {
-      // e.preventDefault()는 여기서 멈추면 안 될 때가 있으므로 필요에 따라 사용
-    }
-
-    if (!disabled && onClick) {
+    if (!disabled && !isLoading && onClick) {
+      // ✅ 로딩 중엔 클릭 무시
       onClick(e)
     }
   }
@@ -50,19 +50,31 @@ const Button = ({
       <PencilSketchEffect />
       <Style.Button
         type={buttonType}
-        disabled={disabled}
-        onClick={handleClick} // 이제 타입 에러가 발생하지 않습니다.
+        disabled={disabled || isLoading} // ✅ 로딩 중엔 disabled 처리
+        onClick={handleClick}
         $variant={variant}
         $size={size}
         $category={category}
         $isActive={isActive}
         $width={width}
         $textColor={textColor}
+        $isLoading={isLoading} // ✅ styled-component로 전달
       >
-        {leftIcon && <span>{leftIcon}</span>}
-        {category === 'text' && children}
-        {category === 'icon' && (children || leftIcon || rightIcon)}
-        {rightIcon && category === 'text' && <span>{rightIcon}</span>}
+        {isLoading ? (
+          // ✅ 로딩 상태 UI
+          <>
+            <Style.Spinner $size={size} />
+            {loadingText && <span>{loadingText}</span>}
+          </>
+        ) : (
+          // ✅ 기존 UI 그대로
+          <>
+            {leftIcon && <span>{leftIcon}</span>}
+            {category === 'text' && children}
+            {category === 'icon' && (children || leftIcon || rightIcon)}
+            {rightIcon && category === 'text' && <span>{rightIcon}</span>}
+          </>
+        )}
       </Style.Button>
     </>
   )

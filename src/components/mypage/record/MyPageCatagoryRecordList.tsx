@@ -13,9 +13,10 @@ const DEFAULT_SIZE = 20
 
 interface MyPageCategoryRecordListProps {
   categoryId: string
+  userId: string
 }
 
-export default function MyPageCategoryRecordList({ categoryId }: MyPageCategoryRecordListProps) {
+export default function MyPageCategoryRecordList({ categoryId, userId }: MyPageCategoryRecordListProps) {
   const [sortBy, setSortBy] = useState<CategoryRecordSortByType>('LATEST')
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ['categoryRecords', categoryId, sortBy],
@@ -25,6 +26,7 @@ export default function MyPageCategoryRecordList({ categoryId }: MyPageCategoryR
         categoryId: categoryId,
         page: pageParam as number,
         size: DEFAULT_SIZE,
+        userId: userId,
       }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {

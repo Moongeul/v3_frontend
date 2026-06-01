@@ -5,6 +5,8 @@ import UserOptionMenu from '@/components/common/option/UserOptionMenu'
 import { Header } from '@/components/common'
 import { QuestionType } from '@/types/question'
 import { useState } from 'react'
+import ThemeOptionIcon from '@/components/common/icon/ThemeOptionIcon'
+import QuestionOptionsMenu from '@/components/common/option/QuestionOptionMenu'
 
 interface QuestionDetailHeaderProps {
   question: QuestionType
@@ -30,11 +32,25 @@ export default function QuestionDetailHeader({ question }: QuestionDetailHeaderP
             content={question.content}
           />
         ) : (
-          <UserOptionMenu handleMenuClick={handleMenuClick} />
+          <UserOptionMenuIcon isMenuOpen={isMenuOpen} handleMenuClick={handleMenuClick} />
         )
       }
     >
       질문
     </Header>
+  )
+}
+function UserOptionMenuIcon({
+  handleMenuClick,
+  isMenuOpen,
+}: {
+  handleMenuClick: (e: React.MouseEvent) => void
+  isMenuOpen: boolean
+}) {
+  return (
+    <div style={{ position: 'relative' }}>
+      <ThemeOptionIcon onClick={handleMenuClick} />
+      {isMenuOpen && <UserOptionMenu handleMenuClick={handleMenuClick} />}
+    </div>
   )
 }

@@ -16,8 +16,7 @@ import { ProfileInfoType } from '@/types/user'
 import { StyleContent } from '@/styles/common/Common.styles'
 import { useTheme } from '@emotion/react'
 import { typography } from '@/styles/theme'
-import { useState } from 'react'
-import ThemeOptionIcon from '@/components/common/icon/ThemeOptionIcon'
+import { useEffect, useState } from 'react'
 import StoryOptionsMenu from '@/components/common/option/StoryOptionMenu'
 import Cookies from 'js-cookie'
 import UserOptionMenu from '@/components/common/option/UserOptionMenu'
@@ -32,11 +31,16 @@ export default function DetailHeader({ memberInfo, created }: DetailHeaderProps)
   const theme = useTheme()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const loginMemberId = Cookies.get('memberId')
+  const [imgSrc, setImgSrc] = useState(memberInfo.profileImage)
 
   const handleMenuClick = (e: React.MouseEvent) => {
     e.stopPropagation() // 카드 클릭 이벤트(상세 이동)가 발생하지 않도록 방지
     setIsMenuOpen(!isMenuOpen)
   }
+
+  useEffect(() => {
+    setImgSrc(memberInfo.profileImage)
+  }, [memberInfo.profileImage])
 
   return (
     <StyledDetailHeader>
@@ -47,7 +51,14 @@ export default function DetailHeader({ memberInfo, created }: DetailHeaderProps)
         }}
       >
         <StyleReviewHeaderMetaContainer>
-          <Image alt={'프로필'} src={memberInfo.profileImage} width={32} height={32} style={{ borderRadius: 999 }} />
+          <Image
+            alt={'프로필'}
+            src={imgSrc}
+            width={32}
+            height={32}
+            style={{ borderRadius: 999 }}
+            onError={() => setImgSrc('/default-profile.png')} // 👈 이거 추가
+          />
           <StyleReviewHeaderMetaUserInfo>
             <StyleContent $typography={typography.badgeMd} $textColor={theme.colors.baseColor.lightYellow50}>
               {memberInfo.nickname}

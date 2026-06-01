@@ -11,6 +11,7 @@ import { TagEnumType } from '@/types/user'
 import { convertKorToEnumTag } from '@/utils/user'
 import { TestAnswerType } from '@/types/test'
 import { getOrGenerateGuestUuid } from '@/utils/common'
+import Cookies from 'js-cookie'
 
 export default function Question12() {
   const router = useRouter()
@@ -34,13 +35,16 @@ export default function Question12() {
         return
       }
 
-      // 2. API 호출 (타입 단언 추가)
-      // 검증을 통과했으므로 'as TestAnswerType'으로 강제 지정하여 에러 해결
+      // 2. API 호출
       const result = await createTest(finalAnswers as TestAnswerType)
 
       // 3. 결과 처리 및 페이지 이동
       if (result?.data?.data) {
         console.log('취향테스트 평가 완료', result)
+
+        // ✅ 쿠키 설정: isReadingTaste 값을 true로 세팅
+        Cookies.set('isReadingTaste', 'true', { expires: 365, path: '/' })
+
         setTestResult({
           readingTasteType: result.data.data.readingTasteType,
           intro: result.data.data.intro,
@@ -51,7 +55,7 @@ export default function Question12() {
       console.error('테스트 제출 중 오류 발생:', error)
       alert('제출에 실패했습니다. 다시 시도해주세요.')
     }
-  }
+  } // 👈 handleSubmit 함수가 여기서 명확하게 끝납니다.
 
   /**
    * 버튼 클릭 핸들러
@@ -64,7 +68,6 @@ export default function Question12() {
     setTestAnswer(12, choice)
 
     // 2. 검증을 위해 현재 스토어 데이터에 방금 선택한 12번 값을 합친 최신 객체 생성
-    // (setTestAnswer가 비동기적으로 작동할 수 있으므로 직접 합쳐서 넘기는 것이 안전함)
     const updatedAnswers = {
       ...testAnswers,
       guestUuid: guestUuid,
@@ -77,6 +80,7 @@ export default function Question12() {
     handleSubmit(updatedAnswers)
   }
 
+  // 👈 컴포넌트가 렌더링할 최종 UI 리턴문이 원래 자리를 찾았습니다.
   return (
     <StyleTestWrapper>
       <Spacing height={20} />

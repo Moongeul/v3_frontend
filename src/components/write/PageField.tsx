@@ -8,6 +8,9 @@ import { useWriteStore } from '@/store/writeStore'
 export default function PageField() {
   const { setState, writeData } = useWriteStore((state) => state)
   const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value)
+
+    if (isNaN(value) || value < 0) return
     setState({
       ...writeData,
       writeData: { ...writeData, page: parseInt(e.target.value) },

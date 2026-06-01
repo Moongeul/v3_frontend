@@ -10,11 +10,11 @@ import Image from 'next/image'
 import { ProfileInfoType } from '@/types/user'
 import { LikesCntType, MyLikesStatusType } from '@/types/record'
 import InteractionButtons from '@/components/book/review/InteractionButtons'
-import { useState } from 'react'
-import Cookies from 'js-cookie'
 import PostOptionMenu from '@/components/common/option/PostOptionMenu'
 import UserOptionMenu from '@/components/common/option/UserOptionMenu'
 import { ProfileIcon } from '@/assets/svgComponents'
+import { useState } from 'react'
+import Cookies from 'js-cookie'
 
 interface ReviewItemProps {
   quotes: QuoteType[]

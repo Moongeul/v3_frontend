@@ -14,7 +14,7 @@ export default function CommentList({ questionId }: CommentListProps) {
   const { ref, inView } = useInView()
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['answers'],
+    queryKey: ['answers', questionId],
     queryFn: ({ pageParam }) => clientFetchAnswers({ page: pageParam, size: 20, questionId: questionId }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {

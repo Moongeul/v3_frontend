@@ -20,7 +20,7 @@ interface MypageState {
   resetMessageState: () => void
 }
 
-const initWithdrawData: Partial<WithDrawType> = {
+const initWithdrawData: WithDrawType = {
   reason: '',
   detailReason: '',
 }

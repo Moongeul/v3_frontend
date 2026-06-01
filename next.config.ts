@@ -34,6 +34,15 @@ const nextConfig: NextConfig = {
         hostname: 'lh3.googleusercontent.com',
         pathname: '/**',
       },
+      {
+        protocol: 'http',
+        hostname: 'img1.kakaocdn.net', // 에러 메시지에 http도 있으니 추가
+      },
+      {
+        protocol: 'https',
+        hostname: 'api-bucket.rhkr8521.com',
+        pathname: '/moongeul/**',
+      },
     ],
   },
 }

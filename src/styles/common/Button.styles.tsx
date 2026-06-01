@@ -1,11 +1,46 @@
+// styles/common/Button.styles.ts
 import styled from '@emotion/styled'
-import { css, CSSObject } from '@emotion/react'
+import { css, CSSObject, keyframes } from '@emotion/react'
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
   size?: 'lg' | 'md' | 'sm'
   category?: 'text' | 'icon'
 }
+
+const spin = keyframes`
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+`
+
+export const Spinner = styled.span<{ $size: 'lg' | 'md' | 'sm' }>`
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  animation: ${spin} 0.7s linear infinite;
+  flex-shrink: 0; /* ✅ 추가: 부모 flex에서 찌그러지지 않도록 */
+
+  ${({ $size }) => {
+    switch ($size) {
+      case 'lg':
+        return css`
+          width: 18px;
+          height: 18px;
+        `
+      case 'md':
+        return css`
+          width: 15px;
+          height: 15px;
+        `
+      case 'sm':
+        return css`
+          width: 12px;
+          height: 12px;
+        `
+    }
+  }}
+`
 
 export const Button = styled.button<{
   $variant: ButtonProps['variant']
@@ -14,6 +49,7 @@ export const Button = styled.button<{
   $isActive: boolean
   $width: number | undefined
   $textColor?: string
+  $isLoading?: boolean
 }>`
   display: flex;
   align-items: center;
@@ -27,8 +63,8 @@ export const Button = styled.button<{
   background-color: transparent;
   flex-shrink: 0;
   white-space: nowrap;
+  column-gap: 8px; /* ✅ 스피너와 텍스트 사이 간격 (size별 override는 아래에서) */
 
-  /* 연필 효과를 입힐 가상 요소 */
   &::before {
     content: '';
     position: absolute;
@@ -48,6 +84,13 @@ export const Button = styled.button<{
     cursor: not-allowed;
     opacity: 0.5;
   }
+
+  /* ✅ 로딩 중엔 cursor: wait으로 override */
+  ${({ $isLoading }) =>
+    $isLoading &&
+    css`
+      cursor: wait;
+    `}
 
   ${({ $size, $category, $width }) => {
     const isIcon = $category === 'icon'
@@ -77,7 +120,7 @@ export const Button = styled.button<{
     `
   }}
 
-  ${({ theme, $variant, $isActive, $textColor }) => {
+    ${({ theme, $variant, $isActive, $textColor }) => {
     switch ($variant) {
       case 'primary':
         const primaryBg = $isActive ? theme.colors.buttonActivePrimary : theme.colors.buttonDefaultPrimary
@@ -104,7 +147,7 @@ export const Button = styled.button<{
           color: ${outlineColor};
           &::before {
             background-color: transparent;
-            border: 1px solid ${outlineColor}; /* 테두리에 연필 효과 적용 */
+            border: 1px solid ${outlineColor};
           }
         `
       case 'ghost':
@@ -126,6 +169,7 @@ export const Button = styled.button<{
   }}
 `
 
+// 아래는 기존 그대로 유지
 export const StickyRoot = styled.div`
   position: fixed;
   bottom: 0;
@@ -143,9 +187,7 @@ export const ActionArea = styled.button`
   all: unset;
   box-sizing: border-box;
   width: 100%;
-
   height: 106px;
-
   position: relative;
   cursor: pointer;
   display: flex;

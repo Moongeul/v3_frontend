@@ -37,6 +37,8 @@ export default function ReviewHeader({
   const router = useRouter()
   const [imgError, setImgError] = useState(false)
 
+  console.log('memberInfo', memberInfo)
+
   return (
     <ReviewHeaderContainer
       onClick={(e) => {

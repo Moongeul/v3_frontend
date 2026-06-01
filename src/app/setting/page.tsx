@@ -16,14 +16,14 @@ export default function SettingPage() {
           </Link>
         }
       />
-      <SettingItem
-        content={'알림'}
-        rightElement={
-          <Link href={'/setting-alarm'}>
-            <ThemeHeaderRightArrowIcon />
-          </Link>
-        }
-      />
+      {/*<SettingItem*/}
+      {/*  content={'알림'}*/}
+      {/*  rightElement={*/}
+      {/*    <Link href={'/setting-alarm'}>*/}
+      {/*      <ThemeHeaderRightArrowIcon />*/}
+      {/*    </Link>*/}
+      {/*  }*/}
+      {/*/>*/}
       <SettingItem
         content={'테마'}
         rightElement={

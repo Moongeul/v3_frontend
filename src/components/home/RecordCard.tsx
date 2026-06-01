@@ -21,6 +21,8 @@ interface StoryCardProps {
 export default function RecordCard({ storyImage, profileImage, nickname, storyId }: StoryCardProps) {
   const router = useRouter()
 
+  console.log('profileImage', profileImage)
+
   return (
     <StyleRecordCardContainer
       onClick={() => {

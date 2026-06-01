@@ -21,8 +21,6 @@ export default async function HomePage({
   const questionResult = await fetchQuestions(1, 2)
   const initialError = questionResult?.success ? undefined : questionResult?.error
 
-  console.log('initialError', initialError)
-
   const questionList = questionResult.data?.data
 
   const tab = (resolvedSearchParams.tab as 'PUBLIC' | 'FOLLOWERS') || 'PUBLIC'

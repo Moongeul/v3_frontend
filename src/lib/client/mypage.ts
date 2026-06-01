@@ -134,7 +134,7 @@ export const postFollowAccept = async (
  */
 export const clientFetchAllCategoryRecords = async (params: {
   categoryId: string
-  userId?: number
+  userId?: string
   sortBy: CategoryRecordSortByType
   page: number
   size: number
